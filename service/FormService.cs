@@ -1,4 +1,5 @@
 ﻿using PM_plus;
+using PM_plus.bean;
 using PM_plus.config;
 using PM_plus.utils;
 using System;
@@ -47,34 +48,51 @@ namespace PM_plus.service {
         }
         internal static void initFont() {
             InstalledFontCollection installedFontCollection = new InstalledFontCollection();
-            Config.mainForm.FontFamilyComboBox.DataSource = installedFontCollection.Families;
-            Config.mainForm.FontFamilyComboBox.DisplayMember = "Name";
-            Config.mainForm.FontFamilyComboBox.ValueMember = "Name";
-           // 字体设置
-           String fontFamilyName = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY);
-            if (StringUtils.isNotEmpty(fontFamilyName)) {
-                ControlUtils.SetControlFont(Config.mainForm, fontFamilyName, true);
-                // 字体项
-                Config.mainForm.FontFamilyComboBox.SelectedValue = fontFamilyName;
+            foreach(FontFamily fontFamily in installedFontCollection.Families) {
+                if (fontFamily.IsStyleAvailable(FontStyle.Regular)) {
+                    Config.mainForm.FontFamilyComboBox.Items.Add(fontFamily.Name);
+                }
             }
+           // 字体配置读取
+           String fontFamilyName = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY);
+            if (StringUtils.isEmpty(fontFamilyName)) {
+                // 未设置，使用默认
+                fontFamilyName = Config.DEFAULT_FONT_FAMILY;
+                IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
+            }
+            // 控件字体设置
+            foreach (Control child in Config.mainForm.Controls) {
+                ControlUtils.SetControlFont(child, fontFamilyName, true);
+            }
+            // 字体项选择
+            Config.mainForm.FontFamilyComboBox.SelectedItem = fontFamilyName;
         }
 
+
         internal static void initSkin() {
-            FileInfo[] skinNames = new DirectoryInfo("Skins").GetFiles();
-            Config.mainForm.SkinListBox.DataSource = skinNames;
+            FileInfo[] skinFileArray = new DirectoryInfo("Skins").GetFiles();
+            List<Skin> skinList = new List<Skin>();
+            foreach(FileInfo fileInfo in skinFileArray) {
+                Skin skin = new Skin();
+                skin.Name = fileInfo.Name;
+                skin.FullName = fileInfo.FullName;
+                skin.RelativeName = fileInfo.FullName.Replace(Config.AppPath, "");
+                skinList.Add(skin);
+            }
+            Config.mainForm.SkinListBox.DataSource = skinList;
             // 皮肤展示名
             Config.mainForm.SkinListBox.DisplayMember = "Name";
             // 用于展示选中项通过value进行比较
-            Config.mainForm.SkinListBox.ValueMember = "FullName";
+            Config.mainForm.SkinListBox.ValueMember = "RelativeName";
             // 获取皮肤配置
             String skinFile = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN);
-            if (StringUtils.isNotEmpty(skinFile)) {
-                Config.mainForm.se.SkinFile = skinFile;
-                Config.mainForm.SkinListBox.SelectedValue = skinFile;
-            } else {
+            if (StringUtils.isEmpty(skinFile)) {
                 // 默认的皮肤
-                Config.mainForm.se.SkinFile = Config.DEFAULT_SKIN;
+                skinFile = Config.DEFAULT_SKIN;
+                IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, Config.DEFAULT_SKIN);
             }
+            Config.mainForm.se.SkinFile = skinFile;
+            Config.mainForm.SkinListBox.SelectedValue = skinFile;
         }
         /// <summary>
         ///  初始化偏好设置
@@ -106,7 +124,6 @@ namespace PM_plus.service {
         public static int initProjectButton(int usedProgress, int giveProgress) {
             List<String> sectionList = IniUtils.ReadSections(Config.ProjectsIniPath);
             Config.waitForm.freshProgress(usedProgress + 5);
-            Thread.Sleep(100);
             for (int i = 0; i < sectionList.Count; i++) {
                 String section = sectionList[i];
                 // 标题
@@ -138,7 +155,6 @@ namespace PM_plus.service {
                 // 校验section
                 FormService.checkSection(projectSection, false);
                 Config.waitForm.freshProgress(usedProgress + ((giveProgress - 5) / sectionList.Count) * (i + 1));
-                Thread.Sleep(100);
             }
             return usedProgress + giveProgress;
         }
@@ -282,6 +298,7 @@ namespace PM_plus.service {
             button.Text = projectSection.title;
             button.TextAlign = ContentAlignment.BottomCenter;
             button.Font = new Font("微软雅黑", 12);
+            button.Tag = 9999;
             #endregion
             #region 按钮加载相关事件
             button.MouseHover += new EventHandler(EventService.BtnMouseHover);
@@ -329,9 +346,8 @@ namespace PM_plus.service {
         /// 修改按钮
         /// </summary>
         /// <param name="section"></param>
-        public static void updateButton(String section) {
-            Button btn = (Button)Config.mainForm.Projects_Panel.Controls[section];
-            ProjectSections.ProjectSection monitorSection = ProjectSections.getProjectBySection(section);
+        public static void updateButton(ProjectSections.ProjectSection monitorSection) {
+            Button btn = (Button)Config.mainForm.Projects_Panel.Controls[monitorSection.section];
             if (null != monitorSection) {
                 String title = monitorSection.title;
                 String port = monitorSection.port;

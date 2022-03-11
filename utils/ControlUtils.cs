@@ -133,6 +133,9 @@ namespace PM_plus.utils {
         }
 
         public static void SetControlFont(Control con , String FontFamilyName, bool isChildren) {
+            if ("FontFamilyComboBox".Equals(con.Name)) {
+                return;
+            }
             con.Font = new Font(FontFamilyName, con.Font.Size);
             if (isChildren && con.HasChildren) {
                 foreach(Control children in con.Controls) {

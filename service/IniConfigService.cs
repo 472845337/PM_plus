@@ -31,7 +31,6 @@ namespace PM_plus.service
 
 
             Config.waitForm.freshProgress(usedProgress + giveProgress);
-            Thread.Sleep(200);
             return usedProgress + giveProgress;
         }
         /// <summary>
@@ -43,18 +42,14 @@ namespace PM_plus.service
         {
             String profile = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_PROFILE);
             Config.waitForm.freshProgress(usedProgress + (giveProgress / 5) * 1);
-            Thread.Sleep(100);
             String JDKPath = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_JDKPATH);
             Config.waitForm.freshProgress(usedProgress + (giveProgress / 5) * 2);
-            Thread.Sleep(100);
             // 计时器频率
             String intervalStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_INTERVAL);
             Config.waitForm.freshProgress(usedProgress + (giveProgress / 5) * 3);
-            Thread.Sleep(100);
             // 请求超时时间
             String timeoutStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_TIMEOUT);
             Config.waitForm.freshProgress(usedProgress + (giveProgress / 5) * 4);
-            Thread.Sleep(100);
             if (StringUtils.isEmpty(intervalStr))
             {
                 intervalStr = "5000";
@@ -74,7 +69,6 @@ namespace PM_plus.service
 
 
             Config.waitForm.freshProgress(usedProgress + giveProgress);
-            Thread.Sleep(100);
 
             Config.mainForm.Profile_ComboBox.Text = profile;
             ProjectUtils.profile = profile;

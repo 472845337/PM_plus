@@ -112,20 +112,25 @@ namespace PM_plus {
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, newSection, Config.INI_KEY_PROJECT_PARAM, param);
                 // 项目对象赋值
                 String logPath = Path.GetDirectoryName(jar) + Config.PATH_CHARACTER + title;
-                ProjectSections.ProjectSection addModel = new ProjectSections.ProjectSection();
-                addModel.section = newSection;
-                addModel.title = title;
-                addModel.jar = jar;
-                addModel.port = port;
-                addModel.isPrintLog = isPrintLogBl;
-                addModel.heartBeat = heartBeat;
-                addModel.actuator = actuator;
+                ProjectSections.ProjectSection projectModel = new ProjectSections.ProjectSection();
+                projectModel.section = newSection;
+                projectModel.title = title;
+                projectModel.jar = jar;
+                projectModel.port = port;
+                projectModel.isPrintLog = isPrintLogBl;
+                projectModel.heartBeat = heartBeat;
+                projectModel.actuator = actuator;
                 // 生成start.bat
-                ProjectUtils.createStartBat(addModel, logPath, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);
+                ProjectUtils.createStartBat(projectModel, logPath, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);
                 // 生成stop.bat
-                ProjectUtils.createStopBat(addModel);
-                /* StartForm中添加新服务按钮 *************/
-                FormService.addButton(addModel);
+                ProjectUtils.createStopBat(projectModel);
+                if (Config.OPERATE_TYPE_ADD.Equals(operateType)) {
+                    /* StartForm中添加新服务按钮 *************/
+                    FormService.addButton(projectModel);
+                }else if (Config.OPERATE_TYPE_UPDATE.Equals(operateType)) {
+                    FormService.updateButton(projectModel);
+                }
+               
                 /* 添加新服务按钮完成****** *************/
                 // ControlUtils.addTabPage2TabControl(Config.mainForm.ProjectRunTabControl, newSection);
                 // 关闭新增窗口

@@ -1,4 +1,5 @@
-﻿using PM_plus.config;
+﻿using PM_plus.bean;
+using PM_plus.config;
 using PM_plus.service;
 using PM_plus.utils;
 using Sunisoft.IrisSkin;
@@ -18,6 +19,7 @@ namespace PM_plus {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            se.DisableTag = 9999;
             initData();
         }
 
@@ -30,23 +32,23 @@ namespace PM_plus {
             // 主窗体赋值，以便其它地方调用
             Config.mainForm = this;
             isFinishedInit = false;
-            // 偏好加载,皮肤加载
-            FormService.initDiySet();
             // 窗口控件属性相关设置
             FormService.initMainForm(this);
             // 加载框显示，load函数中置主窗体不可用
             FormService.initWaitForm(this);
             // GC回收定时任务初始化
             TimerService.autoGc();
-            // 系统日志参数加载
+            // 偏好加载,皮肤加载
+            FormService.initDiySet();
             int usedProgress = 0;
-            usedProgress = IniConfigService.initSystemConfig(usedProgress, 20);
+            // 系统参数加载
+            usedProgress = IniConfigService.initSystemConfig(usedProgress, 25);
             // 运行环境参数加载
-            usedProgress = IniConfigService.initProjectConfig(usedProgress, 20);
+            usedProgress = IniConfigService.initProjectConfig(usedProgress, 25);
             // 项目面板右键按钮
-            usedProgress = FormService.initPanelRightMenu(usedProgress, 30);
+            usedProgress = FormService.initPanelRightMenu(usedProgress, 25);
             // 创建项目按钮控件
-            usedProgress = FormService.initProjectButton(usedProgress, 30);
+            usedProgress = FormService.initProjectButton(usedProgress, 25);
             TimerService.monitor();
             // 加载窗口关闭,close函数中置主窗体可用
             Config.waitForm.freshProgress(usedProgress);
@@ -147,7 +149,7 @@ namespace PM_plus {
         /// <param name="e"></param>
         private void Projects_Panel_ClientSizeChanged(object sender, EventArgs e) {
             int width = Projects_Panel.ClientSize.Width;
-            if (isFinishedInit && panelCurrentWidth != width) {
+            if (isFinishedInit && panelCurrentWidth != width && null != ProjectSections.getAllSections()) {
                 // 将所有的按钮尺寸减少滚动条宽度
                 foreach (String section in ProjectSections.getAllSections()) {
                     Button btn = (Button)Projects_Panel.Controls[section];
@@ -248,22 +250,46 @@ namespace PM_plus {
 
         private void SkinListBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (isFinishedInit && SkinListBox.SelectedItem != null) {
-                se.SkinFile = (SkinListBox.SelectedItem as FileInfo).FullName;
+                se.SkinFile = (SkinListBox.SelectedItem as Skin).RelativeName;
             }
         }
-
+        private void FontFamilyComboBox_DrawItem(object sender, DrawItemEventArgs e) {
+            e.DrawBackground();
+            ComboBox cmb = (ComboBox)sender;
+            string txt = e.Index > -1 ? cmb.Items[e.Index].ToString() : cmb.Text;
+            Font f = new Font(txt, cmb.Font.Size);
+            //使用格式刷
+            Brush b = new SolidBrush(e.ForeColor);
+            //字符串描绘
+            float ym = (e.Bounds.Height - e.Graphics.MeasureString(txt, f).Height) / 2;
+            e.Graphics.DrawString(txt, f, b, e.Bounds.X, e.Bounds.Y + ym);
+            f.Dispose();
+            b.Dispose();
+            //描绘四角表示焦点的形状
+            e.DrawFocusRectangle();
+        }
         private void DiySetChangeApply_Button_Click(object sender, EventArgs e) {
-            object fontSelect = FontFamilyComboBox.SelectedValue;
-            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, (SkinListBox.SelectedItem as FileInfo).FullName);
-            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, FontFamilyComboBox.SelectedValue as String);
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, (SkinListBox.SelectedItem as Skin).RelativeName);
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, FontFamilyComboBox.SelectedItem as String);
         }
 
         private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e) {
-            if(isFinishedInit && FontFamilyComboBox.SelectedItem != null) {
-                foreach(Control con in Config.mainForm.Controls) {
-                    ControlUtils.SetControlFont(con, FontFamilyComboBox.SelectedValue as String, true);
+            if (isFinishedInit && FontFamilyComboBox.SelectedItem != null) {
+                foreach (Control con in Config.mainForm.Controls) {
+                    ControlUtils.SetControlFont(con, FontFamilyComboBox.SelectedItem as String, true);
                 }
             }
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e) {
+            // 皮肤恢复默认
+            se.SkinFile = Config.DEFAULT_SKIN;
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, Config.DEFAULT_SKIN);
+            SkinListBox.SelectedValue = Config.DEFAULT_SKIN;
+            // 字体恢复默认
+            ControlUtils.SetControlFont(Config.mainForm, Config.DEFAULT_FONT_FAMILY, true);
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
+            FontFamilyComboBox.SelectedValue = Config.DEFAULT_FONT_FAMILY;
         }
     }
 }
