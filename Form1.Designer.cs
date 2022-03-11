@@ -25,7 +25,6 @@ namespace PM_plus {
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ProjectTagPage = new System.Windows.Forms.TabPage();
             this.OperateMsg_Label = new System.Windows.Forms.Label();
@@ -47,6 +46,8 @@ namespace PM_plus {
             this.SystemConfig_SaveLabel = new System.Windows.Forms.Label();
             this.SystemConfig_Save_Button = new System.Windows.Forms.Button();
             this.DiySetTabPage = new System.Windows.Forms.TabPage();
+            this.DiySetMsgLabel = new System.Windows.Forms.Label();
+            this.ResetButton = new System.Windows.Forms.Button();
             this.DiySetChangeApply_Button = new System.Windows.Forms.Button();
             this.FontFamilyComboBox = new System.Windows.Forms.ComboBox();
             this.FontLabel = new System.Windows.Forms.Label();
@@ -56,7 +57,6 @@ namespace PM_plus {
             this.HelpRichTextBox = new System.Windows.Forms.RichTextBox();
             this.JDKPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
-            this.ResetButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -282,7 +282,6 @@ namespace PM_plus {
             this.JDKPath_TextBox.Name = "JDKPath_TextBox";
             this.JDKPath_TextBox.Size = new System.Drawing.Size(263, 21);
             this.JDKPath_TextBox.TabIndex = 11;
-            this.JDKPath_TextBox.Click += new System.EventHandler(this.JDKPath_Dialog_Button_Click);
             this.JDKPath_TextBox.TextChanged += new System.EventHandler(this.JDKPath_TextBox_TextChanged);
             // 
             // JDPPath_Dialog_Button
@@ -321,6 +320,7 @@ namespace PM_plus {
             // 
             // DiySetTabPage
             // 
+            this.DiySetTabPage.Controls.Add(this.DiySetMsgLabel);
             this.DiySetTabPage.Controls.Add(this.ResetButton);
             this.DiySetTabPage.Controls.Add(this.DiySetChangeApply_Button);
             this.DiySetTabPage.Controls.Add(this.FontFamilyComboBox);
@@ -333,6 +333,27 @@ namespace PM_plus {
             this.DiySetTabPage.TabIndex = 1;
             this.DiySetTabPage.Text = "偏好设置";
             this.DiySetTabPage.UseVisualStyleBackColor = true;
+            // 
+            // DiySetMsgLabel
+            // 
+            this.DiySetMsgLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiySetMsgLabel.AutoSize = true;
+            this.DiySetMsgLabel.Location = new System.Drawing.Point(268, 484);
+            this.DiySetMsgLabel.Name = "DiySetMsgLabel";
+            this.DiySetMsgLabel.Size = new System.Drawing.Size(0, 12);
+            this.DiySetMsgLabel.TabIndex = 5;
+            // 
+            // ResetButton
+            // 
+            this.ResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResetButton.Location = new System.Drawing.Point(459, 472);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(75, 37);
+            this.ResetButton.TabIndex = 3;
+            this.ResetButton.Text = "恢复";
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // DiySetChangeApply_Button
             // 
@@ -417,24 +438,12 @@ namespace PM_plus {
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
             // 
-            // ResetButton
-            // 
-            this.ResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResetButton.Location = new System.Drawing.Point(459, 472);
-            this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(75, 37);
-            this.ResetButton.TabIndex = 3;
-            this.ResetButton.Text = "恢复";
-            this.ResetButton.UseVisualStyleBackColor = true;
-            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(654, 572);
             this.Controls.Add(this.tabControl1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(670, 1000);
             this.MinimumSize = new System.Drawing.Size(670, 340);
             this.Name = "Form1";
@@ -489,6 +498,7 @@ namespace PM_plus {
         private System.Windows.Forms.Label SystemConfig_SaveLabel;
         private System.Windows.Forms.Button SystemConfig_Save_Button;
         private System.Windows.Forms.Button ResetButton;
+        private System.Windows.Forms.Label DiySetMsgLabel;
     }
 }
 

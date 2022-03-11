@@ -7,17 +7,17 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace PM_plus {
     public partial class Form1 : Form {
-        public SkinEngine se = new SkinEngine();
+        internal SkinEngine se = new SkinEngine();
         public Form1() {
             /// 支持线程操作控件
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
         }
+
         private void Form1_Load(object sender, EventArgs e) {
             se.DisableTag = 9999;
             initData();
@@ -74,7 +74,7 @@ namespace PM_plus {
         }
 
 
-        private Thread invokeThread;
+        private System.Threading.Thread invokeThread;
         private DialogResult result;
         /// <summary>
         /// 选择JDK路径的文件夹选择框
@@ -88,17 +88,18 @@ namespace PM_plus {
                 JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
             }
 
-            invokeThread = new Thread(new ThreadStart(InvokeMethod));
-            invokeThread.SetApartmentState(ApartmentState.STA);
+
+            invokeThread = new System.Threading.Thread(new System.Threading.ThreadStart(InvokeMethod));
+            invokeThread.SetApartmentState(System.Threading.ApartmentState.STA);
             invokeThread.Start();
             invokeThread.Join();
 
             if (result == DialogResult.OK) {
                 JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
-            }
+            } 
         }
         private void InvokeMethod() {
-               result = JDKPath_FolderBrowserDialog.ShowDialog();
+            result = JDKPath_FolderBrowserDialog.ShowDialog();
         }
 
         /// <summary>
@@ -236,6 +237,7 @@ namespace PM_plus {
         private void LabelTimer_Tick(object sender, EventArgs e) {
             SystemConfig_SaveLabel.Visible = false;
             OperateMsg_Label.Text = Config.BLANK_STR;
+            DiySetMsgLabel.Text = Config.BLANK_STR;
             LabelTimer.Enabled = false;
         }
 
@@ -265,8 +267,7 @@ namespace PM_plus {
 
         private void SkinListBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (isFinishedInit && SkinListBox.SelectedItem != null) {
-                String skinFileName = (SkinListBox.SelectedItem as Skin).RelativeName;
-                se.SkinFile = skinFileName;
+                se.SkinFile = (SkinListBox.SelectedItem as Skin).RelativeName;
             }
         }
         private void FontFamilyComboBox_DrawItem(object sender, DrawItemEventArgs e) {
@@ -287,6 +288,10 @@ namespace PM_plus {
         private void DiySetChangeApply_Button_Click(object sender, EventArgs e) {
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, (SkinListBox.SelectedItem as Skin).RelativeName);
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, FontFamilyComboBox.SelectedItem as String);
+            DiySetMsgLabel.Text = "设置成功!";
+            DiySetMsgLabel.ForeColor = Color.Green;
+            DiySetMsgLabel.Visible = true;
+            initLabelMsgTimerout();
         }
 
         private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e) {
@@ -303,9 +308,15 @@ namespace PM_plus {
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, Config.DEFAULT_SKIN);
             SkinListBox.SelectedValue = Config.DEFAULT_SKIN;
             // 字体恢复默认
-            ControlUtils.SetControlFont(Config.mainForm, Config.DEFAULT_FONT_FAMILY, true);
+            foreach(Control con in Config.mainForm.Controls) {
+                ControlUtils.SetControlFont(con, Config.DEFAULT_FONT_FAMILY, true);
+            }
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
             FontFamilyComboBox.SelectedValue = Config.DEFAULT_FONT_FAMILY;
+
+            DiySetMsgLabel.Text = "恢复默认成功！";
+            DiySetMsgLabel.ForeColor = Color.Green;
+            initLabelMsgTimerout();
         }
     }
 }
