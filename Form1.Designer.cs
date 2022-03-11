@@ -25,6 +25,7 @@ namespace PM_plus {
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ProjectTagPage = new System.Windows.Forms.TabPage();
             this.OperateMsg_Label = new System.Windows.Forms.Label();
@@ -282,6 +283,7 @@ namespace PM_plus {
             this.JDKPath_TextBox.Name = "JDKPath_TextBox";
             this.JDKPath_TextBox.Size = new System.Drawing.Size(263, 21);
             this.JDKPath_TextBox.TabIndex = 11;
+            this.JDKPath_TextBox.Click += new System.EventHandler(this.JDKPath_Dialog_Button_Click);
             this.JDKPath_TextBox.TextChanged += new System.EventHandler(this.JDKPath_TextBox_TextChanged);
             // 
             // JDPPath_Dialog_Button
@@ -444,6 +446,7 @@ namespace PM_plus {
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(654, 572);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(670, 1000);
             this.MinimumSize = new System.Drawing.Size(670, 340);
             this.Name = "Form1";

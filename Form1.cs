@@ -7,17 +7,17 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PM_plus {
     public partial class Form1 : Form {
-        internal SkinEngine se = new SkinEngine();
+        public SkinEngine se = new SkinEngine();
         public Form1() {
             /// 支持线程操作控件
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
         }
-
         private void Form1_Load(object sender, EventArgs e) {
             se.DisableTag = 9999;
             initData();
@@ -73,6 +73,9 @@ namespace PM_plus {
             addForm.ShowDialog();
         }
 
+
+        private Thread invokeThread;
+        private DialogResult result;
         /// <summary>
         /// 选择JDK路径的文件夹选择框
         /// </summary>
@@ -84,6 +87,18 @@ namespace PM_plus {
             if (JDKPath_FolderBrowserDialog.ShowDialog() == DialogResult.OK) {
                 JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
             }
+
+            invokeThread = new Thread(new ThreadStart(InvokeMethod));
+            invokeThread.SetApartmentState(ApartmentState.STA);
+            invokeThread.Start();
+            invokeThread.Join();
+
+            if (result == DialogResult.OK) {
+                JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
+            }
+        }
+        private void InvokeMethod() {
+               result = JDKPath_FolderBrowserDialog.ShowDialog();
         }
 
         /// <summary>
@@ -251,7 +266,8 @@ namespace PM_plus {
 
         private void SkinListBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (isFinishedInit && SkinListBox.SelectedItem != null) {
-                se.SkinFile = (SkinListBox.SelectedItem as Skin).RelativeName;
+                String skinFileName = (SkinListBox.SelectedItem as Skin).RelativeName;
+                se.SkinFile = skinFileName;
             }
         }
         private void FontFamilyComboBox_DrawItem(object sender, DrawItemEventArgs e) {
