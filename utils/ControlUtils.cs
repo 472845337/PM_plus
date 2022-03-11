@@ -132,6 +132,12 @@ namespace PM_plus.utils {
             rightMenu.Items.Add(toolStripMenuItem);
         }
 
+        /// <summary>
+        /// 不可用Form直接修改，这样会造成窗口变样
+        /// </summary>
+        /// <param name="con"></param>
+        /// <param name="FontFamilyName"></param>
+        /// <param name="isChildren"></param>
         public static void SetControlFont(Control con , String FontFamilyName, bool isChildren) {
             if ("FontFamilyComboBox".Equals(con.Name)) {
                 return;

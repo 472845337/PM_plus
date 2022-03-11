@@ -73,6 +73,9 @@ namespace PM_plus {
             addForm.ShowDialog();
         }
 
+
+        private System.Threading.Thread invokeThread;
+        private DialogResult result;
         /// <summary>
         /// 选择JDK路径的文件夹选择框
         /// </summary>
@@ -84,6 +87,19 @@ namespace PM_plus {
             if (JDKPath_FolderBrowserDialog.ShowDialog() == DialogResult.OK) {
                 JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
             }
+
+
+            invokeThread = new System.Threading.Thread(new System.Threading.ThreadStart(InvokeMethod));
+            invokeThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            invokeThread.Start();
+            invokeThread.Join();
+
+            if (result == DialogResult.OK) {
+                JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
+            } 
+        }
+        private void InvokeMethod() {
+            result = JDKPath_FolderBrowserDialog.ShowDialog();
         }
 
         /// <summary>
@@ -292,7 +308,9 @@ namespace PM_plus {
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, Config.DEFAULT_SKIN);
             SkinListBox.SelectedValue = Config.DEFAULT_SKIN;
             // 字体恢复默认
-            ControlUtils.SetControlFont(Config.mainForm, Config.DEFAULT_FONT_FAMILY, true);
+            foreach(Control con in Config.mainForm.Controls) {
+                ControlUtils.SetControlFont(con, Config.DEFAULT_FONT_FAMILY, true);
+            }
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
             FontFamilyComboBox.SelectedValue = Config.DEFAULT_FONT_FAMILY;
 

@@ -46,6 +46,8 @@ namespace PM_plus {
             this.SystemConfig_SaveLabel = new System.Windows.Forms.Label();
             this.SystemConfig_Save_Button = new System.Windows.Forms.Button();
             this.DiySetTabPage = new System.Windows.Forms.TabPage();
+            this.DiySetMsgLabel = new System.Windows.Forms.Label();
+            this.ResetButton = new System.Windows.Forms.Button();
             this.DiySetChangeApply_Button = new System.Windows.Forms.Button();
             this.FontFamilyComboBox = new System.Windows.Forms.ComboBox();
             this.FontLabel = new System.Windows.Forms.Label();
@@ -55,8 +57,6 @@ namespace PM_plus {
             this.HelpRichTextBox = new System.Windows.Forms.RichTextBox();
             this.JDKPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
-            this.ResetButton = new System.Windows.Forms.Button();
-            this.DiySetMsgLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -334,6 +334,27 @@ namespace PM_plus {
             this.DiySetTabPage.Text = "偏好设置";
             this.DiySetTabPage.UseVisualStyleBackColor = true;
             // 
+            // DiySetMsgLabel
+            // 
+            this.DiySetMsgLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiySetMsgLabel.AutoSize = true;
+            this.DiySetMsgLabel.Location = new System.Drawing.Point(268, 484);
+            this.DiySetMsgLabel.Name = "DiySetMsgLabel";
+            this.DiySetMsgLabel.Size = new System.Drawing.Size(0, 12);
+            this.DiySetMsgLabel.TabIndex = 5;
+            // 
+            // ResetButton
+            // 
+            this.ResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResetButton.Location = new System.Drawing.Point(459, 472);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(75, 37);
+            this.ResetButton.TabIndex = 3;
+            this.ResetButton.Text = "恢复";
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
             // DiySetChangeApply_Button
             // 
             this.DiySetChangeApply_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -416,27 +437,6 @@ namespace PM_plus {
             // LabelTimer
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
-            // 
-            // ResetButton
-            // 
-            this.ResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResetButton.Location = new System.Drawing.Point(459, 472);
-            this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(75, 37);
-            this.ResetButton.TabIndex = 3;
-            this.ResetButton.Text = "恢复";
-            this.ResetButton.UseVisualStyleBackColor = true;
-            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
-            // 
-            // DiySetMsgLabel
-            // 
-            this.DiySetMsgLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DiySetMsgLabel.AutoSize = true;
-            this.DiySetMsgLabel.Location = new System.Drawing.Point(249, 496);
-            this.DiySetMsgLabel.Name = "DiySetMsgLabel";
-            this.DiySetMsgLabel.Size = new System.Drawing.Size(0, 12);
-            this.DiySetMsgLabel.TabIndex = 5;
             // 
             // Form1
             // 
