@@ -100,7 +100,7 @@ namespace PM_plus.service {
         * */
         public static void BtnRightUpdateClick(Object sender, EventArgs e) {
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
-            UpdateForm updateForm = new UpdateForm();
+            ProjectForm updateForm = new ProjectForm(Config.OPERATE_TYPE_UPDATE);
             updateForm.section = (String)menuItem.Tag;
             updateForm.ShowDialog();
         }
@@ -112,7 +112,7 @@ namespace PM_plus.service {
         /// <param name="e"></param>
         public static void BtnRightDetailClick(Object sender, EventArgs e) {
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
-            DetailForm detailForm = new DetailForm();
+            ProjectForm detailForm = new ProjectForm(Config.OPERATE_TYPE_DETAIL);
             detailForm.section = (String)menuItem.Tag;
             detailForm.ShowDialog();
         }

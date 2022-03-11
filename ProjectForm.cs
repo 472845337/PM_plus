@@ -9,10 +9,51 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace PM_plus {
-    public partial class AddForm : Form {
-
-        public AddForm() {
+    public partial class ProjectForm : Form {
+        private short operateType;
+        public String section { get; set; }
+        public ProjectForm(short operateType) {
             InitializeComponent();
+            this.operateType = operateType;
+        }
+
+        private void ProjectForm_Load(object sender, EventArgs e) {
+            // 根据不同的操作类型进行不同的设置
+            if(Config.OPERATE_TYPE_ADD == operateType || Config.OPERATE_TYPE_UPDATE == operateType) {
+                // 新增操作或编辑操作
+                AddForm_Jar_TextBox.Click += new EventHandler(Jar_Path_Dialog_Show);
+                if (Config.OPERATE_TYPE_ADD == operateType) {
+                    this.Text = "新增";
+                }else if (Config.OPERATE_TYPE_UPDATE == operateType) {
+                    this.Text = "修改";
+                    ProjectSections.ProjectSection monitorSection = ProjectSections.getProjectBySection(section);
+                    String title = monitorSection.title;
+                    String jar = monitorSection.jar;
+                    String port = monitorSection.port;
+                    bool isPrintLog = monitorSection.isPrintLog;
+                    String heartBeat = monitorSection.heartBeat;
+                    String actuator = monitorSection.actuator;
+                    String param = monitorSection.param;
+                    AddForm_Title_TextBox.Text = title;
+                    AddForm_Jar_TextBox.Text = jar;
+                    AddForm_Port_TextBox.Text = port;
+                    AddForm_IsPrintLogCheckBox.Checked = isPrintLog;
+                    AddForm_HeartBeat_TextBox.Text = heartBeat;
+                    AddForm_Actuator_Textbox.Text = actuator;
+                    AddForm_ParamRichTextBox.Text = param;
+                }
+            } else if (Config.OPERATE_TYPE_DETAIL == operateType) {
+                this.Text = "查看";
+                // 查看操作
+                AddForm_Title_TextBox.ReadOnly = true;
+                AddForm_Jar_TextBox.ReadOnly = true;
+                AddForm_Port_TextBox.ReadOnly = true;
+                AddForm_HeartBeat_TextBox.ReadOnly = true;
+                AddForm_Actuator_Textbox.ReadOnly = true;
+                AddForm_ParamRichTextBox.ReadOnly = true;
+
+                AddForm_Save_Button.Visible = false;
+            }
         }
 
         private void AddForm_Cancel_Button_Click(object sender, EventArgs e) {
@@ -92,10 +133,12 @@ namespace PM_plus {
             }
         }
 
-        private void Jar_Dialog_Button_Click(object sender, EventArgs e) {
+        private void Jar_Path_Dialog_Show(object sender, EventArgs e) {
             if (Jar_OpenFileDialog.ShowDialog() == DialogResult.OK) {
                 AddForm_Jar_TextBox.Text = Jar_OpenFileDialog.FileName;
             }
         }
+
+        
     }
 }

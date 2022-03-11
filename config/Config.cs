@@ -36,6 +36,10 @@ namespace PM_plus.config
         public const short PROJECT_RUN_STAT_SUCCESS = 2;
         public const short PROJECT_RUN_STAT_STOPPING = 3;
 
+        public const short OPERATE_TYPE_ADD = 1;
+        public const short OPERATE_TYPE_UPDATE = 2;
+        public const short OPERATE_TYPE_DETAIL = 3;
+
         /** 项目属性INI Key名 */
         public const String INI_SECTION_SYSTEM = "system";
         public const String INI_SECTION_LOG = "log";
@@ -46,6 +50,7 @@ namespace PM_plus.config
         public const String INI_KEY_SYSTEM_TIMEOUT = "timeout";
         public const String INI_KEY_SYSTEM_EXITAFTERCLOSE = "exitAfterClose";
         public const String INI_KEY_SYSTEM_SKIN = "skin";
+        public const String INI_KEY_SYSTEM_FONT_FAMILY = "font_family";
 
         public const String INI_KEY_LOG_SWITCH = "switch";
         public const String INI_KEY_LOG_FILENAME = "filename";

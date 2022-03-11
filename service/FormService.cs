@@ -4,6 +4,7 @@ using PM_plus.utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -44,6 +45,19 @@ namespace PM_plus.service {
             waitForm.Update();
             Config.waitForm = waitForm;
         }
+        internal static void initFont() {
+            InstalledFontCollection installedFontCollection = new InstalledFontCollection();
+            Config.mainForm.FontFamilyComboBox.DataSource = installedFontCollection.Families;
+            Config.mainForm.FontFamilyComboBox.DisplayMember = "Name";
+            Config.mainForm.FontFamilyComboBox.ValueMember = "Name";
+           // 字体设置
+           String fontFamilyName = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY);
+            if (StringUtils.isNotEmpty(fontFamilyName)) {
+                ControlUtils.SetControlFont(Config.mainForm, fontFamilyName, true);
+                // 字体项
+                Config.mainForm.FontFamilyComboBox.SelectedValue = fontFamilyName;
+            }
+        }
 
         internal static void initSkin() {
             FileInfo[] skinNames = new DirectoryInfo("Skins").GetFiles();
@@ -61,6 +75,15 @@ namespace PM_plus.service {
                 // 默认的皮肤
                 Config.mainForm.se.SkinFile = Config.DEFAULT_SKIN;
             }
+        }
+        /// <summary>
+        ///  初始化偏好设置
+        /// </summary>
+        internal static void initDiySet() {
+            // 字体初始化
+            initFont();
+            // 皮肤初始化
+            initSkin();
         }
 
         public static int initPanelRightMenu(int usedProgress, int giveProgress) {
@@ -252,7 +275,7 @@ namespace PM_plus.service {
             button.Size = new Size(Convert.ToInt32(Config.mainForm.Projects_Panel.Width * 0.98), 46);
             button.TabIndex = 0;
             // 按钮背景图片
-            Image image = Image.FromFile(@"resource\icons\computer.ico");
+            Image image = Image.FromFile(@"icons\computer.ico");
             button.BackgroundImageLayout = ImageLayout.None;
             button.BackgroundImage = image;
             // 按钮文本

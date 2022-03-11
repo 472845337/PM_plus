@@ -47,20 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddForm.cs">
+    <Compile Include="ProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddForm.Designer.cs">
-      <DependentUpon>AddForm.cs</DependentUpon>
+    <Compile Include="ProjectForm.Designer.cs">
+      <DependentUpon>ProjectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="config\Config.cs" />
     <Compile Include="config\ProjectSections.cs" />
-    <Compile Include="DetailForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DetailForm.Designer.cs">
-      <DependentUpon>DetailForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,12 +68,6 @@
     <Compile Include="service\FormService.cs" />
     <Compile Include="service\IniConfigService.cs" />
     <Compile Include="service\TimerService.cs" />
-    <Compile Include="UpdateForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UpdateForm.Designer.cs">
-      <DependentUpon>UpdateForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="utils\ControlUtils.cs" />
     <Compile Include="utils\FileUtils.cs" />
     <Compile Include="utils\HttpUtils.cs" />
@@ -97,11 +85,8 @@
     <Compile Include="WaitForm.Designer.cs">
       <DependentUpon>WaitForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddForm.resx">
-      <DependentUpon>AddForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DetailForm.resx">
-      <DependentUpon>DetailForm.cs</DependentUpon>
+    <EmbeddedResource Include="ProjectForm.resx">
+      <DependentUpon>ProjectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -115,9 +100,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UpdateForm.resx">
-      <DependentUpon>UpdateForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WaitForm.resx">
       <DependentUpon>WaitForm.cs</DependentUpon>
     </EmbeddedResource>

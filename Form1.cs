@@ -4,9 +4,8 @@ using PM_plus.utils;
 using Sunisoft.IrisSkin;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Drawing;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace PM_plus {
@@ -31,8 +30,8 @@ namespace PM_plus {
             // 主窗体赋值，以便其它地方调用
             Config.mainForm = this;
             isFinishedInit = false;
-            // 皮肤加载
-            FormService.initSkin();
+            // 偏好加载,皮肤加载
+            FormService.initDiySet();
             // 窗口控件属性相关设置
             FormService.initMainForm(this);
             // 加载框显示，load函数中置主窗体不可用
@@ -51,7 +50,6 @@ namespace PM_plus {
             TimerService.monitor();
             // 加载窗口关闭,close函数中置主窗体可用
             Config.waitForm.freshProgress(usedProgress);
-            System.Threading.Thread.Sleep(200);
             Config.waitForm.Close();
             isFinishedInit = true;
         }
@@ -68,7 +66,7 @@ namespace PM_plus {
                 MessageBox.Show("运行环境和JDK路径需配置并保存！");
                 return;
             }
-            AddForm addForm = new AddForm();
+            ProjectForm addForm = new ProjectForm(Config.OPERATE_TYPE_ADD);
             // 先要把主窗口放以弹出窗口中，以便弹出窗口调用主窗口函数
             addForm.ShowDialog();
         }
@@ -139,7 +137,6 @@ namespace PM_plus {
             return saveJDKPathresult;
         }
 
-
         internal static int panelCurrentWidth;
         /// <summary>
         /// 判断滚动条是否出现，当项目面板的尺寸变化的时候，引起的宽度变化
@@ -149,16 +146,47 @@ namespace PM_plus {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Projects_Panel_ClientSizeChanged(object sender, EventArgs e) {
-
+            int width = Projects_Panel.ClientSize.Width;
+            if (isFinishedInit && panelCurrentWidth != width) {
+                // 将所有的按钮尺寸减少滚动条宽度
+                foreach (String section in ProjectSections.getAllSections()) {
+                    Button btn = (Button)Projects_Panel.Controls[section];
+                    btn.Width = Convert.ToInt32(Projects_Panel.ClientSize.Width * 0.98);
+                }
+                panelCurrentWidth = width;
+            }
         }
 
+        private void LogSwitch_CheckBox_CheckedChanged(object sender, EventArgs e) {
+            if (isFinishedInit) {
+                bool logSwitch = LogSwitch_CheckBox.Checked;
+                Config.logSwitch = logSwitch;
+                IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_LOG, Config.INI_KEY_LOG_SWITCH, logSwitch.ToString());
+            }
+        }
+        private void ExitAfterClose_CheckBox_CheckedChanged(object sender, EventArgs e) {
+            if (isFinishedInit) {
+                bool exitAfterClose = ExitAfterClose_CheckBox.Checked;
+                Config.exitAfterClose = exitAfterClose;
+                IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_EXITAFTERCLOSE, exitAfterClose.ToString());
+            }
+        }
         /// <summary>
         /// 刷新启动文件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         internal void Fresh_Button_Click(object sender, EventArgs e) {
-
+            Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.getAllSectionDic();
+            if (null != sectionList) {
+                foreach (KeyValuePair<String, ProjectSections.ProjectSection> projectSectionEntry in sectionList) {
+                    // 校验section
+                    FormService.checkSection(projectSectionEntry.Value, true);
+                }
+            }
+            OperateMsg_Label.Text = "刷新成功";
+            OperateMsg_Label.ForeColor = Color.Green;
+            initLabelMsgTimerout();
         }
 
         /// <summary>
@@ -168,11 +196,11 @@ namespace PM_plus {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         internal void AllStart_Button_Click(object sender, EventArgs e) {
-
+            ProjectUtils.allProjectOperate(Config.PROJECT_OPERATE_TYPE_START);
         }
 
         internal void AllStop_Button_Click(object sender, EventArgs e) {
-
+            ProjectUtils.allProjectOperate(Config.PROJECT_OPERATE_TYPE_STOP);
         }
 
 
@@ -189,7 +217,9 @@ namespace PM_plus {
         }
 
         private void LabelTimer_Tick(object sender, EventArgs e) {
-
+            SystemConfig_SaveLabel.Visible = false;
+            OperateMsg_Label.Text = Config.BLANK_STR;
+            LabelTimer.Enabled = false;
         }
 
         internal void initLabelMsgTimerout() {
@@ -204,7 +234,12 @@ namespace PM_plus {
         }
 
         private void Projects_Panel_DragDrop(object sender, DragEventArgs e) {
-
+            Button btn = (Button)e.Data.GetData(typeof(Button));
+            Point p = Projects_Panel.PointToClient(new Point(e.X, e.Y));
+            Control control = Projects_Panel.GetChildAtPoint(p);
+            int index = Projects_Panel.Controls.GetChildIndex(control, false);
+            Projects_Panel.Controls.SetChildIndex(btn, index);
+            FormService.freshProjectButtonSort();
         }
 
         private void Projects_Panel_DragEnter(object sender, DragEventArgs e) {
@@ -217,8 +252,18 @@ namespace PM_plus {
             }
         }
 
-        private void SkinChangeApply_Button_Click(object sender, EventArgs e) {
+        private void DiySetChangeApply_Button_Click(object sender, EventArgs e) {
+            object fontSelect = FontFamilyComboBox.SelectedValue;
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, (SkinListBox.SelectedItem as FileInfo).FullName);
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, FontFamilyComboBox.SelectedValue as String);
+        }
+
+        private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e) {
+            if(isFinishedInit && FontFamilyComboBox.SelectedItem != null) {
+                foreach(Control con in Config.mainForm.Controls) {
+                    ControlUtils.SetControlFont(con, FontFamilyComboBox.SelectedValue as String, true);
+                }
+            }
         }
     }
 }

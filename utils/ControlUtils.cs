@@ -131,5 +131,15 @@ namespace PM_plus.utils {
             toolStripMenuItem.Click += eventHandler;
             rightMenu.Items.Add(toolStripMenuItem);
         }
+
+        public static void SetControlFont(Control con , String FontFamilyName, bool isChildren) {
+            con.Font = new Font(FontFamilyName, con.Font.Size);
+            if (isChildren && con.HasChildren) {
+                foreach(Control children in con.Controls) {
+                    SetControlFont(children, FontFamilyName, isChildren);
+                }
+            }
+
+        }
     }
 }
