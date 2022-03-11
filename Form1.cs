@@ -221,6 +221,7 @@ namespace PM_plus {
         private void LabelTimer_Tick(object sender, EventArgs e) {
             SystemConfig_SaveLabel.Visible = false;
             OperateMsg_Label.Text = Config.BLANK_STR;
+            DiySetMsgLabel.Text = Config.BLANK_STR;
             LabelTimer.Enabled = false;
         }
 
@@ -271,6 +272,10 @@ namespace PM_plus {
         private void DiySetChangeApply_Button_Click(object sender, EventArgs e) {
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, (SkinListBox.SelectedItem as Skin).RelativeName);
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, FontFamilyComboBox.SelectedItem as String);
+            DiySetMsgLabel.Text = "设置成功!";
+            DiySetMsgLabel.ForeColor = Color.Green;
+            DiySetMsgLabel.Visible = true;
+            initLabelMsgTimerout();
         }
 
         private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e) {
@@ -290,6 +295,10 @@ namespace PM_plus {
             ControlUtils.SetControlFont(Config.mainForm, Config.DEFAULT_FONT_FAMILY, true);
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
             FontFamilyComboBox.SelectedValue = Config.DEFAULT_FONT_FAMILY;
+
+            DiySetMsgLabel.Text = "恢复默认成功！";
+            DiySetMsgLabel.ForeColor = Color.Green;
+            initLabelMsgTimerout();
         }
     }
 }

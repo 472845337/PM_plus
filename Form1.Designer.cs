@@ -56,6 +56,7 @@ namespace PM_plus {
             this.JDKPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.ResetButton = new System.Windows.Forms.Button();
+            this.DiySetMsgLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -319,6 +320,7 @@ namespace PM_plus {
             // 
             // DiySetTabPage
             // 
+            this.DiySetTabPage.Controls.Add(this.DiySetMsgLabel);
             this.DiySetTabPage.Controls.Add(this.ResetButton);
             this.DiySetTabPage.Controls.Add(this.DiySetChangeApply_Button);
             this.DiySetTabPage.Controls.Add(this.FontFamilyComboBox);
@@ -426,6 +428,16 @@ namespace PM_plus {
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
+            // DiySetMsgLabel
+            // 
+            this.DiySetMsgLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiySetMsgLabel.AutoSize = true;
+            this.DiySetMsgLabel.Location = new System.Drawing.Point(249, 496);
+            this.DiySetMsgLabel.Name = "DiySetMsgLabel";
+            this.DiySetMsgLabel.Size = new System.Drawing.Size(0, 12);
+            this.DiySetMsgLabel.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -486,6 +498,7 @@ namespace PM_plus {
         private System.Windows.Forms.Label SystemConfig_SaveLabel;
         private System.Windows.Forms.Button SystemConfig_Save_Button;
         private System.Windows.Forms.Button ResetButton;
+        private System.Windows.Forms.Label DiySetMsgLabel;
     }
 }
 
