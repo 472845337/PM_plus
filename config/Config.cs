@@ -10,17 +10,17 @@ namespace PM_plus.config
         public const String ENTER_STR = "\r\n";
         public const String BLANK_STR = "";
 
-        public const String PATH_CHARACTER = "/";
-        public const String ProjectsIniPath = "ini/Projects.ini";
-        public const String SystemIniPath = "ini/System.ini";
-        public const String BatPath = "bat/";
+        public const String PATH_CHARACTER = "\\";
+        public const String ProjectsIniPath = "ini\\Projects.ini";
+        public const String SystemIniPath = "ini\\System.ini";
+        public const String BatPath = "bat\\";
         public const String BAT_FILE_TYPE_START = "start";
         public const String BAT_FILE_NAME_START = "_start.bat";
         public const String BAT_FILE_TYPE_STOP = "stop";
         public const String BAT_FILE_NAME_STOP = "_stop.bat";
         public const String LOG_FILE_INFO = "info.log";
         public const String LOG_FILE_ERROR = "error.log";
-        public const String DEFAULT_SKIN = "Skins/Calmness.ssk";
+        public const String DEFAULT_SKIN = "Skins\\Calmness.ssk";
         public const String DEFAULT_FONT_FAMILY = "微软雅黑";
 
         public const String IS_PRINT_LOG_YES = "1";
