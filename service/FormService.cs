@@ -91,9 +91,11 @@ namespace PM_plus.service {
                 skinFile = Config.DEFAULT_SKIN;
                 IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, Config.DEFAULT_SKIN);
             }
-            Config.mainForm.se.SkinFile = skinFile;
-            Config.mainForm.SkinListBox.SelectedValue = skinFile;
-            Config.mainForm.SkinShowPictureBox.Image = Image.FromFile(SkinUtils.getSkinShowPath(skinFile));
+            if (FileUtils.Boo_FileExist(skinFile)) {
+                Config.mainForm.se.SkinFile = skinFile;
+                Config.mainForm.SkinListBox.SelectedValue = skinFile;
+                Config.mainForm.SkinShowPictureBox.Image = Image.FromFile(SkinUtils.getSkinShowPath(skinFile));
+            }
         }
         /// <summary>
         ///  初始化偏好设置
