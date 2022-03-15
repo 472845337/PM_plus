@@ -13,12 +13,14 @@ namespace PM_plus {
     public partial class Form1 : Form {
         internal SkinEngine se = new SkinEngine();
         public Form1() {
+            se.DrawFormIcon = true;
             /// 支持线程操作控件
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            // this.Icon = new Icon("icons/disk.ico");
             se.DisableTag = 9999;
             initData();
         }
@@ -31,6 +33,7 @@ namespace PM_plus {
         private void initData() {
             // 主窗体赋值，以便其它地方调用
             Config.mainForm = this;
+
             isFinishedInit = false;
             // 窗口控件属性相关设置
             FormService.initMainForm(this);
@@ -267,7 +270,8 @@ namespace PM_plus {
 
         private void SkinListBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (isFinishedInit && SkinListBox.SelectedItem != null) {
-                se.SkinFile = (SkinListBox.SelectedItem as Skin).RelativeName;
+                // se.SkinFile = (SkinListBox.SelectedItem as Skin).RelativeName;
+                SkinShowPictureBox.Image = Image.FromFile(SkinUtils.getSkinShowPath((SkinListBox.SelectedItem as Skin).RelativeName));
             }
         }
         private void FontFamilyComboBox_DrawItem(object sender, DrawItemEventArgs e) {
@@ -286,6 +290,7 @@ namespace PM_plus {
             e.DrawFocusRectangle();
         }
         private void DiySetChangeApply_Button_Click(object sender, EventArgs e) {
+            se.SkinFile = (SkinListBox.SelectedItem as Skin).RelativeName;
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, (SkinListBox.SelectedItem as Skin).RelativeName);
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, FontFamilyComboBox.SelectedItem as String);
             DiySetMsgLabel.Text = "设置成功!";
@@ -312,7 +317,7 @@ namespace PM_plus {
                 ControlUtils.SetControlFont(con, Config.DEFAULT_FONT_FAMILY, true);
             }
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
-            FontFamilyComboBox.SelectedValue = Config.DEFAULT_FONT_FAMILY;
+            FontFamilyComboBox.SelectedItem = Config.DEFAULT_FONT_FAMILY;
 
             DiySetMsgLabel.Text = "恢复默认成功！";
             DiySetMsgLabel.ForeColor = Color.Green;

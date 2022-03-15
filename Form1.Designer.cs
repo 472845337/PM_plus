@@ -52,6 +52,7 @@ namespace PM_plus {
             this.FontFamilyComboBox = new System.Windows.Forms.ComboBox();
             this.FontLabel = new System.Windows.Forms.Label();
             this.SkinGroupBox = new System.Windows.Forms.GroupBox();
+            this.SkinShowPictureBox = new System.Windows.Forms.PictureBox();
             this.SkinListBox = new System.Windows.Forms.ListBox();
             this.HelpTabPage = new System.Windows.Forms.TabPage();
             this.HelpRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -63,6 +64,7 @@ namespace PM_plus {
             this.System_GroupBox.SuspendLayout();
             this.DiySetTabPage.SuspendLayout();
             this.SkinGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).BeginInit();
             this.HelpTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -277,6 +279,8 @@ namespace PM_plus {
             // 
             // JDKPath_TextBox
             // 
+            this.JDKPath_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.JDKPath_TextBox.Location = new System.Drawing.Point(310, 20);
             this.JDKPath_TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.JDKPath_TextBox.Name = "JDKPath_TextBox";
@@ -286,10 +290,11 @@ namespace PM_plus {
             // 
             // JDPPath_Dialog_Button
             // 
+            this.JDPPath_Dialog_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.JDPPath_Dialog_Button.Location = new System.Drawing.Point(579, 19);
             this.JDPPath_Dialog_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.JDPPath_Dialog_Button.Name = "JDPPath_Dialog_Button";
-            this.JDPPath_Dialog_Button.Size = new System.Drawing.Size(22, 20);
+            this.JDPPath_Dialog_Button.Size = new System.Drawing.Size(22, 22);
             this.JDPPath_Dialog_Button.TabIndex = 12;
             this.JDPPath_Dialog_Button.Text = "...";
             this.JDPPath_Dialog_Button.UseVisualStyleBackColor = true;
@@ -389,25 +394,39 @@ namespace PM_plus {
             // 
             // SkinGroupBox
             // 
-            this.SkinGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.SkinGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.SkinGroupBox.Controls.Add(this.SkinShowPictureBox);
             this.SkinGroupBox.Controls.Add(this.SkinListBox);
-            this.SkinGroupBox.Location = new System.Drawing.Point(433, 7);
+            this.SkinGroupBox.Location = new System.Drawing.Point(8, 51);
             this.SkinGroupBox.Name = "SkinGroupBox";
-            this.SkinGroupBox.Size = new System.Drawing.Size(182, 459);
+            this.SkinGroupBox.Size = new System.Drawing.Size(607, 415);
             this.SkinGroupBox.TabIndex = 0;
             this.SkinGroupBox.TabStop = false;
             this.SkinGroupBox.Text = "皮肤";
             // 
+            // SkinShowPictureBox
+            // 
+            this.SkinShowPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SkinShowPictureBox.Location = new System.Drawing.Point(182, 20);
+            this.SkinShowPictureBox.Name = "SkinShowPictureBox";
+            this.SkinShowPictureBox.Size = new System.Drawing.Size(419, 389);
+            this.SkinShowPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.SkinShowPictureBox.TabIndex = 3;
+            this.SkinShowPictureBox.TabStop = false;
+            // 
             // SkinListBox
             // 
             this.SkinListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.SkinListBox.FormattingEnabled = true;
             this.SkinListBox.ItemHeight = 12;
-            this.SkinListBox.Location = new System.Drawing.Point(7, 21);
+            this.SkinListBox.Location = new System.Drawing.Point(6, 20);
             this.SkinListBox.Name = "SkinListBox";
-            this.SkinListBox.Size = new System.Drawing.Size(169, 424);
+            this.SkinListBox.Size = new System.Drawing.Size(169, 388);
             this.SkinListBox.TabIndex = 2;
             this.SkinListBox.SelectedIndexChanged += new System.EventHandler(this.SkinListBox_SelectedIndexChanged);
             // 
@@ -444,8 +463,7 @@ namespace PM_plus {
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(654, 572);
             this.Controls.Add(this.tabControl1);
-            this.MaximumSize = new System.Drawing.Size(670, 1000);
-            this.MinimumSize = new System.Drawing.Size(670, 340);
+            this.MinimumSize = new System.Drawing.Size(600, 39);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Java项目管理";
@@ -460,6 +478,7 @@ namespace PM_plus {
             this.DiySetTabPage.ResumeLayout(false);
             this.DiySetTabPage.PerformLayout();
             this.SkinGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).EndInit();
             this.HelpTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -499,6 +518,7 @@ namespace PM_plus {
         private System.Windows.Forms.Button SystemConfig_Save_Button;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.Label DiySetMsgLabel;
+        internal System.Windows.Forms.PictureBox SkinShowPictureBox;
     }
 }
 

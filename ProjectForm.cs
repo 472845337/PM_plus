@@ -19,28 +19,14 @@ namespace PM_plus {
 
         private void ProjectForm_Load(object sender, EventArgs e) {
             // 根据不同的操作类型进行不同的设置
-            if(Config.OPERATE_TYPE_ADD == operateType || Config.OPERATE_TYPE_UPDATE == operateType) {
+            if (Config.OPERATE_TYPE_ADD == operateType || Config.OPERATE_TYPE_UPDATE == operateType) {
                 // 新增操作或编辑操作
                 AddForm_Jar_TextBox.Click += new EventHandler(Jar_Path_Dialog_Show);
                 if (Config.OPERATE_TYPE_ADD == operateType) {
                     this.Text = "新增";
-                }else if (Config.OPERATE_TYPE_UPDATE == operateType) {
+                } else if (Config.OPERATE_TYPE_UPDATE == operateType) {
                     this.Text = "修改";
-                    ProjectSections.ProjectSection monitorSection = ProjectSections.getProjectBySection(section);
-                    String title = monitorSection.title;
-                    String jar = monitorSection.jar;
-                    String port = monitorSection.port;
-                    bool isPrintLog = monitorSection.isPrintLog;
-                    String heartBeat = monitorSection.heartBeat;
-                    String actuator = monitorSection.actuator;
-                    String param = monitorSection.param;
-                    AddForm_Title_TextBox.Text = title;
-                    AddForm_Jar_TextBox.Text = jar;
-                    AddForm_Port_TextBox.Text = port;
-                    AddForm_IsPrintLogCheckBox.Checked = isPrintLog;
-                    AddForm_HeartBeat_TextBox.Text = heartBeat;
-                    AddForm_Actuator_Textbox.Text = actuator;
-                    AddForm_ParamRichTextBox.Text = param;
+
                 }
             } else if (Config.OPERATE_TYPE_DETAIL == operateType) {
                 this.Text = "查看";
@@ -53,6 +39,23 @@ namespace PM_plus {
                 AddForm_ParamRichTextBox.ReadOnly = true;
 
                 AddForm_Save_Button.Visible = false;
+            }
+            if (Config.OPERATE_TYPE_UPDATE == operateType || Config.OPERATE_TYPE_DETAIL == operateType){
+                ProjectSections.ProjectSection monitorSection = ProjectSections.getProjectBySection(section);
+                String title = monitorSection.title;
+                String jar = monitorSection.jar;
+                String port = monitorSection.port;
+                bool isPrintLog = monitorSection.isPrintLog;
+                String heartBeat = monitorSection.heartBeat;
+                String actuator = monitorSection.actuator;
+                String param = monitorSection.param;
+                AddForm_Title_TextBox.Text = title;
+                AddForm_Jar_TextBox.Text = jar;
+                AddForm_Port_TextBox.Text = port;
+                AddForm_IsPrintLogCheckBox.Checked = isPrintLog;
+                AddForm_HeartBeat_TextBox.Text = heartBeat;
+                AddForm_Actuator_Textbox.Text = actuator;
+                AddForm_ParamRichTextBox.Text = param;
             }
         }
 
@@ -89,6 +92,11 @@ namespace PM_plus {
                     checkFlag = false;
                     checkMsg.Append("端口不合法").Append(Config.ENTER_STR);
                 }
+                if (Convert.ToInt32(port) > 65535) {
+                    // 端口不能大于65535
+                    checkFlag = false;
+                    checkMsg.Append("端口不能大于65535").Append(Config.ENTER_STR);
+                }
             }
             /*if ("".Equals(heartBeat ))
             {
@@ -101,36 +109,45 @@ namespace PM_plus {
             } else {
                 /** 数据正常，生成新的ini数据，执行StartForm添加按钮和新增rdp文件操作 */
                 /* 生成新INI ****************************/
-                String newSection = Guid.NewGuid().ToString();
+                String operateSection = Config.OPERATE_TYPE_ADD.Equals(operateType) ? Guid.NewGuid().ToString() : section;
                 // 生成title
-                IniUtils.IniWriteValue(Config.ProjectsIniPath, newSection, Config.INI_KEY_PROJECT_TITLE, title);
-                IniUtils.IniWriteValue(Config.ProjectsIniPath, newSection, Config.INI_KEY_PROJECT_JAR, jar);
-                IniUtils.IniWriteValue(Config.ProjectsIniPath, newSection, Config.INI_KEY_PROJECT_PORT, port);
-                IniUtils.IniWriteValue(Config.ProjectsIniPath, newSection, Config.INI_KEY_PROJECT_PRINT_LOG, isPrintLog);
-                IniUtils.IniWriteValue(Config.ProjectsIniPath, newSection, Config.INI_KEY_PROJECT_HEART_BEAT, heartBeat);
-                IniUtils.IniWriteValue(Config.ProjectsIniPath, newSection, Config.INI_KEY_PROJECT_ACTUATOR, actuator);
-                IniUtils.IniWriteValue(Config.ProjectsIniPath, newSection, Config.INI_KEY_PROJECT_PARAM, param);
+                IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_TITLE, title);
+                IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_JAR, jar);
+                IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_PORT, port);
+                IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_PRINT_LOG, isPrintLog);
+                IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_HEART_BEAT, heartBeat);
+                IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_ACTUATOR, actuator);
+                IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_PARAM, param);
                 // 项目对象赋值
                 String logPath = Path.GetDirectoryName(jar) + Config.PATH_CHARACTER + title;
                 ProjectSections.ProjectSection projectModel = new ProjectSections.ProjectSection();
-                projectModel.section = newSection;
+                projectModel.section = operateSection;
                 projectModel.title = title;
                 projectModel.jar = jar;
                 projectModel.port = port;
                 projectModel.isPrintLog = isPrintLogBl;
                 projectModel.heartBeat = heartBeat;
                 projectModel.actuator = actuator;
+                projectModel.param = param;
                 // 生成start.bat
                 ProjectUtils.createStartBat(projectModel, logPath, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);
                 // 生成stop.bat
                 ProjectUtils.createStopBat(projectModel);
+
                 if (Config.OPERATE_TYPE_ADD.Equals(operateType)) {
                     /* StartForm中添加新服务按钮 *************/
                     FormService.addButton(projectModel);
-                }else if (Config.OPERATE_TYPE_UPDATE.Equals(operateType)) {
+
+                    // 初始化为未运行
+                    projectModel.runStat = Config.PROJECT_RUN_STAT_UNRUN;
+                    projectModel.isRunning = false;
+
+                } else if (Config.OPERATE_TYPE_UPDATE.Equals(operateType)) {
                     FormService.updateButton(projectModel);
                 }
-               
+                #region 数据写进缓存
+                ProjectSections.updateProjectSection(operateSection, projectModel);
+                #endregion
                 /* 添加新服务按钮完成****** *************/
                 // ControlUtils.addTabPage2TabControl(Config.mainForm.ProjectRunTabControl, newSection);
                 // 关闭新增窗口
@@ -144,6 +161,6 @@ namespace PM_plus {
             }
         }
 
-        
+
     }
 }

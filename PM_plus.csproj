@@ -115,6 +115,7 @@
     <Compile Include="utils\ProcessUtils.cs" />
     <Compile Include="utils\ProjectUtils.cs" />
     <Compile Include="utils\ScrollBarUtils.cs" />
+    <Compile Include="utils\SkinUtils.cs" />
     <Compile Include="utils\StringUtils.cs" />
     <Compile Include="WaitForm.cs">
       <SubType>Form</SubType>

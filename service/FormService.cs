@@ -70,7 +70,7 @@ namespace PM_plus.service {
 
 
         internal static void initSkin() {
-            FileInfo[] skinFileArray = new DirectoryInfo("Skins").GetFiles();
+            FileInfo[] skinFileArray = new DirectoryInfo("Skins").GetFiles("*.ssk", SearchOption.AllDirectories);
             List<Skin> skinList = new List<Skin>();
             foreach(FileInfo fileInfo in skinFileArray) {
                 Skin skin = new Skin();
@@ -93,6 +93,7 @@ namespace PM_plus.service {
             }
             Config.mainForm.se.SkinFile = skinFile;
             Config.mainForm.SkinListBox.SelectedValue = skinFile;
+            Config.mainForm.SkinShowPictureBox.Image = Image.FromFile(SkinUtils.getSkinShowPath(skinFile));
         }
         /// <summary>
         ///  初始化偏好设置
@@ -152,6 +153,11 @@ namespace PM_plus.service {
                 projectSection.actuator = actuator;
                 projectSection.param = param;
                 addButton(projectSection);
+
+                // 初始化为未运行
+                projectSection.runStat = Config.PROJECT_RUN_STAT_UNRUN;
+                projectSection.isRunning = false;
+                ProjectSections.updateProjectSection(section, projectSection);
                 // 校验section
                 FormService.checkSection(projectSection, false);
                 Config.waitForm.freshProgress(usedProgress + ((giveProgress - 5) / sectionList.Count) * (i + 1));
@@ -330,12 +336,7 @@ namespace PM_plus.service {
             button.ContextMenuStrip = rightMenu;
             Config.mainForm.Projects_Panel.Controls.Add(button);
             #endregion
-            #region 数据写进缓存
-            // 初始化为未运行
-            projectSection.runStat = Config.PROJECT_RUN_STAT_UNRUN;
-            projectSection.isRunning = false;
-            ProjectSections.updateProjectSection(projectSection.section, projectSection);
-            #endregion
+            
             // 创建新项目运行窗口tabPage
 
         }
