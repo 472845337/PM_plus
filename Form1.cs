@@ -20,7 +20,7 @@ namespace PM_plus {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            // this.Icon = new Icon("icons/disk.ico");
+            this.Icon = new Icon("icons/disk.ico");
             se.DisableTag = 9999;
             initData();
         }
