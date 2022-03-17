@@ -6,7 +6,6 @@ using Sunisoft.IrisSkin;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace PM_plus {
@@ -99,7 +98,7 @@ namespace PM_plus {
 
             if (result == DialogResult.OK) {
                 JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
-            } 
+            }
         }
         private void InvokeMethod() {
             result = JDKPath_FolderBrowserDialog.ShowDialog();
@@ -313,7 +312,7 @@ namespace PM_plus {
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, Config.DEFAULT_SKIN);
             SkinListBox.SelectedValue = Config.DEFAULT_SKIN;
             // 字体恢复默认
-            foreach(Control con in Config.mainForm.Controls) {
+            foreach (Control con in Config.mainForm.Controls) {
                 ControlUtils.SetControlFont(con, Config.DEFAULT_FONT_FAMILY, true);
             }
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
