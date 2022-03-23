@@ -14,18 +14,18 @@ namespace PM_plus.service
         /// </summary>
         /// <param name="progress"></param>
         /// <returns>progress 进度条占用</returns>
-        public static int initSystemConfig(int usedProgress, int giveProgress)
+        public static int InitSystemConfig(int usedProgress, int giveProgress)
         {
             String logFileName = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_LOG, Config.INI_KEY_LOG_FILENAME);
             String logSwitchIni = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_LOG, Config.INI_KEY_LOG_SWITCH);
             String exitAfterCloseIni = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_EXITAFTERCLOSE);
             Config.logFileName = logFileName;
 
-            bool logSwitch = StringUtils.isEmpty(logSwitchIni) ? false : Convert.ToBoolean(logSwitchIni);
+            bool logSwitch = !StringUtils.isEmpty(logSwitchIni) && Convert.ToBoolean(logSwitchIni);
             Config.logSwitch = logSwitch;
             Config.mainForm.LogSwitch_CheckBox.Checked = Config.logSwitch;
 
-            bool exitAfterClose = StringUtils.isEmpty(exitAfterCloseIni) ? false : Convert.ToBoolean(exitAfterCloseIni);
+            bool exitAfterClose = !StringUtils.isEmpty(exitAfterCloseIni) && Convert.ToBoolean(exitAfterCloseIni);
             Config.exitAfterClose = exitAfterClose;
             Config.mainForm.ExitAfterClose_CheckBox.Checked = Config.exitAfterClose;
 
@@ -38,7 +38,7 @@ namespace PM_plus.service
         /// </summary>
         /// <param name="progress"></param>
         /// <returns></returns>
-        public static int initProjectConfig(int usedProgress, int giveProgress)
+        public static int InitProjectConfig(int usedProgress, int giveProgress)
         {
             String profile = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_PROFILE);
             Config.waitForm.freshProgress(usedProgress + (giveProgress / 5) * 1);

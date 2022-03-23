@@ -17,10 +17,10 @@ namespace PM_plus.utils {
          * */
         public static void projectStart(ProjectSections.ProjectSection projectSection) {
             // 置为启动中状态
-            projectSection.runStat = Config.PROJECT_RUN_STAT_RUNNING;
-            projectSection.isRunning = true;
+            projectSection.RunStat = Config.PROJECT_RUN_STAT_RUNNING;
+            projectSection.IsRunning = true;
             // 运行启动脚本
-            Process.Start(FileUtils.getBatFilePath(projectSection.title, Config.BAT_FILE_TYPE_START));
+            Process.Start(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_START));
         }
 
         /**
@@ -42,7 +42,7 @@ namespace PM_plus.utils {
             }
             StringBuilder script = new StringBuilder();
             script.Append("@echo off").Append(Config.ENTER_STR);
-            script.Append("title ").Append(projectSection.title).Append(Config.ENTER_STR);
+            script.Append("title ").Append(projectSection.Title).Append(Config.ENTER_STR);
             // jdk路径
             Boolean JDKPathIsExist = FileUtils.Boo_DirExist(jdkPath);
             if (JDKPathIsExist) {
@@ -51,17 +51,17 @@ namespace PM_plus.utils {
                 script.Append("java");
             }
             // 参数
-            if (StringUtils.isNotEmpty(projectSection.param)) {
-                script.Append(" ").Append(projectSection.param);
+            if (StringUtils.isNotEmpty(projectSection.Param)) {
+                script.Append(" ").Append(projectSection.Param);
             }
             // jar包路径
-            script.Append(" -jar ").Append(projectSection.jar);
+            script.Append(" -jar ").Append(projectSection.Jar);
             // profile配置
             script.Append(" --spring.profiles.active=").Append(profile);
             // 指定启动端口
-            script.Append(" --server.port=").Append(projectSection.port);
+            script.Append(" --server.port=").Append(projectSection.Port);
             // 是否将运行日志输出，配置文件后，日志将不会在console中输出
-            if (!projectSection.isPrintLog && StringUtils.isNotEmpty(LogFilePath) && StringUtils.isNotEmpty(LogFileName)) {
+            if (!projectSection.IsPrintLog && StringUtils.isNotEmpty(LogFilePath) && StringUtils.isNotEmpty(LogFileName)) {
                 LogFilePath = LogFilePath.EndsWith(Config.PATH_CHARACTER) ? LogFilePath : LogFilePath + Config.PATH_CHARACTER;
                 Boolean DirIsExist = FileUtils.Boo_DirExist(LogFilePath);
                 if (!DirIsExist) {
@@ -80,7 +80,7 @@ namespace PM_plus.utils {
             script.Append("pause");
             //创建启动bat文件，使用ANSI编码
             // Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            FileUtils.createFile(FileUtils.getBatFilePath(projectSection.title, Config.BAT_FILE_TYPE_START), script.ToString(), Encoding.GetEncoding("GB2312"));
+            FileUtils.createFile(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_START), script.ToString(), Encoding.GetEncoding("GB2312"));
         }
 
         /**
@@ -94,9 +94,9 @@ namespace PM_plus.utils {
             stopProjectBySection.Invoke(projectSection);*/
 
             // 如果项目未配置监控，则调用自动生成的stop.bat脚本结束进程，有配置actuator则调用/shutdown结束进程
-            String actuator = projectSection.actuator;
+            String actuator = projectSection.Actuator;
             if (StringUtils.isEmpty(actuator)) {
-                Process.Start(FileUtils.getBatFilePath(projectSection.title, Config.BAT_FILE_TYPE_STOP));
+                Process.Start(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP));
             } else {
                 String shutDownUrl = (actuator.EndsWith(Config.PATH_CHARACTER) ? actuator : actuator + Config.PATH_CHARACTER) + Config.ACTUATOR_SHUTDOWN;
                 try {
@@ -111,8 +111,8 @@ namespace PM_plus.utils {
 
             }
             //停止中状态
-            projectSection.runStat = Config.PROJECT_RUN_STAT_STOPPING;
-            projectSection.isRunning = false;
+            projectSection.RunStat = Config.PROJECT_RUN_STAT_STOPPING;
+            projectSection.IsRunning = false;
         }
         /// <summary>
         /// 委托接口
@@ -126,9 +126,9 @@ namespace PM_plus.utils {
         /// <param name="projectSection"></param>
         public static void StopProjectBySectionImpl(ProjectSections.ProjectSection projectSection) {
             // 如果项目未配置监控，则调用自动生成的stop.bat脚本结束进程，有配置actuator则调用/shutdown结束进程
-            String actuator = projectSection.actuator;
+            String actuator = projectSection.Actuator;
             if (StringUtils.isEmpty(actuator)) {
-                Process.Start(FileUtils.getBatFilePath(projectSection.title, Config.BAT_FILE_TYPE_STOP));
+                Process.Start(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP));
             } else {
                 String shutDownUrl = (actuator.EndsWith(Config.PATH_CHARACTER) ? actuator : actuator + Config.PATH_CHARACTER) + Config.ACTUATOR_SHUTDOWN;
                 try {
@@ -143,8 +143,8 @@ namespace PM_plus.utils {
 
             }
             //停止中状态
-            projectSection.runStat = Config.PROJECT_RUN_STAT_STOPPING;
-            projectSection.isRunning = false;
+            projectSection.RunStat = Config.PROJECT_RUN_STAT_STOPPING;
+            projectSection.IsRunning = false;
         }
 
         /**
@@ -155,7 +155,7 @@ namespace PM_plus.utils {
             StringBuilder script = new StringBuilder();
             script.Append("@echo off").Append(Config.ENTER_STR);
             script.Append("setlocal enabledelayedexpansion").Append(Config.ENTER_STR);
-            script.Append("for /f \"tokens=1-5\" %%a in ('netstat -ano ^| find \":").Append(projectSection.port).Append("\"') do (").Append(Config.ENTER_STR);
+            script.Append("for /f \"tokens=1-5\" %%a in ('netstat -ano ^| find \":").Append(projectSection.Port).Append("\"') do (").Append(Config.ENTER_STR);
             script.Append("    if \"%%e%\" == \"\" (").Append(Config.ENTER_STR);
             script.Append("        set pid=%%d").Append(Config.ENTER_STR);
             script.Append("    ) else (").Append(Config.ENTER_STR);
@@ -166,7 +166,7 @@ namespace PM_plus.utils {
             script.Append("    echo kill java progress success").Append(Config.ENTER_STR);
             script.Append(")").Append(Config.ENTER_STR);
             // Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            FileUtils.createFile(FileUtils.getBatFilePath(projectSection.title, Config.BAT_FILE_TYPE_STOP), script.ToString(), Encoding.GetEncoding("GB2312"));
+            FileUtils.createFile(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP), script.ToString(), Encoding.GetEncoding("GB2312"));
         }
 
         public static void removeBat(String title) {
@@ -181,7 +181,7 @@ namespace PM_plus.utils {
         /// </summary>
         /// <param name="type">Config.ProjectOperateTypeStart</param>
         public static void allProjectOperate(int type) {
-            Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.getAllSectionDic();
+            Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.GetAllSectionDic();
             if (null == sectionList || 0 == sectionList.Count) {
                 MessageBox.Show("项目配置为空，请先添加项目", "提示");
                 return;
@@ -199,10 +199,10 @@ namespace PM_plus.utils {
                 foreach (KeyValuePair<String, ProjectSections.ProjectSection> sectionMap in sectionList) {
                     ProjectSections.ProjectSection section = sectionMap.Value;
 
-                    if (Config.PROJECT_OPERATE_TYPE_START == type && (Config.PROJECT_RUN_STAT_UNRUN == section.runStat || Config.PROJECT_RUN_STAT_FAIL == section.runStat)) {
+                    if (Config.PROJECT_OPERATE_TYPE_START == type && (Config.PROJECT_RUN_STAT_UNRUN == section.RunStat || Config.PROJECT_RUN_STAT_FAIL == section.RunStat)) {
                         // 项目状态为未运行或运行失败才可运行
                         projectStart(section);
-                    } else if (Config.PROJECT_OPERATE_TYPE_STOP == type && Config.PROJECT_RUN_STAT_SUCCESS == section.runStat) {
+                    } else if (Config.PROJECT_OPERATE_TYPE_STOP == type && Config.PROJECT_RUN_STAT_SUCCESS == section.RunStat) {
                         // 项目状态必须为运行中
                         projectStop(section);
                     }

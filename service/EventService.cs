@@ -10,24 +10,24 @@ namespace PM_plus.service {
     /// 事件服务费类
     /// </summary>
     class EventService {
-        static ToolTip toolTip = new ToolTip();
+        static readonly ToolTip toolTip = new ToolTip();
         /// <summary>
         /// 鼠标移动到按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public static void BtnMouseHover(Object sender, EventArgs e) {
-            ProjectSections.ProjectSection currentSection = getCurrentProjectSectionBySender(sender);
+            ProjectSections.ProjectSection currentSection = GetCurrentProjectSectionBySender(sender);
             if (null != currentSection) {
-                String title = currentSection.title;
-                String port = currentSection.port;
+                String title = currentSection.Title;
+                String port = currentSection.Port;
                 // 设置显示样式
                 //toolTip.AutoPopDelay = 5000;//提示信息的可见时间
                 toolTip.InitialDelay = 200;//事件触发多久后出现提示
                 toolTip.ReshowDelay = 0;//指针从一个控件移向另一个控件时，经过多久才会显示下一个提示框
                 toolTip.ShowAlways = true;//是否显示提示框
                                           //  设置伴随的对象.
-                toolTip.SetToolTip(getCurrentBtnBySender(sender), title + ":" + port);
+                toolTip.SetToolTip(GetCurrentBtnBySender(sender), title + ":" + port);
             }
         }
         /** 左键双击,打开jar包路径 */
@@ -35,11 +35,11 @@ namespace PM_plus.service {
             // 判断是否双击事件
             bool isDoubleClick = TimerService.IsDoubleClick(sender);
             if (isDoubleClick) {
-                ProjectSections.ProjectSection projectSection = getCurrentProjectSectionBySender(sender);
-                if (!FileUtils.Boo_FileExist(projectSection.jar)) {
+                ProjectSections.ProjectSection projectSection = GetCurrentProjectSectionBySender(sender);
+                if (!FileUtils.Boo_FileExist(projectSection.Jar)) {
                     MessageBox.Show("该jar配置的文件被删除，请重新配置");
                 } else {
-                    Process.Start("explorer.exe", " /select," + projectSection.jar);
+                    Process.Start("explorer.exe", " /select," + projectSection.Jar);
                 }
             }
 
@@ -53,13 +53,13 @@ namespace PM_plus.service {
         public static void BtnRightFreshClick(Object sender, EventArgs e) {
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
             String section = (String)menuItem.Tag;
-            ProjectSections.ProjectSection projectSection = ProjectSections.getProjectBySection(section);
+            ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
             if (null != projectSection) {
                 // 刷新bat文件
-                FormService.checkSection(projectSection, true);
+                FormService.CheckSection(projectSection, true);
                 Config.mainForm.OperateMsg_Label.Text = "刷新成功";
                 Config.mainForm.OperateMsg_Label.ForeColor = Color.Green;
-                Config.mainForm.initLabelMsgTimerout();
+                Config.mainForm.InitLabelMsgTimerout();
             } else {
                 MessageBox.Show("项目未找到，请重启程序!");
             }
@@ -73,8 +73,8 @@ namespace PM_plus.service {
             String section = (String)menuItem.Tag;
             // 按钮置为灰，避免重复点击
             menuItem.Enabled = false;
-            ProjectSections.ProjectSection projectSection = ProjectSections.getProjectBySection(section);
-            if (null != projectSection && Config.PROJECT_RUN_STAT_SUCCESS != projectSection.runStat) {
+            ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
+            if (null != projectSection && Config.PROJECT_RUN_STAT_SUCCESS != projectSection.RunStat) {
                 // 准备启动
                 ProjectUtils.projectStart(projectSection);
             } else {
@@ -88,7 +88,7 @@ namespace PM_plus.service {
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
             menuItem.Enabled = false;
             String section = (String)menuItem.Tag;
-            ProjectSections.ProjectSection projectSection = ProjectSections.getProjectBySection(section);
+            ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
             if (null != projectSection) {
                 // 停止
                 ProjectUtils.projectStop(projectSection);
@@ -100,8 +100,9 @@ namespace PM_plus.service {
         * */
         public static void BtnRightUpdateClick(Object sender, EventArgs e) {
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
-            ProjectForm updateForm = new ProjectForm(Config.OPERATE_TYPE_UPDATE);
-            updateForm.section = (String)menuItem.Tag;
+            ProjectForm updateForm = new ProjectForm(Config.OPERATE_TYPE_UPDATE) {
+                Section = (String)menuItem.Tag
+            };
             updateForm.ShowDialog();
         }
 
@@ -112,8 +113,9 @@ namespace PM_plus.service {
         /// <param name="e"></param>
         public static void BtnRightDetailClick(Object sender, EventArgs e) {
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
-            ProjectForm detailForm = new ProjectForm(Config.OPERATE_TYPE_DETAIL);
-            detailForm.section = (String)menuItem.Tag;
+            ProjectForm detailForm = new ProjectForm(Config.OPERATE_TYPE_DETAIL) {
+                Section = (String)menuItem.Tag
+            };
             detailForm.ShowDialog();
         }
         /// <summary>
@@ -126,9 +128,9 @@ namespace PM_plus.service {
             menuItem.Enabled = false;
             String section = (String)menuItem.Tag;
             // 移除缓存中的项目信息
-            ProjectSections.removeProjectBySection(section);
+            ProjectSections.RemoveProjectBySection(section);
             // 移除panel中的按钮
-            FormService.removeButton(section);
+            FormService.RemoveButton(section);
             // 删除ini文件中的配置信息
             IniUtils.EraseSection(Config.ProjectsIniPath, section);
 
@@ -138,20 +140,19 @@ namespace PM_plus.service {
 
         #region 项目按钮拖动事件
         private static bool down = false;
-        public static void btn_MouseUp(object sender, MouseEventArgs e) {
+        public static void Btn_MouseUp(object sender, MouseEventArgs e) {
             down = false;
         }
 
-        public static void btn_MouseDown(object sender, MouseEventArgs e) {
+        public static void Btn_MouseDown(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
                 down = true;
             }
         }
-        public static void btn_MouseMove(object sender, MouseEventArgs e) {
+        public static void Btn_MouseMove(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left && down) {
                 down = false;
-                Button btn = sender as Button;
-                if (btn == null) {
+                if (!(sender is Button btn)) {
                     return;
                 }
                 Config.mainForm.Projects_Panel.DoDragDrop(btn, DragDropEffects.Move);
@@ -167,7 +168,7 @@ namespace PM_plus.service {
         public static void RunTab_ClearButtonClick(Object sender, MouseEventArgs e) {
             Button button = (Button)sender;
             String section = (String)button.Tag;
-            RichTextBox richTextBox = ControlUtils.getRichTextBoxControlBySection(section);
+            RichTextBox richTextBox = ControlUtils.GetRichTextBoxControlBySection(section);
             richTextBox.Text = "";
         }
 
@@ -179,7 +180,7 @@ namespace PM_plus.service {
         public static void RunTab_StartButtonClick(Object sender, MouseEventArgs e) {
             Button button = (Button)sender;
             String section = (String)button.Tag;
-            ProjectSections.ProjectSection projectSection = ProjectSections.getProjectBySection(section);
+            ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
             if (null != projectSection) {
                 // 准备启动
                 ProjectUtils.projectStart(projectSection);
@@ -194,21 +195,21 @@ namespace PM_plus.service {
         public static void RunTab_StopButtonClick(Object sender, MouseEventArgs e) {
             Button button = (Button)sender;
             String section = (String)button.Tag;
-            ProjectSections.ProjectSection projectSection = ProjectSections.getProjectBySection(section);
+            ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
             if (null != projectSection) {
                 // 停止
                 ProjectUtils.projectStop(projectSection);
             }
         }
 
-        private static ProjectSections.ProjectSection getCurrentProjectSectionBySender(Object sender) {
-            Button currentBtn = getCurrentBtnBySender(sender);
+        private static ProjectSections.ProjectSection GetCurrentProjectSectionBySender(Object sender) {
+            Button currentBtn = GetCurrentBtnBySender(sender);
             String section = currentBtn.Name;
-            ProjectSections.ProjectSection currentSection = ProjectSections.getProjectBySection(section);
+            ProjectSections.ProjectSection currentSection = ProjectSections.GetProjectBySection(section);
             return currentSection;
         }
 
-        private static Button getCurrentBtnBySender(Object sender) {
+        private static Button GetCurrentBtnBySender(Object sender) {
             Button currentBtn = (Button)sender;
             return currentBtn;
         }

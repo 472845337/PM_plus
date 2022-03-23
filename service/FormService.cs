@@ -19,7 +19,7 @@ namespace PM_plus.service {
         /// 将主窗体放到缓存当中供，其它窗口使用
         /// </summary>
         /// <param name="form"></param>
-        public static void initMainForm(Form1 form) {
+        public static void InitMainForm(Form1 form) {
             // 设置项目面板水平滚动条不可用
             form.Projects_Panel.HorizontalScroll.Maximum = 0;
             form.Projects_Panel.AutoScroll = false;
@@ -39,14 +39,13 @@ namespace PM_plus.service {
         /// <summary>
         /// 初始化显示加载窗口
         /// </summary>
-        /// <param name="mainForm"></param>
-        public static void initWaitForm(Form1 mainForm) {
+        public static void InitWaitForm() {
             WaitForm waitForm = new WaitForm();
             waitForm.Show();
             waitForm.Update();
             Config.waitForm = waitForm;
         }
-        internal static void initFont() {
+        internal static void InitFont() {
             InstalledFontCollection installedFontCollection = new InstalledFontCollection();
             foreach(FontFamily fontFamily in installedFontCollection.Families) {
                 if (fontFamily.IsStyleAvailable(FontStyle.Regular)) {
@@ -69,14 +68,15 @@ namespace PM_plus.service {
         }
 
 
-        internal static void initSkin() {
+        internal static void InitSkin() {
             FileInfo[] skinFileArray = new DirectoryInfo("Skins").GetFiles("*.ssk", SearchOption.AllDirectories);
             List<Skin> skinList = new List<Skin>();
             foreach(FileInfo fileInfo in skinFileArray) {
-                Skin skin = new Skin();
-                skin.Name = fileInfo.Name;
-                skin.FullName = fileInfo.FullName;
-                skin.RelativeName = fileInfo.FullName.Replace(Config.AppPath, "");
+                Skin skin = new Skin {
+                    Name = fileInfo.Name,
+                    FullName = fileInfo.FullName,
+                    RelativeName = fileInfo.FullName.Replace(Config.AppPath, Config.BLANK_STR)
+                };
                 skinList.Add(skin);
             }
             Config.mainForm.SkinListBox.DataSource = skinList;
@@ -100,14 +100,14 @@ namespace PM_plus.service {
         /// <summary>
         ///  初始化偏好设置
         /// </summary>
-        internal static void initDiySet() {
+        internal static void InitDiySet() {
             // 字体初始化
-            initFont();
+            InitFont();
             // 皮肤初始化
-            initSkin();
+            InitSkin();
         }
 
-        public static int initPanelRightMenu(int usedProgress, int giveProgress) {
+        public static int InitPanelRightMenu(int usedProgress, int giveProgress) {
 
             /* 启动程序按钮 */
             ContextMenuStrip rightMenu = new ContextMenuStrip();
@@ -124,7 +124,7 @@ namespace PM_plus.service {
             return usedProgress + giveProgress;
         }
 
-        public static int initProjectButton(int usedProgress, int giveProgress) {
+        public static int InitProjectButton(int usedProgress, int giveProgress) {
             List<String> sectionList = IniUtils.ReadSections(Config.ProjectsIniPath);
             Config.waitForm.freshProgress(usedProgress + 5);
             for (int i = 0; i < sectionList.Count; i++) {
@@ -137,7 +137,7 @@ namespace PM_plus.service {
                 String port = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_PORT);
                 // 是否在控制台打印日志
                 String isPrintLog = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_PRINT_LOG);
-                bool isPrintLogBl = Config.IS_PRINT_LOG_YES.Equals(isPrintLog) ? true : false;
+                bool isPrintLogBl = Config.IS_PRINT_LOG_YES.Equals(isPrintLog);
                 // 心跳地址
                 String heartBeat = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_HEART_BEAT);
                 // 监控地址
@@ -145,29 +145,30 @@ namespace PM_plus.service {
                 // 启动参数
                 String param = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_PARAM);
                 // 创建按钮
-                ProjectSections.ProjectSection projectSection = new ProjectSections.ProjectSection();
-                projectSection.section = section;
-                projectSection.title = buttonText;
-                projectSection.jar = jar;
-                projectSection.port = port;
-                projectSection.isPrintLog = isPrintLogBl;
-                projectSection.heartBeat = heartBeat;
-                projectSection.actuator = actuator;
-                projectSection.param = param;
-                addButton(projectSection);
+                ProjectSections.ProjectSection projectSection = new ProjectSections.ProjectSection {
+                    Section = section,
+                    Title = buttonText,
+                    Jar = jar,
+                    Port = port,
+                    IsPrintLog = isPrintLogBl,
+                    HeartBeat = heartBeat,
+                    Actuator = actuator,
+                    Param = param
+                };
+                AddButton(projectSection);
 
                 // 初始化为未运行
-                projectSection.runStat = Config.PROJECT_RUN_STAT_UNRUN;
-                projectSection.isRunning = false;
-                ProjectSections.updateProjectSection(section, projectSection);
+                projectSection.RunStat = Config.PROJECT_RUN_STAT_UNRUN;
+                projectSection.IsRunning = false;
+                ProjectSections.UpdateProjectSection(section, projectSection);
                 // 校验section
-                FormService.checkSection(projectSection, false);
+                FormService.CheckSection(projectSection, false);
                 Config.waitForm.freshProgress(usedProgress + ((giveProgress - 5) / sectionList.Count) * (i + 1));
             }
             return usedProgress + giveProgress;
         }
 
-        public static void freshProjectButtonSort() {
+        public static void FreshProjectButtonSort() {
             ControlCollection controls = Config.mainForm.Projects_Panel.Controls;
             foreach (Control con in controls) {
                 int index = controls.GetChildIndex(con, false);
@@ -182,7 +183,7 @@ namespace PM_plus.service {
         /// <param name="usedProgress"></param>
         /// <param name="giveProgress"></param>
         /// <returns></returns>
-        public static int initProjectTab(TabControl projectRunTabControl, int usedProgress, int giveProgress) {
+        public static int InitProjectTab(TabControl projectRunTabControl, int usedProgress, int giveProgress) {
             List<String> sectionList = IniUtils.ReadSections(Config.ProjectsIniPath);
             // 先移除首页外的所有
             foreach (TabPage tabPage in projectRunTabControl.TabPages) {
@@ -196,7 +197,7 @@ namespace PM_plus.service {
             for (int i = 0; i < sectionList.Count; i++) {
                 String section = sectionList[i];
                 // 添加项目运行窗口的所有控件
-                ControlUtils.addTabPage2TabControl(projectRunTabControl, section);
+                ControlUtils.AddTabPage2TabControl(projectRunTabControl, section);
                 // 
                 Config.waitForm.freshProgress(usedProgress + (surplusProgress / sectionList.Count) * (i + 1));
                 Thread.Sleep(100);
@@ -208,7 +209,7 @@ namespace PM_plus.service {
         /// </summary>
         /// <param name="section">当前按钮编码</param>
         /// <param name="isRunning">当前项目是否运行</param>
-        internal static void updateButtonEnabledOfMenuStrip(String section, short runStat) {
+        internal static void UpdateButtonEnabledOfMenuStrip(String section, short runStat) {
             Color backColor = Color.LightGray;
             bool startEnabled = false;
             bool stopEnabled = false;
@@ -254,28 +255,28 @@ namespace PM_plus.service {
         /// </summary>
         /// <param name="projectSection">项目</param>
         /// <param name="force">是否强制更新bat文件</param>
-        public static void checkSection(ProjectSections.ProjectSection projectSection, bool force) {
+        public static void CheckSection(ProjectSections.ProjectSection projectSection, bool force) {
             // 校验端口启动进程的bat文件是否存在，不存在
-            if (force || !File.Exists(FileUtils.getBatFilePath(projectSection.title, Config.BAT_FILE_TYPE_START))) {
+            if (force || !File.Exists(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_START))) {
                 String logPath = null;
-                if (!projectSection.isPrintLog) {
-                    logPath = Path.GetDirectoryName(projectSection.jar) + Config.PATH_CHARACTER + projectSection.title;
+                if (!projectSection.IsPrintLog) {
+                    logPath = Path.GetDirectoryName(projectSection.Jar) + Config.PATH_CHARACTER + projectSection.Title;
                 }
                 ProjectUtils.createStartBat(projectSection, logPath, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);
             }
             // 校验端口结束进程的bat文件是否存在，不存在
-            if (force || !File.Exists(FileUtils.getBatFilePath(projectSection.title, Config.BAT_FILE_TYPE_STOP))) {
+            if (force || !File.Exists(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP))) {
                 ProjectUtils.createStopBat(projectSection);
             }
             // 识别运行状态
 
             if (null != projectSection) {
-                if (PortUtils.PortInUse(Convert.ToInt16(projectSection.port))) {
-                    projectSection.runStat = Config.PROJECT_RUN_STAT_SUCCESS;
-                    projectSection.isRunning = true;
+                if (PortUtils.PortInUse(Convert.ToInt16(projectSection.Port))) {
+                    projectSection.RunStat = Config.PROJECT_RUN_STAT_SUCCESS;
+                    projectSection.IsRunning = true;
                 }
                 // 根据运行状态右键按钮的可操作性调整
-                FormService.updateButtonEnabledOfMenuStrip(projectSection.section, projectSection.runStat);
+                FormService.UpdateButtonEnabledOfMenuStrip(projectSection.Section, projectSection.RunStat);
             }
         }
 
@@ -290,12 +291,12 @@ namespace PM_plus.service {
         /// <param name="jar">jar包路径</param>
         /// <param name="port">启动端口</param>
         /// <param name="heartBeat">心跳检测地址</param>
-        public static void addButton(ProjectSections.ProjectSection projectSection) {
+        public static void AddButton(ProjectSections.ProjectSection projectSection) {
             Button button = new Button();
             #region 按钮基本属性
             button.ImageAlign = ContentAlignment.TopCenter;
             button.Location = new Point(3, 0);
-            button.Name = projectSection.section;
+            button.Name = projectSection.Section;
             button.Size = new Size(Convert.ToInt32(Config.mainForm.Projects_Panel.Width * 0.98), 46);
             button.TabIndex = 0;
             // 按钮背景图片
@@ -303,7 +304,7 @@ namespace PM_plus.service {
             button.BackgroundImageLayout = ImageLayout.None;
             button.BackgroundImage = image;
             // 按钮文本
-            button.Text = projectSection.title;
+            button.Text = projectSection.Title;
             button.TextAlign = ContentAlignment.BottomCenter;
             button.Font = new Font("微软雅黑", 12);
             button.Tag = 9999;
@@ -314,26 +315,26 @@ namespace PM_plus.service {
              * btn没有双击事件，只能单击，使用计时器模拟双击
              */
             button.MouseClick += new MouseEventHandler(EventService.BtnDoubleClick);
-            button.MouseDown += new MouseEventHandler(EventService.btn_MouseDown);
-            button.MouseMove += new MouseEventHandler(EventService.btn_MouseMove);
-            button.MouseUp += new MouseEventHandler(EventService.btn_MouseUp);
+            button.MouseDown += new MouseEventHandler(EventService.Btn_MouseDown);
+            button.MouseMove += new MouseEventHandler(EventService.Btn_MouseMove);
+            button.MouseUp += new MouseEventHandler(EventService.Btn_MouseUp);
             /** 右键按钮添加事件
              * 
              * */
             /* 启动程序按钮 */
             ContextMenuStrip rightMenu = new ContextMenuStrip();
             /* 查看按钮------------------------------------------------------------------ */
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.section, Config.RIGHT_BUTTON_DETAIL_NAME, Config.RIGHT_BUTTON_DETAIL_TEXT, new EventHandler(EventService.BtnRightDetailClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_DETAIL_NAME, Config.RIGHT_BUTTON_DETAIL_TEXT, new EventHandler(EventService.BtnRightDetailClick));
             /* 启动按钮 ---------------------------------------------------------------*/
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.section, Config.RIGHT_BUTTON_START_NAME, Config.RIGHT_BUTTON_START_TEXT, new EventHandler(EventService.BtnRightStartClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_START_NAME, Config.RIGHT_BUTTON_START_TEXT, new EventHandler(EventService.BtnRightStartClick));
             /* 停止按钮--------------------------------------------------------------------- */
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.section, Config.RIGHT_BUTTON_STOP_NAME, Config.RIGHT_BUTTON_STOP_TEXT, new EventHandler(EventService.BtnRightStopClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_STOP_NAME, Config.RIGHT_BUTTON_STOP_TEXT, new EventHandler(EventService.BtnRightStopClick));
             /* 编辑按钮------------------------------------------------------------------ */
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.section, Config.RIGHT_BUTTON_UPDATE_NAME, Config.RIGHT_BUTTON_UPDATE_TEXT, new EventHandler(EventService.BtnRightUpdateClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_UPDATE_NAME, Config.RIGHT_BUTTON_UPDATE_TEXT, new EventHandler(EventService.BtnRightUpdateClick));
             /* 删除按钮---------------------------------------------------------------- */
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.section, Config.RIGHT_BUTTON_DELETE_NAME, Config.RIGHT_BUTTON_DELETE_TEXT, new EventHandler(EventService.BtnRightDeleteClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_DELETE_NAME, Config.RIGHT_BUTTON_DELETE_TEXT, new EventHandler(EventService.BtnRightDeleteClick));
             /* 刷新按钮------------------------------------------------------------------ */
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.section, Config.RIGHT_BUTTON_FRESH_NAME, Config.RIGHT_BUTTON_FRESH_TEXT, new EventHandler(EventService.BtnRightFreshClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_FRESH_NAME, Config.RIGHT_BUTTON_FRESH_TEXT, new EventHandler(EventService.BtnRightFreshClick));
             /* 装载右键 */
             button.ContextMenuStrip = rightMenu;
             Config.mainForm.Projects_Panel.Controls.Add(button);
@@ -349,11 +350,10 @@ namespace PM_plus.service {
         /// 修改按钮
         /// </summary>
         /// <param name="section"></param>
-        public static void updateButton(ProjectSections.ProjectSection monitorSection) {
-            Button btn = (Button)Config.mainForm.Projects_Panel.Controls[monitorSection.section];
+        public static void UpdateButton(ProjectSections.ProjectSection monitorSection) {
+            Button btn = (Button)Config.mainForm.Projects_Panel.Controls[monitorSection.Section];
             if (null != monitorSection) {
-                String title = monitorSection.title;
-                String port = monitorSection.port;
+                String title = monitorSection.Title;
                 btn.Text = title;
             } else {
 
@@ -364,12 +364,12 @@ namespace PM_plus.service {
         /// 移除按钮
         /// </summary>
         /// <param name="section"></param>
-        public static void removeButton(String section) {
+        public static void RemoveButton(String section) {
             // 按钮清除
             Button btn = (Button)Config.mainForm.Projects_Panel.Controls[section];
             Config.mainForm.Projects_Panel.Controls.Remove(btn);
             // project_section清除
-            ProjectSections.removeProjectBySection(section);
+            ProjectSections.RemoveProjectBySection(section);
             // 文件清除
             ProjectUtils.removeBat(btn.Text);
         }

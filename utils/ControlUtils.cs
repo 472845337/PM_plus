@@ -9,19 +9,19 @@ using System.Windows.Forms;
 namespace PM_plus.utils {
     class ControlUtils {
 
-        private static object lockObj = new object();
+        private static readonly object lockObj = new object();
         /// <summary>
         /// 根据section获取运行窗口页
         /// </summary>
         /// <param name="section"></param>
         /// <returns></returns>
-        public static RichTextBox getRichTextBoxControlBySection(String section) {
+        public static RichTextBox GetRichTextBoxControlBySection(String section) {
             lock (lockObj) {
                 if (Config.richTextBoxControlDic == null || Config.richTextBoxControlDic.Count == 0) {
                     // 获取form中的所有控件，拿到richTextBox
-                    foreach (Control single in getAllControl()) {
-                        if (single is RichTextBox) {
-                            Config.richTextBoxControlDic.Add(single.Name, (RichTextBox)single);
+                    foreach (Control single in GetAllControl()) {
+                        if (single is RichTextBox box) {
+                            Config.richTextBoxControlDic.Add(single.Name, box);
                         }
                     }
                 }
@@ -33,21 +33,21 @@ namespace PM_plus.utils {
             }
         }
 
-        public static List<Control> getAllControl() {
+        public static List<Control> GetAllControl() {
             List<Control> controlList = new List<Control>();
             foreach (Control c in Config.mainForm.Controls) {
                 controlList.Add(c);
-                controlList.AddRange(getChildControlsFromControl(c, true));
+                controlList.AddRange(GetChildControlsFromControl(c, true));
             }
             return controlList;
         }
 
-        public static List<Control> getChildControlsFromControl(Control c, bool child) {
+        public static List<Control> GetChildControlsFromControl(Control c, bool child) {
             List<Control> controlList = new List<Control>();
             foreach (Control single in c.Controls) {
                 controlList.Add(single);
                 if (child) {
-                    controlList.AddRange(getChildControlsFromControl(single, child));
+                    controlList.AddRange(GetChildControlsFromControl(single, child));
                 }
             }
             return controlList;
@@ -58,13 +58,13 @@ namespace PM_plus.utils {
         /// </summary>
         /// <param name="tabControl"></param>
         /// <param name="section"></param>
-        public static void addTabPage2TabControl(TabControl tabControl, String section) {
+        public static void AddTabPage2TabControl(TabControl tabControl, String section) {
             // 标题
             String title = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_TITLE);
             // 创建新的tab页
-            TabPage tabPage = ControlUtils.createTabPage(section, title);
+            TabPage tabPage = ControlUtils.CreateTabPage(section, title);
             // tabPage中创建日志文本框
-            ControlUtils.addRichTextBox2TabPage(tabPage, section, title);
+            ControlUtils.AddRichTextBox2TabPage(tabPage, section, title);
             // 清除按钮添加
             ControlUtils.AddButton2TabPage(section, Config.RUNTAB_CONTROL_NAME_CLEAR_BUTTON_NAME, Config.RUNTAB_CONTROL_NAME_CLEAR_BUTTON_TEXT
                 , Config.RUNTAB_CONTROL_BUTTON_SIZE, Config.RUNTAB_CONTROL_NAME_CLEAR_BUTTON_LOCATION
@@ -84,50 +84,54 @@ namespace PM_plus.utils {
             tabControl.TabPages.Add(tabPage);
         }
 
-        public static TabPage createTabPage(String section, String text) {
-            TabPage tabPage = new TabPage();
-            tabPage.Name = section + Config.RUNTAB_CONTROL_NAME_TABPAGE;
-            tabPage.Text = text;
-            tabPage.BackColor = Color.Transparent;
-            tabPage.Size = Config.RUNTAB_CONTROL_TABPAGE_SIZE;
-            tabPage.Tag = section;
+        public static TabPage CreateTabPage(String section, String text) {
+            TabPage tabPage = new TabPage {
+                Name = section + Config.RUNTAB_CONTROL_NAME_TABPAGE,
+                Text = text,
+                BackColor = Color.Transparent,
+                Size = Config.RUNTAB_CONTROL_TABPAGE_SIZE,
+                Tag = section
+            };
             return tabPage;
         }
 
-        public static void addRichTextBox2TabPage(TabPage tabPage, String section, String text) {
+        public static void AddRichTextBox2TabPage(TabPage tabPage, String section, String text) {
             // 日志文本框控件
-            RichTextBox richTextBox = new RichTextBox();
-            richTextBox.Name = section + Config.RUNTAB_CONTROL_NAME_RICHTEXTBOX;
-            richTextBox.Size = Config.RUNTAB_CONTROL_RICHTEXTBOX_SIZE;
-            richTextBox.Location = Config.RUNTAB_CONTROL_RICHTEXTBOX_LOCATION;
-            richTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            richTextBox.Text = text;
-            richTextBox.BackColor = SystemColors.WindowText;
-            richTextBox.ForeColor = SystemColors.HighlightText;
-            richTextBox.Tag = section;
-            richTextBox.ReadOnly = true;
+            RichTextBox richTextBox = new RichTextBox {
+                Name = section + Config.RUNTAB_CONTROL_NAME_RICHTEXTBOX,
+                Size = Config.RUNTAB_CONTROL_RICHTEXTBOX_SIZE,
+                Location = Config.RUNTAB_CONTROL_RICHTEXTBOX_LOCATION,
+                Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top,
+                Text = text,
+                BackColor = SystemColors.WindowText,
+                ForeColor = SystemColors.HighlightText,
+                Tag = section,
+                ReadOnly = true
+            };
             // Config.richTextBoxControlDic.Add(richTextBox.Name, richTextBox);
             // 文本框放入TabPage
             tabPage.Controls.Add(richTextBox);
         }
 
         public static void AddButton2TabPage(String section, String name, String text, Size size, Point point, AnchorStyles anchor, TabPage tabPage, MouseEventHandler handler) {
-            Button button = new Button();
-            button.Name = section + name;
-            button.Text = text;
-            button.Size = size;
-            button.Location = point;
-            button.Anchor = anchor;
-            button.Tag = section;
+            Button button = new Button {
+                Name = section + name,
+                Text = text,
+                Size = size,
+                Location = point,
+                Anchor = anchor,
+                Tag = section
+            };
             button.MouseClick += handler;
             tabPage.Controls.Add(button);
         }
 
         public static void AddToolStripMenu(ContextMenuStrip rightMenu, String name, String typeName, String text, EventHandler eventHandler) {
-            ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
-            toolStripMenuItem.Name = name + typeName;
-            toolStripMenuItem.Text = text;
-            toolStripMenuItem.Tag = name;
+            ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem {
+                Name = name + typeName,
+                Text = text,
+                Tag = name
+            };
             toolStripMenuItem.Click += eventHandler;
             rightMenu.Items.Add(toolStripMenuItem);
         }

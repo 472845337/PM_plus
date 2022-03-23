@@ -21,7 +21,7 @@ namespace PM_plus {
         private void Form1_Load(object sender, EventArgs e) {
             this.Icon = new Icon("icons/disk.ico");
             se.DisableTag = 9999;
-            initData();
+            InitData();
         }
 
         // 是否完成初始化属性，一些checkbox根据此属性进行判断changed,否则初始化就会发生冗余的changed事件
@@ -29,29 +29,29 @@ namespace PM_plus {
         /// <summary>
         /// 初始化相关数据
         /// </summary>
-        private void initData() {
+        private void InitData() {
             // 主窗体赋值，以便其它地方调用
             Config.mainForm = this;
 
             isFinishedInit = false;
             // 窗口控件属性相关设置
-            FormService.initMainForm(this);
+            FormService.InitMainForm(this);
             // 加载框显示，load函数中置主窗体不可用
-            FormService.initWaitForm(this);
+            FormService.InitWaitForm();
             // GC回收定时任务初始化
-            TimerService.autoGc();
+            TimerService.AutoGc();
             // 偏好加载,皮肤加载
-            FormService.initDiySet();
+            FormService.InitDiySet();
             int usedProgress = 0;
             // 系统参数加载
-            usedProgress = IniConfigService.initSystemConfig(usedProgress, 25);
+            usedProgress = IniConfigService.InitSystemConfig(usedProgress, 25);
             // 运行环境参数加载
-            usedProgress = IniConfigService.initProjectConfig(usedProgress, 25);
+            usedProgress = IniConfigService.InitProjectConfig(usedProgress, 25);
             // 项目面板右键按钮
-            usedProgress = FormService.initPanelRightMenu(usedProgress, 25);
+            usedProgress = FormService.InitPanelRightMenu(usedProgress, 25);
             // 创建项目按钮控件
-            usedProgress = FormService.initProjectButton(usedProgress, 25);
-            TimerService.monitor();
+            usedProgress = FormService.InitProjectButton(usedProgress, 25);
+            TimerService.Monitor();
             // 加载窗口关闭,close函数中置主窗体可用
             Config.waitForm.freshProgress(usedProgress);
             Config.waitForm.Close();
@@ -110,8 +110,8 @@ namespace PM_plus {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SystemConfig_Save_Button_Click(object sender, EventArgs e) {
-            long saveProfileResult = saveProfile();
-            long saveJDKPathresult = saveJdkPath();
+            long saveProfileResult = SaveProfile();
+            long saveJDKPathresult = SaveJdkPath();
 
             if (saveProfileResult > 0 && saveJDKPathresult > 0) {
                 MessageBox.Show("保存成功！");
@@ -124,14 +124,14 @@ namespace PM_plus {
         /// 保存运行环境配置项
         /// </summary>
         /// <returns></returns>
-        private long saveProfile() {
+        private long SaveProfile() {
             String profile = Profile_ComboBox.Text;
             // 放入缓存
             ProjectUtils.profile = profile;
             // 写进配置文件
             long saveProfileResult = IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_PROFILE, profile);
             SystemConfig_SaveLabel.Visible = true;
-            initLabelMsgTimerout();
+            InitLabelMsgTimerout();
             return saveProfileResult;
         }
 
@@ -139,18 +139,18 @@ namespace PM_plus {
         /// 保存JDK配置路径
         /// </summary>
         /// <returns></returns>
-        private long saveJdkPath() {
+        private long SaveJdkPath() {
             String JDKPath = JDKPath_TextBox.Text;
             // 写入ini配置文件
             long saveJDKPathresult = IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_JDKPATH, JDKPath);
             ProjectUtils.jdkPath = JDKPath;
             if (saveJDKPathresult > 0) {
                 // 动态创建按钮控件
-                Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.getAllSectionDic();
+                Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.GetAllSectionDic();
                 if (null != sectionList) {
                     foreach (KeyValuePair<String, ProjectSections.ProjectSection> projectSectionEntry in sectionList) {
                         // 校验section
-                        FormService.checkSection(projectSectionEntry.Value, true);
+                        FormService.CheckSection(projectSectionEntry.Value, true);
                     }
                 }
             }
@@ -167,9 +167,9 @@ namespace PM_plus {
         /// <param name="e"></param>
         private void Projects_Panel_ClientSizeChanged(object sender, EventArgs e) {
             int width = Projects_Panel.ClientSize.Width;
-            if (isFinishedInit && panelCurrentWidth != width && null != ProjectSections.getAllSections()) {
+            if (isFinishedInit && panelCurrentWidth != width && null != ProjectSections.GetAllSections()) {
                 // 将所有的按钮尺寸减少滚动条宽度
-                foreach (String section in ProjectSections.getAllSections()) {
+                foreach (String section in ProjectSections.GetAllSections()) {
                     Button btn = (Button)Projects_Panel.Controls[section];
                     btn.Width = Convert.ToInt32(Projects_Panel.ClientSize.Width * 0.98);
                 }
@@ -197,16 +197,16 @@ namespace PM_plus {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         internal void Fresh_Button_Click(object sender, EventArgs e) {
-            Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.getAllSectionDic();
+            Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.GetAllSectionDic();
             if (null != sectionList) {
                 foreach (KeyValuePair<String, ProjectSections.ProjectSection> projectSectionEntry in sectionList) {
                     // 校验section
-                    FormService.checkSection(projectSectionEntry.Value, true);
+                    FormService.CheckSection(projectSectionEntry.Value, true);
                 }
             }
             OperateMsg_Label.Text = "刷新成功";
             OperateMsg_Label.ForeColor = Color.Green;
-            initLabelMsgTimerout();
+            InitLabelMsgTimerout();
         }
 
         /// <summary>
@@ -226,13 +226,13 @@ namespace PM_plus {
 
         private void Profile_ComboBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (isFinishedInit) {
-                saveProfile();
+                SaveProfile();
             }
         }
 
         private void JDKPath_TextBox_TextChanged(object sender, EventArgs e) {
             if (isFinishedInit) {
-                saveJdkPath();
+                SaveJdkPath();
             }
         }
 
@@ -243,7 +243,7 @@ namespace PM_plus {
             LabelTimer.Enabled = false;
         }
 
-        internal void initLabelMsgTimerout() {
+        internal void InitLabelMsgTimerout() {
             LabelTimer.Enabled = true;
             LabelTimer.Interval = 3000;
         }
@@ -260,7 +260,7 @@ namespace PM_plus {
             Control control = Projects_Panel.GetChildAtPoint(p);
             int index = Projects_Panel.Controls.GetChildIndex(control, false);
             Projects_Panel.Controls.SetChildIndex(btn, index);
-            FormService.freshProjectButtonSort();
+            FormService.FreshProjectButtonSort();
         }
 
         private void Projects_Panel_DragEnter(object sender, DragEventArgs e) {
@@ -295,7 +295,7 @@ namespace PM_plus {
             DiySetMsgLabel.Text = "设置成功!";
             DiySetMsgLabel.ForeColor = Color.Green;
             DiySetMsgLabel.Visible = true;
-            initLabelMsgTimerout();
+            InitLabelMsgTimerout();
         }
 
         private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e) {
@@ -320,7 +320,7 @@ namespace PM_plus {
 
             DiySetMsgLabel.Text = "恢复默认成功！";
             DiySetMsgLabel.ForeColor = Color.Green;
-            initLabelMsgTimerout();
+            InitLabelMsgTimerout();
         }
     }
 }

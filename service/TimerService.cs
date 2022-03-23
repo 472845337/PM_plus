@@ -9,16 +9,16 @@ namespace PM_plus.service {
         [System.Runtime.InteropServices.DllImport("kernel32")]
         public static extern Int32 SetProcessWorkingSetSize(IntPtr process, Int32 minSize, Int32 maxSize);
         // 不能使用窗体中的timer控件，要使用线程timer
-        private static System.Timers.Timer GcTimer = new System.Timers.Timer();
-        private static System.Timers.Timer MonitorTimer = new System.Timers.Timer();
-        private static System.Timers.Timer BtnDoubleCheckTimer = new System.Timers.Timer(500);
+        private static readonly System.Timers.Timer GcTimer = new System.Timers.Timer();
+        private static readonly System.Timers.Timer MonitorTimer = new System.Timers.Timer();
+        private static readonly System.Timers.Timer BtnDoubleCheckTimer = new System.Timers.Timer(500);
 
         static TimerService() {
             // 双击计时器不开启
             BtnDoubleCheckTimer.Enabled = false;
             BtnDoubleCheckTimer.Elapsed += new System.Timers.ElapsedEventHandler(BtnDoubleCheckTimer_Tick);
         }
-        internal static void autoGc() {
+        internal static void AutoGc() {
             GcTimer.Interval = 20000;
             GcTimer.Enabled = true;
             // 给时间控件绑定事件
@@ -26,7 +26,7 @@ namespace PM_plus.service {
             GcTimer.AutoReset = true;
         }
 
-        internal static void monitor() {
+        internal static void Monitor() {
             MonitorTimer.Interval = Config.interval;
             MonitorTimer.Enabled = true;
             MonitorTimer.Elapsed += new System.Timers.ElapsedEventHandler(MonitorTimer_Tick);
@@ -86,29 +86,29 @@ namespace PM_plus.service {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private static void MonitorTimer_Tick(object sender, EventArgs e) {
-            if (null != ProjectSections.getAllSections()) {
+            if (null != ProjectSections.GetAllSections()) {
                 try {
-                    foreach (String section in ProjectSections.getAllSections()) {
-                        ProjectSections.ProjectSection projectSection = ProjectSections.getProjectBySection(section);
+                    foreach (String section in ProjectSections.GetAllSections()) {
+                        ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
                         if (null != projectSection) {
-                            String heartBeatUrl = projectSection.heartBeat;
+                            String heartBeatUrl = projectSection.HeartBeat;
                             String result = null;
                             if (StringUtils.isNotEmpty(heartBeatUrl)) {
                                 result = HttpUtils.postRequest(heartBeatUrl, null, null);
 
                             } else {
-                                if (PortUtils.PortInUse(Convert.ToInt16(projectSection.port))) {
+                                if (PortUtils.PortInUse(Convert.ToInt16(projectSection.Port))) {
                                     result = "success";
                                 }
                             }
-                            short runStat = projectSection.runStat;
+                            short runStat = projectSection.RunStat;
                             if ("success".Equals(result)) {
-                                projectSection.runStat = Config.PROJECT_RUN_STAT_SUCCESS;
+                                projectSection.RunStat = Config.PROJECT_RUN_STAT_SUCCESS;
                                 // 变更按钮状态和颜色
-                                FormService.updateButtonEnabledOfMenuStrip(section, Config.PROJECT_RUN_STAT_SUCCESS);
+                                FormService.UpdateButtonEnabledOfMenuStrip(section, Config.PROJECT_RUN_STAT_SUCCESS);
                             } else {
-                                if (projectSection.isRunning) {
-                                    switch (projectSection.runStat) {
+                                if (projectSection.IsRunning) {
+                                    switch (projectSection.RunStat) {
                                         case Config.PROJECT_RUN_STAT_STOPPING:
                                         case Config.PROJECT_RUN_STAT_UNRUN:
                                             // 未运行,停止中
@@ -126,9 +126,9 @@ namespace PM_plus.service {
                                 } else {
                                     runStat = Config.PROJECT_RUN_STAT_UNRUN;
                                 }
-                                projectSection.runStat = runStat;
+                                projectSection.RunStat = runStat;
                                 // 未运行
-                                FormService.updateButtonEnabledOfMenuStrip(section, runStat);
+                                FormService.UpdateButtonEnabledOfMenuStrip(section, runStat);
                             }
                         }
                     }

@@ -10,8 +10,8 @@ using System.Windows.Forms;
 
 namespace PM_plus {
     public partial class ProjectForm : Form {
-        private short operateType;
-        public String section { get; set; }
+        private readonly short operateType;
+        public string Section { get; set; }
         public ProjectForm(short operateType) {
             InitializeComponent();
             this.operateType = operateType;
@@ -41,14 +41,14 @@ namespace PM_plus {
                 AddForm_Save_Button.Visible = false;
             }
             if (Config.OPERATE_TYPE_UPDATE == operateType || Config.OPERATE_TYPE_DETAIL == operateType){
-                ProjectSections.ProjectSection monitorSection = ProjectSections.getProjectBySection(section);
-                String title = monitorSection.title;
-                String jar = monitorSection.jar;
-                String port = monitorSection.port;
-                bool isPrintLog = monitorSection.isPrintLog;
-                String heartBeat = monitorSection.heartBeat;
-                String actuator = monitorSection.actuator;
-                String param = monitorSection.param;
+                ProjectSections.ProjectSection monitorSection = ProjectSections.GetProjectBySection(Section);
+                String title = monitorSection.Title;
+                String jar = monitorSection.Jar;
+                String port = monitorSection.Port;
+                bool isPrintLog = monitorSection.IsPrintLog;
+                String heartBeat = monitorSection.HeartBeat;
+                String actuator = monitorSection.Actuator;
+                String param = monitorSection.Param;
                 AddForm_Title_TextBox.Text = title;
                 AddForm_Jar_TextBox.Text = jar;
                 AddForm_Port_TextBox.Text = port;
@@ -109,7 +109,7 @@ namespace PM_plus {
             } else {
                 /** 数据正常，生成新的ini数据，执行StartForm添加按钮和新增rdp文件操作 */
                 /* 生成新INI ****************************/
-                String operateSection = Config.OPERATE_TYPE_ADD.Equals(operateType) ? Guid.NewGuid().ToString() : section;
+                String operateSection = Config.OPERATE_TYPE_ADD.Equals(operateType) ? Guid.NewGuid().ToString() : Section;
                 // 生成title
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_TITLE, title);
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_JAR, jar);
@@ -120,15 +120,16 @@ namespace PM_plus {
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_PARAM, param);
                 // 项目对象赋值
                 String logPath = Path.GetDirectoryName(jar) + Config.PATH_CHARACTER + title;
-                ProjectSections.ProjectSection projectModel = new ProjectSections.ProjectSection();
-                projectModel.section = operateSection;
-                projectModel.title = title;
-                projectModel.jar = jar;
-                projectModel.port = port;
-                projectModel.isPrintLog = isPrintLogBl;
-                projectModel.heartBeat = heartBeat;
-                projectModel.actuator = actuator;
-                projectModel.param = param;
+                ProjectSections.ProjectSection projectModel = new ProjectSections.ProjectSection {
+                    Section = operateSection,
+                    Title = title,
+                    Jar = jar,
+                    Port = port,
+                    IsPrintLog = isPrintLogBl,
+                    HeartBeat = heartBeat,
+                    Actuator = actuator,
+                    Param = param
+                };
                 // 生成start.bat
                 ProjectUtils.createStartBat(projectModel, logPath, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);
                 // 生成stop.bat
@@ -136,17 +137,17 @@ namespace PM_plus {
 
                 if (Config.OPERATE_TYPE_ADD.Equals(operateType)) {
                     /* StartForm中添加新服务按钮 *************/
-                    FormService.addButton(projectModel);
+                    FormService.AddButton(projectModel);
 
                     // 初始化为未运行
-                    projectModel.runStat = Config.PROJECT_RUN_STAT_UNRUN;
-                    projectModel.isRunning = false;
+                    projectModel.RunStat = Config.PROJECT_RUN_STAT_UNRUN;
+                    projectModel.IsRunning = false;
 
                 } else if (Config.OPERATE_TYPE_UPDATE.Equals(operateType)) {
-                    FormService.updateButton(projectModel);
+                    FormService.UpdateButton(projectModel);
                 }
                 #region 数据写进缓存
-                ProjectSections.updateProjectSection(operateSection, projectModel);
+                ProjectSections.UpdateProjectSection(operateSection, projectModel);
                 #endregion
                 /* 添加新服务按钮完成****** *************/
                 // ControlUtils.addTabPage2TabControl(Config.mainForm.ProjectRunTabControl, newSection);

@@ -7,18 +7,18 @@ namespace PM_plus.config {
         private static Dictionary<String, ProjectSection> dictionarys;
 
 
-        public static void clear() {
+        public static void Clear() {
             sections = null;
             dictionarys = null;
         }
-        public static List<String> getAllSections() {
+        public static List<String> GetAllSections() {
             return sections;
         }
-        public static Dictionary<String, ProjectSection> getAllSectionDic() {
+        public static Dictionary<String, ProjectSection> GetAllSectionDic() {
             return dictionarys;
         }
 
-        public static ProjectSection getProjectBySection(String section) {
+        public static ProjectSection GetProjectBySection(String section) {
             if (null == dictionarys) {
                 return null;
             } else {
@@ -31,7 +31,7 @@ namespace PM_plus.config {
             }
         }
 
-        public static void removeProjectBySection(String section) {
+        public static void RemoveProjectBySection(String section) {
             if (null != dictionarys) {
                 if (dictionarys.ContainsKey(section)) {
                     dictionarys.Remove(section);
@@ -43,7 +43,7 @@ namespace PM_plus.config {
         /// </summary>
         /// <param name="section"></param>
         /// <param name="monitor"></param>
-        public static void updateProjectSection(String section, ProjectSection projectSection) {
+        public static void UpdateProjectSection(String section, ProjectSection projectSection) {
             if (dictionarys == null) {
                 dictionarys = new Dictionary<string, ProjectSection>();
                 sections = new List<String>();
@@ -61,44 +61,44 @@ namespace PM_plus.config {
             /// <summary>
             /// 项目section
             /// </summary>
-            public String section { get; set; }
+            public string Section { get; set; }
             /// <summary>
             /// 项目名
             /// </summary>
-            public String title { get; set; }
+            public string Title { get; set; }
             /// <summary>
             /// 项目jar包路径
             /// </summary>
-            public String jar { get; set; }
+            public string Jar { get; set; }
             /// <summary>
             /// 是否打印日志
             /// </summary>
-            public bool isPrintLog { get; set; }
+            public bool IsPrintLog { get; set; }
             /// <summary>
             /// 项目启动端口
             /// </summary>
-            public String port { get; set; }
+            public string Port { get; set; }
             /// <summary>
             /// 心跳监测地址，返回success则为成功
             /// </summary>
-            public String heartBeat { get; set; }
+            public string HeartBeat { get; set; }
             /// <summary>
             /// 是否正在运行
             /// </summary>
-            public Boolean isRunning { get; set; }
+            public bool IsRunning { get; set; }
             /// <summary>
             /// 运行状态，0：未运行，1：启动中，2：启动成功，-1：启动失败
             /// </summary>
-            public short runStat { get; set; }
+            public short RunStat { get; set; }
             /// <summary>
             /// 是否配置有spring的actuator地址，存在配置则在停止时调用 shutdown，要该项目开启了shutdown节点
             /// </summary>
-            public String actuator { get; set; }
+            public string Actuator { get; set; }
 
             /// <summary>
             /// 启动参数
             /// </summary>
-            public String param { get; set; }
+            public string Param { get; set; }
         }
     }
 }
