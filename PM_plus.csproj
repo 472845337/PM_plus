@@ -70,9 +70,8 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="IrisSkin4">
       <HintPath>..\..\IrisSkinTest\IrisSkinTest\bin\Debug\IrisSkin4.dll</HintPath>
@@ -153,7 +152,6 @@
     </EmbeddedResource>
     <None Include="ini\Projects.ini" />
     <None Include="ini\System.ini" />
-    <None Include="PM_plus_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
