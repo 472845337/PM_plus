@@ -40,7 +40,7 @@ namespace PM_plus {
 
                 AddForm_Save_Button.Visible = false;
             }
-            if (Config.OPERATE_TYPE_UPDATE == operateType || Config.OPERATE_TYPE_DETAIL == operateType){
+            if (Config.OPERATE_TYPE_UPDATE == operateType || Config.OPERATE_TYPE_DETAIL == operateType) {
                 ProjectSections.ProjectSection monitorSection = ProjectSections.GetProjectBySection(Section);
                 String title = monitorSection.Title;
                 String jar = monitorSection.Jar;
@@ -87,12 +87,11 @@ namespace PM_plus {
                 checkFlag = false;
                 checkMsg.Append("端口未配置").Append(Config.ENTER_STR);
             } else {
-                if (!Regex.IsMatch(port, @"^[+-]?\d*$")) {
+                if (!Regex.IsMatch(port, @"^\d*$")) {
                     // 端口必须要是数字
                     checkFlag = false;
-                    checkMsg.Append("端口不合法").Append(Config.ENTER_STR);
-                }
-                if (Convert.ToInt32(port) > 65535) {
+                    checkMsg.Append("端口必须是数字").Append(Config.ENTER_STR);
+                } else if(Convert.ToInt32(port) > 65535) {
                     // 端口不能大于65535
                     checkFlag = false;
                     checkMsg.Append("端口不能大于65535").Append(Config.ENTER_STR);
