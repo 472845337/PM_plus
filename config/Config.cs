@@ -45,6 +45,7 @@ namespace PM_plus.config
         public const String INI_SECTION_SYSTEM = "system";
         public const String INI_SECTION_LOG = "log";
 
+        public const String INI_KEY_SYSTEM_FORM_HEIGHT = "height";
         public const String INI_KEY_SYSTEM_PROFILE = "profile";
         public const String INI_KEY_SYSTEM_JDKPATH = "JDKPath";
         public const String INI_KEY_SYSTEM_LOGPATH = "LogPath";

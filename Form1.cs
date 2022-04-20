@@ -60,6 +60,12 @@ namespace PM_plus {
             Config.waitForm.FreshProgress(usedProgress);
             Config.waitForm.Close();
             isFinishedInit = true;
+            // 高度设置
+            String heightStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_HEIGHT);
+            if (StringUtils.IsNotEmpty(heightStr)) {
+                int height = Int32.Parse(heightStr);
+                this.Size = new Size(this.Size.Width, height);
+            }
         }
 
         /// <summary>
@@ -381,6 +387,11 @@ namespace PM_plus {
             DiySetMsgLabel.Text = "恢复默认成功！";
             DiySetMsgLabel.ForeColor = Color.Green;
             InitLabelMsgTimerout();
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e) {
+            int height = this.Size.Height;
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_HEIGHT, height.ToString());
         }
     }
 }
