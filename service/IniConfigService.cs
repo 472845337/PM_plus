@@ -1,9 +1,6 @@
 ﻿using PM_plus.config;
 using PM_plus.utils;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 
 namespace PM_plus.service
 {
@@ -21,16 +18,16 @@ namespace PM_plus.service
             String exitAfterCloseIni = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_EXITAFTERCLOSE);
             Config.logFileName = logFileName;
 
-            bool logSwitch = !StringUtils.isEmpty(logSwitchIni) && Convert.ToBoolean(logSwitchIni);
+            bool logSwitch = !StringUtils.IsEmpty(logSwitchIni) && Convert.ToBoolean(logSwitchIni);
             Config.logSwitch = logSwitch;
             Config.mainForm.LogSwitch_CheckBox.Checked = Config.logSwitch;
 
-            bool exitAfterClose = !StringUtils.isEmpty(exitAfterCloseIni) && Convert.ToBoolean(exitAfterCloseIni);
+            bool exitAfterClose = !StringUtils.IsEmpty(exitAfterCloseIni) && Convert.ToBoolean(exitAfterCloseIni);
             Config.exitAfterClose = exitAfterClose;
             Config.mainForm.ExitAfterClose_CheckBox.Checked = Config.exitAfterClose;
 
 
-            Config.waitForm.freshProgress(usedProgress + giveProgress);
+            Config.waitForm.FreshProgress(usedProgress + giveProgress);
             return usedProgress + giveProgress;
         }
         /// <summary>
@@ -41,21 +38,23 @@ namespace PM_plus.service
         public static int InitProjectConfig(int usedProgress, int giveProgress)
         {
             String profile = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_PROFILE);
-            Config.waitForm.freshProgress(usedProgress + (giveProgress / 5) * 1);
+            Config.waitForm.FreshProgress(usedProgress + (giveProgress / 6) * 1);
             String JDKPath = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_JDKPATH);
-            Config.waitForm.freshProgress(usedProgress + (giveProgress / 5) * 2);
+            Config.waitForm.FreshProgress(usedProgress + (giveProgress / 6) * 2);
+            String LogPath = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_LOGPATH);
+            Config.waitForm.FreshProgress(usedProgress + (giveProgress / 6) * 3);
             // 计时器频率
             String intervalStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_INTERVAL);
-            Config.waitForm.freshProgress(usedProgress + (giveProgress / 5) * 3);
+            Config.waitForm.FreshProgress(usedProgress + (giveProgress / 6) * 4);
             // 请求超时时间
             String timeoutStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_TIMEOUT);
-            Config.waitForm.freshProgress(usedProgress + (giveProgress / 5) * 4);
-            if (StringUtils.isEmpty(intervalStr))
+            Config.waitForm.FreshProgress(usedProgress + (giveProgress / 6) * 5);
+            if (StringUtils.IsEmpty(intervalStr))
             {
                 intervalStr = "5000";
                 IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_INTERVAL, intervalStr);
             }
-            if (StringUtils.isEmpty(timeoutStr))
+            if (StringUtils.IsEmpty(timeoutStr))
             {
                 timeoutStr = "20";
                 IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_TIMEOUT, timeoutStr);
@@ -68,12 +67,14 @@ namespace PM_plus.service
 
 
 
-            Config.waitForm.freshProgress(usedProgress + giveProgress);
+            Config.waitForm.FreshProgress(usedProgress + giveProgress);
 
             Config.mainForm.Profile_ComboBox.Text = profile;
             ProjectUtils.profile = profile;
             Config.mainForm.JDKPath_TextBox.Text = JDKPath;
             ProjectUtils.jdkPath = JDKPath;
+            Config.mainForm.LogPath_TextBox.Text = LogPath;
+            ProjectUtils.logPath = LogPath;
             return usedProgress+giveProgress;
         }
     }

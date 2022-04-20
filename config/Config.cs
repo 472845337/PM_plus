@@ -47,10 +47,12 @@ namespace PM_plus.config
 
         public const String INI_KEY_SYSTEM_PROFILE = "profile";
         public const String INI_KEY_SYSTEM_JDKPATH = "JDKPath";
+        public const String INI_KEY_SYSTEM_LOGPATH = "LogPath";
         public const String INI_KEY_SYSTEM_INTERVAL = "interval";
         public const String INI_KEY_SYSTEM_TIMEOUT = "timeout";
         public const String INI_KEY_SYSTEM_EXITAFTERCLOSE = "exitAfterClose";
         public const String INI_KEY_SYSTEM_SKIN = "skin";
+        public const String INI_KEY_SYSTEM_SKIN_SWITCH = "skin_switch";
         public const String INI_KEY_SYSTEM_FONT_FAMILY = "font_family";
 
         public const String INI_KEY_LOG_SWITCH = "switch";

@@ -57,10 +57,10 @@ namespace PM_plus.utils
             list.Sort(delegate (String section1, String section2) {
                 String sort1 = IniReadValue(Config.ProjectsIniPath, section1, Config.INI_KEY_PROJECT_SORT);
                 String sort2 = IniReadValue(Config.ProjectsIniPath, section2, Config.INI_KEY_PROJECT_SORT);
-                if(StringUtils.isNotEmpty(sort1) && StringUtils.isNotEmpty(sort2)) {
+                if(StringUtils.IsNotEmpty(sort1) && StringUtils.IsNotEmpty(sort2)) {
                     return Convert.ToInt16(sort1).CompareTo(Convert.ToInt16(sort2));
                 } else {
-                    if (StringUtils.isEmpty(sort1)) {
+                    if (StringUtils.IsEmpty(sort1)) {
                         return 1;
                     } else {
                         return -1;
@@ -91,7 +91,7 @@ namespace PM_plus.utils
                     {
                         tmp = ASCIIEncoding.Default.GetString(buffer, iPos, iCnt - iPos).Trim();
                         iPos = iCnt + 1;
-                        if (StringUtils.isNotEmpty(tmp))
+                        if (StringUtils.IsNotEmpty(tmp))
                             list.Add(tmp);
                     }
                 }

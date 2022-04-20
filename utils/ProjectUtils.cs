@@ -1,44 +1,40 @@
 ﻿using PM_plus.config;
-using PM_plus.service;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace PM_plus.utils {
     class ProjectUtils {
         public static String profile;
         public static String jdkPath;
+        public static String logPath;
         /** 项目启动
          * 
          * */
-        public static void projectStart(ProjectSections.ProjectSection projectSection) {
+        public static void ProjectStart(ProjectSections.ProjectSection projectSection) {
             // 置为启动中状态
             projectSection.RunStat = Config.PROJECT_RUN_STAT_RUNNING;
             projectSection.IsRunning = true;
             // 运行启动脚本
-            Process.Start(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_START));
+            Process.Start(FileUtils.GetBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_START));
         }
 
         /**
-         * 创建杀进程的脚本文件
-         * 
-         * */
-        public static void createStartBat(ProjectSections.ProjectSection projectSection, String LogFilePath, String LogFileName, String ErrorLogFileName) {
+        * 创建杀进程的脚本文件
+        * 
+        * */
+        public static String CreateStartBat(ProjectSections.ProjectSection projectSection, String LogFileName, String ErrorLogFileName) {
+            String result = bool.TrueString;
             if (null == profile || "".Equals(profile)) {
-                MessageBox.Show("运行环境未配置或未保存！");
-                return;
+                return "运行环境未配置或未保存！";
             }
             if (null == jdkPath || "".Equals(jdkPath)) {
-                MessageBox.Show("JDK未配置或未保存！");
-                return;
+                return "JDK未配置或未保存！";
             }
             if (!FileUtils.Boo_DirExist(jdkPath)) {
-                MessageBox.Show("JDK路径不存在，请重新配置！");
-                return;
+                return "JDK路径不存在，请重新配置！";
             }
             StringBuilder script = new StringBuilder();
             script.Append("@echo off").Append(Config.ENTER_STR);
@@ -51,7 +47,7 @@ namespace PM_plus.utils {
                 script.Append("java");
             }
             // 参数
-            if (StringUtils.isNotEmpty(projectSection.Param)) {
+            if (StringUtils.IsNotEmpty(projectSection.Param)) {
                 script.Append(" ").Append(projectSection.Param);
             }
             // jar包路径
@@ -61,17 +57,17 @@ namespace PM_plus.utils {
             // 指定启动端口
             script.Append(" --server.port=").Append(projectSection.Port);
             // 是否将运行日志输出，配置文件后，日志将不会在console中输出
-            if (!projectSection.IsPrintLog && StringUtils.isNotEmpty(LogFilePath) && StringUtils.isNotEmpty(LogFileName)) {
-                LogFilePath = LogFilePath.EndsWith(Config.PATH_CHARACTER) ? LogFilePath : LogFilePath + Config.PATH_CHARACTER;
-                Boolean DirIsExist = FileUtils.Boo_DirExist(LogFilePath);
+            if (!projectSection.IsPrintLog && StringUtils.IsNotEmpty(logPath) && StringUtils.IsNotEmpty(LogFileName)) {
+                String projectLogPath = (logPath.EndsWith(Config.PATH_CHARACTER) ? logPath : logPath + Config.PATH_CHARACTER) + projectSection.Title + Config.PATH_CHARACTER;
+                Boolean DirIsExist = FileUtils.Boo_DirExist(projectLogPath);
                 if (!DirIsExist) {
-                    FileUtils.DirCreate(LogFilePath);
+                    FileUtils.DirCreate(projectLogPath);
                 }
                 // 日志文件
-                script.Append(" > ").Append(LogFilePath).Append(LogFileName);
-                if (StringUtils.isNotEmpty(ErrorLogFileName)) {
+                script.Append(" > ").Append(projectLogPath).Append(LogFileName);
+                if (StringUtils.IsNotEmpty(ErrorLogFileName)) {
                     // 异常日志
-                    script.Append(" 2>").Append(LogFilePath).Append(ErrorLogFileName);
+                    script.Append(" 2>").Append(projectLogPath).Append(ErrorLogFileName);
                 }
                 script.Append(" &");
             }
@@ -80,7 +76,8 @@ namespace PM_plus.utils {
             script.Append("pause");
             //创建启动bat文件，使用ANSI编码
             // Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            FileUtils.createFile(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_START), script.ToString(), Encoding.GetEncoding("GB2312"));
+            FileUtils.CreateFile(FileUtils.GetBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_START), script.ToString(), Encoding.GetEncoding("GB2312"));
+            return result;
         }
 
         /**
@@ -88,15 +85,15 @@ namespace PM_plus.utils {
          * 判断是否配置监控，有配置监控则调用监控下的shutdown节点进行关闭
          * 
          */
-        public static void projectStop(ProjectSections.ProjectSection projectSection) {
+        public static void ProjectStop(ProjectSections.ProjectSection projectSection) {
            /* // 定义委托
             StopProjectBySection stopProjectBySection = new StopProjectBySection(StopProjectBySectionImpl);
             stopProjectBySection.Invoke(projectSection);*/
 
             // 如果项目未配置监控，则调用自动生成的stop.bat脚本结束进程，有配置actuator则调用/shutdown结束进程
             String actuator = projectSection.Actuator;
-            if (StringUtils.isEmpty(actuator)) {
-                Process.Start(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP));
+            if (StringUtils.IsEmpty(actuator)) {
+                Process.Start(FileUtils.GetBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP));
             } else {
                 String shutDownUrl = (actuator.EndsWith(Config.PATH_CHARACTER) ? actuator : actuator + Config.PATH_CHARACTER) + Config.ACTUATOR_SHUTDOWN;
                 try {
@@ -127,8 +124,8 @@ namespace PM_plus.utils {
         public static void StopProjectBySectionImpl(ProjectSections.ProjectSection projectSection) {
             // 如果项目未配置监控，则调用自动生成的stop.bat脚本结束进程，有配置actuator则调用/shutdown结束进程
             String actuator = projectSection.Actuator;
-            if (StringUtils.isEmpty(actuator)) {
-                Process.Start(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP));
+            if (StringUtils.IsEmpty(actuator)) {
+                Process.Start(FileUtils.GetBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP));
             } else {
                 String shutDownUrl = (actuator.EndsWith(Config.PATH_CHARACTER) ? actuator : actuator + Config.PATH_CHARACTER) + Config.ACTUATOR_SHUTDOWN;
                 try {
@@ -151,7 +148,7 @@ namespace PM_plus.utils {
          * 创建杀进程的脚本文件
          * 
          * */
-        public static void createStopBat(ProjectSections.ProjectSection projectSection) {
+        public static void CreateStopBat(ProjectSections.ProjectSection projectSection) {
             StringBuilder script = new StringBuilder();
             script.Append("@echo off").Append(Config.ENTER_STR);
             script.Append("setlocal enabledelayedexpansion").Append(Config.ENTER_STR);
@@ -166,12 +163,12 @@ namespace PM_plus.utils {
             script.Append("    echo kill java progress success").Append(Config.ENTER_STR);
             script.Append(")").Append(Config.ENTER_STR);
             // Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            FileUtils.createFile(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP), script.ToString(), Encoding.GetEncoding("GB2312"));
+            FileUtils.CreateFile(FileUtils.GetBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP), script.ToString(), Encoding.GetEncoding("GB2312"));
         }
 
-        public static void removeBat(String title) {
-            FileUtils.deleteFile(FileUtils.getBatFilePath(title, Config.BAT_FILE_TYPE_STOP));
-            FileUtils.deleteFile(FileUtils.getBatFilePath(title, Config.BAT_FILE_TYPE_START));
+        public static void RemoveBat(String title) {
+            FileUtils.DeleteFile(FileUtils.GetBatFilePath(title, Config.BAT_FILE_TYPE_STOP));
+            FileUtils.DeleteFile(FileUtils.GetBatFilePath(title, Config.BAT_FILE_TYPE_START));
         }
 
 
@@ -180,7 +177,7 @@ namespace PM_plus.utils {
         /// 根据type区分启动或停止
         /// </summary>
         /// <param name="type">Config.ProjectOperateTypeStart</param>
-        public static void allProjectOperate(int type) {
+        public static void AllProjectOperate(int type) {
             Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.GetAllSectionDic();
             if (null == sectionList || 0 == sectionList.Count) {
                 MessageBox.Show("项目配置为空，请先添加项目", "提示");
@@ -201,10 +198,10 @@ namespace PM_plus.utils {
 
                     if (Config.PROJECT_OPERATE_TYPE_START == type && (Config.PROJECT_RUN_STAT_UNRUN == section.RunStat || Config.PROJECT_RUN_STAT_FAIL == section.RunStat)) {
                         // 项目状态为未运行或运行失败才可运行
-                        projectStart(section);
+                        ProjectStart(section);
                     } else if (Config.PROJECT_OPERATE_TYPE_STOP == type && Config.PROJECT_RUN_STAT_SUCCESS == section.RunStat) {
                         // 项目状态必须为运行中
-                        projectStop(section);
+                        ProjectStop(section);
                     }
                 }
             }

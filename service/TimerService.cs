@@ -93,7 +93,7 @@ namespace PM_plus.service {
                         if (null != projectSection) {
                             String heartBeatUrl = projectSection.HeartBeat;
                             String result = null;
-                            if (StringUtils.isNotEmpty(heartBeatUrl)) {
+                            if (StringUtils.IsNotEmpty(heartBeatUrl)) {
                                 result = HttpUtils.postRequest(heartBeatUrl, null, null);
 
                             } else {

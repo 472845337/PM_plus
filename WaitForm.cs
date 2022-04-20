@@ -17,7 +17,7 @@ namespace PM_plus
             Config.mainForm.Enabled = false;
         }
 
-        public void freshProgress(Int32 value)
+        public void FreshProgress(Int32 value)
         {
             WaitForm_ProgressBar.Value = value;
         }

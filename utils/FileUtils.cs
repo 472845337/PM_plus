@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PM_plus.utils {
     class FileUtils {
-        public static String getBatFilePath(String projectTitle, String type) {
+        public static String GetBatFilePath(String projectTitle, String type) {
             String batTypePath;
             if (Config.BAT_FILE_TYPE_START.Equals(type)) {
                 batTypePath = Config.BAT_FILE_NAME_START;
@@ -32,7 +32,7 @@ namespace PM_plus.utils {
             System.IO.File.Create(@FilePath);
         }
 
-        public static void createFile(String filePath, String content, Encoding encoding) {
+        public static void CreateFile(String filePath, String content, Encoding encoding) {
             String directPath = Path.GetDirectoryName(filePath);
             if (!Boo_DirExist(directPath)) {
                 DirCreate(directPath);
@@ -44,7 +44,7 @@ namespace PM_plus.utils {
             File.WriteAllText(filePath, content, encoding);
         }
 
-        internal static void deleteFile(string filePath) {
+        internal static void DeleteFile(string filePath) {
             File.Delete(filePath);
         }
     }

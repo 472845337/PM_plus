@@ -75,15 +75,15 @@ namespace PM_plus {
 
             Boolean checkFlag = true;
             StringBuilder checkMsg = new StringBuilder();
-            if (StringUtils.isEmpty(title)) {
+            if (StringUtils.IsEmpty(title)) {
                 checkFlag = false;
                 checkMsg.Append("名称未填写").Append(Config.ENTER_STR);
             }
-            if (StringUtils.isEmpty(jar)) {
+            if (StringUtils.IsEmpty(jar)) {
                 checkFlag = false;
                 checkMsg.Append("jar包路径未选择").Append(Config.ENTER_STR);
             }
-            if (StringUtils.isEmpty(port)) {
+            if (StringUtils.IsEmpty(port)) {
                 checkFlag = false;
                 checkMsg.Append("端口未配置").Append(Config.ENTER_STR);
             } else {
@@ -119,7 +119,6 @@ namespace PM_plus {
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_ACTUATOR, actuator);
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_PARAM, param);
                 // 项目对象赋值
-                String logPath = Path.GetDirectoryName(jar) + Config.PATH_CHARACTER + title;
                 ProjectSections.ProjectSection projectModel = new ProjectSections.ProjectSection {
                     Section = operateSection,
                     Title = title,
@@ -131,9 +130,12 @@ namespace PM_plus {
                     Param = param
                 };
                 // 生成start.bat
-                ProjectUtils.createStartBat(projectModel, logPath, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);
+                String result = ProjectUtils.CreateStartBat(projectModel, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);
+                if (!bool.TrueString.Equals(result)) {
+                    MessageBox.Show(result);
+                }
                 // 生成stop.bat
-                ProjectUtils.createStopBat(projectModel);
+                ProjectUtils.CreateStopBat(projectModel);
 
                 if (Config.OPERATE_TYPE_ADD.Equals(operateType)) {
                     /* StartForm中添加新服务按钮 *************/

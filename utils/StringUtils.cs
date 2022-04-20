@@ -6,11 +6,11 @@ namespace PM_plus.utils
 {
     class StringUtils
     {
-        public static bool isNotEmpty(String str)
+        public static bool IsNotEmpty(String str)
         {
-            return !isEmpty(str);
+            return !IsEmpty(str);
         }
-        public static bool isEmpty(String str)
+        public static bool IsEmpty(String str)
         {
             bool isEmpty = false;
             if(null == str || "".Equals(str) || "null".Equals(str.ToLower()))

@@ -12,6 +12,10 @@ namespace PM_plus {
     public partial class Form1 : Form {
         internal SkinEngine se = new SkinEngine();
         public Form1() {
+            // 皮肤开关配置
+            String skinSwithConfig = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN_SWITCH);
+            bool skinSwitch = bool.TrueString.Equals(skinSwithConfig);
+            se.Active = skinSwitch;
             se.DrawFormIcon = true;
             /// 支持线程操作控件
             CheckForIllegalCrossThreadCalls = false;
@@ -53,7 +57,7 @@ namespace PM_plus {
             usedProgress = FormService.InitProjectButton(usedProgress, 25);
             TimerService.Monitor();
             // 加载窗口关闭,close函数中置主窗体可用
-            Config.waitForm.freshProgress(usedProgress);
+            Config.waitForm.FreshProgress(usedProgress);
             Config.waitForm.Close();
             isFinishedInit = true;
         }
@@ -66,7 +70,7 @@ namespace PM_plus {
         internal void ProjectAdd_Button_Click(object sender, EventArgs e) {
             String profile = ProjectUtils.profile;
             String jdkPath = ProjectUtils.jdkPath;
-            if (StringUtils.isEmpty(profile) || StringUtils.isEmpty(jdkPath)) {
+            if (StringUtils.IsEmpty(profile) || StringUtils.IsEmpty(jdkPath)) {
                 MessageBox.Show("运行环境和JDK路径需配置并保存！");
                 return;
             }
@@ -86,12 +90,12 @@ namespace PM_plus {
         private void JDKPath_Dialog_Button_Click(object sender, EventArgs e) {
             JDKPath_FolderBrowserDialog.SelectedPath = JDKPath_TextBox.Text;
             JDKPath_FolderBrowserDialog.ShowNewFolderButton = false;
-            if (JDKPath_FolderBrowserDialog.ShowDialog() == DialogResult.OK) {
+           /* if (JDKPath_FolderBrowserDialog.ShowDialog() == DialogResult.OK) {
                 JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
-            }
+            }*/
 
 
-            invokeThread = new System.Threading.Thread(new System.Threading.ThreadStart(InvokeMethod));
+            invokeThread = new System.Threading.Thread(new System.Threading.ThreadStart(InvokeMethodJDKPath));
             invokeThread.SetApartmentState(System.Threading.ApartmentState.STA);
             invokeThread.Start();
             invokeThread.Join();
@@ -100,8 +104,33 @@ namespace PM_plus {
                 JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
             }
         }
-        private void InvokeMethod() {
+        private void InvokeMethodJDKPath() {
             result = JDKPath_FolderBrowserDialog.ShowDialog();
+        }
+        /// <summary>
+        /// 选择日志路径的文件夹选择框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LogPath_Dialog_Button_Click(object sender, EventArgs e) {
+            LogPath_FolderBrowserDialog.SelectedPath = LogPath_TextBox.Text;
+            LogPath_FolderBrowserDialog.ShowNewFolderButton = false;
+            /* if (LogPath_FolderBrowserDialog.ShowDialog() == DialogResult.OK) {
+                 LogPath_TextBox.Text = LogPath_FolderBrowserDialog.SelectedPath;
+             }*/
+
+
+            invokeThread = new System.Threading.Thread(new System.Threading.ThreadStart(InvokeMethodLogPath));
+            invokeThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            invokeThread.Start();
+            invokeThread.Join();
+
+            if (result == DialogResult.OK) {
+                LogPath_TextBox.Text = LogPath_FolderBrowserDialog.SelectedPath;
+            }
+        }
+        private void InvokeMethodLogPath() {
+            result = LogPath_FolderBrowserDialog.ShowDialog();
         }
 
         /// <summary>
@@ -112,8 +141,9 @@ namespace PM_plus {
         private void SystemConfig_Save_Button_Click(object sender, EventArgs e) {
             long saveProfileResult = SaveProfile();
             long saveJDKPathresult = SaveJdkPath();
+            long saveLogPathResult = SaveLogPath();
 
-            if (saveProfileResult > 0 && saveJDKPathresult > 0) {
+            if (saveProfileResult > 0 && saveJDKPathresult > 0 && saveLogPathResult > 0) {
                 MessageBox.Show("保存成功！");
             } else {
                 MessageBox.Show("保存失败，请联系作者！");
@@ -155,6 +185,28 @@ namespace PM_plus {
                 }
             }
             return saveJDKPathresult;
+        }
+
+        /// <summary>
+        /// 保存JDK配置路径
+        /// </summary>
+        /// <returns></returns>
+        private long SaveLogPath() {
+            String logPath = LogPath_TextBox.Text;
+            // 写入ini配置文件
+            long saveLogPathresult = IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_LOGPATH, logPath);
+            ProjectUtils.logPath = logPath;
+            if (saveLogPathresult > 0) {
+                // 动态创建按钮控件
+                Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.GetAllSectionDic();
+                if (null != sectionList) {
+                    foreach (KeyValuePair<String, ProjectSections.ProjectSection> projectSectionEntry in sectionList) {
+                        // 校验section
+                        FormService.CheckSection(projectSectionEntry.Value, true);
+                    }
+                }
+            }
+            return saveLogPathresult;
         }
 
         internal static int panelCurrentWidth;
@@ -216,11 +268,11 @@ namespace PM_plus {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         internal void AllStart_Button_Click(object sender, EventArgs e) {
-            ProjectUtils.allProjectOperate(Config.PROJECT_OPERATE_TYPE_START);
+            ProjectUtils.AllProjectOperate(Config.PROJECT_OPERATE_TYPE_START);
         }
 
         internal void AllStop_Button_Click(object sender, EventArgs e) {
-            ProjectUtils.allProjectOperate(Config.PROJECT_OPERATE_TYPE_STOP);
+            ProjectUtils.AllProjectOperate(Config.PROJECT_OPERATE_TYPE_STOP);
         }
 
 
@@ -233,6 +285,12 @@ namespace PM_plus {
         private void JDKPath_TextBox_TextChanged(object sender, EventArgs e) {
             if (isFinishedInit) {
                 SaveJdkPath();
+            }
+        }
+
+        private void LogPath_TextBox_TextChanged(object sender, EventArgs e) {
+            if (isFinishedInit) {
+                SaveLogPath();
             }
         }
 
@@ -250,7 +308,7 @@ namespace PM_plus {
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             if (Config.exitAfterClose) {
-                ProjectUtils.allProjectOperate(Config.PROJECT_OPERATE_TYPE_STOP);
+                ProjectUtils.AllProjectOperate(Config.PROJECT_OPERATE_TYPE_STOP);
             }
         }
 
@@ -289,8 +347,10 @@ namespace PM_plus {
             e.DrawFocusRectangle();
         }
         private void DiySetChangeApply_Button_Click(object sender, EventArgs e) {
+            se.Active = SkinSwitchChecked.Checked;
             se.SkinFile = (SkinListBox.SelectedItem as Skin).RelativeName;
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, (SkinListBox.SelectedItem as Skin).RelativeName);
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN_SWITCH, SkinSwitchChecked.Checked.ToString());
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, FontFamilyComboBox.SelectedItem as String);
             DiySetMsgLabel.Text = "设置成功!";
             DiySetMsgLabel.ForeColor = Color.Green;

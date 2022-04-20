@@ -10,7 +10,7 @@ namespace PM_plus.utils
     {
         public static void writeLog(String log)
         {
-            writeLog(log, StringUtils.isEmpty(Config.logFileName)? "logs/info.log": Config.logFileName);
+            writeLog(log, StringUtils.IsEmpty(Config.logFileName)? "logs/info.log": Config.logFileName);
         }
         /// <summary>
         /// 同步锁写日志文件

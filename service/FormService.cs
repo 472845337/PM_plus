@@ -54,7 +54,7 @@ namespace PM_plus.service {
             }
            // 字体配置读取
            String fontFamilyName = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY);
-            if (StringUtils.isEmpty(fontFamilyName)) {
+            if (StringUtils.IsEmpty(fontFamilyName)) {
                 // 未设置，使用默认
                 fontFamilyName = Config.DEFAULT_FONT_FAMILY;
                 IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
@@ -86,7 +86,7 @@ namespace PM_plus.service {
             Config.mainForm.SkinListBox.ValueMember = "RelativeName";
             // 获取皮肤配置
             String skinFile = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN);
-            if (StringUtils.isEmpty(skinFile)) {
+            if (StringUtils.IsEmpty(skinFile)) {
                 // 默认的皮肤
                 skinFile = Config.DEFAULT_SKIN;
                 IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, Config.DEFAULT_SKIN);
@@ -101,6 +101,9 @@ namespace PM_plus.service {
         ///  初始化偏好设置
         /// </summary>
         internal static void InitDiySet() {
+            String skinSwithConfig = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN_SWITCH);
+            bool skinSwitch = bool.TrueString.Equals(skinSwithConfig);
+            Config.mainForm.SkinSwitchChecked.Checked = skinSwitch;
             // 字体初始化
             InitFont();
             // 皮肤初始化
@@ -126,7 +129,7 @@ namespace PM_plus.service {
 
         public static int InitProjectButton(int usedProgress, int giveProgress) {
             List<String> sectionList = IniUtils.ReadSections(Config.ProjectsIniPath);
-            Config.waitForm.freshProgress(usedProgress + 5);
+            Config.waitForm.FreshProgress(usedProgress + 5);
             for (int i = 0; i < sectionList.Count; i++) {
                 String section = sectionList[i];
                 // 标题
@@ -163,7 +166,7 @@ namespace PM_plus.service {
                 ProjectSections.UpdateProjectSection(section, projectSection);
                 // 校验section
                 FormService.CheckSection(projectSection, false);
-                Config.waitForm.freshProgress(usedProgress + ((giveProgress - 5) / sectionList.Count) * (i + 1));
+                Config.waitForm.FreshProgress(usedProgress + ((giveProgress - 5) / sectionList.Count) * (i + 1));
             }
             return usedProgress + giveProgress;
         }
@@ -191,7 +194,7 @@ namespace PM_plus.service {
                     projectRunTabControl.TabPages.Remove(tabPage);
                 }
             }
-            Config.waitForm.freshProgress(usedProgress + 5);
+            Config.waitForm.FreshProgress(usedProgress + 5);
             Thread.Sleep(100);
             int surplusProgress = giveProgress - 10;
             for (int i = 0; i < sectionList.Count; i++) {
@@ -199,7 +202,7 @@ namespace PM_plus.service {
                 // 添加项目运行窗口的所有控件
                 ControlUtils.AddTabPage2TabControl(projectRunTabControl, section);
                 // 
-                Config.waitForm.freshProgress(usedProgress + (surplusProgress / sectionList.Count) * (i + 1));
+                Config.waitForm.FreshProgress(usedProgress + (surplusProgress / sectionList.Count) * (i + 1));
                 Thread.Sleep(100);
             }
             return usedProgress + giveProgress;
@@ -257,16 +260,12 @@ namespace PM_plus.service {
         /// <param name="force">是否强制更新bat文件</param>
         public static void CheckSection(ProjectSections.ProjectSection projectSection, bool force) {
             // 校验端口启动进程的bat文件是否存在，不存在
-            if (force || !File.Exists(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_START))) {
-                String logPath = null;
-                if (!projectSection.IsPrintLog) {
-                    logPath = Path.GetDirectoryName(projectSection.Jar) + Config.PATH_CHARACTER + projectSection.Title;
-                }
-                ProjectUtils.createStartBat(projectSection, logPath, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);
+            if (force || !File.Exists(FileUtils.GetBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_START))) {
+                ProjectUtils.CreateStartBat(projectSection, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);
             }
             // 校验端口结束进程的bat文件是否存在，不存在
-            if (force || !File.Exists(FileUtils.getBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP))) {
-                ProjectUtils.createStopBat(projectSection);
+            if (force || !File.Exists(FileUtils.GetBatFilePath(projectSection.Title, Config.BAT_FILE_TYPE_STOP))) {
+                ProjectUtils.CreateStopBat(projectSection);
             }
             // 识别运行状态
 
@@ -371,7 +370,7 @@ namespace PM_plus.service {
             // project_section清除
             ProjectSections.RemoveProjectBySection(section);
             // 文件清除
-            ProjectUtils.removeBat(btn.Text);
+            ProjectUtils.RemoveBat(btn.Text);
         }
     }
 }

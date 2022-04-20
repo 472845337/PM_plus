@@ -20,7 +20,7 @@ namespace PM_plus.utils
             request.Method = "POST";
             request.UserAgent = DefaultUserAgent;
             //设置request的MIME类型及内容长度
-            request.ContentType = StringUtils.isEmpty(contentType) ? CONTENT_TYPE_APPLICATION_JSON : contentType;
+            request.ContentType = StringUtils.IsEmpty(contentType) ? CONTENT_TYPE_APPLICATION_JSON : contentType;
             request.KeepAlive = false;
             //定义response为前面的request响应
             HttpWebResponse response = null;

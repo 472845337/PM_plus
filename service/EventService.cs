@@ -76,7 +76,7 @@ namespace PM_plus.service {
             ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
             if (null != projectSection && Config.PROJECT_RUN_STAT_SUCCESS != projectSection.RunStat) {
                 // 准备启动
-                ProjectUtils.projectStart(projectSection);
+                ProjectUtils.ProjectStart(projectSection);
             } else {
                 MessageBox.Show("项目不可重复启动!");
             }
@@ -91,7 +91,7 @@ namespace PM_plus.service {
             ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
             if (null != projectSection) {
                 // 停止
-                ProjectUtils.projectStop(projectSection);
+                ProjectUtils.ProjectStop(projectSection);
             }
         }
 
@@ -183,7 +183,7 @@ namespace PM_plus.service {
             ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
             if (null != projectSection) {
                 // 准备启动
-                ProjectUtils.projectStart(projectSection);
+                ProjectUtils.ProjectStart(projectSection);
             }
         }
 
@@ -198,7 +198,7 @@ namespace PM_plus.service {
             ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
             if (null != projectSection) {
                 // 停止
-                ProjectUtils.projectStop(projectSection);
+                ProjectUtils.ProjectStop(projectSection);
             }
         }
 
