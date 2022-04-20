@@ -4,14 +4,14 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace PM_plus.utils
-{
-    class HttpUtils
-    {
+/// <summary>
+/// Http请求工具类
+/// </summary>
+namespace PM_plus.utils {
+    class HttpUtils {
         private static readonly string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
         public static String CONTENT_TYPE_APPLICATION_JSON = "application/json";
-        public static String PostRequest(String url, String data, String contentType)
-        {
+        public static String PostRequest(String url, String data, String contentType) {
             //定义request并设置request的路径
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             // 设置超时时间
@@ -27,8 +27,7 @@ namespace PM_plus.utils
             Stream dataStream = null;
             StreamReader reader = null;
             string responseFromServer = null;
-            try
-            {
+            try {
                 Stream writer = request.GetRequestStream();
                 byte[] dataArray = null == data ? new Byte[] { } : Encoding.UTF8.GetBytes(data);
                 writer.Write(dataArray, 0, dataArray.Length);
@@ -41,27 +40,19 @@ namespace PM_plus.utils
                 reader = new StreamReader(dataStream);
                 responseFromServer = reader.ReadToEnd();//读取所有
                 // LogUtils.writeLog(responseFromServer);
-            }
-            catch (Exception e)
-            {
-                if (Config.logSwitch)
-                {
+            } catch (Exception e) {
+                if (Config.logSwitch) {
                     LogUtils.WriteLog(e.StackTrace);
                 }
-            }
-            finally
-            {
+            } finally {
                 //关闭资源
-                if (null != reader)
-                {
+                if (null != reader) {
                     reader.Close();
                 }
-                if (null != dataStream)
-                {
+                if (null != dataStream) {
                     dataStream.Close();
                 }
-                if (null != response)
-                {
+                if (null != response) {
                     response.Close();
                 }
             }

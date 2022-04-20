@@ -9,10 +9,8 @@ using System.Text;
  * INI文件工具类
  * 
  * */
-namespace PM_plus.utils
-{
-    class IniUtils
-    {
+namespace PM_plus.utils {
+    class IniUtils {
         [DllImport("kernel32")]
         private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
         //需要调用GetPrivateProfileString的重载
@@ -23,27 +21,23 @@ namespace PM_plus.utils
         private static extern uint GetPrivateProfileStringA(string section, string key, string def, Byte[] retVal, int size, string filePath);
 
         //类的构造函数，传递INI文件名  
-        public static long IniWriteValue(String iniPath, string Section, string Key, string Value)
-        {
+        public static long IniWriteValue(String iniPath, string Section, string Key, string Value) {
             // 如果文件不存在，创建文件
-            if (!FileUtils.Boo_DirExist(iniPath))
-            {
+            if (!FileUtils.Boo_DirExist(iniPath)) {
                 FileUtils.DirCreate(Path.GetDirectoryName(iniPath));
             }
             return WritePrivateProfileString(Section, Key, Value, iniPath);
         }
 
         //读取section中某个值  
-        public static string IniReadValue(String iniPath, string Section, string Key)
-        {
+        public static string IniReadValue(String iniPath, string Section, string Key) {
             StringBuilder temp = new StringBuilder();
             GetPrivateProfileString(Section, Key, "", temp, 255, iniPath);
             return temp.ToString();
         }
         // 封装的方法中，最有价值的是获取所有Sections和所有的Keys，网上关于这个的代码大部分是错误的，这里给出一个正确的方法：  
         /// 返回该配置文件中所有Section名称的集合  
-        public static List<String> ReadSections(String iniPath)
-        {
+        public static List<String> ReadSections(String iniPath) {
             byte[] buffer = new byte[65535];
             uint len = GetPrivateProfileStringA(null, null, null, buffer, buffer.Length, iniPath);
             int j = 0;
@@ -57,7 +51,7 @@ namespace PM_plus.utils
             list.Sort(delegate (String section1, String section2) {
                 String sort1 = IniReadValue(Config.ProjectsIniPath, section1, Config.INI_KEY_PROJECT_SORT);
                 String sort2 = IniReadValue(Config.ProjectsIniPath, section2, Config.INI_KEY_PROJECT_SORT);
-                if(StringUtils.IsNotEmpty(sort1) && StringUtils.IsNotEmpty(sort2)) {
+                if (StringUtils.IsNotEmpty(sort1) && StringUtils.IsNotEmpty(sort2)) {
                     return Convert.ToInt16(sort1).CompareTo(Convert.ToInt16(sort2));
                 } else {
                     if (StringUtils.IsEmpty(sort1)) {
@@ -66,15 +60,14 @@ namespace PM_plus.utils
                         return -1;
                     }
                 }
-                
+
             });
             return list;
         }
 
         // 获取节点的所有KEY值  
 
-        public static List<String> ReadKeys(String iniPath, string sectionName)
-        {
+        public static List<String> ReadKeys(String iniPath, string sectionName) {
 
             byte[] buffer = new byte[5120];
             uint rel = GetPrivateProfileStringA(sectionName, null, Config.BLANK_STR, buffer, buffer.GetUpperBound(0), iniPath);
@@ -82,13 +75,10 @@ namespace PM_plus.utils
             int iCnt, iPos;
             List<String> list = new List<String>();
             string tmp;
-            if (rel > 0)
-            {
+            if (rel > 0) {
                 iPos = 0;
-                for (iCnt = 0; iCnt < rel; iCnt++)
-                {
-                    if (buffer[iCnt] == 0x00)
-                    {
+                for (iCnt = 0; iCnt < rel; iCnt++) {
+                    if (buffer[iCnt] == 0x00) {
                         tmp = ASCIIEncoding.Default.GetString(buffer, iPos, iCnt - iPos).Trim();
                         iPos = iCnt + 1;
                         if (StringUtils.IsNotEmpty(tmp))
@@ -104,8 +94,7 @@ namespace PM_plus.utils
         ///   <param   name= "sectionName "> 要设置的项名或条目名。这个字串不区分大小写。 </param> 
         ///   <param   name= "keyName "> 要删除的项名或条目名。这个字串不区分大小写。 </param> 
 
-        public static void DeleteKey(String iniPath, string sectionName, string keyName)
-        {
+        public static void DeleteKey(String iniPath, string sectionName, string keyName) {
             WritePrivateProfileString(sectionName, keyName, null, iniPath);
         }
 
@@ -114,9 +103,7 @@ namespace PM_plus.utils
         ///   </summary> 
         ///   <param   name= "sectionName "> 要删除的小节名。这个字串不区分大小写。 </param> 
 
-        public static void EraseSection(String iniPath, String section)
-
-        {
+        public static void EraseSection(String iniPath, String section) {
             WritePrivateProfileString(section, null, null, iniPath);
         }
     }
