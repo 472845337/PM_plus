@@ -37,7 +37,7 @@ namespace PM_plus.utils
         public static string IniReadValue(String iniPath, string Section, string Key)
         {
             StringBuilder temp = new StringBuilder();
-            long i = GetPrivateProfileString(Section, Key, "", temp, 255, iniPath);
+            GetPrivateProfileString(Section, Key, "", temp, 255, iniPath);
             return temp.ToString();
         }
         // 封装的方法中，最有价值的是获取所有Sections和所有的Keys，网上关于这个的代码大部分是错误的，这里给出一个正确的方法：  
@@ -84,7 +84,7 @@ namespace PM_plus.utils
             string tmp;
             if (rel > 0)
             {
-                iCnt = 0; iPos = 0;
+                iPos = 0;
                 for (iCnt = 0; iCnt < rel; iCnt++)
                 {
                     if (buffer[iCnt] == 0x00)

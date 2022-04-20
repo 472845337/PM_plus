@@ -8,9 +8,9 @@ namespace PM_plus.utils
 {
     class LogUtils
     {
-        public static void writeLog(String log)
+        public static void WriteLog(String log)
         {
-            writeLog(log, StringUtils.IsEmpty(Config.logFileName)? "logs/info.log": Config.logFileName);
+            WriteLog(log, StringUtils.IsEmpty(Config.logFileName)? "logs/info.log": Config.logFileName);
         }
         /// <summary>
         /// 同步锁写日志文件
@@ -18,7 +18,7 @@ namespace PM_plus.utils
         /// <param name="log"></param>
         /// <param name="logFile"></param>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void writeLog(String log, String logFile)
+        public static void WriteLog(String log, String logFile)
         {
             if (!Config.logSwitch)
             {

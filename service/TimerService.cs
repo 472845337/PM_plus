@@ -94,7 +94,7 @@ namespace PM_plus.service {
                             String heartBeatUrl = projectSection.HeartBeat;
                             String result = null;
                             if (StringUtils.IsNotEmpty(heartBeatUrl)) {
-                                result = HttpUtils.postRequest(heartBeatUrl, null, null);
+                                result = HttpUtils.PostRequest(heartBeatUrl, null, null);
 
                             } else {
                                 if (PortUtils.PortInUse(Convert.ToInt16(projectSection.Port))) {

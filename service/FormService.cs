@@ -94,7 +94,7 @@ namespace PM_plus.service {
             if (FileUtils.Boo_FileExist(skinFile)) {
                 Config.mainForm.se.SkinFile = skinFile;
                 Config.mainForm.SkinListBox.SelectedValue = skinFile;
-                Config.mainForm.SkinShowPictureBox.Image = Image.FromFile(SkinUtils.getSkinShowPath(skinFile));
+                Config.mainForm.SkinShowPictureBox.Image = Image.FromFile(SkinUtils.GetSkinShowPath(skinFile));
             }
         }
         /// <summary>

@@ -8,21 +8,17 @@ namespace PM_plus.utils
 {
     class Monitor
     {
-        private String title;
-        private String url;
-        private String warn;
-        private Button button;
+        private readonly String url;
+        private readonly Button button;
 
-        public Monitor(String title, String url, String warn, Button button)
+        public Monitor(String url, Button button)
         {
-            this.title = title;
             this.url = url;
-            this.warn = warn;
             this.button = button;
         }
-        public void monitorUrl()
+        public void MonitorUrl()
         {
-            String result = HttpUtils.postRequest(url, Config.BLANK_STR, null);
+            String result = HttpUtils.PostRequest(url, Config.BLANK_STR, null);
             if ("success".Equals(result))
             {
                 button.BackColor = Color.LimeGreen;

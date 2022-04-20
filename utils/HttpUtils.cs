@@ -10,7 +10,7 @@ namespace PM_plus.utils
     {
         private static readonly string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
         public static String CONTENT_TYPE_APPLICATION_JSON = "application/json";
-        public static String postRequest(String url, String data, String contentType)
+        public static String PostRequest(String url, String data, String contentType)
         {
             //定义request并设置request的路径
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
@@ -46,7 +46,7 @@ namespace PM_plus.utils
             {
                 if (Config.logSwitch)
                 {
-                    LogUtils.writeLog(e.StackTrace);
+                    LogUtils.WriteLog(e.StackTrace);
                 }
             }
             finally

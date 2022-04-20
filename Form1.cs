@@ -334,7 +334,7 @@ namespace PM_plus {
         private void SkinListBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (isFinishedInit && SkinListBox.SelectedItem != null) {
                 // se.SkinFile = (SkinListBox.SelectedItem as Skin).RelativeName;
-                SkinShowPictureBox.Image = Image.FromFile(SkinUtils.getSkinShowPath((SkinListBox.SelectedItem as Skin).RelativeName));
+                SkinShowPictureBox.Image = Image.FromFile(SkinUtils.GetSkinShowPath((SkinListBox.SelectedItem as Skin).RelativeName));
             }
         }
         private void FontFamilyComboBox_DrawItem(object sender, DrawItemEventArgs e) {

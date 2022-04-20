@@ -98,10 +98,10 @@ namespace PM_plus.utils {
                 String shutDownUrl = (actuator.EndsWith(Config.PATH_CHARACTER) ? actuator : actuator + Config.PATH_CHARACTER) + Config.ACTUATOR_SHUTDOWN;
                 try {
                     // actuator请求要使用post，使用默认的application/json方式请求
-                    HttpUtils.postRequest(shutDownUrl, null, null);
+                    HttpUtils.PostRequest(shutDownUrl, null, null);
                 } catch (Exception e) {
                     if (Config.logSwitch) {
-                        LogUtils.writeLog(e.StackTrace);
+                        LogUtils.WriteLog(e.StackTrace);
                     }
                     MessageBox.Show("监控节点shutdown无法请求，请重新配置！");
                 }
@@ -130,10 +130,10 @@ namespace PM_plus.utils {
                 String shutDownUrl = (actuator.EndsWith(Config.PATH_CHARACTER) ? actuator : actuator + Config.PATH_CHARACTER) + Config.ACTUATOR_SHUTDOWN;
                 try {
                     // actuator请求要使用post，使用默认的application/json方式请求
-                    HttpUtils.postRequest(shutDownUrl, null, null);
+                    HttpUtils.PostRequest(shutDownUrl, null, null);
                 } catch (Exception e) {
                     if (Config.logSwitch) {
-                        LogUtils.writeLog(e.StackTrace);
+                        LogUtils.WriteLog(e.StackTrace);
                     }
                     MessageBox.Show("监控节点shutdown无法请求，请重新配置！");
                 }

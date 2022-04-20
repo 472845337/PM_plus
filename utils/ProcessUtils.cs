@@ -18,7 +18,7 @@ namespace PM_plus.utils
         {
             this.batFilePath = batFilePath;
         }
-        public void runScript()
+        public void RunScript()
         {
             Process proc = new Process
             {
@@ -42,7 +42,7 @@ namespace PM_plus.utils
             proc.Dispose();
         }
 
-        public void runBat()
+        public void RunBat()
         {
             Process.Start(batFilePath);
         }

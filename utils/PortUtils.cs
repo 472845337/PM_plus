@@ -26,7 +26,7 @@ namespace PM_plus.utils {
                 return false;
             } catch (Exception ex) {
                 if (Config.logSwitch) {
-                    LogUtils.writeLog(ex.Message);
+                    LogUtils.WriteLog(ex.Message);
                 }
                 return false;
             }
