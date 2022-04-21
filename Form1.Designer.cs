@@ -401,9 +401,9 @@ namespace PM_plus {
             // ResetButton
             // 
             this.ResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResetButton.Location = new System.Drawing.Point(498, 495);
+            this.ResetButton.Location = new System.Drawing.Point(429, 389);
             this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(75, 37);
+            this.ResetButton.Size = new System.Drawing.Size(75, 32);
             this.ResetButton.TabIndex = 3;
             this.ResetButton.Text = "恢复";
             this.ResetButton.UseVisualStyleBackColor = true;
@@ -412,9 +412,9 @@ namespace PM_plus {
             // DiySetChangeApply_Button
             // 
             this.DiySetChangeApply_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DiySetChangeApply_Button.Location = new System.Drawing.Point(579, 495);
+            this.DiySetChangeApply_Button.Location = new System.Drawing.Point(510, 389);
             this.DiySetChangeApply_Button.Name = "DiySetChangeApply_Button";
-            this.DiySetChangeApply_Button.Size = new System.Drawing.Size(75, 37);
+            this.DiySetChangeApply_Button.Size = new System.Drawing.Size(75, 32);
             this.DiySetChangeApply_Button.TabIndex = 4;
             this.DiySetChangeApply_Button.Text = "应用";
             this.DiySetChangeApply_Button.UseVisualStyleBackColor = true;
@@ -450,7 +450,7 @@ namespace PM_plus {
             this.SkinGroupBox.Controls.Add(this.SkinListBox);
             this.SkinGroupBox.Location = new System.Drawing.Point(8, 35);
             this.SkinGroupBox.Name = "SkinGroupBox";
-            this.SkinGroupBox.Size = new System.Drawing.Size(646, 454);
+            this.SkinGroupBox.Size = new System.Drawing.Size(577, 348);
             this.SkinGroupBox.TabIndex = 0;
             this.SkinGroupBox.TabStop = false;
             this.SkinGroupBox.Text = "皮肤";
@@ -462,7 +462,7 @@ namespace PM_plus {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SkinShowPictureBox.Location = new System.Drawing.Point(182, 20);
             this.SkinShowPictureBox.Name = "SkinShowPictureBox";
-            this.SkinShowPictureBox.Size = new System.Drawing.Size(395, 364);
+            this.SkinShowPictureBox.Size = new System.Drawing.Size(389, 319);
             this.SkinShowPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.SkinShowPictureBox.TabIndex = 3;
             this.SkinShowPictureBox.TabStop = false;
@@ -475,7 +475,7 @@ namespace PM_plus {
             this.SkinListBox.ItemHeight = 12;
             this.SkinListBox.Location = new System.Drawing.Point(6, 20);
             this.SkinListBox.Name = "SkinListBox";
-            this.SkinListBox.Size = new System.Drawing.Size(169, 364);
+            this.SkinListBox.Size = new System.Drawing.Size(169, 316);
             this.SkinListBox.TabIndex = 2;
             this.SkinListBox.SelectedIndexChanged += new System.EventHandler(this.SkinListBox_SelectedIndexChanged);
             // 
