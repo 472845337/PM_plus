@@ -267,9 +267,11 @@ namespace PM_plus {
             // 
             // LogPath_TextBox
             // 
+            this.LogPath_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LogPath_TextBox.Location = new System.Drawing.Point(77, 45);
             this.LogPath_TextBox.Name = "LogPath_TextBox";
-            this.LogPath_TextBox.Size = new System.Drawing.Size(420, 21);
+            this.LogPath_TextBox.Size = new System.Drawing.Size(459, 21);
             this.LogPath_TextBox.TabIndex = 16;
             this.LogPath_TextBox.TextChanged += new System.EventHandler(this.LogPath_TextBox_TextChanged);
             // 
