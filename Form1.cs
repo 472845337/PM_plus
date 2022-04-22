@@ -59,7 +59,6 @@ namespace PM_plus {
             // 加载窗口关闭,close函数中置主窗体可用
             Config.waitForm.FreshProgress(usedProgress);
             Config.waitForm.Close();
-            isFinishedInit = true;
             // 高度设置
             String heightStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_HEIGHT);
             String widthStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_WIDTH);
@@ -72,6 +71,7 @@ namespace PM_plus {
                 int width = Int32.Parse(widthStr);
                 this.Size = new Size(width, this.Size.Height);
             }
+            isFinishedInit = true;
         }
 
         /// <summary>
