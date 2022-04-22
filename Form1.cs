@@ -62,9 +62,15 @@ namespace PM_plus {
             isFinishedInit = true;
             // 高度设置
             String heightStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_HEIGHT);
+            String widthStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_WIDTH);
             if (StringUtils.IsNotEmpty(heightStr)) {
                 int height = Int32.Parse(heightStr);
                 this.Size = new Size(this.Size.Width, height);
+            }
+            // 宽度设置
+            if (StringUtils.IsNotEmpty(widthStr)) {
+                int width = Int32.Parse(widthStr);
+                this.Size = new Size(width, this.Size.Height);
             }
         }
 
@@ -389,9 +395,16 @@ namespace PM_plus {
             InitLabelMsgTimerout();
         }
 
-        private void Form1_SizeChanged(object sender, EventArgs e) {
+        /// <summary>
+        /// 窗口尺寸变化保存尺寸
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_ResizeEnd(object sender, EventArgs e) {
             int height = this.Size.Height;
+            int width = this.Size.Width;
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_HEIGHT, height.ToString());
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_WIDTH, width.ToString());
         }
     }
 }
