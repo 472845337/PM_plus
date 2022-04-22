@@ -85,7 +85,7 @@ namespace PM_plus {
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(599, 460);
+            this.tabControl1.Size = new System.Drawing.Size(599, 465);
             this.tabControl1.TabIndex = 0;
             // 
             // ProjectTagPage
@@ -99,7 +99,7 @@ namespace PM_plus {
             this.ProjectTagPage.Location = new System.Drawing.Point(4, 29);
             this.ProjectTagPage.Name = "ProjectTagPage";
             this.ProjectTagPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ProjectTagPage.Size = new System.Drawing.Size(591, 427);
+            this.ProjectTagPage.Size = new System.Drawing.Size(591, 432);
             this.ProjectTagPage.TabIndex = 0;
             this.ProjectTagPage.Text = "项目配置";
             this.ProjectTagPage.UseVisualStyleBackColor = true;
@@ -116,7 +116,7 @@ namespace PM_plus {
             // 
             this.ExitAfterClose_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ExitAfterClose_CheckBox.AutoSize = true;
-            this.ExitAfterClose_CheckBox.Location = new System.Drawing.Point(83, 405);
+            this.ExitAfterClose_CheckBox.Location = new System.Drawing.Point(83, 410);
             this.ExitAfterClose_CheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ExitAfterClose_CheckBox.Name = "ExitAfterClose_CheckBox";
             this.ExitAfterClose_CheckBox.Size = new System.Drawing.Size(72, 16);
@@ -129,7 +129,7 @@ namespace PM_plus {
             // 
             this.LogSwitch_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LogSwitch_CheckBox.AutoSize = true;
-            this.LogSwitch_CheckBox.Location = new System.Drawing.Point(5, 405);
+            this.LogSwitch_CheckBox.Location = new System.Drawing.Point(5, 410);
             this.LogSwitch_CheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LogSwitch_CheckBox.Name = "LogSwitch_CheckBox";
             this.LogSwitch_CheckBox.Size = new System.Drawing.Size(72, 16);
@@ -142,7 +142,7 @@ namespace PM_plus {
             // 
             this.Author_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Author_Label.AutoSize = true;
-            this.Author_Label.Location = new System.Drawing.Point(414, 406);
+            this.Author_Label.Location = new System.Drawing.Point(414, 411);
             this.Author_Label.Name = "Author_Label";
             this.Author_Label.Size = new System.Drawing.Size(137, 12);
             this.Author_Label.TabIndex = 23;
@@ -160,7 +160,7 @@ namespace PM_plus {
             this.ProjectGroupBox.Controls.Add(this.FreshButton);
             this.ProjectGroupBox.Location = new System.Drawing.Point(7, 105);
             this.ProjectGroupBox.Name = "ProjectGroupBox";
-            this.ProjectGroupBox.Size = new System.Drawing.Size(579, 288);
+            this.ProjectGroupBox.Size = new System.Drawing.Size(579, 293);
             this.ProjectGroupBox.TabIndex = 22;
             this.ProjectGroupBox.TabStop = false;
             this.ProjectGroupBox.Text = "项目";
@@ -173,7 +173,7 @@ namespace PM_plus {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Projects_Panel.Location = new System.Drawing.Point(6, 21);
             this.Projects_Panel.Name = "Projects_Panel";
-            this.Projects_Panel.Size = new System.Drawing.Size(567, 225);
+            this.Projects_Panel.Size = new System.Drawing.Size(567, 230);
             this.Projects_Panel.TabIndex = 21;
             this.Projects_Panel.ClientSizeChanged += new System.EventHandler(this.Projects_Panel_ClientSizeChanged);
             this.Projects_Panel.DragDrop += new System.Windows.Forms.DragEventHandler(this.Projects_Panel_DragDrop);
@@ -184,7 +184,7 @@ namespace PM_plus {
             this.ProjectAdd_Button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ProjectAdd_Button.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F);
-            this.ProjectAdd_Button.Location = new System.Drawing.Point(7, 251);
+            this.ProjectAdd_Button.Location = new System.Drawing.Point(7, 256);
             this.ProjectAdd_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ProjectAdd_Button.Name = "ProjectAdd_Button";
             this.ProjectAdd_Button.Size = new System.Drawing.Size(309, 32);
@@ -197,7 +197,7 @@ namespace PM_plus {
             // 
             this.AllStart_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AllStart_Button.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F);
-            this.AllStart_Button.Location = new System.Drawing.Point(409, 251);
+            this.AllStart_Button.Location = new System.Drawing.Point(409, 256);
             this.AllStart_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AllStart_Button.Name = "AllStart_Button";
             this.AllStart_Button.Size = new System.Drawing.Size(81, 32);
@@ -210,7 +210,7 @@ namespace PM_plus {
             // 
             this.AllStop_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AllStop_Button.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F);
-            this.AllStop_Button.Location = new System.Drawing.Point(496, 251);
+            this.AllStop_Button.Location = new System.Drawing.Point(496, 256);
             this.AllStop_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AllStop_Button.Name = "AllStop_Button";
             this.AllStop_Button.Size = new System.Drawing.Size(75, 32);
@@ -223,7 +223,7 @@ namespace PM_plus {
             // 
             this.FreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.FreshButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F);
-            this.FreshButton.Location = new System.Drawing.Point(322, 251);
+            this.FreshButton.Location = new System.Drawing.Point(322, 256);
             this.FreshButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.FreshButton.Name = "FreshButton";
             this.FreshButton.Size = new System.Drawing.Size(81, 32);
@@ -512,17 +512,17 @@ namespace PM_plus {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(623, 484);
+            this.ClientSize = new System.Drawing.Size(623, 489);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(639, 768);
-            this.MinimumSize = new System.Drawing.Size(639, 500);
+            this.MaximumSize = new System.Drawing.Size(639, 1080);
+            this.MinimumSize = new System.Drawing.Size(639, 528);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Java项目管理";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
+            this.ResizeEnd += new System.EventHandler(this.Form1_SizeChanged);
             this.tabControl1.ResumeLayout(false);
             this.ProjectTagPage.ResumeLayout(false);
             this.ProjectTagPage.PerformLayout();
