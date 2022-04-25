@@ -47,13 +47,13 @@ namespace PM_plus.service {
         }
         internal static void InitFont() {
             InstalledFontCollection installedFontCollection = new InstalledFontCollection();
-            foreach(FontFamily fontFamily in installedFontCollection.Families) {
+            foreach (FontFamily fontFamily in installedFontCollection.Families) {
                 if (fontFamily.IsStyleAvailable(FontStyle.Regular)) {
                     Config.mainForm.FontFamilyComboBox.Items.Add(fontFamily.Name);
                 }
             }
-           // 字体配置读取
-           String fontFamilyName = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY);
+            // 字体配置读取
+            String fontFamilyName = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY);
             if (StringUtils.IsEmpty(fontFamilyName)) {
                 // 未设置，使用默认
                 fontFamilyName = Config.DEFAULT_FONT_FAMILY;
@@ -71,7 +71,7 @@ namespace PM_plus.service {
         internal static void InitSkin() {
             FileInfo[] skinFileArray = new DirectoryInfo("Skins").GetFiles("*.ssk", SearchOption.AllDirectories);
             List<Skin> skinList = new List<Skin>();
-            foreach(FileInfo fileInfo in skinFileArray) {
+            foreach (FileInfo fileInfo in skinFileArray) {
                 Skin skin = new Skin {
                     Name = fileInfo.Name,
                     FullName = fileInfo.FullName,
@@ -115,13 +115,13 @@ namespace PM_plus.service {
             /* 启动程序按钮 */
             ContextMenuStrip rightMenu = new ContextMenuStrip();
             /* 添加按钮-------------------------------- */
-            ControlUtils.AddToolStripMenu(rightMenu, Config.BLANK_STR, Config.PROJECT_PANEL_RIGHT_ADD_NAME, Config.PROJECT_PANEL_RIGHT_ADD_TEXT, new EventHandler(Config.mainForm.ProjectAdd_Button_Click));
-            /** 启动按钮 -------------------------------*/
-            ControlUtils.AddToolStripMenu(rightMenu, Config.BLANK_STR, Config.PROJECT_PANEL_RIGHT_ALLSTART_NAME, Config.PROJECT_PANEL_RIGHT_ALLSTART_TEXT, new EventHandler(Config.mainForm.AllStart_Button_Click));
+            ControlUtils.AddToolStripMenu(rightMenu, Config.BLANK_STR, Config.PROJECT_PANEL_RIGHT_ADD_NAME, Config.PROJECT_PANEL_RIGHT_ADD_TEXT, Config.PROJECT_PANEL_RIGHT_ADD_IMAGE, new EventHandler(Config.mainForm.ProjectAdd_Button_Click));
+            /* 启动按钮 --------------------------------*/
+            ControlUtils.AddToolStripMenu(rightMenu, Config.BLANK_STR, Config.PROJECT_PANEL_RIGHT_ALLSTART_NAME, Config.PROJECT_PANEL_RIGHT_ALLSTART_TEXT, Config.RIGHT_BUTTON_START_IMAGE, new EventHandler(Config.mainForm.AllStart_Button_Click));
             /* 停止按钮-------------------------------- */
-            ControlUtils.AddToolStripMenu(rightMenu, Config.BLANK_STR, Config.PROJECT_PANEL_RIGHT_ALLSTOP_NAME, Config.PROJECT_PANEL_RIGHT_ALLSTOP_TEXT, new EventHandler(Config.mainForm.AllStop_Button_Click));
+            ControlUtils.AddToolStripMenu(rightMenu, Config.BLANK_STR, Config.PROJECT_PANEL_RIGHT_ALLSTOP_NAME, Config.PROJECT_PANEL_RIGHT_ALLSTOP_TEXT, Config.RIGHT_BUTTON_STOP_IMAGE, new EventHandler(Config.mainForm.AllStop_Button_Click));
             /* 刷新按钮-------------------------------- */
-            ControlUtils.AddToolStripMenu(rightMenu, Config.BLANK_STR, Config.PROJECT_PANEL_RIGHT_FRESH_NAME, Config.PROJECT_PANEL_RIGHT_FRESH_TEXT, new EventHandler(Config.mainForm.Fresh_Button_Click));
+            ControlUtils.AddToolStripMenu(rightMenu, Config.BLANK_STR, Config.PROJECT_PANEL_RIGHT_FRESH_NAME, Config.PROJECT_PANEL_RIGHT_FRESH_TEXT, Config.RIGHT_BUTTON_FRESH_IMAGE, new EventHandler(Config.mainForm.Fresh_Button_Click));
             /* 装载右键 */
             Config.mainForm.Projects_Panel.ContextMenuStrip = rightMenu;
             return usedProgress + giveProgress;
@@ -323,22 +323,22 @@ namespace PM_plus.service {
             /* 启动程序按钮 */
             ContextMenuStrip rightMenu = new ContextMenuStrip();
             /* 查看按钮------------------------------------------------------------------ */
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_DETAIL_NAME, Config.RIGHT_BUTTON_DETAIL_TEXT, new EventHandler(EventService.BtnRightDetailClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_DETAIL_NAME, Config.RIGHT_BUTTON_DETAIL_TEXT, Config.RIGHT_BUTTON_DETAIL_IMAGE, new EventHandler(EventService.BtnRightDetailClick));
             /* 启动按钮 ---------------------------------------------------------------*/
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_START_NAME, Config.RIGHT_BUTTON_START_TEXT, new EventHandler(EventService.BtnRightStartClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_START_NAME, Config.RIGHT_BUTTON_START_TEXT, Config.RIGHT_BUTTON_START_IMAGE, new EventHandler(EventService.BtnRightStartClick));
             /* 停止按钮--------------------------------------------------------------------- */
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_STOP_NAME, Config.RIGHT_BUTTON_STOP_TEXT, new EventHandler(EventService.BtnRightStopClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_STOP_NAME, Config.RIGHT_BUTTON_STOP_TEXT, Config.RIGHT_BUTTON_STOP_IMAGE, new EventHandler(EventService.BtnRightStopClick));
             /* 编辑按钮------------------------------------------------------------------ */
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_UPDATE_NAME, Config.RIGHT_BUTTON_UPDATE_TEXT, new EventHandler(EventService.BtnRightUpdateClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_UPDATE_NAME, Config.RIGHT_BUTTON_UPDATE_TEXT, Config.RIGHT_BUTTON_UPDATE_IMAGE, new EventHandler(EventService.BtnRightUpdateClick));
             /* 删除按钮---------------------------------------------------------------- */
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_DELETE_NAME, Config.RIGHT_BUTTON_DELETE_TEXT, new EventHandler(EventService.BtnRightDeleteClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_DELETE_NAME, Config.RIGHT_BUTTON_DELETE_TEXT, Config.RIGHT_BUTTON_DELETE_IMAGE, new EventHandler(EventService.BtnRightDeleteClick));
             /* 刷新按钮------------------------------------------------------------------ */
-            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_FRESH_NAME, Config.RIGHT_BUTTON_FRESH_TEXT, new EventHandler(EventService.BtnRightFreshClick));
+            ControlUtils.AddToolStripMenu(rightMenu, projectSection.Section, Config.RIGHT_BUTTON_FRESH_NAME, Config.RIGHT_BUTTON_FRESH_TEXT, Config.RIGHT_BUTTON_FRESH_IMAGE, new EventHandler(EventService.BtnRightFreshClick));
             /* 装载右键 */
             button.ContextMenuStrip = rightMenu;
             Config.mainForm.Projects_Panel.Controls.Add(button);
             #endregion
-            
+
             // 创建新项目运行窗口tabPage
 
         }

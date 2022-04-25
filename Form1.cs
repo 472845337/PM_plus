@@ -283,7 +283,13 @@ namespace PM_plus {
             ProjectUtils.AllProjectOperate(Config.PROJECT_OPERATE_TYPE_START);
         }
 
+        /// <summary>
+        /// 全部停止
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         internal void AllStop_Button_Click(object sender, EventArgs e) {
+            // 执行全部停止
             ProjectUtils.AllProjectOperate(Config.PROJECT_OPERATE_TYPE_STOP);
         }
 

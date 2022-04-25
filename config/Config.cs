@@ -83,6 +83,7 @@ namespace PM_plus.config
         // 项目面板右键添加
         public const String PROJECT_PANEL_RIGHT_ADD_NAME = "ProjectPanel_MouseRightMenu_Add";
         public const String PROJECT_PANEL_RIGHT_ADD_TEXT = "添加";
+        public const String PROJECT_PANEL_RIGHT_ADD_IMAGE = "resources\\menu-icon\\add.ico";
         // 项目面板右键全部启动
         public const String PROJECT_PANEL_RIGHT_ALLSTART_NAME = "ProjectPanel_MouseRightMenu_AllStart";
         public const String PROJECT_PANEL_RIGHT_ALLSTART_TEXT = "全部启动";
@@ -93,21 +94,27 @@ namespace PM_plus.config
         // 项目按钮右键刷新
         public const String RIGHT_BUTTON_FRESH_NAME = "MouseRightMenu_Fresh";
         public const String RIGHT_BUTTON_FRESH_TEXT = "刷新";
+        public const String RIGHT_BUTTON_FRESH_IMAGE = "resources\\menu-icon\\fresh.ico";
         // 项目按钮右键查看
         public const String RIGHT_BUTTON_DETAIL_NAME = "MouseRightMenu_Detail";
         public const String RIGHT_BUTTON_DETAIL_TEXT = "查看";
+        public const String RIGHT_BUTTON_DETAIL_IMAGE = "resources\\menu-icon\\detail.ico";
         // 项目按钮右键启动
         public const String RIGHT_BUTTON_START_NAME = "MouseRightMenu_Start";
         public const String RIGHT_BUTTON_START_TEXT = "启动";
+        public const String RIGHT_BUTTON_START_IMAGE = "resources\\menu-icon\\start.ico";
         // 项目按钮右键停止
         public const String RIGHT_BUTTON_STOP_NAME = "MouseRightMenu_Stop";
         public const String RIGHT_BUTTON_STOP_TEXT = "停止";
+        public const String RIGHT_BUTTON_STOP_IMAGE = "resources\\menu-icon\\stop.ico";
         // 项目按钮右键编辑
         public const String RIGHT_BUTTON_UPDATE_NAME = "MouseRightMenu_Update";
         public const String RIGHT_BUTTON_UPDATE_TEXT = "编辑";
+        public const String RIGHT_BUTTON_UPDATE_IMAGE = "resources\\menu-icon\\edit.ico";
         // 项目按钮右键删除
         public const String RIGHT_BUTTON_DELETE_NAME = "MouseRightMenu_Delete";
         public const String RIGHT_BUTTON_DELETE_TEXT = "删除";
+        public const String RIGHT_BUTTON_DELETE_IMAGE = "resources\\menu-icon\\remove.ico";
         #endregion
         /************** 运行窗口 相关控件参数,尺寸，位置，文本，名称 */
         #region

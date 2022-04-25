@@ -126,12 +126,15 @@ namespace PM_plus.utils {
             tabPage.Controls.Add(button);
         }
 
-        public static void AddToolStripMenu(ContextMenuStrip rightMenu, String name, String typeName, String text, EventHandler eventHandler) {
+        public static void AddToolStripMenu(ContextMenuStrip rightMenu, String name, String typeName, String text, String imagePath, EventHandler eventHandler) {
             ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem {
                 Name = name + typeName,
                 Text = text,
                 Tag = name
             };
+            if (StringUtils.IsNotEmpty(imagePath)) {
+                toolStripMenuItem.Image = Image.FromFile(imagePath);
+            }
             toolStripMenuItem.Click += eventHandler;
             rightMenu.Items.Add(toolStripMenuItem);
         }

@@ -12,6 +12,9 @@ namespace PM_plus.service {
         private static readonly System.Timers.Timer GcTimer = new System.Timers.Timer();
         private static readonly System.Timers.Timer MonitorTimer = new System.Timers.Timer();
         private static readonly System.Timers.Timer BtnDoubleCheckTimer = new System.Timers.Timer(500);
+        // 到时间后执行的计时器
+        private static readonly System.Timers.Timer TimeoutTimer = new System.Timers.Timer();
+
 
         static TimerService() {
             // 双击计时器不开启
@@ -85,58 +88,65 @@ namespace PM_plus.service {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void MonitorTimer_Tick(object sender, EventArgs e) {
+        public static void MonitorTimer_Tick(object sender, EventArgs e) {
             if (null != ProjectSections.GetAllSections()) {
                 try {
                     foreach (String section in ProjectSections.GetAllSections()) {
-                        ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
-                        if (null != projectSection) {
-                            String heartBeatUrl = projectSection.HeartBeat;
-                            String result = null;
-                            if (StringUtils.IsNotEmpty(heartBeatUrl)) {
-                                result = HttpUtils.PostRequest(heartBeatUrl, null, null);
-
-                            } else {
-                                if (PortUtils.PortInUse(Convert.ToInt16(projectSection.Port))) {
-                                    result = "success";
-                                }
-                            }
-                            short runStat = projectSection.RunStat;
-                            if ("success".Equals(result)) {
-                                projectSection.RunStat = Config.PROJECT_RUN_STAT_SUCCESS;
-                                // 变更按钮状态和颜色
-                                FormService.UpdateButtonEnabledOfMenuStrip(section, Config.PROJECT_RUN_STAT_SUCCESS);
-                            } else {
-                                if (projectSection.IsRunning) {
-                                    switch (projectSection.RunStat) {
-                                        case Config.PROJECT_RUN_STAT_STOPPING:
-                                        case Config.PROJECT_RUN_STAT_UNRUN:
-                                            // 未运行,停止中
-                                            runStat = Config.PROJECT_RUN_STAT_UNRUN;
-                                            break;
-                                        case Config.PROJECT_RUN_STAT_RUNNING:
-                                        case Config.PROJECT_RUN_STAT_SUCCESS:
-                                        case Config.PROJECT_RUN_STAT_FAIL:
-                                            // 运行中,运行成功,运行失败
-                                            runStat = Config.PROJECT_RUN_STAT_FAIL;
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                } else {
-                                    runStat = Config.PROJECT_RUN_STAT_UNRUN;
-                                }
-                                projectSection.RunStat = runStat;
-                                // 未运行
-                                FormService.UpdateButtonEnabledOfMenuStrip(section, runStat);
-                            }
-                        }
+                        MonitorProject(section);
                     }
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message);
                 }
             }
         }
+        public static void MonitorProject(ProjectSections.ProjectSection projectSection) {
+            if (null != projectSection) {
+                String heartBeatUrl = projectSection.HeartBeat;
+                String result = null;
+                if (StringUtils.IsNotEmpty(heartBeatUrl)) {
+                    result = HttpUtils.PostRequest(heartBeatUrl, null, null);
 
+                } else {
+                    if (PortUtils.PortInUse(Convert.ToInt16(projectSection.Port))) {
+                        result = "success";
+                    }
+                }
+                short runStat = projectSection.RunStat;
+                if ("success".Equals(result)) {
+                    projectSection.RunStat = Config.PROJECT_RUN_STAT_SUCCESS;
+                    // 变更按钮状态和颜色
+                    FormService.UpdateButtonEnabledOfMenuStrip(projectSection.Section, Config.PROJECT_RUN_STAT_SUCCESS);
+                } else {
+                    if (projectSection.IsRunning) {
+                        switch (projectSection.RunStat) {
+                            case Config.PROJECT_RUN_STAT_STOPPING:
+                            case Config.PROJECT_RUN_STAT_UNRUN:
+                                // 未运行,停止中
+                                runStat = Config.PROJECT_RUN_STAT_UNRUN;
+                                break;
+                            case Config.PROJECT_RUN_STAT_RUNNING:
+                            case Config.PROJECT_RUN_STAT_SUCCESS:
+                            case Config.PROJECT_RUN_STAT_FAIL:
+                                // 运行中,运行成功,运行失败
+                                runStat = Config.PROJECT_RUN_STAT_FAIL;
+                                break;
+                            default:
+                                break;
+                        }
+                    } else {
+                        runStat = Config.PROJECT_RUN_STAT_UNRUN;
+                    }
+                    projectSection.RunStat = runStat;
+                    // 未运行
+                    FormService.UpdateButtonEnabledOfMenuStrip(projectSection.Section, runStat);
+                }
+            }
+        }
+
+
+        public static void MonitorProject(String section) {
+            ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
+            MonitorProject(projectSection);
+        }
     }
 }
