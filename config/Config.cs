@@ -67,6 +67,7 @@ namespace PM_plus.config
         public const String INI_KEY_PROJECT_HEART_BEAT = "heartBeat";
         public const String INI_KEY_PROJECT_ACTUATOR = "actuator";
         public const String INI_KEY_PROJECT_PARAM = "param";
+        public const String INI_KEY_PROJECT_ENV = "env";
         public const String INI_KEY_PROJECT_SORT = "sort";
 
         /** 项目操作类型 */

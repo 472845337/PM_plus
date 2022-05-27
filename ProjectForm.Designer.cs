@@ -44,12 +44,14 @@ namespace PM_plus {
             this.AddForm_IsPrintLogCheckBox = new System.Windows.Forms.CheckBox();
             this.AddForm_ParamLabel = new System.Windows.Forms.Label();
             this.AddForm_ParamRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.ProjectForm_EnvRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.ProjectForm_EnvLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // AddForm_Save_Button
             // 
             this.AddForm_Save_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddForm_Save_Button.Location = new System.Drawing.Point(276, 269);
+            this.AddForm_Save_Button.Location = new System.Drawing.Point(276, 326);
             this.AddForm_Save_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AddForm_Save_Button.Name = "AddForm_Save_Button";
             this.AddForm_Save_Button.Size = new System.Drawing.Size(47, 25);
@@ -61,7 +63,7 @@ namespace PM_plus {
             // AddForm_Cancel_Button
             // 
             this.AddForm_Cancel_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddForm_Cancel_Button.Location = new System.Drawing.Point(329, 269);
+            this.AddForm_Cancel_Button.Location = new System.Drawing.Point(329, 326);
             this.AddForm_Cancel_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AddForm_Cancel_Button.Name = "AddForm_Cancel_Button";
             this.AddForm_Cancel_Button.Size = new System.Drawing.Size(43, 25);
@@ -175,7 +177,7 @@ namespace PM_plus {
             this.AddForm_IsPrintLogCheckBox.AutoSize = true;
             this.AddForm_IsPrintLogCheckBox.Checked = true;
             this.AddForm_IsPrintLogCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AddForm_IsPrintLogCheckBox.Location = new System.Drawing.Point(53, 274);
+            this.AddForm_IsPrintLogCheckBox.Location = new System.Drawing.Point(53, 331);
             this.AddForm_IsPrintLogCheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AddForm_IsPrintLogCheckBox.Name = "AddForm_IsPrintLogCheckBox";
             this.AddForm_IsPrintLogCheckBox.Size = new System.Drawing.Size(96, 16);
@@ -190,26 +192,49 @@ namespace PM_plus {
             this.AddForm_ParamLabel.Name = "AddForm_ParamLabel";
             this.AddForm_ParamLabel.Size = new System.Drawing.Size(41, 12);
             this.AddForm_ParamLabel.TabIndex = 15;
-            this.AddForm_ParamLabel.Text = "参  数";
+            this.AddForm_ParamLabel.Text = "配  置";
             // 
             // AddForm_ParamRichTextBox
             // 
-            this.AddForm_ParamRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.AddForm_ParamRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AddForm_ParamRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.AddForm_ParamRichTextBox.Location = new System.Drawing.Point(53, 133);
             this.AddForm_ParamRichTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AddForm_ParamRichTextBox.Name = "AddForm_ParamRichTextBox";
-            this.AddForm_ParamRichTextBox.Size = new System.Drawing.Size(319, 132);
+            this.AddForm_ParamRichTextBox.Size = new System.Drawing.Size(319, 81);
             this.AddForm_ParamRichTextBox.TabIndex = 16;
             this.AddForm_ParamRichTextBox.Text = "";
+            // 
+            // ProjectForm_EnvRichTextBox
+            // 
+            this.ProjectForm_EnvRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProjectForm_EnvRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ProjectForm_EnvRichTextBox.Location = new System.Drawing.Point(53, 218);
+            this.ProjectForm_EnvRichTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ProjectForm_EnvRichTextBox.Name = "ProjectForm_EnvRichTextBox";
+            this.ProjectForm_EnvRichTextBox.Size = new System.Drawing.Size(319, 81);
+            this.ProjectForm_EnvRichTextBox.TabIndex = 18;
+            this.ProjectForm_EnvRichTextBox.Text = "";
+            // 
+            // ProjectForm_EnvLabel
+            // 
+            this.ProjectForm_EnvLabel.AutoSize = true;
+            this.ProjectForm_EnvLabel.Location = new System.Drawing.Point(6, 220);
+            this.ProjectForm_EnvLabel.Name = "ProjectForm_EnvLabel";
+            this.ProjectForm_EnvLabel.Size = new System.Drawing.Size(41, 12);
+            this.ProjectForm_EnvLabel.TabIndex = 17;
+            this.ProjectForm_EnvLabel.Text = "环  境";
             // 
             // ProjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 301);
+            this.ClientSize = new System.Drawing.Size(384, 358);
+            this.Controls.Add(this.ProjectForm_EnvRichTextBox);
+            this.Controls.Add(this.ProjectForm_EnvLabel);
             this.Controls.Add(this.AddForm_ParamRichTextBox);
             this.Controls.Add(this.AddForm_ParamLabel);
             this.Controls.Add(this.AddForm_IsPrintLogCheckBox);
@@ -255,5 +280,7 @@ namespace PM_plus {
         private System.Windows.Forms.CheckBox AddForm_IsPrintLogCheckBox;
         private System.Windows.Forms.Label AddForm_ParamLabel;
         private System.Windows.Forms.RichTextBox AddForm_ParamRichTextBox;
+        private System.Windows.Forms.RichTextBox ProjectForm_EnvRichTextBox;
+        private System.Windows.Forms.Label ProjectForm_EnvLabel;
     }
 }

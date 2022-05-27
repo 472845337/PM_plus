@@ -46,12 +46,16 @@ namespace PM_plus.utils {
             } else {
                 script.Append("java");
             }
-            // 参数
+            // 启动参数
             if (StringUtils.IsNotEmpty(projectSection.Param)) {
                 script.Append(" ").Append(projectSection.Param);
             }
             // jar包路径
             script.Append(" -jar ").Append(projectSection.Jar);
+            // 环境参数
+            if (StringUtils.IsNotEmpty(projectSection.Env)) {
+                script.Append(" ").Append(projectSection.Env);
+            }
             // profile配置
             script.Append(" --spring.profiles.active=").Append(profile);
             // 指定启动端口

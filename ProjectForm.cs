@@ -37,7 +37,7 @@ namespace PM_plus {
                 AddForm_HeartBeat_TextBox.ReadOnly = true;
                 AddForm_Actuator_Textbox.ReadOnly = true;
                 AddForm_ParamRichTextBox.ReadOnly = true;
-
+                ProjectForm_EnvRichTextBox.ReadOnly = true;
                 AddForm_Save_Button.Visible = false;
             }
             if (Config.OPERATE_TYPE_UPDATE == operateType || Config.OPERATE_TYPE_DETAIL == operateType) {
@@ -49,6 +49,7 @@ namespace PM_plus {
                 String heartBeat = monitorSection.HeartBeat;
                 String actuator = monitorSection.Actuator;
                 String param = monitorSection.Param;
+                String env = monitorSection.Env;
                 AddForm_Title_TextBox.Text = title;
                 AddForm_Jar_TextBox.Text = jar;
                 AddForm_Port_TextBox.Text = port;
@@ -56,6 +57,7 @@ namespace PM_plus {
                 AddForm_HeartBeat_TextBox.Text = heartBeat;
                 AddForm_Actuator_Textbox.Text = actuator;
                 AddForm_ParamRichTextBox.Text = param;
+                ProjectForm_EnvRichTextBox.Text = env;
             }
         }
 
@@ -72,7 +74,7 @@ namespace PM_plus {
             String heartBeat = AddForm_HeartBeat_TextBox.Text;
             String actuator = AddForm_Actuator_Textbox.Text;
             String param = AddForm_ParamRichTextBox.Text;
-
+            String env = ProjectForm_EnvRichTextBox.Text;
             Boolean checkFlag = true;
             StringBuilder checkMsg = new StringBuilder();
             if (StringUtils.IsEmpty(title)) {
@@ -117,6 +119,7 @@ namespace PM_plus {
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_HEART_BEAT, heartBeat);
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_ACTUATOR, actuator);
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_PARAM, param);
+                IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_ENV, env);
                 // 项目对象赋值
                 ProjectSections.ProjectSection projectModel = new ProjectSections.ProjectSection {
                     Section = operateSection,
@@ -126,7 +129,8 @@ namespace PM_plus {
                     IsPrintLog = isPrintLogBl,
                     HeartBeat = heartBeat,
                     Actuator = actuator,
-                    Param = param
+                    Param = param,
+                    Env = env
                 };
                 // 生成start.bat
                 String result = ProjectUtils.CreateStartBat(projectModel, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);

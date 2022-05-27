@@ -1,5 +1,4 @@
-﻿using PM_plus;
-using PM_plus.bean;
+﻿using PM_plus.bean;
 using PM_plus.config;
 using PM_plus.utils;
 using System;
@@ -305,7 +304,7 @@ namespace PM_plus.service {
             // 按钮文本
             button.Text = projectSection.Title;
             button.TextAlign = ContentAlignment.BottomCenter;
-            button.Font = new Font("微软雅黑", 12);
+            button.Font = new Font(Config.DEFAULT_FONT_FAMILY, 12);
             button.Tag = 9999;
             #endregion
             #region 按钮加载相关事件

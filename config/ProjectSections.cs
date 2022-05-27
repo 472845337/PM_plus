@@ -99,6 +99,10 @@ namespace PM_plus.config {
             /// 启动参数
             /// </summary>
             public string Param { get; set; }
+            /// <summary>
+            /// 环境参数
+            /// </summary>
+            public String Env { get; set; }
         }
     }
 }
