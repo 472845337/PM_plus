@@ -146,6 +146,8 @@ namespace PM_plus.service {
                 String actuator = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_ACTUATOR);
                 // 启动参数
                 String param = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_PARAM);
+                // 环境参数
+                String env = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_ENV);
                 // 创建按钮
                 ProjectSections.ProjectSection projectSection = new ProjectSections.ProjectSection {
                     Section = section,
@@ -155,7 +157,8 @@ namespace PM_plus.service {
                     IsPrintLog = isPrintLogBl,
                     HeartBeat = heartBeat,
                     Actuator = actuator,
-                    Param = param
+                    Param = param,
+                    Env = env
                 };
                 AddButton(projectSection);
 
