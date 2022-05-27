@@ -175,20 +175,18 @@ namespace PM_plus {
             // 
             this.AddForm_IsPrintLogCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AddForm_IsPrintLogCheckBox.AutoSize = true;
-            this.AddForm_IsPrintLogCheckBox.Checked = true;
-            this.AddForm_IsPrintLogCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AddForm_IsPrintLogCheckBox.Location = new System.Drawing.Point(53, 331);
             this.AddForm_IsPrintLogCheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AddForm_IsPrintLogCheckBox.Name = "AddForm_IsPrintLogCheckBox";
             this.AddForm_IsPrintLogCheckBox.Size = new System.Drawing.Size(96, 16);
             this.AddForm_IsPrintLogCheckBox.TabIndex = 14;
-            this.AddForm_IsPrintLogCheckBox.Text = "是否打印日志";
+            this.AddForm_IsPrintLogCheckBox.Text = "控制面板日志";
             this.AddForm_IsPrintLogCheckBox.UseVisualStyleBackColor = true;
             // 
             // AddForm_ParamLabel
             // 
             this.AddForm_ParamLabel.AutoSize = true;
-            this.AddForm_ParamLabel.Location = new System.Drawing.Point(6, 135);
+            this.AddForm_ParamLabel.Location = new System.Drawing.Point(6, 146);
             this.AddForm_ParamLabel.Name = "AddForm_ParamLabel";
             this.AddForm_ParamLabel.Size = new System.Drawing.Size(41, 12);
             this.AddForm_ParamLabel.TabIndex = 15;
@@ -222,7 +220,7 @@ namespace PM_plus {
             // ProjectForm_EnvLabel
             // 
             this.ProjectForm_EnvLabel.AutoSize = true;
-            this.ProjectForm_EnvLabel.Location = new System.Drawing.Point(6, 220);
+            this.ProjectForm_EnvLabel.Location = new System.Drawing.Point(6, 236);
             this.ProjectForm_EnvLabel.Name = "ProjectForm_EnvLabel";
             this.ProjectForm_EnvLabel.Size = new System.Drawing.Size(41, 12);
             this.ProjectForm_EnvLabel.TabIndex = 17;
@@ -253,6 +251,7 @@ namespace PM_plus {
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(400, 397);
             this.Name = "ProjectForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加";
