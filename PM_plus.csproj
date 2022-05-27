@@ -74,7 +74,8 @@
   <PropertyGroup />
   <ItemGroup>
     <Reference Include="IrisSkin4">
-      <HintPath>..\..\IrisSkinTest\IrisSkinTest\bin\Debug\IrisSkin4.dll</HintPath>
+      <HintPath>plugins\IrisSkin4.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -162,6 +163,79 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Skins\Carlmness\Calmness.ssk" />
+    <None Include="Skins\Carlmness\CalmnessColor1.ssk" />
+    <None Include="Skins\Carlmness\CalmnessColor2.ssk" />
+    <None Include="Skins\Deep\DeepCyan.ssk" />
+    <None Include="Skins\Deep\DeepGreen.ssk" />
+    <None Include="Skins\Deep\DeepOrange.ssk" />
+    <None Include="Skins\Diamond\DiamondBlue.ssk" />
+    <None Include="Skins\Diamond\DiamondGreen.ssk" />
+    <None Include="Skins\Diamond\DiamondOlive.ssk" />
+    <None Include="Skins\Diamond\DiamondPurple.ssk" />
+    <None Include="Skins\Diamond\DiamondRed.ssk" />
+    <None Include="Skins\Eighteen\Eighteen.ssk" />
+    <None Include="Skins\Eighteen\EighteenColor1.ssk" />
+    <None Include="Skins\Eighteen\EighteenColor2.ssk" />
+    <None Include="Skins\Emerald\Emerald.ssk" />
+    <None Include="Skins\Emerald\EmeraldColor1.ssk" />
+    <None Include="Skins\Emerald\EmeraldColor2.ssk" />
+    <None Include="Skins\Emerald\EmeraldColor3.ssk" />
+    <None Include="Skins\Glass\GlassBrown.ssk" />
+    <None Include="Skins\Glass\GlassGreen.ssk" />
+    <None Include="Skins\Glass\GlassOrange.ssk" />
+    <None Include="Skins\Longhorn\Longhorn.ssk" />
+    <None Include="Skins\MacOS\MacOS.ssk" />
+    <None Include="Skins\Midsummer\Midsummer.ssk" />
+    <None Include="Skins\Midsummer\MidsummerColor1.ssk" />
+    <None Include="Skins\Midsummer\MidsummerColor2.ssk" />
+    <None Include="Skins\Midsummer\MidsummerColor3.ssk" />
+    <None Include="Skins\MP10\MP10.ssk" />
+    <None Include="Skins\MP10\MP10Green.ssk" />
+    <None Include="Skins\MP10\MP10Maroon.ssk" />
+    <None Include="Skins\MP10\MP10Mulberry.ssk" />
+    <None Include="Skins\MP10\MP10Pink.ssk" />
+    <None Include="Skins\MP10\MP10Purple.ssk" />
+    <None Include="Skins\MSN\MSN.ssk" />
+    <None Include="Skins\Office\Office2007.ssk" />
+    <None Include="Skins\One\OneBlue.ssk" />
+    <None Include="Skins\One\OneCyan.ssk" />
+    <None Include="Skins\One\OneGreen.ssk" />
+    <None Include="Skins\One\OneOrange.ssk" />
+    <None Include="Skins\Page\Page.ssk" />
+    <None Include="Skins\Page\PageColor1.ssk" />
+    <None Include="Skins\Page\PageColor2.ssk" />
+    <None Include="Skins\RealOne\RealOne.ssk" />
+    <None Include="Skins\Silver\Silver.ssk" />
+    <None Include="Skins\Silver\SilverColor1.ssk" />
+    <None Include="Skins\Silver\SilverColor2.ssk" />
+    <None Include="Skins\Sports\SportsBlack.ssk" />
+    <None Include="Skins\Sports\SportsBlue.ssk" />
+    <None Include="Skins\Sports\SportsCyan.ssk" />
+    <None Include="Skins\Sports\SportsGreen.ssk" />
+    <None Include="Skins\Sports\SportsOrange.ssk" />
+    <None Include="Skins\Steel\SteelBlack.ssk" />
+    <None Include="Skins\Steel\SteelBlue.ssk" />
+    <None Include="Skins\Vista1\Vista1.ssk" />
+    <None Include="Skins\Vista1\Vista1Green.ssk" />
+    <None Include="Skins\Vista2\Vista2Color1.ssk" />
+    <None Include="Skins\Vista2\Vista2Color2.ssk" />
+    <None Include="Skins\Vista2\Vista2Color3.ssk" />
+    <None Include="Skins\Vista2\Vista2Color4.ssk" />
+    <None Include="Skins\Vista2\Vista2Color5.ssk" />
+    <None Include="Skins\Vista2\Vista2Color6.ssk" />
+    <None Include="Skins\Vista2\Vista2Color7.ssk" />
+    <None Include="Skins\Warm\Warm.ssk" />
+    <None Include="Skins\Warm\WarmColor1.ssk" />
+    <None Include="Skins\Warm\WarmColor2.ssk" />
+    <None Include="Skins\Warm\WarmColor3.ssk" />
+    <None Include="Skins\Wave\Wave.ssk" />
+    <None Include="Skins\Wave\WaveColor1.ssk" />
+    <None Include="Skins\Wave\WaveColor2.ssk" />
+    <None Include="Skins\WinXP\XPBlue.ssk" />
+    <None Include="Skins\WinXP\XPGreen.ssk" />
+    <None Include="Skins\WinXP\XPOrange.ssk" />
+    <None Include="Skins\WinXP\XPSilver.ssk" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="icons\computer.ico">
@@ -179,29 +253,94 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="resources\menu-icon\add.ico">
+    <None Include="resources\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="resources\menu-icon\fresh.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="resources\menu-icon\stop.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="resources\menu-icon\edit.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="resources\menu-icon\remove.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="resources\menu-icon\start.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="resources\menu-icon\detail.ico">
+    <None Include="Skins\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="plugins\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Skins\Carlmness\Calmness.gif" />
+    <Content Include="Skins\Carlmness\CalmnessColor1.gif" />
+    <Content Include="Skins\Carlmness\CalmnessColor2.gif" />
+    <Content Include="Skins\Deep\DeepCyan.gif" />
+    <Content Include="Skins\Deep\DeepGreen.gif" />
+    <Content Include="Skins\Deep\DeepOrange.gif" />
+    <Content Include="Skins\Diamond\DiamondBlue.gif" />
+    <Content Include="Skins\Diamond\DiamondGreen.gif" />
+    <Content Include="Skins\Diamond\DiamondOlive.gif" />
+    <Content Include="Skins\Diamond\DiamondPurple.gif" />
+    <Content Include="Skins\Diamond\DiamondRed.gif" />
+    <Content Include="Skins\Eighteen\Eighteen.gif" />
+    <Content Include="Skins\Eighteen\EighteenColor1.gif" />
+    <Content Include="Skins\Eighteen\EighteenColor2.gif" />
+    <Content Include="Skins\Emerald\Emerald.gif" />
+    <Content Include="Skins\Emerald\EmeraldColor1.gif" />
+    <Content Include="Skins\Emerald\EmeraldColor2.gif" />
+    <Content Include="Skins\Emerald\EmeraldColor3.gif" />
+    <Content Include="Skins\Glass\GlassBrown.gif" />
+    <Content Include="Skins\Glass\GlassGreen.gif" />
+    <Content Include="Skins\Glass\GlassOrange.gif" />
+    <Content Include="Skins\Longhorn\Longhorn.gif" />
+    <Content Include="Skins\MacOS\MacOS.gif" />
+    <Content Include="Skins\Midsummer\Midsummer.gif" />
+    <Content Include="Skins\Midsummer\MidsummerColor1.gif" />
+    <Content Include="Skins\Midsummer\MidsummerColor2.gif" />
+    <Content Include="Skins\Midsummer\MidsummerColor3.gif" />
+    <Content Include="Skins\MP10\MP10.gif" />
+    <Content Include="Skins\MP10\MP10Green.gif" />
+    <Content Include="Skins\MP10\MP10Maroon.gif" />
+    <Content Include="Skins\MP10\MP10Mulberry.gif" />
+    <Content Include="Skins\MP10\MP10Pink.gif" />
+    <Content Include="Skins\MP10\MP10Purple.gif" />
+    <Content Include="Skins\MSN\MSN.gif" />
+    <Content Include="Skins\Office\Office2007.gif" />
+    <Content Include="Skins\One\OneBlue.gif" />
+    <Content Include="Skins\One\OneCyan.gif" />
+    <Content Include="Skins\One\OneGreen.gif" />
+    <Content Include="Skins\One\OneOrange.gif" />
+    <Content Include="Skins\Page\Page.gif" />
+    <Content Include="Skins\Page\PageColor1.gif" />
+    <Content Include="Skins\Page\PageColor2.gif" />
+    <Content Include="Skins\RealOne\RealOne.gif" />
+    <Content Include="Skins\Silver\Silver.gif" />
+    <Content Include="Skins\Silver\SilverColor1.gif" />
+    <Content Include="Skins\Silver\SilverColor2.gif" />
+    <Content Include="Skins\Sports\SportsBlack.gif" />
+    <Content Include="Skins\Sports\SportsBlue.gif" />
+    <Content Include="Skins\Sports\SportsCyan.gif" />
+    <Content Include="Skins\Sports\SportsGreen.gif" />
+    <Content Include="Skins\Sports\SportsOrange.gif" />
+    <Content Include="Skins\Steel\SteelBlack.gif" />
+    <Content Include="Skins\Steel\SteelBlue.gif" />
+    <Content Include="Skins\Vista1\Vista1.gif" />
+    <Content Include="Skins\Vista1\Vista1Green.gif" />
+    <Content Include="Skins\Vista2\Vista2Color1.gif" />
+    <Content Include="Skins\Vista2\Vista2Color2.gif" />
+    <Content Include="Skins\Vista2\Vista2Color3.gif" />
+    <Content Include="Skins\Vista2\Vista2Color4.gif" />
+    <Content Include="Skins\Vista2\Vista2Color5.gif" />
+    <Content Include="Skins\Vista2\Vista2Color6.gif" />
+    <Content Include="Skins\Vista2\Vista2Color7.gif" />
+    <Content Include="Skins\Warm\Warm.gif" />
+    <Content Include="Skins\Warm\WarmColor1.gif" />
+    <Content Include="Skins\Warm\WarmColor2.gif" />
+    <Content Include="Skins\Warm\WarmColor3.gif" />
+    <Content Include="Skins\Wave\Wave.gif" />
+    <Content Include="Skins\Wave\WaveColor1.gif" />
+    <Content Include="Skins\Wave\WaveColor2.gif" />
+    <Content Include="Skins\WinXP\XPBlue.gif" />
+    <Content Include="Skins\WinXP\XPGreen.gif" />
+    <Content Include="Skins\WinXP\XPOrange.gif" />
+    <Content Include="Skins\WinXP\XPSilver.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
