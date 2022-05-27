@@ -106,8 +106,9 @@ namespace PM_plus {
             // 
             // OperateMsg_Label
             // 
+            this.OperateMsg_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OperateMsg_Label.AutoSize = true;
-            this.OperateMsg_Label.Location = new System.Drawing.Point(161, 358);
+            this.OperateMsg_Label.Location = new System.Drawing.Point(161, 411);
             this.OperateMsg_Label.Name = "OperateMsg_Label";
             this.OperateMsg_Label.Size = new System.Drawing.Size(0, 12);
             this.OperateMsg_Label.TabIndex = 26;
@@ -374,7 +375,7 @@ namespace PM_plus {
             this.DiySetTabPage.Location = new System.Drawing.Point(4, 29);
             this.DiySetTabPage.Name = "DiySetTabPage";
             this.DiySetTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.DiySetTabPage.Size = new System.Drawing.Size(591, 427);
+            this.DiySetTabPage.Size = new System.Drawing.Size(591, 432);
             this.DiySetTabPage.TabIndex = 1;
             this.DiySetTabPage.Text = "偏好设置";
             this.DiySetTabPage.UseVisualStyleBackColor = true;
@@ -486,7 +487,7 @@ namespace PM_plus {
             this.HelpTabPage.Controls.Add(this.HelpRichTextBox);
             this.HelpTabPage.Location = new System.Drawing.Point(4, 29);
             this.HelpTabPage.Name = "HelpTabPage";
-            this.HelpTabPage.Size = new System.Drawing.Size(591, 427);
+            this.HelpTabPage.Size = new System.Drawing.Size(591, 432);
             this.HelpTabPage.TabIndex = 2;
             this.HelpTabPage.Text = "帮助";
             this.HelpTabPage.UseVisualStyleBackColor = true;
