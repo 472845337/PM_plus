@@ -52,12 +52,21 @@ namespace PM_plus.utils {
             }
             // jar包路径
             script.Append(" -jar ").Append(projectSection.Jar);
+
+            bool useEnvProFiles = false;
             // 环境参数
             if (StringUtils.IsNotEmpty(projectSection.Env)) {
                 script.Append(" ").Append(projectSection.Env);
+                
+                if (projectSection.Env.Contains("spring.profiles.active=")) {
+                    // 环境参数中配置了指定了启动环境
+                    useEnvProFiles = true;
+                }
             }
             // profile配置
-            script.Append(" --spring.profiles.active=").Append(profile);
+            if (!useEnvProFiles) {
+                script.Append(" --spring.profiles.active=").Append(profile);
+            }
             // 指定启动端口
             script.Append(" --server.port=").Append(projectSection.Port);
             // 是否将运行日志输出，配置文件后，日志将不会在console中输出
