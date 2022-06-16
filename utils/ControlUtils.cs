@@ -19,8 +19,8 @@ namespace PM_plus.utils {
                 if (Config.richTextBoxControlDic == null || Config.richTextBoxControlDic.Count == 0) {
                     // 获取form中的所有控件，拿到richTextBox
                     foreach (Control single in GetAllControl()) {
-                        if (single is RichTextBox box) {
-                            Config.richTextBoxControlDic.Add(single.Name, box);
+                        if (single is RichTextBox) {
+                            Config.richTextBoxControlDic.Add(single.Name, (RichTextBox)single);
                         }
                     }
                 }
@@ -144,13 +144,13 @@ namespace PM_plus.utils {
         /// <param name="con"></param>
         /// <param name="FontFamilyName"></param>
         /// <param name="isChildren"></param>
-        public static void SetControlFont(Control con , String FontFamilyName, bool isChildren) {
+        public static void SetControlFont(Control con, String FontFamilyName, bool isChildren) {
             if ("FontFamilyComboBox".Equals(con.Name)) {
                 return;
             }
             con.Font = new Font(FontFamilyName, con.Font.Size);
             if (isChildren && con.HasChildren) {
-                foreach(Control children in con.Controls) {
+                foreach (Control children in con.Controls) {
                     SetControlFont(children, FontFamilyName, isChildren);
                 }
             }

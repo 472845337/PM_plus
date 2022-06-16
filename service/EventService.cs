@@ -152,10 +152,11 @@ namespace PM_plus.service {
         public static void Btn_MouseMove(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left && down) {
                 down = false;
-                if (!(sender is Button btn)) {
+                if (!(sender is Button)) {
                     return;
+                } else {
+                    Config.mainForm.Projects_Panel.DoDragDrop((Button)sender, DragDropEffects.Move);
                 }
-                Config.mainForm.Projects_Panel.DoDragDrop(btn, DragDropEffects.Move);
             }
         }
         #endregion
