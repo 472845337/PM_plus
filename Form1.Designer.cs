@@ -58,6 +58,13 @@ namespace PM_plus {
             this.SkinGroupBox = new System.Windows.Forms.GroupBox();
             this.SkinShowPictureBox = new System.Windows.Forms.PictureBox();
             this.SkinListBox = new System.Windows.Forms.ListBox();
+            this.ToolTabPage = new System.Windows.Forms.TabPage();
+            this.HttpRequestGroupBox = new System.Windows.Forms.GroupBox();
+            this.HttpSendButton = new System.Windows.Forms.Button();
+            this.TypeLabel = new System.Windows.Forms.Label();
+            this.TypeComboBox = new System.Windows.Forms.ComboBox();
+            this.UrlLabel = new System.Windows.Forms.Label();
+            this.UrlTextBox = new System.Windows.Forms.RichTextBox();
             this.HelpTabPage = new System.Windows.Forms.TabPage();
             this.HelpRichTextBox = new System.Windows.Forms.RichTextBox();
             this.JDKPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -70,6 +77,8 @@ namespace PM_plus {
             this.DiySetTabPage.SuspendLayout();
             this.SkinGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).BeginInit();
+            this.ToolTabPage.SuspendLayout();
+            this.HttpRequestGroupBox.SuspendLayout();
             this.HelpTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,6 +89,7 @@ namespace PM_plus {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.ProjectTagPage);
             this.tabControl1.Controls.Add(this.DiySetTabPage);
+            this.tabControl1.Controls.Add(this.ToolTabPage);
             this.tabControl1.Controls.Add(this.HelpTabPage);
             this.tabControl1.ItemSize = new System.Drawing.Size(60, 25);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
@@ -482,6 +492,77 @@ namespace PM_plus {
             this.SkinListBox.TabIndex = 2;
             this.SkinListBox.SelectedIndexChanged += new System.EventHandler(this.SkinListBox_SelectedIndexChanged);
             // 
+            // ToolTabPage
+            // 
+            this.ToolTabPage.Controls.Add(this.HttpRequestGroupBox);
+            this.ToolTabPage.Location = new System.Drawing.Point(4, 29);
+            this.ToolTabPage.Name = "ToolTabPage";
+            this.ToolTabPage.Size = new System.Drawing.Size(591, 432);
+            this.ToolTabPage.TabIndex = 3;
+            this.ToolTabPage.Text = "工具";
+            this.ToolTabPage.UseVisualStyleBackColor = true;
+            // 
+            // HttpRequestGroupBox
+            // 
+            this.HttpRequestGroupBox.Controls.Add(this.HttpSendButton);
+            this.HttpRequestGroupBox.Controls.Add(this.TypeLabel);
+            this.HttpRequestGroupBox.Controls.Add(this.TypeComboBox);
+            this.HttpRequestGroupBox.Controls.Add(this.UrlLabel);
+            this.HttpRequestGroupBox.Controls.Add(this.UrlTextBox);
+            this.HttpRequestGroupBox.Location = new System.Drawing.Point(4, 4);
+            this.HttpRequestGroupBox.Name = "HttpRequestGroupBox";
+            this.HttpRequestGroupBox.Size = new System.Drawing.Size(584, 121);
+            this.HttpRequestGroupBox.TabIndex = 0;
+            this.HttpRequestGroupBox.TabStop = false;
+            this.HttpRequestGroupBox.Text = "Http请求";
+            // 
+            // HttpSendButton
+            // 
+            this.HttpSendButton.Location = new System.Drawing.Point(503, 90);
+            this.HttpSendButton.Name = "HttpSendButton";
+            this.HttpSendButton.Size = new System.Drawing.Size(75, 23);
+            this.HttpSendButton.TabIndex = 4;
+            this.HttpSendButton.Text = "发送";
+            this.HttpSendButton.UseVisualStyleBackColor = true;
+            this.HttpSendButton.Click += new System.EventHandler(this.HttpSendButton_Click);
+            // 
+            // TypeLabel
+            // 
+            this.TypeLabel.AutoSize = true;
+            this.TypeLabel.Location = new System.Drawing.Point(6, 93);
+            this.TypeLabel.Name = "TypeLabel";
+            this.TypeLabel.Size = new System.Drawing.Size(35, 12);
+            this.TypeLabel.TabIndex = 3;
+            this.TypeLabel.Text = "方式:";
+            // 
+            // TypeComboBox
+            // 
+            this.TypeComboBox.FormattingEnabled = true;
+            this.TypeComboBox.Items.AddRange(new object[] {
+            "Get",
+            "Post"});
+            this.TypeComboBox.Location = new System.Drawing.Point(55, 90);
+            this.TypeComboBox.Name = "TypeComboBox";
+            this.TypeComboBox.Size = new System.Drawing.Size(81, 20);
+            this.TypeComboBox.TabIndex = 2;
+            // 
+            // UrlLabel
+            // 
+            this.UrlLabel.AutoSize = true;
+            this.UrlLabel.Location = new System.Drawing.Point(6, 24);
+            this.UrlLabel.Name = "UrlLabel";
+            this.UrlLabel.Size = new System.Drawing.Size(29, 12);
+            this.UrlLabel.TabIndex = 1;
+            this.UrlLabel.Text = "Url:";
+            // 
+            // UrlTextBox
+            // 
+            this.UrlTextBox.Location = new System.Drawing.Point(55, 21);
+            this.UrlTextBox.Name = "UrlTextBox";
+            this.UrlTextBox.Size = new System.Drawing.Size(523, 63);
+            this.UrlTextBox.TabIndex = 0;
+            this.UrlTextBox.Text = "";
+            // 
             // HelpTabPage
             // 
             this.HelpTabPage.Controls.Add(this.HelpRichTextBox);
@@ -534,6 +615,9 @@ namespace PM_plus {
             this.DiySetTabPage.PerformLayout();
             this.SkinGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).EndInit();
+            this.ToolTabPage.ResumeLayout(false);
+            this.HttpRequestGroupBox.ResumeLayout(false);
+            this.HttpRequestGroupBox.PerformLayout();
             this.HelpTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -579,6 +663,13 @@ namespace PM_plus {
         private System.Windows.Forms.Label LogPathLabel;
         private System.Windows.Forms.FolderBrowserDialog LogPath_FolderBrowserDialog;
         internal System.Windows.Forms.TextBox LogPath_TextBox;
+        private System.Windows.Forms.TabPage ToolTabPage;
+        private System.Windows.Forms.GroupBox HttpRequestGroupBox;
+        private System.Windows.Forms.Button HttpSendButton;
+        private System.Windows.Forms.Label TypeLabel;
+        private System.Windows.Forms.ComboBox TypeComboBox;
+        private System.Windows.Forms.Label UrlLabel;
+        private System.Windows.Forms.RichTextBox UrlTextBox;
     }
 }
 

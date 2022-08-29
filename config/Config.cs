@@ -144,6 +144,8 @@ namespace PM_plus.config
         public static Point RUNTAB_CONTROL_NAME_STOP_BUTTON_LOCATION = new Point(569, 392);
         #endregion
 
+        public const String HTTP_TYPE_POST = "Post";
+        public const String HTTP_TYPE_GET = "Get";
 
         public static String logFileName;
         public static String AppPath = System.AppDomain.CurrentDomain.BaseDirectory;

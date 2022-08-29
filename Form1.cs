@@ -412,5 +412,41 @@ namespace PM_plus {
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_HEIGHT, height.ToString());
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_WIDTH, width.ToString());
         }
+
+        /// <summary>
+        /// 发送Http请求
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HttpSendButton_Click(object sender, EventArgs e) {
+            HttpSendButton.Enabled = false;
+
+            String httpUrl = UrlTextBox.Text;
+            String httpType = TypeComboBox.Text;
+            if (StringUtils.IsEmpty(httpUrl)) {
+                MessageBox.Show("未填写URL;");
+                goto end;
+            }
+            if (StringUtils.IsEmpty(httpType)) {
+                MessageBox.Show("未选择请求类型;");
+                goto end;
+            }
+            
+            String result = "";
+            if (Config.HTTP_TYPE_POST.Equals(httpType)) {
+                result = HttpUtils.PostRequest(httpUrl, "", null);
+            }else if(Config.HTTP_TYPE_GET.Equals(httpType)) {
+                result = HttpUtils.GetRequest(httpUrl, null);
+            }else {
+                MessageBox.Show("非法请求类型;");
+                goto end;
+            }
+            MessageBox.Show(result);
+
+            end:
+                HttpSendButton.Enabled = true;
+            
+
+        }
     }
 }
