@@ -38,6 +38,7 @@ namespace PM_plus {
                 AddForm_Actuator_Textbox.ReadOnly = true;
                 AddForm_ParamRichTextBox.ReadOnly = true;
                 ProjectForm_EnvRichTextBox.ReadOnly = true;
+                AddForm_IsPrintLogCheckBox.Enabled = false;
                 AddForm_Save_Button.Visible = false;
             }
             if (Config.OPERATE_TYPE_UPDATE == operateType || Config.OPERATE_TYPE_DETAIL == operateType) {

@@ -70,6 +70,8 @@ namespace PM_plus {
             this.JDKPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.LogPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.HttpSendResponseRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.ResponseLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -504,6 +506,11 @@ namespace PM_plus {
             // 
             // HttpRequestGroupBox
             // 
+            this.HttpRequestGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.HttpRequestGroupBox.Controls.Add(this.ResponseLabel);
+            this.HttpRequestGroupBox.Controls.Add(this.HttpSendResponseRichTextBox);
             this.HttpRequestGroupBox.Controls.Add(this.HttpSendButton);
             this.HttpRequestGroupBox.Controls.Add(this.TypeLabel);
             this.HttpRequestGroupBox.Controls.Add(this.TypeComboBox);
@@ -511,16 +518,17 @@ namespace PM_plus {
             this.HttpRequestGroupBox.Controls.Add(this.UrlTextBox);
             this.HttpRequestGroupBox.Location = new System.Drawing.Point(4, 4);
             this.HttpRequestGroupBox.Name = "HttpRequestGroupBox";
-            this.HttpRequestGroupBox.Size = new System.Drawing.Size(584, 121);
+            this.HttpRequestGroupBox.Size = new System.Drawing.Size(584, 425);
             this.HttpRequestGroupBox.TabIndex = 0;
             this.HttpRequestGroupBox.TabStop = false;
             this.HttpRequestGroupBox.Text = "Http请求";
             // 
             // HttpSendButton
             // 
-            this.HttpSendButton.Location = new System.Drawing.Point(503, 90);
+            this.HttpSendButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.HttpSendButton.Location = new System.Drawing.Point(526, 110);
             this.HttpSendButton.Name = "HttpSendButton";
-            this.HttpSendButton.Size = new System.Drawing.Size(75, 23);
+            this.HttpSendButton.Size = new System.Drawing.Size(52, 26);
             this.HttpSendButton.TabIndex = 4;
             this.HttpSendButton.Text = "发送";
             this.HttpSendButton.UseVisualStyleBackColor = true;
@@ -529,7 +537,7 @@ namespace PM_plus {
             // TypeLabel
             // 
             this.TypeLabel.AutoSize = true;
-            this.TypeLabel.Location = new System.Drawing.Point(6, 93);
+            this.TypeLabel.Location = new System.Drawing.Point(6, 115);
             this.TypeLabel.Name = "TypeLabel";
             this.TypeLabel.Size = new System.Drawing.Size(35, 12);
             this.TypeLabel.TabIndex = 3;
@@ -537,13 +545,14 @@ namespace PM_plus {
             // 
             // TypeComboBox
             // 
+            this.TypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TypeComboBox.FormattingEnabled = true;
             this.TypeComboBox.Items.AddRange(new object[] {
             "Get",
             "Post"});
-            this.TypeComboBox.Location = new System.Drawing.Point(55, 90);
+            this.TypeComboBox.Location = new System.Drawing.Point(55, 112);
             this.TypeComboBox.Name = "TypeComboBox";
-            this.TypeComboBox.Size = new System.Drawing.Size(81, 20);
+            this.TypeComboBox.Size = new System.Drawing.Size(55, 20);
             this.TypeComboBox.TabIndex = 2;
             // 
             // UrlLabel
@@ -557,9 +566,11 @@ namespace PM_plus {
             // 
             // UrlTextBox
             // 
+            this.UrlTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UrlTextBox.DetectUrls = false;
             this.UrlTextBox.Location = new System.Drawing.Point(55, 21);
             this.UrlTextBox.Name = "UrlTextBox";
-            this.UrlTextBox.Size = new System.Drawing.Size(523, 63);
+            this.UrlTextBox.Size = new System.Drawing.Size(523, 83);
             this.UrlTextBox.TabIndex = 0;
             this.UrlTextBox.Text = "";
             // 
@@ -589,6 +600,27 @@ namespace PM_plus {
             // LabelTimer
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
+            // 
+            // HttpSendResponseRichTextBox
+            // 
+            this.HttpSendResponseRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.HttpSendResponseRichTextBox.Location = new System.Drawing.Point(55, 138);
+            this.HttpSendResponseRichTextBox.Name = "HttpSendResponseRichTextBox";
+            this.HttpSendResponseRichTextBox.ReadOnly = true;
+            this.HttpSendResponseRichTextBox.Size = new System.Drawing.Size(523, 281);
+            this.HttpSendResponseRichTextBox.TabIndex = 5;
+            this.HttpSendResponseRichTextBox.Text = "";
+            // 
+            // ResponseLabel
+            // 
+            this.ResponseLabel.AutoSize = true;
+            this.ResponseLabel.Location = new System.Drawing.Point(8, 152);
+            this.ResponseLabel.Name = "ResponseLabel";
+            this.ResponseLabel.Size = new System.Drawing.Size(35, 12);
+            this.ResponseLabel.TabIndex = 6;
+            this.ResponseLabel.Text = "反馈:";
             // 
             // Form1
             // 
@@ -670,6 +702,8 @@ namespace PM_plus {
         private System.Windows.Forms.ComboBox TypeComboBox;
         private System.Windows.Forms.Label UrlLabel;
         private System.Windows.Forms.RichTextBox UrlTextBox;
+        private System.Windows.Forms.Label ResponseLabel;
+        private System.Windows.Forms.RichTextBox HttpSendResponseRichTextBox;
     }
 }
 

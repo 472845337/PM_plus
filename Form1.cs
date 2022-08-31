@@ -71,6 +71,8 @@ namespace PM_plus {
                 int width = Int32.Parse(widthStr);
                 this.Size = new Size(width, this.Size.Height);
             }
+            // 工具面板中设置
+            TypeComboBox.Text = TypeComboBox.Items[0].ToString();
             isFinishedInit = true;
         }
 
@@ -426,6 +428,10 @@ namespace PM_plus {
             if (StringUtils.IsEmpty(httpUrl)) {
                 MessageBox.Show("未填写URL;");
                 goto end;
+            }else {
+                if (!httpUrl.ToLower().StartsWith("http")) {
+                    httpUrl = "http://" + httpUrl;
+                }
             }
             if (StringUtils.IsEmpty(httpType)) {
                 MessageBox.Show("未选择请求类型;");
@@ -441,7 +447,7 @@ namespace PM_plus {
                 MessageBox.Show("非法请求类型;");
                 goto end;
             }
-            MessageBox.Show(result);
+            HttpSendResponseRichTextBox.Text = result;
 
             end:
                 HttpSendButton.Enabled = true;
