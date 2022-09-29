@@ -1,5 +1,6 @@
 ﻿using PM_plus.bean;
 using PM_plus.config;
+using PM_plus.pojo;
 using PM_plus.service;
 using PM_plus.utils;
 using Sunisoft.IrisSkin;
@@ -11,6 +12,7 @@ using System.Windows.Forms;
 namespace PM_plus {
     public partial class Form1 : Form {
         internal SkinEngine se = new SkinEngine();
+        internal HttpSendHistoryService hshs = new HttpSendHistoryService();
         public Form1() {
             // 皮肤开关配置
             String skinSwithConfig = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN_SWITCH);
@@ -169,7 +171,7 @@ namespace PM_plus {
         /// </summary>
         /// <returns></returns>
         private long SaveProfile() {
-            String profile = Profile_ComboBox.Text;
+            String profile = Profile_TextBox.Text;
             // 放入缓存
             ProjectUtils.profile = profile;
             // 写进配置文件
@@ -293,13 +295,6 @@ namespace PM_plus {
         internal void AllStop_Button_Click(object sender, EventArgs e) {
             // 执行全部停止
             ProjectUtils.AllProjectOperate(Config.PROJECT_OPERATE_TYPE_STOP);
-        }
-
-
-        private void Profile_ComboBox_SelectedIndexChanged(object sender, EventArgs e) {
-            if (isFinishedInit) {
-                SaveProfile();
-            }
         }
 
         private void JDKPath_TextBox_TextChanged(object sender, EventArgs e) {
@@ -437,7 +432,11 @@ namespace PM_plus {
                 MessageBox.Show("未选择请求类型;");
                 goto end;
             }
-            
+            // 当前数据写进文件中
+            HttpSendHistory hsh = new HttpSendHistory();
+            hsh.url = httpUrl;
+            hsh.type = httpType;
+            hshs.saveData(hsh);
             String result = "";
             if (Config.HTTP_TYPE_POST.Equals(httpType)) {
                 result = HttpUtils.PostRequest(httpUrl, "", null);
@@ -453,6 +452,19 @@ namespace PM_plus {
                 HttpSendButton.Enabled = true;
             
 
+        }
+        /// <summary>
+        /// 清除http请求反馈中文件框内容
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e) {
+            HttpSendResponseRichTextBox.Text = "";
+        }
+
+        private void SendHistoryButton_Click(object sender, EventArgs e) {
+            SendHistoryForm sendHistoryForm = new SendHistoryForm();
+            sendHistoryForm.Show();
         }
     }
 }

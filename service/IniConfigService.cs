@@ -69,7 +69,7 @@ namespace PM_plus.service
 
             Config.waitForm.FreshProgress(usedProgress + giveProgress);
 
-            Config.mainForm.Profile_ComboBox.Text = profile;
+            Config.mainForm.Profile_TextBox.Text = profile;
             ProjectUtils.profile = profile;
             Config.mainForm.JDKPath_TextBox.Text = JDKPath;
             ProjectUtils.jdkPath = JDKPath;

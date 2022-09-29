@@ -26,14 +26,14 @@
     <ProductName>java项目管理器</ProductName>
     <PublisherName>万世极缘</PublisherName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -79,6 +79,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\..\迅雷下载\sqlite-netFx40-binary-Win32-2010-1.0.116.0\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -91,6 +94,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bean\Skin.cs" />
+    <Compile Include="data\ClsLock.cs" />
+    <Compile Include="data\SQLiteFactory.cs" />
+    <Compile Include="pojo\HttpSendHistory.cs" />
+    <Compile Include="SelfEnum\Table.cs" />
+    <Compile Include="SendHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendHistoryForm.Designer.cs">
+      <DependentUpon>SendHistoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="service\HttpSendHistoryService.cs" />
+    <Compile Include="data\SQLiteHelper.cs" />
+    <Compile Include="SelfEnum\TableParam.cs" />
     <Compile Include="ProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +129,7 @@
     <Compile Include="service\IniConfigService.cs" />
     <Compile Include="service\TimerService.cs" />
     <Compile Include="utils\ControlUtils.cs" />
+    <Compile Include="utils\DateTimeUtils.cs" />
     <Compile Include="utils\FileUtils.cs" />
     <Compile Include="utils\HttpUtils.cs" />
     <Compile Include="utils\IniUtils.cs" />
@@ -145,6 +162,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SendHistoryForm.resx">
+      <DependentUpon>SendHistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WaitForm.resx">
       <DependentUpon>WaitForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,5 +362,6 @@
     <Content Include="Skins\WinXP\XPOrange.gif" />
     <Content Include="Skins\WinXP\XPSilver.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

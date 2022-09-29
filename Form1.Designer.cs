@@ -42,7 +42,6 @@ namespace PM_plus {
             this.LogPath_TextBox = new System.Windows.Forms.TextBox();
             this.LogPathLabel = new System.Windows.Forms.Label();
             this.Profile_label = new System.Windows.Forms.Label();
-            this.Profile_ComboBox = new System.Windows.Forms.ComboBox();
             this.JDKPath_Label = new System.Windows.Forms.Label();
             this.JDKPath_TextBox = new System.Windows.Forms.TextBox();
             this.JDKPath_Dialog_Button = new System.Windows.Forms.Button();
@@ -60,6 +59,10 @@ namespace PM_plus {
             this.SkinListBox = new System.Windows.Forms.ListBox();
             this.ToolTabPage = new System.Windows.Forms.TabPage();
             this.HttpRequestGroupBox = new System.Windows.Forms.GroupBox();
+            this.SendHistoryButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.ResponseLabel = new System.Windows.Forms.Label();
+            this.HttpSendResponseRichTextBox = new System.Windows.Forms.RichTextBox();
             this.HttpSendButton = new System.Windows.Forms.Button();
             this.TypeLabel = new System.Windows.Forms.Label();
             this.TypeComboBox = new System.Windows.Forms.ComboBox();
@@ -70,8 +73,7 @@ namespace PM_plus {
             this.JDKPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.LogPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.HttpSendResponseRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.ResponseLabel = new System.Windows.Forms.Label();
+            this.Profile_TextBox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -249,11 +251,11 @@ namespace PM_plus {
             // 
             this.System_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.System_GroupBox.Controls.Add(this.Profile_TextBox);
             this.System_GroupBox.Controls.Add(this.LogPath_Dialog_Button);
             this.System_GroupBox.Controls.Add(this.LogPath_TextBox);
             this.System_GroupBox.Controls.Add(this.LogPathLabel);
             this.System_GroupBox.Controls.Add(this.Profile_label);
-            this.System_GroupBox.Controls.Add(this.Profile_ComboBox);
             this.System_GroupBox.Controls.Add(this.JDKPath_Label);
             this.System_GroupBox.Controls.Add(this.JDKPath_TextBox);
             this.System_GroupBox.Controls.Add(this.JDKPath_Dialog_Button);
@@ -306,20 +308,6 @@ namespace PM_plus {
             this.Profile_label.TabIndex = 8;
             this.Profile_label.Text = "运行环境:";
             // 
-            // Profile_ComboBox
-            // 
-            this.Profile_ComboBox.FormattingEnabled = true;
-            this.Profile_ComboBox.Items.AddRange(new object[] {
-            "dev",
-            "test",
-            "prod"});
-            this.Profile_ComboBox.Location = new System.Drawing.Point(77, 19);
-            this.Profile_ComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Profile_ComboBox.Name = "Profile_ComboBox";
-            this.Profile_ComboBox.Size = new System.Drawing.Size(96, 20);
-            this.Profile_ComboBox.TabIndex = 9;
-            this.Profile_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Profile_ComboBox_SelectedIndexChanged);
-            // 
             // JDKPath_Label
             // 
             this.JDKPath_Label.AutoSize = true;
@@ -365,14 +353,13 @@ namespace PM_plus {
             // 
             // SystemConfig_Save_Button
             // 
-            this.SystemConfig_Save_Button.Location = new System.Drawing.Point(546, 75);
+            this.SystemConfig_Save_Button.Location = new System.Drawing.Point(524, 71);
             this.SystemConfig_Save_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SystemConfig_Save_Button.Name = "SystemConfig_Save_Button";
             this.SystemConfig_Save_Button.Size = new System.Drawing.Size(46, 23);
             this.SystemConfig_Save_Button.TabIndex = 13;
             this.SystemConfig_Save_Button.Text = "保存";
             this.SystemConfig_Save_Button.UseVisualStyleBackColor = true;
-            this.SystemConfig_Save_Button.Visible = false;
             this.SystemConfig_Save_Button.Click += new System.EventHandler(this.SystemConfig_Save_Button_Click);
             // 
             // DiySetTabPage
@@ -509,6 +496,8 @@ namespace PM_plus {
             this.HttpRequestGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.HttpRequestGroupBox.Controls.Add(this.SendHistoryButton);
+            this.HttpRequestGroupBox.Controls.Add(this.button1);
             this.HttpRequestGroupBox.Controls.Add(this.ResponseLabel);
             this.HttpRequestGroupBox.Controls.Add(this.HttpSendResponseRichTextBox);
             this.HttpRequestGroupBox.Controls.Add(this.HttpSendButton);
@@ -522,6 +511,47 @@ namespace PM_plus {
             this.HttpRequestGroupBox.TabIndex = 0;
             this.HttpRequestGroupBox.TabStop = false;
             this.HttpRequestGroupBox.Text = "Http请求";
+            // 
+            // SendHistoryButton
+            // 
+            this.SendHistoryButton.Location = new System.Drawing.Point(0, 49);
+            this.SendHistoryButton.Name = "SendHistoryButton";
+            this.SendHistoryButton.Size = new System.Drawing.Size(49, 23);
+            this.SendHistoryButton.TabIndex = 8;
+            this.SendHistoryButton.Text = "历史";
+            this.SendHistoryButton.UseVisualStyleBackColor = true;
+            this.SendHistoryButton.Click += new System.EventHandler(this.SendHistoryButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(526, 396);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(52, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "清除";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // ResponseLabel
+            // 
+            this.ResponseLabel.AutoSize = true;
+            this.ResponseLabel.Location = new System.Drawing.Point(8, 152);
+            this.ResponseLabel.Name = "ResponseLabel";
+            this.ResponseLabel.Size = new System.Drawing.Size(35, 12);
+            this.ResponseLabel.TabIndex = 6;
+            this.ResponseLabel.Text = "反馈:";
+            // 
+            // HttpSendResponseRichTextBox
+            // 
+            this.HttpSendResponseRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.HttpSendResponseRichTextBox.Location = new System.Drawing.Point(55, 138);
+            this.HttpSendResponseRichTextBox.Name = "HttpSendResponseRichTextBox";
+            this.HttpSendResponseRichTextBox.ReadOnly = true;
+            this.HttpSendResponseRichTextBox.Size = new System.Drawing.Size(523, 252);
+            this.HttpSendResponseRichTextBox.TabIndex = 5;
+            this.HttpSendResponseRichTextBox.Text = "";
             // 
             // HttpSendButton
             // 
@@ -601,26 +631,12 @@ namespace PM_plus {
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
             // 
-            // HttpSendResponseRichTextBox
+            // Profile_TextBox
             // 
-            this.HttpSendResponseRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.HttpSendResponseRichTextBox.Location = new System.Drawing.Point(55, 138);
-            this.HttpSendResponseRichTextBox.Name = "HttpSendResponseRichTextBox";
-            this.HttpSendResponseRichTextBox.ReadOnly = true;
-            this.HttpSendResponseRichTextBox.Size = new System.Drawing.Size(523, 281);
-            this.HttpSendResponseRichTextBox.TabIndex = 5;
-            this.HttpSendResponseRichTextBox.Text = "";
-            // 
-            // ResponseLabel
-            // 
-            this.ResponseLabel.AutoSize = true;
-            this.ResponseLabel.Location = new System.Drawing.Point(8, 152);
-            this.ResponseLabel.Name = "ResponseLabel";
-            this.ResponseLabel.Size = new System.Drawing.Size(35, 12);
-            this.ResponseLabel.TabIndex = 6;
-            this.ResponseLabel.Text = "反馈:";
+            this.Profile_TextBox.Location = new System.Drawing.Point(77, 19);
+            this.Profile_TextBox.Name = "Profile_TextBox";
+            this.Profile_TextBox.Size = new System.Drawing.Size(96, 21);
+            this.Profile_TextBox.TabIndex = 18;
             // 
             // Form1
             // 
@@ -681,7 +697,6 @@ namespace PM_plus {
         internal System.Windows.Forms.Button FreshButton;
         private System.Windows.Forms.GroupBox System_GroupBox;
         private System.Windows.Forms.Label Profile_label;
-        internal System.Windows.Forms.ComboBox Profile_ComboBox;
         private System.Windows.Forms.Label JDKPath_Label;
         internal System.Windows.Forms.TextBox JDKPath_TextBox;
         private System.Windows.Forms.Button JDKPath_Dialog_Button;
@@ -704,6 +719,9 @@ namespace PM_plus {
         private System.Windows.Forms.RichTextBox UrlTextBox;
         private System.Windows.Forms.Label ResponseLabel;
         private System.Windows.Forms.RichTextBox HttpSendResponseRichTextBox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SendHistoryButton;
+        internal System.Windows.Forms.TextBox Profile_TextBox;
     }
 }
 
