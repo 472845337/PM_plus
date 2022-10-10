@@ -26,6 +26,7 @@
             this.HistoryListBox = new System.Windows.Forms.ListBox();
             this.HistoryClearButton = new System.Windows.Forms.Button();
             this.HistoryFreshButton = new System.Windows.Forms.Button();
+            this.HistoryDeleteButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // HistoryListBox
@@ -36,6 +37,7 @@
             this.HistoryListBox.Name = "HistoryListBox";
             this.HistoryListBox.Size = new System.Drawing.Size(322, 256);
             this.HistoryListBox.TabIndex = 0;
+            this.HistoryListBox.SelectedIndexChanged += new System.EventHandler(this.HistoryListBox_SelectedIndexChanged);
             // 
             // HistoryClearButton
             // 
@@ -49,18 +51,30 @@
             // 
             // HistoryFreshButton
             // 
-            this.HistoryFreshButton.Location = new System.Drawing.Point(247, 279);
+            this.HistoryFreshButton.Location = new System.Drawing.Point(201, 279);
             this.HistoryFreshButton.Name = "HistoryFreshButton";
             this.HistoryFreshButton.Size = new System.Drawing.Size(40, 23);
             this.HistoryFreshButton.TabIndex = 2;
             this.HistoryFreshButton.Text = "刷新";
             this.HistoryFreshButton.UseVisualStyleBackColor = true;
+            this.HistoryFreshButton.Click += new System.EventHandler(this.HistoryFreshButton_Click);
+            // 
+            // HistoryDeleteButton
+            // 
+            this.HistoryDeleteButton.Location = new System.Drawing.Point(247, 279);
+            this.HistoryDeleteButton.Name = "HistoryDeleteButton";
+            this.HistoryDeleteButton.Size = new System.Drawing.Size(40, 23);
+            this.HistoryDeleteButton.TabIndex = 3;
+            this.HistoryDeleteButton.Text = "删除";
+            this.HistoryDeleteButton.UseVisualStyleBackColor = true;
+            this.HistoryDeleteButton.Click += new System.EventHandler(this.HistoryDeleteButton_Click);
             // 
             // SendHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 314);
+            this.Controls.Add(this.HistoryDeleteButton);
             this.Controls.Add(this.HistoryFreshButton);
             this.Controls.Add(this.HistoryClearButton);
             this.Controls.Add(this.HistoryListBox);
@@ -75,5 +89,6 @@
         private System.Windows.Forms.ListBox HistoryListBox;
         private System.Windows.Forms.Button HistoryClearButton;
         private System.Windows.Forms.Button HistoryFreshButton;
+        private System.Windows.Forms.Button HistoryDeleteButton;
     }
 }

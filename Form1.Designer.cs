@@ -714,9 +714,9 @@ namespace PM_plus {
         private System.Windows.Forms.GroupBox HttpRequestGroupBox;
         private System.Windows.Forms.Button HttpSendButton;
         private System.Windows.Forms.Label TypeLabel;
-        private System.Windows.Forms.ComboBox TypeComboBox;
+        internal System.Windows.Forms.ComboBox TypeComboBox;
         private System.Windows.Forms.Label UrlLabel;
-        private System.Windows.Forms.RichTextBox UrlTextBox;
+        internal System.Windows.Forms.RichTextBox UrlTextBox;
         private System.Windows.Forms.Label ResponseLabel;
         private System.Windows.Forms.RichTextBox HttpSendResponseRichTextBox;
         private System.Windows.Forms.Button button1;

@@ -89,6 +89,7 @@ namespace PM_plus.utils {
                 if (Config.logSwitch) {
                     LogUtils.WriteLog(e.StackTrace);
                 }
+                responseFromServer = e.Message;
             } finally {
                 //关闭资源
                 if (null != reader) {

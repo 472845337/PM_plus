@@ -5,6 +5,7 @@ using System.Reflection;
 using PM_plus.SelfEnum;
 using System.Data.SQLite;
 using PM_plus.pojo;
+using PM_plus.utils;
 
 namespace PM_plus.service {
     /// <summary>
@@ -37,16 +38,42 @@ namespace PM_plus.service {
             }
         }
 
+        /// <summary>
+        /// 清除所有数据
+        /// </summary>
         internal void clear() {
             // 清空所有的数据
             sqlLiteHelper.ExecuteNonQuery("DELETE FROM "+getTableName(), null);
         }
 
+        /// <summary>
+        /// 写入数据
+        /// </summary>
+        /// <param name="httpSendHistory"></param>
+        /// <returns></returns>
         public int insertData(HttpSendHistory httpSendHistory) {
             httpSendHistory.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             return sqlLiteHelper.InsertData(getTableName(), getParams(httpSendHistory));
         }
 
+        /// <summary>
+        /// 删除某个数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int deleteData(int? id) {
+            if(null == id) {
+                return 0;
+            } else {
+                return sqlLiteHelper.ExecuteNonQuery("DELETE FROM " + getTableName() + " where id=@id", new SQLiteParameter[] { new SQLiteParameter("id", id) });
+            }
+        }
+
+        /// <summary>
+        /// 修改数据
+        /// </summary>
+        /// <param name="httpSendHistory"></param>
+        /// <returns></returns>
         public int updateData(HttpSendHistory httpSendHistory) {
             List<SQLiteParameter> paramList = new List<SQLiteParameter>();
             SQLiteParameter idParame = new SQLiteParameter("id", httpSendHistory.id);
@@ -69,8 +96,11 @@ namespace PM_plus.service {
             selectSql += "SELECT ";
             selectSql += paramSql;
             selectSql += " FROM " + getTableName();
-            // selectSql += " WHERE ";
-            // selectSql += whereSql;
+            if (StringUtils.IsNotEmpty(whereSql)) {
+                selectSql += " WHERE ";
+                selectSql += whereSql;
+            }
+            
 
             SQLiteDataReader reader = sqlLiteHelper.ExecuteReader(selectSql, paramList.ToArray());
             while (reader.Read()) {

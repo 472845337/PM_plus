@@ -37,6 +37,11 @@ namespace PM_plus.config {
                     dictionarys.Remove(section);
                 }
             }
+            if (null != sections) {
+                if (sections.Contains(section)) {
+                    sections.Remove(section);
+                }
+            }
         }
         /// <summary>
         /// 更新

@@ -361,6 +361,12 @@
     <Content Include="Skins\WinXP\XPGreen.gif" />
     <Content Include="Skins\WinXP\XPOrange.gif" />
     <Content Include="Skins\WinXP\XPSilver.gif" />
+    <EmbeddedResource Include="SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System.Data.SQLite.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

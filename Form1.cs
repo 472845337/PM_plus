@@ -239,7 +239,9 @@ namespace PM_plus {
                 // 将所有的按钮尺寸减少滚动条宽度
                 foreach (String section in ProjectSections.GetAllSections()) {
                     Button btn = (Button)Projects_Panel.Controls[section];
-                    btn.Width = Convert.ToInt32(Projects_Panel.ClientSize.Width * 0.98);
+                    if (null != btn) {
+                        btn.Width = Convert.ToInt32(Projects_Panel.ClientSize.Width * 0.98);
+                    }
                 }
                 panelCurrentWidth = width;
             }
