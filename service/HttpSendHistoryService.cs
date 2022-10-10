@@ -15,14 +15,19 @@ namespace PM_plus.service {
 
         SQLiteHelper sqlLiteHelper = data.SQLiteFactory.getSQLiteHelper("/data.db", null);
 
-       
-        public int saveData(HttpSendHistory httpSendHistory) {
 
+        public HttpSendHistoryService() {
+            initTable();
+        }
+        public void initTable() {
             // 判断表是否存在
             if (!sqlLiteHelper.TableExists(getTableName())) {
                 // 创建表
-                createTable(httpSendHistory);
+                createTable();
             }
+        }
+       
+        public int saveData(HttpSendHistory httpSendHistory) {
             // 查询是否存在类似数据
             HttpSendHistory queryModel = new HttpSendHistory();
             queryModel.url = httpSendHistory.url;
@@ -151,7 +156,7 @@ namespace PM_plus.service {
         /// 创建表
         /// </summary>
         /// <param name="httpSendHistory"></param>
-        private void createTable(HttpSendHistory httpSendHistory) {
+        private void createTable() {
             PropertyInfo[] infos = typeof(HttpSendHistory).GetProperties();
             String insertSql = "create table " + getTableName() + " (";
             for (int i = 0; i < infos.Length; i++) {
