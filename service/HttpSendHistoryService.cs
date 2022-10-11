@@ -6,6 +6,7 @@ using PM_plus.SelfEnum;
 using System.Data.SQLite;
 using PM_plus.pojo;
 using PM_plus.utils;
+using PM_plus.config;
 
 namespace PM_plus.service {
     /// <summary>
@@ -13,7 +14,7 @@ namespace PM_plus.service {
     /// </summary>
     class HttpSendHistoryService {
 
-        SQLiteHelper sqlLiteHelper = data.SQLiteFactory.getSQLiteHelper("/data.db", null);
+        SQLiteHelper sqlLiteHelper = data.SQLiteFactory.getSQLiteHelper(Config.DB_NAME, Config.DB_PASSWORD);
 
 
         public HttpSendHistoryService() {

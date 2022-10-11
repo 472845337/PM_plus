@@ -144,6 +144,9 @@ namespace PM_plus.config
         public static Point RUNTAB_CONTROL_NAME_STOP_BUTTON_LOCATION = new Point(569, 392);
         #endregion
 
+        public const String DB_NAME = "data.db";
+        public const String DB_PASSWORD = "123456";
+
         public const String HTTP_TYPE_POST = "Post";
         public const String HTTP_TYPE_GET = "Get";
 

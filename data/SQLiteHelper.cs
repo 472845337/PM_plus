@@ -66,8 +66,6 @@ namespace PM_plus.data {
             }
             this.mdataFile = dataFile;
             this.mPassWord = PassWord;
-            //this.mdataFile = AppDomain.CurrentDomain.BaseDirectory + dataFile;
-            this.mdataFile = dataFile;
             if (!RWL.ContainsKey(dataFile)) {
                 LockName = dataFile;
                 RWL.Add(dataFile, new ClsLock());
@@ -177,7 +175,7 @@ namespace PM_plus.data {
                 conn.ConnectionString = conStr.ToString();
                 conn.Open();
                 return conn;
-            } catch (Exception) {
+            } catch (Exception e) {
                 return null;
             }
         }
