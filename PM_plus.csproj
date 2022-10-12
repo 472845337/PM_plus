@@ -286,9 +286,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="plugins\*">
+    <EmbeddedResource Include="IrisSkin4.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skins\Carlmness\Calmness.gif" />
