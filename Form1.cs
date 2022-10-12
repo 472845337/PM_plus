@@ -76,6 +76,7 @@ namespace PM_plus {
             // 工具面板中设置
             TypeComboBox.Text = TypeComboBox.Items[0].ToString();
             isFinishedInit = true;
+            TimerService.monitorServer();
         }
 
         /// <summary>
@@ -467,6 +468,23 @@ namespace PM_plus {
         private void SendHistoryButton_Click(object sender, EventArgs e) {
             SendHistoryForm sendHistoryForm = new SendHistoryForm();
             sendHistoryForm.Show();
+        }
+
+        private void MonitorFreqComboBox_SelectedIndexChanged(object sender, EventArgs e) {
+            int monitorFrequenceInterval = Convert.ToInt32(MonitorFreqComboBox.Text);
+            Config.monitorServerInterval = monitorFrequenceInterval;
+            // 写入配置
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_MONITOR, Config.INI_KEY_MONITOR_SERVER_FREQUENCE, monitorFrequenceInterval.ToString());
+            if (monitorFrequenceInterval > 0) {
+                TimerService.ServerInfoTimer.Enabled = true;
+                TimerService.ServerInfoTimer.Interval = monitorFrequenceInterval * 1000;
+            } else {
+                TimerService.ServerInfoTimer.Enabled = false;
+            }
+        }
+
+        private void MemoryUsedTextBox_TextChanged(object sender, EventArgs e) {
+
         }
     }
 }

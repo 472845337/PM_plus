@@ -175,7 +175,7 @@ namespace PM_plus.data {
                 conn.ConnectionString = conStr.ToString();
                 conn.Open();
                 return conn;
-            } catch (Exception e) {
+            } catch (Exception) {
                 return null;
             }
         }

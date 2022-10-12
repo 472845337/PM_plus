@@ -1,6 +1,7 @@
 ﻿using PM_plus.config;
 using PM_plus.utils;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace PM_plus.service {
@@ -12,6 +13,7 @@ namespace PM_plus.service {
         private static readonly System.Timers.Timer GcTimer = new System.Timers.Timer();
         private static readonly System.Timers.Timer MonitorTimer = new System.Timers.Timer();
         private static readonly System.Timers.Timer BtnDoubleCheckTimer = new System.Timers.Timer(500);
+        public static readonly System.Timers.Timer ServerInfoTimer = new System.Timers.Timer();
         // 到时间后执行的计时器
         private static readonly System.Timers.Timer TimeoutTimer = new System.Timers.Timer();
 
@@ -20,6 +22,13 @@ namespace PM_plus.service {
             // 双击计时器不开启
             BtnDoubleCheckTimer.Enabled = false;
             BtnDoubleCheckTimer.Elapsed += new System.Timers.ElapsedEventHandler(BtnDoubleCheckTimer_Tick);
+
+
+            ServerInfoTimer.Elapsed += new System.Timers.ElapsedEventHandler(ServerTimer_Tick);
+            if(Config.monitorServerInterval > 0) {
+                ServerInfoTimer.Enabled = true;
+                ServerInfoTimer.Interval = Config.monitorServerInterval * 1000;
+            }
         }
         internal static void AutoGc() {
             GcTimer.Interval = 20000;
@@ -147,6 +156,37 @@ namespace PM_plus.service {
         public static void MonitorProject(String section) {
             ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
             MonitorProject(projectSection);
+        }
+        // 获取CPU和内存使用率
+        static PerformanceCounter cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+        // CPU空闲率
+        static PerformanceCounter idleCounter = new PerformanceCounter("Processor", "% Idle Time", "_Total");
+        // 内存可用大小
+        static PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
+        // 内存已用大小
+        static PerformanceCounter usedRamCounter = new PerformanceCounter("Memory", "% Committed Bytes In Use");
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void ServerTimer_Tick(object sender, EventArgs e) {
+            monitorServer();
+        }
+
+        public static void monitorServer() {
+            var cpuUsage = cpuCounter.NextValue();
+            string cpuUsageStr = string.Format("{0:f2} %", cpuUsage);
+            var cpuIdle = idleCounter.NextValue();
+            string cpuIdleStr = string.Format("{0:f2} %", cpuIdle);
+            var ramAvailable = ramCounter.NextValue();
+            string ramAvaiableStr = string.Format("{0} MB", ramAvailable);
+            var ramUsed = usedRamCounter.NextValue();
+            string ramUsedStr = string.Format("{0:f2} %", ramUsed);
+            Config.mainForm.CpuUsedTextBox.Text = cpuUsageStr;
+            Config.mainForm.CpuIdleTextBox.Text = cpuIdleStr;
+            Config.mainForm.MemoryAvailableTextBox.Text = ramAvaiableStr;
+            Config.mainForm.MemoryUsedTextBox.Text = ramUsedStr;
         }
     }
 }

@@ -44,6 +44,7 @@ namespace PM_plus.config
         /** 项目属性INI Key名 */
         public const String INI_SECTION_SYSTEM = "system";
         public const String INI_SECTION_LOG = "log";
+        public const String INI_SECTION_MONITOR = "monitor";
 
         public const String INI_KEY_SYSTEM_FORM_HEIGHT = "height";
         public const String INI_KEY_SYSTEM_FORM_WIDTH = "width";
@@ -69,6 +70,9 @@ namespace PM_plus.config
         public const String INI_KEY_PROJECT_PARAM = "param";
         public const String INI_KEY_PROJECT_ENV = "env";
         public const String INI_KEY_PROJECT_SORT = "sort";
+
+
+        public const String INI_KEY_MONITOR_SERVER_FREQUENCE = "server_freq";
 
         /** 项目操作类型 */
         public const int PROJECT_OPERATE_TYPE_START = 1;
@@ -165,5 +169,7 @@ namespace PM_plus.config
         public static bool exitAfterClose;
         // 控件映射
         public static Dictionary<String, RichTextBox> richTextBoxControlDic = new Dictionary<string, RichTextBox>();
+
+        public static int monitorServerInterval;
     }
 }

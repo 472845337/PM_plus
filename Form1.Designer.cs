@@ -48,6 +48,22 @@ namespace PM_plus {
             this.JDKPath_Dialog_Button = new System.Windows.Forms.Button();
             this.SystemConfig_SaveLabel = new System.Windows.Forms.Label();
             this.SystemConfig_Save_Button = new System.Windows.Forms.Button();
+            this.MonitorTabPage = new System.Windows.Forms.TabPage();
+            this.MonitorFreqLabel = new System.Windows.Forms.Label();
+            this.MonitorFreqComboBox = new System.Windows.Forms.ComboBox();
+            this.ServerInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.MemoryAvailableLabel = new System.Windows.Forms.Label();
+            this.MemoryAvailableTextBox = new System.Windows.Forms.TextBox();
+            this.MemoryUsedTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.MemoryTotalLabel = new System.Windows.Forms.Label();
+            this.MemoryTotalTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CpuIdleLabel = new System.Windows.Forms.Label();
+            this.CpuUsedLabel = new System.Windows.Forms.Label();
+            this.CpuUsedTextBox = new System.Windows.Forms.TextBox();
+            this.CpuIdleTextBox = new System.Windows.Forms.TextBox();
             this.DiySetTabPage = new System.Windows.Forms.TabPage();
             this.SkinSwitchChecked = new System.Windows.Forms.CheckBox();
             this.DiySetMsgLabel = new System.Windows.Forms.Label();
@@ -78,6 +94,10 @@ namespace PM_plus {
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
             this.System_GroupBox.SuspendLayout();
+            this.MonitorTabPage.SuspendLayout();
+            this.ServerInfoGroupBox.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.DiySetTabPage.SuspendLayout();
             this.SkinGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).BeginInit();
@@ -92,6 +112,7 @@ namespace PM_plus {
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.ProjectTagPage);
+            this.tabControl1.Controls.Add(this.MonitorTabPage);
             this.tabControl1.Controls.Add(this.DiySetTabPage);
             this.tabControl1.Controls.Add(this.ToolTabPage);
             this.tabControl1.Controls.Add(this.HelpTabPage);
@@ -368,6 +389,162 @@ namespace PM_plus {
             this.SystemConfig_Save_Button.Text = "保存";
             this.SystemConfig_Save_Button.UseVisualStyleBackColor = true;
             this.SystemConfig_Save_Button.Click += new System.EventHandler(this.SystemConfig_Save_Button_Click);
+            // 
+            // MonitorTabPage
+            // 
+            this.MonitorTabPage.Controls.Add(this.MonitorFreqLabel);
+            this.MonitorTabPage.Controls.Add(this.MonitorFreqComboBox);
+            this.MonitorTabPage.Controls.Add(this.ServerInfoGroupBox);
+            this.MonitorTabPage.Location = new System.Drawing.Point(4, 29);
+            this.MonitorTabPage.Name = "MonitorTabPage";
+            this.MonitorTabPage.Size = new System.Drawing.Size(591, 432);
+            this.MonitorTabPage.TabIndex = 4;
+            this.MonitorTabPage.Text = "监控";
+            this.MonitorTabPage.UseVisualStyleBackColor = true;
+            // 
+            // MonitorFreqLabel
+            // 
+            this.MonitorFreqLabel.AutoSize = true;
+            this.MonitorFreqLabel.Location = new System.Drawing.Point(4, 388);
+            this.MonitorFreqLabel.Name = "MonitorFreqLabel";
+            this.MonitorFreqLabel.Size = new System.Drawing.Size(41, 12);
+            this.MonitorFreqLabel.TabIndex = 2;
+            this.MonitorFreqLabel.Text = "刷新率";
+            // 
+            // MonitorFreqComboBox
+            // 
+            this.MonitorFreqComboBox.FormattingEnabled = true;
+            this.MonitorFreqComboBox.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "5",
+            "10",
+            "30"});
+            this.MonitorFreqComboBox.Location = new System.Drawing.Point(51, 388);
+            this.MonitorFreqComboBox.Name = "MonitorFreqComboBox";
+            this.MonitorFreqComboBox.Size = new System.Drawing.Size(61, 20);
+            this.MonitorFreqComboBox.TabIndex = 1;
+            this.MonitorFreqComboBox.SelectedIndexChanged += new System.EventHandler(this.MonitorFreqComboBox_SelectedIndexChanged);
+            // 
+            // ServerInfoGroupBox
+            // 
+            this.ServerInfoGroupBox.Controls.Add(this.groupBox2);
+            this.ServerInfoGroupBox.Controls.Add(this.groupBox1);
+            this.ServerInfoGroupBox.Location = new System.Drawing.Point(4, 4);
+            this.ServerInfoGroupBox.Name = "ServerInfoGroupBox";
+            this.ServerInfoGroupBox.Size = new System.Drawing.Size(584, 377);
+            this.ServerInfoGroupBox.TabIndex = 0;
+            this.ServerInfoGroupBox.TabStop = false;
+            this.ServerInfoGroupBox.Text = "服务器信息";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.MemoryAvailableLabel);
+            this.groupBox2.Controls.Add(this.MemoryAvailableTextBox);
+            this.groupBox2.Controls.Add(this.MemoryUsedTextBox);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.MemoryTotalLabel);
+            this.groupBox2.Controls.Add(this.MemoryTotalTextBox);
+            this.groupBox2.Location = new System.Drawing.Point(7, 78);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(571, 65);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "内存";
+            // 
+            // MemoryAvailableLabel
+            // 
+            this.MemoryAvailableLabel.AutoSize = true;
+            this.MemoryAvailableLabel.Location = new System.Drawing.Point(381, 24);
+            this.MemoryAvailableLabel.Name = "MemoryAvailableLabel";
+            this.MemoryAvailableLabel.Size = new System.Drawing.Size(29, 12);
+            this.MemoryAvailableLabel.TabIndex = 8;
+            this.MemoryAvailableLabel.Text = "剩余";
+            // 
+            // MemoryAvailableTextBox
+            // 
+            this.MemoryAvailableTextBox.Location = new System.Drawing.Point(416, 20);
+            this.MemoryAvailableTextBox.Name = "MemoryAvailableTextBox";
+            this.MemoryAvailableTextBox.Size = new System.Drawing.Size(100, 21);
+            this.MemoryAvailableTextBox.TabIndex = 7;
+            // 
+            // MemoryUsedTextBox
+            // 
+            this.MemoryUsedTextBox.Location = new System.Drawing.Point(229, 20);
+            this.MemoryUsedTextBox.Name = "MemoryUsedTextBox";
+            this.MemoryUsedTextBox.Size = new System.Drawing.Size(100, 21);
+            this.MemoryUsedTextBox.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(193, 24);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "已用";
+            // 
+            // MemoryTotalLabel
+            // 
+            this.MemoryTotalLabel.AutoSize = true;
+            this.MemoryTotalLabel.Location = new System.Drawing.Point(13, 23);
+            this.MemoryTotalLabel.Name = "MemoryTotalLabel";
+            this.MemoryTotalLabel.Size = new System.Drawing.Size(17, 12);
+            this.MemoryTotalLabel.TabIndex = 4;
+            this.MemoryTotalLabel.Text = "总";
+            // 
+            // MemoryTotalTextBox
+            // 
+            this.MemoryTotalTextBox.Location = new System.Drawing.Point(48, 20);
+            this.MemoryTotalTextBox.Name = "MemoryTotalTextBox";
+            this.MemoryTotalTextBox.Size = new System.Drawing.Size(94, 21);
+            this.MemoryTotalTextBox.TabIndex = 3;
+            this.MemoryTotalTextBox.TextChanged += new System.EventHandler(this.MemoryUsedTextBox_TextChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.CpuIdleLabel);
+            this.groupBox1.Controls.Add(this.CpuUsedLabel);
+            this.groupBox1.Controls.Add(this.CpuUsedTextBox);
+            this.groupBox1.Controls.Add(this.CpuIdleTextBox);
+            this.groupBox1.Location = new System.Drawing.Point(7, 21);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(571, 51);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "CPU";
+            // 
+            // CpuIdleLabel
+            // 
+            this.CpuIdleLabel.AutoSize = true;
+            this.CpuIdleLabel.Location = new System.Drawing.Point(194, 23);
+            this.CpuIdleLabel.Name = "CpuIdleLabel";
+            this.CpuIdleLabel.Size = new System.Drawing.Size(29, 12);
+            this.CpuIdleLabel.TabIndex = 6;
+            this.CpuIdleLabel.Text = "剩余";
+            // 
+            // CpuUsedLabel
+            // 
+            this.CpuUsedLabel.AutoSize = true;
+            this.CpuUsedLabel.Location = new System.Drawing.Point(13, 21);
+            this.CpuUsedLabel.Name = "CpuUsedLabel";
+            this.CpuUsedLabel.Size = new System.Drawing.Size(29, 12);
+            this.CpuUsedLabel.TabIndex = 5;
+            this.CpuUsedLabel.Text = "已用";
+            // 
+            // CpuUsedTextBox
+            // 
+            this.CpuUsedTextBox.Location = new System.Drawing.Point(48, 18);
+            this.CpuUsedTextBox.Name = "CpuUsedTextBox";
+            this.CpuUsedTextBox.Size = new System.Drawing.Size(94, 21);
+            this.CpuUsedTextBox.TabIndex = 1;
+            // 
+            // CpuIdleTextBox
+            // 
+            this.CpuIdleTextBox.Location = new System.Drawing.Point(229, 18);
+            this.CpuIdleTextBox.Name = "CpuIdleTextBox";
+            this.CpuIdleTextBox.Size = new System.Drawing.Size(100, 21);
+            this.CpuIdleTextBox.TabIndex = 4;
             // 
             // DiySetTabPage
             // 
@@ -660,6 +837,13 @@ namespace PM_plus {
             this.ProjectGroupBox.ResumeLayout(false);
             this.System_GroupBox.ResumeLayout(false);
             this.System_GroupBox.PerformLayout();
+            this.MonitorTabPage.ResumeLayout(false);
+            this.MonitorTabPage.PerformLayout();
+            this.ServerInfoGroupBox.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.DiySetTabPage.ResumeLayout(false);
             this.DiySetTabPage.PerformLayout();
             this.SkinGroupBox.ResumeLayout(false);
@@ -723,6 +907,22 @@ namespace PM_plus {
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button SendHistoryButton;
         internal System.Windows.Forms.TextBox Profile_TextBox;
+        private System.Windows.Forms.TabPage MonitorTabPage;
+        private System.Windows.Forms.Label MonitorFreqLabel;
+        internal System.Windows.Forms.ComboBox MonitorFreqComboBox;
+        private System.Windows.Forms.GroupBox ServerInfoGroupBox;
+        internal System.Windows.Forms.TextBox MemoryTotalTextBox;
+        internal System.Windows.Forms.TextBox CpuUsedTextBox;
+        internal System.Windows.Forms.TextBox CpuIdleTextBox;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label MemoryAvailableLabel;
+        internal System.Windows.Forms.TextBox MemoryAvailableTextBox;
+        internal System.Windows.Forms.TextBox MemoryUsedTextBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label MemoryTotalLabel;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label CpuIdleLabel;
+        private System.Windows.Forms.Label CpuUsedLabel;
     }
 }
 

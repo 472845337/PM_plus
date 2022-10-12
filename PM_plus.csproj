@@ -84,6 +84,7 @@
       <HintPath>.\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -129,6 +130,7 @@
     <Compile Include="service\FormService.cs" />
     <Compile Include="service\IniConfigService.cs" />
     <Compile Include="service\TimerService.cs" />
+    <Compile Include="utils\ComputerInfo.cs" />
     <Compile Include="utils\ControlUtils.cs" />
     <Compile Include="utils\DateTimeUtils.cs" />
     <Compile Include="utils\FileUtils.cs" />
