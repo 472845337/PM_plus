@@ -159,6 +159,7 @@ namespace PM_plus {
             this.ExitAfterClose_CheckBox.TabIndex = 25;
             this.ExitAfterClose_CheckBox.Text = "关闭退出";
             this.ExitAfterClose_CheckBox.UseVisualStyleBackColor = true;
+            this.ExitAfterClose_CheckBox.Visible = false;
             this.ExitAfterClose_CheckBox.CheckedChanged += new System.EventHandler(this.ExitAfterClose_CheckBox_CheckedChanged);
             // 
             // LogSwitch_CheckBox
@@ -404,6 +405,7 @@ namespace PM_plus {
             // 
             // MonitorFreqLabel
             // 
+            this.MonitorFreqLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MonitorFreqLabel.AutoSize = true;
             this.MonitorFreqLabel.Location = new System.Drawing.Point(4, 388);
             this.MonitorFreqLabel.Name = "MonitorFreqLabel";
@@ -413,6 +415,7 @@ namespace PM_plus {
             // 
             // MonitorFreqComboBox
             // 
+            this.MonitorFreqComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MonitorFreqComboBox.FormattingEnabled = true;
             this.MonitorFreqComboBox.Items.AddRange(new object[] {
             "0",
@@ -428,6 +431,9 @@ namespace PM_plus {
             // 
             // ServerInfoGroupBox
             // 
+            this.ServerInfoGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ServerInfoGroupBox.Controls.Add(this.groupBox2);
             this.ServerInfoGroupBox.Controls.Add(this.groupBox1);
             this.ServerInfoGroupBox.Location = new System.Drawing.Point(4, 4);

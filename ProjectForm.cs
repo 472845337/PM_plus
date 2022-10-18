@@ -39,6 +39,7 @@ namespace PM_plus {
                 AddForm_ParamRichTextBox.ReadOnly = true;
                 ProjectForm_EnvRichTextBox.ReadOnly = true;
                 AddForm_IsPrintLogCheckBox.Enabled = false;
+                ExtRichTextBox.ReadOnly = true;
                 AddForm_Save_Button.Visible = false;
             }
             if (Config.OPERATE_TYPE_UPDATE == operateType || Config.OPERATE_TYPE_DETAIL == operateType) {
@@ -49,6 +50,7 @@ namespace PM_plus {
                 bool isPrintLog = monitorSection.IsPrintLog;
                 String heartBeat = monitorSection.HeartBeat;
                 String actuator = monitorSection.Actuator;
+                String ext = monitorSection.Ext;
                 String param = monitorSection.Param;
                 String env = monitorSection.Env;
                 AddForm_Title_TextBox.Text = title;
@@ -57,8 +59,9 @@ namespace PM_plus {
                 AddForm_IsPrintLogCheckBox.Checked = isPrintLog;
                 AddForm_HeartBeat_TextBox.Text = heartBeat;
                 AddForm_Actuator_Textbox.Text = actuator;
-                AddForm_ParamRichTextBox.Text = param;
-                ProjectForm_EnvRichTextBox.Text = env;
+                ExtRichTextBox.Text = StringUtils.TxtDecode(ext);
+                AddForm_ParamRichTextBox.Text = StringUtils.TxtDecode(param);
+                ProjectForm_EnvRichTextBox.Text = StringUtils.TxtDecode(env);
             }
         }
 
@@ -74,8 +77,9 @@ namespace PM_plus {
             String isPrintLog = isPrintLogBl ? Config.IS_PRINT_LOG_YES : Config.IS_PRINT_LOG_NO;
             String heartBeat = AddForm_HeartBeat_TextBox.Text;
             String actuator = AddForm_Actuator_Textbox.Text;
-            String param = AddForm_ParamRichTextBox.Text;
-            String env = ProjectForm_EnvRichTextBox.Text;
+            String ext = StringUtils.TxtEncode(ExtRichTextBox.Text);
+            String param = StringUtils.TxtEncode(AddForm_ParamRichTextBox.Text);
+            String env = StringUtils.TxtEncode(ProjectForm_EnvRichTextBox.Text);
             Boolean checkFlag = true;
             StringBuilder checkMsg = new StringBuilder();
             if (StringUtils.IsEmpty(title)) {
@@ -119,6 +123,7 @@ namespace PM_plus {
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_PRINT_LOG, isPrintLog);
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_HEART_BEAT, heartBeat);
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_ACTUATOR, actuator);
+                IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_EXT, ext);
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_PARAM, param);
                 IniUtils.IniWriteValue(Config.ProjectsIniPath, operateSection, Config.INI_KEY_PROJECT_ENV, env);
                 // 项目对象赋值
@@ -130,6 +135,7 @@ namespace PM_plus {
                     IsPrintLog = isPrintLogBl,
                     HeartBeat = heartBeat,
                     Actuator = actuator,
+                    Ext = ext,
                     Param = param,
                     Env = env
                 };
@@ -167,7 +173,5 @@ namespace PM_plus {
                 AddForm_Jar_TextBox.Text = Jar_OpenFileDialog.FileName;
             }
         }
-
-
     }
 }

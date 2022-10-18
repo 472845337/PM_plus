@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PM_plus.config;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,6 +19,20 @@ namespace PM_plus.utils
                 isEmpty = true;
             }
             return isEmpty;
+        }
+
+        public static String TxtEncode(String str) {
+            if (IsNotEmpty(str)) {
+                str = str.Replace(Config.ENTER_STR, "\\r\\n").Replace("\n", "\\n").Replace("\r", "\\r");
+            }
+            return str;
+        }
+
+        public static String TxtDecode(String str) {
+            if (IsNotEmpty(str)) {
+                str = str.Replace("\\r\\n", Config.ENTER_STR).Replace("\\n", "\n").Replace("\\r", "\r");
+            }
+            return str;
         }
     }
 }

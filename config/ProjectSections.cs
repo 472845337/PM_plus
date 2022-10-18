@@ -99,7 +99,10 @@ namespace PM_plus.config {
             /// 是否配置有spring的actuator地址，存在配置则在停止时调用 shutdown，要该项目开启了shutdown节点
             /// </summary>
             public string Actuator { get; set; }
-
+            /// <summary>
+            /// 扩展
+            /// </summary>
+            public string Ext { get; set; }
             /// <summary>
             /// 启动参数
             /// </summary>

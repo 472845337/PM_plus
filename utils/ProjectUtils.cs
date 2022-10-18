@@ -39,6 +39,9 @@ namespace PM_plus.utils {
             StringBuilder script = new StringBuilder();
             script.Append("@echo off").Append(Config.ENTER_STR);
             script.Append("title ").Append(projectSection.Title).Append(Config.ENTER_STR);
+            if (StringUtils.IsNotEmpty(projectSection.Ext)) {
+                script.Append(StringUtils.TxtDecode(projectSection.Ext)).Append(Config.ENTER_STR);
+            }
             // jdk路径
             Boolean JDKPathIsExist = FileUtils.Boo_DirExist(jdkPath);
             if (JDKPathIsExist) {
@@ -48,7 +51,7 @@ namespace PM_plus.utils {
             }
             // 启动参数
             if (StringUtils.IsNotEmpty(projectSection.Param)) {
-                script.Append(" ").Append(projectSection.Param);
+                script.Append(" ").Append(StringUtils.TxtDecode(projectSection.Param));
             }
             // jar包路径
             script.Append(" -jar ").Append(projectSection.Jar);
@@ -56,8 +59,8 @@ namespace PM_plus.utils {
             bool useEnvProFiles = false;
             // 环境参数
             if (StringUtils.IsNotEmpty(projectSection.Env)) {
-                script.Append(" ").Append(projectSection.Env);
-                
+                script.Append(" ").Append(StringUtils.TxtDecode(projectSection.Env));
+
                 if (projectSection.Env.Contains("spring.profiles.active=")) {
                     // 环境参数中配置了指定了启动环境
                     useEnvProFiles = true;
@@ -99,9 +102,9 @@ namespace PM_plus.utils {
          * 
          */
         public static void ProjectStop(ProjectSections.ProjectSection projectSection) {
-           /* // 定义委托
-            StopProjectBySection stopProjectBySection = new StopProjectBySection(StopProjectBySectionImpl);
-            stopProjectBySection.Invoke(projectSection);*/
+            /* // 定义委托
+             StopProjectBySection stopProjectBySection = new StopProjectBySection(StopProjectBySectionImpl);
+             stopProjectBySection.Invoke(projectSection);*/
 
             // 如果项目未配置监控，则调用自动生成的stop.bat脚本结束进程，有配置actuator则调用/shutdown结束进程
             String actuator = projectSection.Actuator;

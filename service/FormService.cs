@@ -144,6 +144,8 @@ namespace PM_plus.service {
                 String heartBeat = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_HEART_BEAT);
                 // 监控地址
                 String actuator = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_ACTUATOR);
+                // 扩展
+                String ext = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_EXT);
                 // 启动参数
                 String param = IniUtils.IniReadValue(Config.ProjectsIniPath, section, Config.INI_KEY_PROJECT_PARAM);
                 // 环境参数
@@ -157,6 +159,7 @@ namespace PM_plus.service {
                     IsPrintLog = isPrintLogBl,
                     HeartBeat = heartBeat,
                     Actuator = actuator,
+                    Ext = ext,
                     Param = param,
                     Env = env
                 };

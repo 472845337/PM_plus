@@ -38,25 +38,28 @@ namespace PM_plus {
         private void InitData() {
             // 主窗体赋值，以便其它地方调用
             Config.mainForm = this;
-
+            int usedProgress = 0;
             isFinishedInit = false;
             // 窗口控件属性相关设置
             FormService.InitMainForm(this);
             // 加载框显示，load函数中置主窗体不可用
             FormService.InitWaitForm();
+            Config.waitForm.FreshProgress(10);
             // GC回收定时任务初始化
             TimerService.AutoGc();
+            Config.waitForm.FreshProgress(10);
             // 偏好加载,皮肤加载
             FormService.InitDiySet();
-            int usedProgress = 0;
+            Config.waitForm.FreshProgress(5);
+            usedProgress = 25;
             // 系统参数加载
-            usedProgress = IniConfigService.InitSystemConfig(usedProgress, 25);
+            usedProgress = IniConfigService.InitSystemConfig(usedProgress, 15);
             // 运行环境参数加载
-            usedProgress = IniConfigService.InitProjectConfig(usedProgress, 25);
+            usedProgress = IniConfigService.InitProjectConfig(usedProgress, 15);
             // 项目面板右键按钮
-            usedProgress = FormService.InitPanelRightMenu(usedProgress, 25);
+            usedProgress = FormService.InitPanelRightMenu(usedProgress, 15);
             // 创建项目按钮控件
-            usedProgress = FormService.InitProjectButton(usedProgress, 25);
+            usedProgress = FormService.InitProjectButton(usedProgress, 15);
             TimerService.Monitor();
             // 加载窗口关闭,close函数中置主窗体可用
             Config.waitForm.FreshProgress(usedProgress);
@@ -268,16 +271,18 @@ namespace PM_plus {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         internal void Fresh_Button_Click(object sender, EventArgs e) {
-            Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.GetAllSectionDic();
-            if (null != sectionList) {
-                foreach (KeyValuePair<String, ProjectSections.ProjectSection> projectSectionEntry in sectionList) {
-                    // 校验section
-                    FormService.CheckSection(projectSectionEntry.Value, true);
+            if(MessageBox.Show("确认刷新所有启动脚本吗？", "信息",MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.GetAllSectionDic();
+                if (null != sectionList) {
+                    foreach (KeyValuePair<String, ProjectSections.ProjectSection> projectSectionEntry in sectionList) {
+                        // 校验section
+                        FormService.CheckSection(projectSectionEntry.Value, true);
+                    }
                 }
+                OperateMsg_Label.Text = "刷新成功";
+                OperateMsg_Label.ForeColor = Color.Green;
+                InitLabelMsgTimerout();
             }
-            OperateMsg_Label.Text = "刷新成功";
-            OperateMsg_Label.ForeColor = Color.Green;
-            InitLabelMsgTimerout();
         }
 
         /// <summary>
