@@ -13,9 +13,6 @@ namespace PM_plus.utils {
     class IniUtils {
         [DllImport("kernel32")]
         private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
-        //需要调用GetPrivateProfileString的重载
-        [DllImport("kernel32", EntryPoint = "GetPrivateProfileString")]
-        private static extern long GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
         [DllImport("kernel32", EntryPoint = "GetPrivateProfileString")]
         private static extern uint GetPrivateProfileStringA(string section, string key, string def, Byte[] retVal, int size, string filePath);
@@ -31,9 +28,10 @@ namespace PM_plus.utils {
 
         //读取section中某个值  
         public static string IniReadValue(String iniPath, string Section, string Key) {
-            StringBuilder temp = new StringBuilder();
-            GetPrivateProfileString(Section, Key, "", temp, 255, iniPath);
-            return temp.ToString();
+            Byte[] Buffer = new Byte[256];
+            uint len = GetPrivateProfileStringA(Section, Key, "", Buffer, 256, iniPath);
+            String result = Encoding.Default.GetString(Buffer, 0, (int)len);
+            return result;
         }
         // 封装的方法中，最有价值的是获取所有Sections和所有的Keys，网上关于这个的代码大部分是错误的，这里给出一个正确的方法：  
         /// 返回该配置文件中所有Section名称的集合  

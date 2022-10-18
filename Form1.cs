@@ -38,7 +38,7 @@ namespace PM_plus {
         private void InitData() {
             // 主窗体赋值，以便其它地方调用
             Config.mainForm = this;
-            int usedProgress = 0;
+            int usedProgress;
             isFinishedInit = false;
             // 窗口控件属性相关设置
             FormService.InitMainForm(this);
@@ -445,7 +445,7 @@ namespace PM_plus {
             hsh.url = httpUrl;
             hsh.type = httpType;
             hshs.saveData(hsh);
-            String result = "";
+            String result;
             if (Config.HTTP_TYPE_POST.Equals(httpType)) {
                 result = HttpUtils.PostRequest(httpUrl, "", null);
             }else if(Config.HTTP_TYPE_GET.Equals(httpType)) {
