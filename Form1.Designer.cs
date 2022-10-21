@@ -50,6 +50,7 @@ namespace PM_plus {
             this.SystemConfig_Save_Button = new System.Windows.Forms.Button();
             this.MonitorTabPage = new System.Windows.Forms.TabPage();
             this.ProjectInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.FreshProcessButton = new System.Windows.Forms.Button();
             this.ClickActiveCmdCheckBox = new System.Windows.Forms.CheckBox();
             this.ChildProcessListBox = new System.Windows.Forms.ListBox();
             this.ProcessTitleTextBox = new System.Windows.Forms.TextBox();
@@ -100,7 +101,7 @@ namespace PM_plus {
             this.JDKPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.LogPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.FreshProcessButton = new System.Windows.Forms.Button();
+            this.ProcessWindowMinButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -164,7 +165,7 @@ namespace PM_plus {
             // 
             this.ExitAfterClose_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ExitAfterClose_CheckBox.AutoSize = true;
-            this.ExitAfterClose_CheckBox.Location = new System.Drawing.Point(83, 410);
+            this.ExitAfterClose_CheckBox.Location = new System.Drawing.Point(95, 410);
             this.ExitAfterClose_CheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ExitAfterClose_CheckBox.Name = "ExitAfterClose_CheckBox";
             this.ExitAfterClose_CheckBox.Size = new System.Drawing.Size(72, 16);
@@ -181,9 +182,9 @@ namespace PM_plus {
             this.LogSwitch_CheckBox.Location = new System.Drawing.Point(5, 410);
             this.LogSwitch_CheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LogSwitch_CheckBox.Name = "LogSwitch_CheckBox";
-            this.LogSwitch_CheckBox.Size = new System.Drawing.Size(72, 16);
+            this.LogSwitch_CheckBox.Size = new System.Drawing.Size(84, 16);
             this.LogSwitch_CheckBox.TabIndex = 24;
-            this.LogSwitch_CheckBox.Text = "开启日志";
+            this.LogSwitch_CheckBox.Text = "控制台日志";
             this.LogSwitch_CheckBox.UseVisualStyleBackColor = true;
             this.LogSwitch_CheckBox.CheckedChanged += new System.EventHandler(this.LogSwitch_CheckBox_CheckedChanged);
             // 
@@ -419,6 +420,7 @@ namespace PM_plus {
             this.ProjectInfoGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessWindowMinButton);
             this.ProjectInfoGroupBox.Controls.Add(this.FreshProcessButton);
             this.ProjectInfoGroupBox.Controls.Add(this.ClickActiveCmdCheckBox);
             this.ProjectInfoGroupBox.Controls.Add(this.ChildProcessListBox);
@@ -436,11 +438,22 @@ namespace PM_plus {
             this.ProjectInfoGroupBox.TabStop = false;
             this.ProjectInfoGroupBox.Text = "进程信息";
             // 
+            // FreshProcessButton
+            // 
+            this.FreshProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.FreshProcessButton.Location = new System.Drawing.Point(493, 221);
+            this.FreshProcessButton.Name = "FreshProcessButton";
+            this.FreshProcessButton.Size = new System.Drawing.Size(75, 23);
+            this.FreshProcessButton.TabIndex = 8;
+            this.FreshProcessButton.Text = "刷新";
+            this.FreshProcessButton.UseVisualStyleBackColor = true;
+            this.FreshProcessButton.Click += new System.EventHandler(this.FreshProcessButton_Click);
+            // 
             // ClickActiveCmdCheckBox
             // 
             this.ClickActiveCmdCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ClickActiveCmdCheckBox.AutoSize = true;
-            this.ClickActiveCmdCheckBox.Location = new System.Drawing.Point(7, 227);
+            this.ClickActiveCmdCheckBox.Location = new System.Drawing.Point(7, 228);
             this.ClickActiveCmdCheckBox.Name = "ClickActiveCmdCheckBox";
             this.ClickActiveCmdCheckBox.Size = new System.Drawing.Size(96, 16);
             this.ClickActiveCmdCheckBox.TabIndex = 4;
@@ -472,7 +485,7 @@ namespace PM_plus {
             this.ProcessMemTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ProcessMemTextBox.Location = new System.Drawing.Point(362, 88);
             this.ProcessMemTextBox.Name = "ProcessMemTextBox";
-            this.ProcessMemTextBox.Size = new System.Drawing.Size(207, 21);
+            this.ProcessMemTextBox.Size = new System.Drawing.Size(206, 21);
             this.ProcessMemTextBox.TabIndex = 5;
             // 
             // ProcessIdTextBox
@@ -521,7 +534,7 @@ namespace PM_plus {
             this.ProcessListBox.FormattingEnabled = true;
             this.ProcessListBox.HorizontalScrollbar = true;
             this.ProcessListBox.ItemHeight = 12;
-            this.ProcessListBox.Location = new System.Drawing.Point(7, 21);
+            this.ProcessListBox.Location = new System.Drawing.Point(7, 19);
             this.ProcessListBox.Name = "ProcessListBox";
             this.ProcessListBox.Size = new System.Drawing.Size(291, 196);
             this.ProcessListBox.TabIndex = 0;
@@ -950,16 +963,16 @@ namespace PM_plus {
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
             // 
-            // FreshProcessButton
+            // ProcessWindowMinButton
             // 
-            this.FreshProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.FreshProcessButton.Location = new System.Drawing.Point(493, 222);
-            this.FreshProcessButton.Name = "FreshProcessButton";
-            this.FreshProcessButton.Size = new System.Drawing.Size(75, 23);
-            this.FreshProcessButton.TabIndex = 8;
-            this.FreshProcessButton.Text = "刷新";
-            this.FreshProcessButton.UseVisualStyleBackColor = true;
-            this.FreshProcessButton.Click += new System.EventHandler(this.FreshProcessButton_Click);
+            this.ProcessWindowMinButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ProcessWindowMinButton.Location = new System.Drawing.Point(110, 221);
+            this.ProcessWindowMinButton.Name = "ProcessWindowMinButton";
+            this.ProcessWindowMinButton.Size = new System.Drawing.Size(75, 23);
+            this.ProcessWindowMinButton.TabIndex = 9;
+            this.ProcessWindowMinButton.Text = "窗口最小化";
+            this.ProcessWindowMinButton.UseVisualStyleBackColor = true;
+            this.ProcessWindowMinButton.Click += new System.EventHandler(this.ProcessWindowMinButton_Click);
             // 
             // Form1
             // 
@@ -1081,6 +1094,7 @@ namespace PM_plus {
         internal System.Windows.Forms.ListBox ProcessListBox;
         private System.Windows.Forms.CheckBox ClickActiveCmdCheckBox;
         private System.Windows.Forms.Button FreshProcessButton;
+        private System.Windows.Forms.Button ProcessWindowMinButton;
     }
 }
 

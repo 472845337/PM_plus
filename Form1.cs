@@ -490,7 +490,12 @@ namespace PM_plus {
                 TimerService.ServerInfoTimer.Enabled = false;
             }
         }
-
+        /// <summary>
+        /// 进程项被选择后，根据是否激活窗口进行置顶当前所选的进程对应的窗口
+        /// 展示该进程的详细信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ProcessListBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (ProcessListBox.Items.Count > 0 && ProcessListBox.SelectedIndex > -1) {
                 Process selectProcess = (ProcessListBox.SelectedItem as Process);
@@ -539,7 +544,23 @@ namespace PM_plus {
         }
 
         private void FreshProcessButton_Click(object sender, EventArgs e) {
+            // 重新获取进程
             TimerService.MonitorProcess();
+            // 清空进程详细显示
+            clearProcessInfo();
+        }
+
+        /// <summary>
+        /// 所有进程对应的窗口最小化到任务栏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProcessWindowMinButton_Click(object sender, EventArgs e) {
+            if (ProcessListBox.Items.Count > 0) {
+                foreach (Process process in ProcessListBox.Items) {
+                    User32Dll.ShowWindow(process.MainWindowHandle, User32Dll.SHOW_WINDOW_MIN);
+                }
+            }
         }
     }
 }
