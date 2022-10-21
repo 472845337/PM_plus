@@ -144,14 +144,15 @@ namespace PM_plus.utils {
         /// <param name="con"></param>
         /// <param name="FontFamilyName"></param>
         /// <param name="isChildren"></param>
-        public static void SetControlFont(Control con, String FontFamilyName, bool isChildren) {
+        public static void SetControlFont(Control con, String FontFamilyName, int fontSize, Color fontColor, bool isChildren) {
             if ("FontFamilyComboBox".Equals(con.Name)) {
                 return;
             }
-            con.Font = new Font(FontFamilyName, con.Font.Size);
+            con.Font = new Font(StringUtils.IsEmpty(FontFamilyName) ? Config.DEFAULT_FONT_FAMILY : FontFamilyName, fontSize == 0 ? con.Font.Size : fontSize);
+            con.ForeColor = fontColor;
             if (isChildren && con.HasChildren) {
                 foreach (Control children in con.Controls) {
-                    SetControlFont(children, FontFamilyName, isChildren);
+                    SetControlFont(children, FontFamilyName, fontSize, fontColor, isChildren);
                 }
             }
 

@@ -22,6 +22,8 @@ namespace PM_plus.config
         public const String LOG_FILE_ERROR = "error.log";
         public const String DEFAULT_SKIN = "Skins\\Calmness\\Calmness.ssk";
         public const String DEFAULT_FONT_FAMILY = "微软雅黑";
+        public const int DEFAULT_FONT_SIZE = 10;
+        public const String DEFAULT_FONT_COLOR = "#000000";
 
         public const String IS_PRINT_LOG_YES = "1";
         public const String IS_PRINT_LOG_NO = "0";
@@ -57,6 +59,8 @@ namespace PM_plus.config
         public const String INI_KEY_SYSTEM_SKIN = "skin";
         public const String INI_KEY_SYSTEM_SKIN_SWITCH = "skin_switch";
         public const String INI_KEY_SYSTEM_FONT_FAMILY = "font_family";
+        public const String INI_KEY_SYSTEM_FONT_SIZE = "font_size";
+        public const String INI_KEY_SYSTEM_FONT_COLOR = "font_color";
         public const String INI_KEY_SYSTEM_CLICK_ACTIVE = "click_active";
 
         public const String INI_KEY_LOG_SWITCH = "switch";

@@ -378,6 +378,8 @@ namespace PM_plus {
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, (SkinListBox.SelectedItem as Skin).RelativeName);
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN_SWITCH, SkinSwitchChecked.Checked.ToString());
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, FontFamilyComboBox.SelectedItem as String);
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_SIZE, FontSizeComboBox.SelectedItem as String);
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_COLOR, ColorTranslator.ToHtml(FontColorTextBox.BackColor));
             DiySetMsgLabel.Text = "设置成功!";
             DiySetMsgLabel.ForeColor = Color.Green;
             DiySetMsgLabel.Visible = true;
@@ -386,8 +388,9 @@ namespace PM_plus {
 
         private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (isFinishedInit && FontFamilyComboBox.SelectedItem != null) {
+                String fontSizeStr = FontSizeComboBox.SelectedItem as String;
                 foreach (Control con in Config.mainForm.Controls) {
-                    ControlUtils.SetControlFont(con, FontFamilyComboBox.SelectedItem as String, true);
+                    ControlUtils.SetControlFont(con, FontFamilyComboBox.SelectedItem as String, StringUtils.IsNotEmpty(fontSizeStr)?Convert.ToInt16(fontSizeStr):0, FontColorTextBox.BackColor, true);
                 }
             }
         }
@@ -399,7 +402,7 @@ namespace PM_plus {
             SkinListBox.SelectedValue = Config.DEFAULT_SKIN;
             // 字体恢复默认
             foreach (Control con in Config.mainForm.Controls) {
-                ControlUtils.SetControlFont(con, Config.DEFAULT_FONT_FAMILY, true);
+                ControlUtils.SetControlFont(con, Config.DEFAULT_FONT_FAMILY, Config.DEFAULT_FONT_SIZE, ColorTranslator.FromHtml(Config.DEFAULT_FONT_COLOR), true);
             }
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
             FontFamilyComboBox.SelectedItem = Config.DEFAULT_FONT_FAMILY;
@@ -559,6 +562,25 @@ namespace PM_plus {
             if (ProcessListBox.Items.Count > 0) {
                 foreach (Process process in ProcessListBox.Items) {
                     User32Dll.ShowWindow(process.MainWindowHandle, User32Dll.SHOW_WINDOW_MIN);
+                }
+            }
+        }
+
+        private void FontSizeComboBox_SelectedIndexChanged(object sender, EventArgs e) {
+            if (isFinishedInit && FontSizeComboBox.SelectedItem != null) {
+                foreach (Control con in Config.mainForm.Controls) {
+                    String fontSizeStr = FontSizeComboBox.SelectedItem as String;
+                    ControlUtils.SetControlFont(con, FontFamilyComboBox.SelectedItem as string, StringUtils.IsNotEmpty(fontSizeStr)? Convert.ToInt16(fontSizeStr): 0, FontColorTextBox.BackColor, true);
+                }
+            }
+        }
+
+        private void FontColorTextBox_Click(object sender, EventArgs e) {
+            if (FontColorDialog.ShowDialog() == DialogResult.OK) {
+                FontColorTextBox.BackColor = FontColorDialog.Color;
+                foreach (Control con in Config.mainForm.Controls) {
+                    String fontSizeStr = FontSizeComboBox.SelectedItem as String;
+                    ControlUtils.SetControlFont(con, FontFamilyComboBox.SelectedItem as string, StringUtils.IsNotEmpty(fontSizeStr) ? Convert.ToInt16(fontSizeStr) : 0, FontColorTextBox.BackColor, true);
                 }
             }
         }

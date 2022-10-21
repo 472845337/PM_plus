@@ -53,17 +53,33 @@ namespace PM_plus.service {
             }
             // 字体配置读取
             String fontFamilyName = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY);
+            String fontSizeStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_SIZE);
+            String fontColor = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_COLOR);
             if (StringUtils.IsEmpty(fontFamilyName)) {
                 // 未设置，使用默认
                 fontFamilyName = Config.DEFAULT_FONT_FAMILY;
                 IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
             }
+            int fontSize = Config.DEFAULT_FONT_SIZE;
+            if (StringUtils.IsNotEmpty(fontSizeStr)) {
+                // 未设置，使用默认
+                fontSize = Convert.ToInt16(fontSizeStr);
+            } else {
+                IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_SIZE, Config.DEFAULT_FONT_SIZE.ToString());
+            }
+            if (StringUtils.IsEmpty(fontColor)) {
+                // 未设置，使用默认
+                fontColor = Config.DEFAULT_FONT_COLOR;
+                IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_COLOR, Config.DEFAULT_FONT_COLOR);
+            }
             // 控件字体设置
             foreach (Control child in Config.mainForm.Controls) {
-                ControlUtils.SetControlFont(child, fontFamilyName, true);
+                ControlUtils.SetControlFont(child, fontFamilyName, fontSize, ColorTranslator.FromHtml(fontColor), true);
             }
             // 字体项选择
             Config.mainForm.FontFamilyComboBox.SelectedItem = fontFamilyName;
+            Config.mainForm.FontSizeComboBox.SelectedItem = fontSize.ToString();
+            Config.mainForm.FontColorTextBox.BackColor = ColorTranslator.FromHtml(fontColor);
         }
 
 

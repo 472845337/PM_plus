@@ -81,16 +81,6 @@ namespace PM_plus {
             this.CpuIdleTextBox = new System.Windows.Forms.TextBox();
             this.MonitorFreqLabel = new System.Windows.Forms.Label();
             this.MonitorFreqComboBox = new System.Windows.Forms.ComboBox();
-            this.DiySetTabPage = new System.Windows.Forms.TabPage();
-            this.SkinSwitchChecked = new System.Windows.Forms.CheckBox();
-            this.DiySetMsgLabel = new System.Windows.Forms.Label();
-            this.ResetButton = new System.Windows.Forms.Button();
-            this.DiySetChangeApply_Button = new System.Windows.Forms.Button();
-            this.FontFamilyComboBox = new System.Windows.Forms.ComboBox();
-            this.FontLabel = new System.Windows.Forms.Label();
-            this.SkinGroupBox = new System.Windows.Forms.GroupBox();
-            this.SkinShowPictureBox = new System.Windows.Forms.PictureBox();
-            this.SkinListBox = new System.Windows.Forms.ListBox();
             this.ToolTabPage = new System.Windows.Forms.TabPage();
             this.HttpRequestGroupBox = new System.Windows.Forms.GroupBox();
             this.SendHistoryButton = new System.Windows.Forms.Button();
@@ -102,11 +92,27 @@ namespace PM_plus {
             this.TypeComboBox = new System.Windows.Forms.ComboBox();
             this.UrlLabel = new System.Windows.Forms.Label();
             this.UrlTextBox = new System.Windows.Forms.RichTextBox();
+            this.DiySetTabPage = new System.Windows.Forms.TabPage();
+            this.FontSetGroupBox = new System.Windows.Forms.GroupBox();
+            this.FontColorTextBox = new System.Windows.Forms.TextBox();
+            this.FontSizeComboBox = new System.Windows.Forms.ComboBox();
+            this.FontColorLabel = new System.Windows.Forms.Label();
+            this.FontSizeLabel = new System.Windows.Forms.Label();
+            this.FontFamilyComboBox = new System.Windows.Forms.ComboBox();
+            this.FontLabel = new System.Windows.Forms.Label();
+            this.SkinSwitchChecked = new System.Windows.Forms.CheckBox();
+            this.DiySetMsgLabel = new System.Windows.Forms.Label();
+            this.ResetButton = new System.Windows.Forms.Button();
+            this.DiySetChangeApply_Button = new System.Windows.Forms.Button();
+            this.SkinGroupBox = new System.Windows.Forms.GroupBox();
+            this.SkinShowPictureBox = new System.Windows.Forms.PictureBox();
+            this.SkinListBox = new System.Windows.Forms.ListBox();
             this.HelpTabPage = new System.Windows.Forms.TabPage();
             this.HelpRichTextBox = new System.Windows.Forms.RichTextBox();
             this.JDKPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.LogPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.FontColorDialog = new System.Windows.Forms.ColorDialog();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -117,11 +123,12 @@ namespace PM_plus {
             this.NetWorkGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.DiySetTabPage.SuspendLayout();
-            this.SkinGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).BeginInit();
             this.ToolTabPage.SuspendLayout();
             this.HttpRequestGroupBox.SuspendLayout();
+            this.DiySetTabPage.SuspendLayout();
+            this.FontSetGroupBox.SuspendLayout();
+            this.SkinGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).BeginInit();
             this.HelpTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,8 +140,8 @@ namespace PM_plus {
             this.tabControl1.Controls.Add(this.ProjectTagPage);
             this.tabControl1.Controls.Add(this.MonitorTabPage);
             this.tabControl1.Controls.Add(this.ToolTabPage);
-            this.tabControl1.Controls.Add(this.HelpTabPage);
             this.tabControl1.Controls.Add(this.DiySetTabPage);
+            this.tabControl1.Controls.Add(this.HelpTabPage);
             this.tabControl1.ItemSize = new System.Drawing.Size(60, 25);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
@@ -451,7 +458,7 @@ namespace PM_plus {
             this.ProcessWindowMinButton.Name = "ProcessWindowMinButton";
             this.ProcessWindowMinButton.Size = new System.Drawing.Size(75, 23);
             this.ProcessWindowMinButton.TabIndex = 9;
-            this.ProcessWindowMinButton.Text = "窗口最小化";
+            this.ProcessWindowMinButton.Text = "最小化";
             this.ProcessWindowMinButton.UseVisualStyleBackColor = true;
             this.ProcessWindowMinButton.Click += new System.EventHandler(this.ProcessWindowMinButton_Click);
             // 
@@ -764,125 +771,6 @@ namespace PM_plus {
             this.MonitorFreqComboBox.TabIndex = 1;
             this.MonitorFreqComboBox.SelectedIndexChanged += new System.EventHandler(this.MonitorFreqComboBox_SelectedIndexChanged);
             // 
-            // DiySetTabPage
-            // 
-            this.DiySetTabPage.Controls.Add(this.SkinSwitchChecked);
-            this.DiySetTabPage.Controls.Add(this.DiySetMsgLabel);
-            this.DiySetTabPage.Controls.Add(this.ResetButton);
-            this.DiySetTabPage.Controls.Add(this.DiySetChangeApply_Button);
-            this.DiySetTabPage.Controls.Add(this.FontFamilyComboBox);
-            this.DiySetTabPage.Controls.Add(this.FontLabel);
-            this.DiySetTabPage.Controls.Add(this.SkinGroupBox);
-            this.DiySetTabPage.Location = new System.Drawing.Point(4, 29);
-            this.DiySetTabPage.Name = "DiySetTabPage";
-            this.DiySetTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.DiySetTabPage.Size = new System.Drawing.Size(591, 432);
-            this.DiySetTabPage.TabIndex = 1;
-            this.DiySetTabPage.Text = "偏好设置";
-            this.DiySetTabPage.UseVisualStyleBackColor = true;
-            // 
-            // SkinSwitchChecked
-            // 
-            this.SkinSwitchChecked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SkinSwitchChecked.AutoSize = true;
-            this.SkinSwitchChecked.Location = new System.Drawing.Point(537, 16);
-            this.SkinSwitchChecked.Name = "SkinSwitchChecked";
-            this.SkinSwitchChecked.Size = new System.Drawing.Size(48, 16);
-            this.SkinSwitchChecked.TabIndex = 7;
-            this.SkinSwitchChecked.Text = "皮肤";
-            this.SkinSwitchChecked.UseVisualStyleBackColor = true;
-            // 
-            // DiySetMsgLabel
-            // 
-            this.DiySetMsgLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DiySetMsgLabel.AutoSize = true;
-            this.DiySetMsgLabel.Location = new System.Drawing.Point(268, 507);
-            this.DiySetMsgLabel.Name = "DiySetMsgLabel";
-            this.DiySetMsgLabel.Size = new System.Drawing.Size(0, 12);
-            this.DiySetMsgLabel.TabIndex = 5;
-            // 
-            // ResetButton
-            // 
-            this.ResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResetButton.Location = new System.Drawing.Point(429, 389);
-            this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(75, 32);
-            this.ResetButton.TabIndex = 3;
-            this.ResetButton.Text = "恢复";
-            this.ResetButton.UseVisualStyleBackColor = true;
-            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
-            // 
-            // DiySetChangeApply_Button
-            // 
-            this.DiySetChangeApply_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DiySetChangeApply_Button.Location = new System.Drawing.Point(510, 389);
-            this.DiySetChangeApply_Button.Name = "DiySetChangeApply_Button";
-            this.DiySetChangeApply_Button.Size = new System.Drawing.Size(75, 32);
-            this.DiySetChangeApply_Button.TabIndex = 4;
-            this.DiySetChangeApply_Button.Text = "应用";
-            this.DiySetChangeApply_Button.UseVisualStyleBackColor = true;
-            this.DiySetChangeApply_Button.Click += new System.EventHandler(this.DiySetChangeApply_Button_Click);
-            // 
-            // FontFamilyComboBox
-            // 
-            this.FontFamilyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.FontFamilyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FontFamilyComboBox.FormattingEnabled = true;
-            this.FontFamilyComboBox.Location = new System.Drawing.Point(42, 10);
-            this.FontFamilyComboBox.Name = "FontFamilyComboBox";
-            this.FontFamilyComboBox.Size = new System.Drawing.Size(121, 22);
-            this.FontFamilyComboBox.TabIndex = 1;
-            this.FontFamilyComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.FontFamilyComboBox_DrawItem);
-            this.FontFamilyComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
-            // 
-            // FontLabel
-            // 
-            this.FontLabel.AutoSize = true;
-            this.FontLabel.Location = new System.Drawing.Point(6, 15);
-            this.FontLabel.Name = "FontLabel";
-            this.FontLabel.Size = new System.Drawing.Size(29, 12);
-            this.FontLabel.TabIndex = 1;
-            this.FontLabel.Text = "字体";
-            // 
-            // SkinGroupBox
-            // 
-            this.SkinGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SkinGroupBox.Controls.Add(this.SkinShowPictureBox);
-            this.SkinGroupBox.Controls.Add(this.SkinListBox);
-            this.SkinGroupBox.Location = new System.Drawing.Point(8, 35);
-            this.SkinGroupBox.Name = "SkinGroupBox";
-            this.SkinGroupBox.Size = new System.Drawing.Size(577, 348);
-            this.SkinGroupBox.TabIndex = 0;
-            this.SkinGroupBox.TabStop = false;
-            this.SkinGroupBox.Text = "皮肤";
-            // 
-            // SkinShowPictureBox
-            // 
-            this.SkinShowPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SkinShowPictureBox.Location = new System.Drawing.Point(182, 20);
-            this.SkinShowPictureBox.Name = "SkinShowPictureBox";
-            this.SkinShowPictureBox.Size = new System.Drawing.Size(389, 319);
-            this.SkinShowPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.SkinShowPictureBox.TabIndex = 3;
-            this.SkinShowPictureBox.TabStop = false;
-            // 
-            // SkinListBox
-            // 
-            this.SkinListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.SkinListBox.FormattingEnabled = true;
-            this.SkinListBox.ItemHeight = 12;
-            this.SkinListBox.Location = new System.Drawing.Point(6, 20);
-            this.SkinListBox.Name = "SkinListBox";
-            this.SkinListBox.Size = new System.Drawing.Size(169, 316);
-            this.SkinListBox.TabIndex = 2;
-            this.SkinListBox.SelectedIndexChanged += new System.EventHandler(this.SkinListBox_SelectedIndexChanged);
-            // 
             // ToolTabPage
             // 
             this.ToolTabPage.Controls.Add(this.HttpRequestGroupBox);
@@ -1007,6 +895,179 @@ namespace PM_plus {
             this.UrlTextBox.TabIndex = 0;
             this.UrlTextBox.Text = "";
             // 
+            // DiySetTabPage
+            // 
+            this.DiySetTabPage.Controls.Add(this.FontSetGroupBox);
+            this.DiySetTabPage.Controls.Add(this.DiySetMsgLabel);
+            this.DiySetTabPage.Controls.Add(this.ResetButton);
+            this.DiySetTabPage.Controls.Add(this.DiySetChangeApply_Button);
+            this.DiySetTabPage.Controls.Add(this.SkinGroupBox);
+            this.DiySetTabPage.Location = new System.Drawing.Point(4, 29);
+            this.DiySetTabPage.Name = "DiySetTabPage";
+            this.DiySetTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.DiySetTabPage.Size = new System.Drawing.Size(591, 432);
+            this.DiySetTabPage.TabIndex = 1;
+            this.DiySetTabPage.Text = "偏好设置";
+            this.DiySetTabPage.UseVisualStyleBackColor = true;
+            // 
+            // FontSetGroupBox
+            // 
+            this.FontSetGroupBox.Controls.Add(this.FontColorTextBox);
+            this.FontSetGroupBox.Controls.Add(this.FontSizeComboBox);
+            this.FontSetGroupBox.Controls.Add(this.FontColorLabel);
+            this.FontSetGroupBox.Controls.Add(this.FontSizeLabel);
+            this.FontSetGroupBox.Controls.Add(this.FontFamilyComboBox);
+            this.FontSetGroupBox.Controls.Add(this.FontLabel);
+            this.FontSetGroupBox.Location = new System.Drawing.Point(8, 7);
+            this.FontSetGroupBox.Name = "FontSetGroupBox";
+            this.FontSetGroupBox.Size = new System.Drawing.Size(571, 49);
+            this.FontSetGroupBox.TabIndex = 8;
+            this.FontSetGroupBox.TabStop = false;
+            // 
+            // FontColorTextBox
+            // 
+            this.FontColorTextBox.Location = new System.Drawing.Point(302, 16);
+            this.FontColorTextBox.Name = "FontColorTextBox";
+            this.FontColorTextBox.ReadOnly = true;
+            this.FontColorTextBox.Size = new System.Drawing.Size(60, 21);
+            this.FontColorTextBox.TabIndex = 5;
+            this.FontColorTextBox.Click += new System.EventHandler(this.FontColorTextBox_Click);
+            // 
+            // FontSizeComboBox
+            // 
+            this.FontSizeComboBox.FormattingEnabled = true;
+            this.FontSizeComboBox.Items.AddRange(new object[] {
+            "8",
+            "9",
+            "10",
+            "12"});
+            this.FontSizeComboBox.Location = new System.Drawing.Point(204, 17);
+            this.FontSizeComboBox.Name = "FontSizeComboBox";
+            this.FontSizeComboBox.Size = new System.Drawing.Size(57, 20);
+            this.FontSizeComboBox.TabIndex = 4;
+            this.FontSizeComboBox.SelectedIndexChanged += new System.EventHandler(this.FontSizeComboBox_SelectedIndexChanged);
+            // 
+            // FontColorLabel
+            // 
+            this.FontColorLabel.AutoSize = true;
+            this.FontColorLabel.Location = new System.Drawing.Point(267, 20);
+            this.FontColorLabel.Name = "FontColorLabel";
+            this.FontColorLabel.Size = new System.Drawing.Size(29, 12);
+            this.FontColorLabel.TabIndex = 3;
+            this.FontColorLabel.Text = "颜色";
+            // 
+            // FontSizeLabel
+            // 
+            this.FontSizeLabel.AutoSize = true;
+            this.FontSizeLabel.Location = new System.Drawing.Point(169, 20);
+            this.FontSizeLabel.Name = "FontSizeLabel";
+            this.FontSizeLabel.Size = new System.Drawing.Size(29, 12);
+            this.FontSizeLabel.TabIndex = 2;
+            this.FontSizeLabel.Text = "大小";
+            // 
+            // FontFamilyComboBox
+            // 
+            this.FontFamilyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.FontFamilyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FontFamilyComboBox.FormattingEnabled = true;
+            this.FontFamilyComboBox.Location = new System.Drawing.Point(41, 17);
+            this.FontFamilyComboBox.Name = "FontFamilyComboBox";
+            this.FontFamilyComboBox.Size = new System.Drawing.Size(121, 22);
+            this.FontFamilyComboBox.TabIndex = 1;
+            this.FontFamilyComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.FontFamilyComboBox_DrawItem);
+            this.FontFamilyComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
+            // 
+            // FontLabel
+            // 
+            this.FontLabel.AutoSize = true;
+            this.FontLabel.Location = new System.Drawing.Point(6, 20);
+            this.FontLabel.Name = "FontLabel";
+            this.FontLabel.Size = new System.Drawing.Size(29, 12);
+            this.FontLabel.TabIndex = 1;
+            this.FontLabel.Text = "字体";
+            // 
+            // SkinSwitchChecked
+            // 
+            this.SkinSwitchChecked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SkinSwitchChecked.AutoSize = true;
+            this.SkinSwitchChecked.Location = new System.Drawing.Point(8, 296);
+            this.SkinSwitchChecked.Name = "SkinSwitchChecked";
+            this.SkinSwitchChecked.Size = new System.Drawing.Size(72, 16);
+            this.SkinSwitchChecked.TabIndex = 7;
+            this.SkinSwitchChecked.Text = "皮肤开关";
+            this.SkinSwitchChecked.UseVisualStyleBackColor = true;
+            // 
+            // DiySetMsgLabel
+            // 
+            this.DiySetMsgLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiySetMsgLabel.AutoSize = true;
+            this.DiySetMsgLabel.Location = new System.Drawing.Point(268, 507);
+            this.DiySetMsgLabel.Name = "DiySetMsgLabel";
+            this.DiySetMsgLabel.Size = new System.Drawing.Size(0, 12);
+            this.DiySetMsgLabel.TabIndex = 5;
+            // 
+            // ResetButton
+            // 
+            this.ResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResetButton.Location = new System.Drawing.Point(429, 389);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(75, 32);
+            this.ResetButton.TabIndex = 3;
+            this.ResetButton.Text = "恢复";
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
+            // DiySetChangeApply_Button
+            // 
+            this.DiySetChangeApply_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiySetChangeApply_Button.Location = new System.Drawing.Point(510, 389);
+            this.DiySetChangeApply_Button.Name = "DiySetChangeApply_Button";
+            this.DiySetChangeApply_Button.Size = new System.Drawing.Size(75, 32);
+            this.DiySetChangeApply_Button.TabIndex = 4;
+            this.DiySetChangeApply_Button.Text = "应用";
+            this.DiySetChangeApply_Button.UseVisualStyleBackColor = true;
+            this.DiySetChangeApply_Button.Click += new System.EventHandler(this.DiySetChangeApply_Button_Click);
+            // 
+            // SkinGroupBox
+            // 
+            this.SkinGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SkinGroupBox.Controls.Add(this.SkinShowPictureBox);
+            this.SkinGroupBox.Controls.Add(this.SkinSwitchChecked);
+            this.SkinGroupBox.Controls.Add(this.SkinListBox);
+            this.SkinGroupBox.Location = new System.Drawing.Point(8, 62);
+            this.SkinGroupBox.Name = "SkinGroupBox";
+            this.SkinGroupBox.Size = new System.Drawing.Size(577, 321);
+            this.SkinGroupBox.TabIndex = 0;
+            this.SkinGroupBox.TabStop = false;
+            this.SkinGroupBox.Text = "皮肤";
+            // 
+            // SkinShowPictureBox
+            // 
+            this.SkinShowPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SkinShowPictureBox.Location = new System.Drawing.Point(182, 20);
+            this.SkinShowPictureBox.Name = "SkinShowPictureBox";
+            this.SkinShowPictureBox.Size = new System.Drawing.Size(389, 292);
+            this.SkinShowPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.SkinShowPictureBox.TabIndex = 3;
+            this.SkinShowPictureBox.TabStop = false;
+            // 
+            // SkinListBox
+            // 
+            this.SkinListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.SkinListBox.FormattingEnabled = true;
+            this.SkinListBox.ItemHeight = 12;
+            this.SkinListBox.Location = new System.Drawing.Point(6, 20);
+            this.SkinListBox.Name = "SkinListBox";
+            this.SkinListBox.Size = new System.Drawing.Size(169, 268);
+            this.SkinListBox.TabIndex = 2;
+            this.SkinListBox.SelectedIndexChanged += new System.EventHandler(this.SkinListBox_SelectedIndexChanged);
+            // 
             // HelpTabPage
             // 
             this.HelpTabPage.Controls.Add(this.HelpRichTextBox);
@@ -1066,13 +1127,16 @@ namespace PM_plus {
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.DiySetTabPage.ResumeLayout(false);
-            this.DiySetTabPage.PerformLayout();
-            this.SkinGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).EndInit();
             this.ToolTabPage.ResumeLayout(false);
             this.HttpRequestGroupBox.ResumeLayout(false);
             this.HttpRequestGroupBox.PerformLayout();
+            this.DiySetTabPage.ResumeLayout(false);
+            this.DiySetTabPage.PerformLayout();
+            this.FontSetGroupBox.ResumeLayout(false);
+            this.FontSetGroupBox.PerformLayout();
+            this.SkinGroupBox.ResumeLayout(false);
+            this.SkinGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).EndInit();
             this.HelpTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1162,6 +1226,12 @@ namespace PM_plus {
         internal System.Windows.Forms.TextBox NetWorkUploadTextBox;
         private System.Windows.Forms.Label NewWorkDownloadLabel;
         private System.Windows.Forms.Label NetWorkUploadLabel;
+        private System.Windows.Forms.GroupBox FontSetGroupBox;
+        internal System.Windows.Forms.TextBox FontColorTextBox;
+        internal System.Windows.Forms.ComboBox FontSizeComboBox;
+        private System.Windows.Forms.Label FontColorLabel;
+        private System.Windows.Forms.Label FontSizeLabel;
+        private System.Windows.Forms.ColorDialog FontColorDialog;
     }
 }
 
