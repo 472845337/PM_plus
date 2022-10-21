@@ -132,9 +132,9 @@ namespace PM_plus {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.ProjectTagPage);
             this.tabControl1.Controls.Add(this.MonitorTabPage);
-            this.tabControl1.Controls.Add(this.DiySetTabPage);
             this.tabControl1.Controls.Add(this.ToolTabPage);
             this.tabControl1.Controls.Add(this.HelpTabPage);
+            this.tabControl1.Controls.Add(this.DiySetTabPage);
             this.tabControl1.ItemSize = new System.Drawing.Size(60, 25);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
