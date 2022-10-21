@@ -1,6 +1,8 @@
-﻿using PM_plus.config;
+﻿using PM_plus.bean;
+using PM_plus.config;
 using PM_plus.utils;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -16,7 +18,8 @@ namespace PM_plus.service {
         public static readonly System.Timers.Timer ServerInfoTimer = new System.Timers.Timer();
         // 到时间后执行的计时器
         private static readonly System.Timers.Timer TimeoutTimer = new System.Timers.Timer();
-
+        // 网络适配器集合
+        private static List<NetWorkAdapter> adapters = new List<NetWorkAdapter>();
 
         static TimerService() {
             // 双击计时器不开启
@@ -28,6 +31,18 @@ namespace PM_plus.service {
             if(Config.monitorServerInterval > 0) {
                 ServerInfoTimer.Enabled = true;
                 ServerInfoTimer.Interval = Config.monitorServerInterval * 1000;
+            }
+            // 网络适配器初始化
+            foreach (string name in category.GetInstanceNames()) {
+                // This one exists on every computer.
+                if (name == "MS TCP Loopback interface")
+                    continue;
+                // Create an instance of NetworkAdapter class, and create performance counters for it.
+                NetWorkAdapter adapter = new NetWorkAdapter(name);
+                adapter.dlCounter = new PerformanceCounter("Network Interface", "Bytes Received/sec", name);
+                adapter.ulCounter = new PerformanceCounter("Network Interface", "Bytes Sent/sec", name);
+                adapter.init();
+                adapters.Add(adapter);    // Add it to ArrayList adapter
             }
         }
         internal static void AutoGc() {
@@ -165,6 +180,10 @@ namespace PM_plus.service {
         static PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
         // 内存已用大小
         static PerformanceCounter usedRamCounter = new PerformanceCounter("Memory", "% Committed Bytes In Use");
+        // 网络情况
+        static PerformanceCounterCategory category = new PerformanceCounterCategory("Network Interface");
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -175,18 +194,30 @@ namespace PM_plus.service {
         }
 
         public static void MonitorServer() {
-            var cpuUsage = cpuCounter.NextValue();
+            float cpuUsage = cpuCounter.NextValue();
             string cpuUsageStr = string.Format("{0:f2} %", cpuUsage);
-            var cpuIdle = idleCounter.NextValue();
+            float cpuIdle = idleCounter.NextValue();
             string cpuIdleStr = string.Format("{0:f2} %", cpuIdle);
-            var ramAvailable = ramCounter.NextValue();
-            string ramAvaiableStr = string.Format("{0} MB", ramAvailable);
-            var ramUsed = usedRamCounter.NextValue();
+            float ramAvailable = ramCounter.NextValue();
+            string ramAvaiableStr = string.Format("{0:f2} GB", ramAvailable/1024.0F);
+            float ramUsed = usedRamCounter.NextValue();
             string ramUsedStr = string.Format("{0:f2} %", ramUsed);
+            double downloadSpeed = 0.0F;
+            double uploadSpeed = 0.0F;
+            foreach(NetWorkAdapter adapter in adapters) {
+                adapter.refresh();
+                downloadSpeed += adapter.DownloadSpeedKbps;
+                uploadSpeed += adapter.UploadSpeedKbps;
+            }
+            string downloadSpeedStr = string.Format("{0:n} KB/s", downloadSpeed);
+            string uploadSpeedStr = string.Format("{0:n} KB/s", uploadSpeed);
+
             Config.mainForm.CpuUsedTextBox.Text = cpuUsageStr;
             Config.mainForm.CpuIdleTextBox.Text = cpuIdleStr;
             Config.mainForm.MemoryAvailableTextBox.Text = ramAvaiableStr;
             Config.mainForm.MemoryUsedTextBox.Text = ramUsedStr;
+            Config.mainForm.NetWorkDownloadTextBox.Text = downloadSpeedStr;
+            Config.mainForm.NetWorkUploadTextBox.Text = uploadSpeedStr;
         }
 
         public static void MonitorProcess() {

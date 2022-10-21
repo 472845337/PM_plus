@@ -95,6 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bean\NetWorkAdapter.cs" />
     <Compile Include="bean\Skin.cs" />
     <Compile Include="data\ClsLock.cs" />
     <Compile Include="data\SQLiteFactory.cs" />

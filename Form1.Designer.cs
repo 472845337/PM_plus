@@ -50,6 +50,7 @@ namespace PM_plus {
             this.SystemConfig_Save_Button = new System.Windows.Forms.Button();
             this.MonitorTabPage = new System.Windows.Forms.TabPage();
             this.ProjectInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.ProcessWindowMinButton = new System.Windows.Forms.Button();
             this.FreshProcessButton = new System.Windows.Forms.Button();
             this.ClickActiveCmdCheckBox = new System.Windows.Forms.CheckBox();
             this.ChildProcessListBox = new System.Windows.Forms.ListBox();
@@ -61,6 +62,11 @@ namespace PM_plus {
             this.ProcessIdLabel = new System.Windows.Forms.Label();
             this.ProcessListBox = new System.Windows.Forms.ListBox();
             this.ServerInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.NetWorkGroup = new System.Windows.Forms.GroupBox();
+            this.NetWorkDownloadTextBox = new System.Windows.Forms.TextBox();
+            this.NetWorkUploadTextBox = new System.Windows.Forms.TextBox();
+            this.NewWorkDownloadLabel = new System.Windows.Forms.Label();
+            this.NetWorkUploadLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MemoryAvailableLabel = new System.Windows.Forms.Label();
             this.MemoryAvailableTextBox = new System.Windows.Forms.TextBox();
@@ -101,7 +107,6 @@ namespace PM_plus {
             this.JDKPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.LogPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.ProcessWindowMinButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -109,6 +114,7 @@ namespace PM_plus {
             this.MonitorTabPage.SuspendLayout();
             this.ProjectInfoGroupBox.SuspendLayout();
             this.ServerInfoGroupBox.SuspendLayout();
+            this.NetWorkGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.DiySetTabPage.SuspendLayout();
@@ -431,17 +437,28 @@ namespace PM_plus {
             this.ProjectInfoGroupBox.Controls.Add(this.ProcessTitleLabel);
             this.ProjectInfoGroupBox.Controls.Add(this.ProcessIdLabel);
             this.ProjectInfoGroupBox.Controls.Add(this.ProcessListBox);
-            this.ProjectInfoGroupBox.Location = new System.Drawing.Point(6, 180);
+            this.ProjectInfoGroupBox.Location = new System.Drawing.Point(6, 140);
             this.ProjectInfoGroupBox.Name = "ProjectInfoGroupBox";
-            this.ProjectInfoGroupBox.Size = new System.Drawing.Size(576, 249);
+            this.ProjectInfoGroupBox.Size = new System.Drawing.Size(576, 289);
             this.ProjectInfoGroupBox.TabIndex = 3;
             this.ProjectInfoGroupBox.TabStop = false;
             this.ProjectInfoGroupBox.Text = "进程信息";
             // 
+            // ProcessWindowMinButton
+            // 
+            this.ProcessWindowMinButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ProcessWindowMinButton.Location = new System.Drawing.Point(110, 261);
+            this.ProcessWindowMinButton.Name = "ProcessWindowMinButton";
+            this.ProcessWindowMinButton.Size = new System.Drawing.Size(75, 23);
+            this.ProcessWindowMinButton.TabIndex = 9;
+            this.ProcessWindowMinButton.Text = "窗口最小化";
+            this.ProcessWindowMinButton.UseVisualStyleBackColor = true;
+            this.ProcessWindowMinButton.Click += new System.EventHandler(this.ProcessWindowMinButton_Click);
+            // 
             // FreshProcessButton
             // 
             this.FreshProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.FreshProcessButton.Location = new System.Drawing.Point(493, 221);
+            this.FreshProcessButton.Location = new System.Drawing.Point(493, 261);
             this.FreshProcessButton.Name = "FreshProcessButton";
             this.FreshProcessButton.Size = new System.Drawing.Size(75, 23);
             this.FreshProcessButton.TabIndex = 8;
@@ -453,7 +470,7 @@ namespace PM_plus {
             // 
             this.ClickActiveCmdCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ClickActiveCmdCheckBox.AutoSize = true;
-            this.ClickActiveCmdCheckBox.Location = new System.Drawing.Point(7, 228);
+            this.ClickActiveCmdCheckBox.Location = new System.Drawing.Point(7, 268);
             this.ClickActiveCmdCheckBox.Name = "ClickActiveCmdCheckBox";
             this.ClickActiveCmdCheckBox.Size = new System.Drawing.Size(96, 16);
             this.ClickActiveCmdCheckBox.TabIndex = 4;
@@ -470,13 +487,14 @@ namespace PM_plus {
             this.ChildProcessListBox.ItemHeight = 12;
             this.ChildProcessListBox.Location = new System.Drawing.Point(305, 127);
             this.ChildProcessListBox.Name = "ChildProcessListBox";
-            this.ChildProcessListBox.Size = new System.Drawing.Size(264, 88);
+            this.ChildProcessListBox.Size = new System.Drawing.Size(264, 124);
             this.ChildProcessListBox.TabIndex = 7;
             // 
             // ProcessTitleTextBox
             // 
             this.ProcessTitleTextBox.Location = new System.Drawing.Point(362, 51);
             this.ProcessTitleTextBox.Name = "ProcessTitleTextBox";
+            this.ProcessTitleTextBox.ReadOnly = true;
             this.ProcessTitleTextBox.Size = new System.Drawing.Size(207, 21);
             this.ProcessTitleTextBox.TabIndex = 6;
             // 
@@ -485,6 +503,7 @@ namespace PM_plus {
             this.ProcessMemTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ProcessMemTextBox.Location = new System.Drawing.Point(362, 88);
             this.ProcessMemTextBox.Name = "ProcessMemTextBox";
+            this.ProcessMemTextBox.ReadOnly = true;
             this.ProcessMemTextBox.Size = new System.Drawing.Size(206, 21);
             this.ProcessMemTextBox.TabIndex = 5;
             // 
@@ -493,6 +512,7 @@ namespace PM_plus {
             this.ProcessIdTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ProcessIdTextBox.Location = new System.Drawing.Point(362, 18);
             this.ProcessIdTextBox.Name = "ProcessIdTextBox";
+            this.ProcessIdTextBox.ReadOnly = true;
             this.ProcessIdTextBox.Size = new System.Drawing.Size(207, 21);
             this.ProcessIdTextBox.TabIndex = 4;
             // 
@@ -536,7 +556,7 @@ namespace PM_plus {
             this.ProcessListBox.ItemHeight = 12;
             this.ProcessListBox.Location = new System.Drawing.Point(7, 19);
             this.ProcessListBox.Name = "ProcessListBox";
-            this.ProcessListBox.Size = new System.Drawing.Size(291, 196);
+            this.ProcessListBox.Size = new System.Drawing.Size(291, 232);
             this.ProcessListBox.TabIndex = 0;
             this.ProcessListBox.SelectedIndexChanged += new System.EventHandler(this.ProcessListBox_SelectedIndexChanged);
             // 
@@ -544,16 +564,64 @@ namespace PM_plus {
             // 
             this.ServerInfoGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ServerInfoGroupBox.Controls.Add(this.NetWorkGroup);
             this.ServerInfoGroupBox.Controls.Add(this.groupBox2);
             this.ServerInfoGroupBox.Controls.Add(this.groupBox1);
             this.ServerInfoGroupBox.Controls.Add(this.MonitorFreqLabel);
             this.ServerInfoGroupBox.Controls.Add(this.MonitorFreqComboBox);
             this.ServerInfoGroupBox.Location = new System.Drawing.Point(4, 4);
             this.ServerInfoGroupBox.Name = "ServerInfoGroupBox";
-            this.ServerInfoGroupBox.Size = new System.Drawing.Size(584, 170);
+            this.ServerInfoGroupBox.Size = new System.Drawing.Size(584, 130);
             this.ServerInfoGroupBox.TabIndex = 0;
             this.ServerInfoGroupBox.TabStop = false;
             this.ServerInfoGroupBox.Text = "服务器信息";
+            // 
+            // NetWorkGroup
+            // 
+            this.NetWorkGroup.Controls.Add(this.NetWorkDownloadTextBox);
+            this.NetWorkGroup.Controls.Add(this.NetWorkUploadTextBox);
+            this.NetWorkGroup.Controls.Add(this.NewWorkDownloadLabel);
+            this.NetWorkGroup.Controls.Add(this.NetWorkUploadLabel);
+            this.NetWorkGroup.Location = new System.Drawing.Point(9, 74);
+            this.NetWorkGroup.Name = "NetWorkGroup";
+            this.NetWorkGroup.Size = new System.Drawing.Size(274, 45);
+            this.NetWorkGroup.TabIndex = 7;
+            this.NetWorkGroup.TabStop = false;
+            this.NetWorkGroup.Text = "网速";
+            // 
+            // NetWorkDownloadTextBox
+            // 
+            this.NetWorkDownloadTextBox.Location = new System.Drawing.Point(183, 14);
+            this.NetWorkDownloadTextBox.Name = "NetWorkDownloadTextBox";
+            this.NetWorkDownloadTextBox.ReadOnly = true;
+            this.NetWorkDownloadTextBox.Size = new System.Drawing.Size(85, 21);
+            this.NetWorkDownloadTextBox.TabIndex = 3;
+            // 
+            // NetWorkUploadTextBox
+            // 
+            this.NetWorkUploadTextBox.Location = new System.Drawing.Point(39, 14);
+            this.NetWorkUploadTextBox.Name = "NetWorkUploadTextBox";
+            this.NetWorkUploadTextBox.ReadOnly = true;
+            this.NetWorkUploadTextBox.Size = new System.Drawing.Size(85, 21);
+            this.NetWorkUploadTextBox.TabIndex = 2;
+            // 
+            // NewWorkDownloadLabel
+            // 
+            this.NewWorkDownloadLabel.AutoSize = true;
+            this.NewWorkDownloadLabel.Location = new System.Drawing.Point(148, 17);
+            this.NewWorkDownloadLabel.Name = "NewWorkDownloadLabel";
+            this.NewWorkDownloadLabel.Size = new System.Drawing.Size(29, 12);
+            this.NewWorkDownloadLabel.TabIndex = 1;
+            this.NewWorkDownloadLabel.Text = "下载";
+            // 
+            // NetWorkUploadLabel
+            // 
+            this.NetWorkUploadLabel.AutoSize = true;
+            this.NetWorkUploadLabel.Location = new System.Drawing.Point(6, 17);
+            this.NetWorkUploadLabel.Name = "NetWorkUploadLabel";
+            this.NetWorkUploadLabel.Size = new System.Drawing.Size(29, 12);
+            this.NetWorkUploadLabel.TabIndex = 0;
+            this.NetWorkUploadLabel.Text = "上传";
             // 
             // groupBox2
             // 
@@ -565,9 +633,9 @@ namespace PM_plus {
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.MemoryTotalLabel);
             this.groupBox2.Controls.Add(this.MemoryTotalTextBox);
-            this.groupBox2.Location = new System.Drawing.Point(7, 78);
+            this.groupBox2.Location = new System.Drawing.Point(289, 20);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(571, 56);
+            this.groupBox2.Size = new System.Drawing.Size(289, 48);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "内存";
@@ -575,7 +643,7 @@ namespace PM_plus {
             // MemoryAvailableLabel
             // 
             this.MemoryAvailableLabel.AutoSize = true;
-            this.MemoryAvailableLabel.Location = new System.Drawing.Point(381, 24);
+            this.MemoryAvailableLabel.Location = new System.Drawing.Point(189, 17);
             this.MemoryAvailableLabel.Name = "MemoryAvailableLabel";
             this.MemoryAvailableLabel.Size = new System.Drawing.Size(29, 12);
             this.MemoryAvailableLabel.TabIndex = 8;
@@ -583,22 +651,24 @@ namespace PM_plus {
             // 
             // MemoryAvailableTextBox
             // 
-            this.MemoryAvailableTextBox.Location = new System.Drawing.Point(416, 20);
+            this.MemoryAvailableTextBox.Location = new System.Drawing.Point(224, 14);
             this.MemoryAvailableTextBox.Name = "MemoryAvailableTextBox";
-            this.MemoryAvailableTextBox.Size = new System.Drawing.Size(100, 21);
+            this.MemoryAvailableTextBox.ReadOnly = true;
+            this.MemoryAvailableTextBox.Size = new System.Drawing.Size(55, 21);
             this.MemoryAvailableTextBox.TabIndex = 7;
             // 
             // MemoryUsedTextBox
             // 
-            this.MemoryUsedTextBox.Location = new System.Drawing.Point(229, 20);
+            this.MemoryUsedTextBox.Location = new System.Drawing.Point(127, 14);
             this.MemoryUsedTextBox.Name = "MemoryUsedTextBox";
-            this.MemoryUsedTextBox.Size = new System.Drawing.Size(100, 21);
+            this.MemoryUsedTextBox.ReadOnly = true;
+            this.MemoryUsedTextBox.Size = new System.Drawing.Size(56, 21);
             this.MemoryUsedTextBox.TabIndex = 6;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(193, 24);
+            this.label4.Location = new System.Drawing.Point(92, 17);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 5;
@@ -607,7 +677,7 @@ namespace PM_plus {
             // MemoryTotalLabel
             // 
             this.MemoryTotalLabel.AutoSize = true;
-            this.MemoryTotalLabel.Location = new System.Drawing.Point(13, 23);
+            this.MemoryTotalLabel.Location = new System.Drawing.Point(6, 17);
             this.MemoryTotalLabel.Name = "MemoryTotalLabel";
             this.MemoryTotalLabel.Size = new System.Drawing.Size(17, 12);
             this.MemoryTotalLabel.TabIndex = 4;
@@ -615,22 +685,21 @@ namespace PM_plus {
             // 
             // MemoryTotalTextBox
             // 
-            this.MemoryTotalTextBox.Location = new System.Drawing.Point(48, 20);
+            this.MemoryTotalTextBox.Location = new System.Drawing.Point(30, 14);
             this.MemoryTotalTextBox.Name = "MemoryTotalTextBox";
-            this.MemoryTotalTextBox.Size = new System.Drawing.Size(94, 21);
+            this.MemoryTotalTextBox.ReadOnly = true;
+            this.MemoryTotalTextBox.Size = new System.Drawing.Size(56, 21);
             this.MemoryTotalTextBox.TabIndex = 3;
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.CpuIdleLabel);
             this.groupBox1.Controls.Add(this.CpuUsedLabel);
             this.groupBox1.Controls.Add(this.CpuUsedTextBox);
             this.groupBox1.Controls.Add(this.CpuIdleTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(7, 21);
+            this.groupBox1.Location = new System.Drawing.Point(7, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(571, 51);
+            this.groupBox1.Size = new System.Drawing.Size(276, 48);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "CPU";
@@ -638,7 +707,7 @@ namespace PM_plus {
             // CpuIdleLabel
             // 
             this.CpuIdleLabel.AutoSize = true;
-            this.CpuIdleLabel.Location = new System.Drawing.Point(194, 23);
+            this.CpuIdleLabel.Location = new System.Drawing.Point(150, 17);
             this.CpuIdleLabel.Name = "CpuIdleLabel";
             this.CpuIdleLabel.Size = new System.Drawing.Size(29, 12);
             this.CpuIdleLabel.TabIndex = 6;
@@ -647,7 +716,7 @@ namespace PM_plus {
             // CpuUsedLabel
             // 
             this.CpuUsedLabel.AutoSize = true;
-            this.CpuUsedLabel.Location = new System.Drawing.Point(13, 21);
+            this.CpuUsedLabel.Location = new System.Drawing.Point(6, 17);
             this.CpuUsedLabel.Name = "CpuUsedLabel";
             this.CpuUsedLabel.Size = new System.Drawing.Size(29, 12);
             this.CpuUsedLabel.TabIndex = 5;
@@ -655,23 +724,25 @@ namespace PM_plus {
             // 
             // CpuUsedTextBox
             // 
-            this.CpuUsedTextBox.Location = new System.Drawing.Point(48, 18);
+            this.CpuUsedTextBox.Location = new System.Drawing.Point(41, 14);
             this.CpuUsedTextBox.Name = "CpuUsedTextBox";
-            this.CpuUsedTextBox.Size = new System.Drawing.Size(94, 21);
+            this.CpuUsedTextBox.ReadOnly = true;
+            this.CpuUsedTextBox.Size = new System.Drawing.Size(85, 21);
             this.CpuUsedTextBox.TabIndex = 1;
             // 
             // CpuIdleTextBox
             // 
-            this.CpuIdleTextBox.Location = new System.Drawing.Point(229, 18);
+            this.CpuIdleTextBox.Location = new System.Drawing.Point(185, 14);
             this.CpuIdleTextBox.Name = "CpuIdleTextBox";
-            this.CpuIdleTextBox.Size = new System.Drawing.Size(100, 21);
+            this.CpuIdleTextBox.ReadOnly = true;
+            this.CpuIdleTextBox.Size = new System.Drawing.Size(85, 21);
             this.CpuIdleTextBox.TabIndex = 4;
             // 
             // MonitorFreqLabel
             // 
-            this.MonitorFreqLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.MonitorFreqLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MonitorFreqLabel.AutoSize = true;
-            this.MonitorFreqLabel.Location = new System.Drawing.Point(470, 144);
+            this.MonitorFreqLabel.Location = new System.Drawing.Point(470, 94);
             this.MonitorFreqLabel.Name = "MonitorFreqLabel";
             this.MonitorFreqLabel.Size = new System.Drawing.Size(41, 12);
             this.MonitorFreqLabel.TabIndex = 2;
@@ -687,7 +758,7 @@ namespace PM_plus {
             "5",
             "10",
             "30"});
-            this.MonitorFreqComboBox.Location = new System.Drawing.Point(517, 140);
+            this.MonitorFreqComboBox.Location = new System.Drawing.Point(517, 91);
             this.MonitorFreqComboBox.Name = "MonitorFreqComboBox";
             this.MonitorFreqComboBox.Size = new System.Drawing.Size(61, 20);
             this.MonitorFreqComboBox.TabIndex = 1;
@@ -963,17 +1034,6 @@ namespace PM_plus {
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
             // 
-            // ProcessWindowMinButton
-            // 
-            this.ProcessWindowMinButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ProcessWindowMinButton.Location = new System.Drawing.Point(110, 221);
-            this.ProcessWindowMinButton.Name = "ProcessWindowMinButton";
-            this.ProcessWindowMinButton.Size = new System.Drawing.Size(75, 23);
-            this.ProcessWindowMinButton.TabIndex = 9;
-            this.ProcessWindowMinButton.Text = "窗口最小化";
-            this.ProcessWindowMinButton.UseVisualStyleBackColor = true;
-            this.ProcessWindowMinButton.Click += new System.EventHandler(this.ProcessWindowMinButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1000,6 +1060,8 @@ namespace PM_plus {
             this.ProjectInfoGroupBox.PerformLayout();
             this.ServerInfoGroupBox.ResumeLayout(false);
             this.ServerInfoGroupBox.PerformLayout();
+            this.NetWorkGroup.ResumeLayout(false);
+            this.NetWorkGroup.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1095,6 +1157,11 @@ namespace PM_plus {
         private System.Windows.Forms.CheckBox ClickActiveCmdCheckBox;
         private System.Windows.Forms.Button FreshProcessButton;
         private System.Windows.Forms.Button ProcessWindowMinButton;
+        private System.Windows.Forms.GroupBox NetWorkGroup;
+        internal System.Windows.Forms.TextBox NetWorkDownloadTextBox;
+        internal System.Windows.Forms.TextBox NetWorkUploadTextBox;
+        private System.Windows.Forms.Label NewWorkDownloadLabel;
+        private System.Windows.Forms.Label NetWorkUploadLabel;
     }
 }
 
