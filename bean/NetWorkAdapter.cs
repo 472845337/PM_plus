@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 
 namespace PM_plus.bean {
     class NetWorkAdapter {
@@ -22,7 +18,7 @@ namespace PM_plus.bean {
         /// <summary>
         /// Preparations for monitoring.
         /// </summary>
-        internal void init() {
+        internal void Init() {
             // Since dlValueOld and ulValueOld are used in method refresh() to calculate network speed, they must have be initialized.
             this.dlValueOld = this.dlCounter.NextSample().RawValue;
             this.ulValueOld = this.ulCounter.NextSample().RawValue;
@@ -31,7 +27,7 @@ namespace PM_plus.bean {
         /// Obtain new sample from performance counters, and refresh the values saved in dlSpeed, ulSpeed, etc.
         /// This method is supposed to be called only in NetworkMonitor, one time every second.
         /// </summary>
-        internal void refresh() {
+        internal void Refresh() {
             this.dlValue = this.dlCounter.NextSample().RawValue;
             this.ulValue = this.ulCounter.NextSample().RawValue;
 

@@ -447,9 +447,10 @@ namespace PM_plus {
                 goto end;
             }
             // 当前数据写进文件中
-            HttpSendHistory hsh = new HttpSendHistory();
-            hsh.url = httpUrl;
-            hsh.type = httpType;
+            HttpSendHistory hsh = new HttpSendHistory {
+                Url = httpUrl,
+                Type = httpType
+            };
             hshs.saveData(hsh);
             String result;
             if (Config.HTTP_TYPE_POST.Equals(httpType)) {
@@ -472,7 +473,7 @@ namespace PM_plus {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e) {
+        private void HttpResponseClearButton_Click(object sender, EventArgs e) {
             HttpSendResponseRichTextBox.Text = "";
         }
 
@@ -491,6 +492,14 @@ namespace PM_plus {
                 TimerService.ServerInfoTimer.Interval = monitorFrequenceInterval * 1000;
             } else {
                 TimerService.ServerInfoTimer.Enabled = false;
+                // 清空监控中所有数据
+                CpuUsedTextBox.Text = "";
+                CpuIdleTextBox.Text = "";
+                MemoryTotalTextBox.Text = "";
+                MemoryAvailableTextBox.Text = "";
+                MemoryUsedTextBox.Text = "";
+                NetWorkDownloadTextBox.Text = "";
+                NetWorkUploadTextBox.Text = "";
             }
         }
         /// <summary>
@@ -506,7 +515,7 @@ namespace PM_plus {
                 ProcessIdTextBox.Text = selectProcess.Id.ToString();
                 ProcessTitleTextBox.Text = selectProcess.MainWindowTitle;
                 // 展示内存占用和子进程
-                showMemAndChildProcess(selectProcess);
+                ShowMemAndChildProcess(selectProcess);
 
                 if (ClickActiveCmdCheckBox.Checked) {
                     // 并将当前窗口置顶
@@ -514,11 +523,11 @@ namespace PM_plus {
                 }
 
             } else {
-                clearProcessInfo();
+                ClearProcessInfo();
             }
         }
 
-        private void showMemAndChildProcess(Process p) {
+        private void ShowMemAndChildProcess(Process p) {
             // 内存占用量，需要将子进程也进行统计
             float mem = 0.0F;
             ChildProcessListBox.Items.Clear();
@@ -535,7 +544,7 @@ namespace PM_plus {
             ProcessMemTextBox.Text = StringUtils.FormatSize(mem + p.WorkingSet64);
         }
 
-        private void clearProcessInfo() {
+        private void ClearProcessInfo() {
             ProcessIdTextBox.Text = "";
             ProcessTitleTextBox.Text = "";
             ProcessMemTextBox.Text = "";
@@ -550,7 +559,7 @@ namespace PM_plus {
             // 重新获取进程
             TimerService.MonitorProcess();
             // 清空进程详细显示
-            clearProcessInfo();
+            ClearProcessInfo();
         }
 
         /// <summary>

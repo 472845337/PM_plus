@@ -4,6 +4,7 @@ using PM_plus.utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PM_plus.service {
@@ -16,10 +17,8 @@ namespace PM_plus.service {
         private static readonly System.Timers.Timer MonitorTimer = new System.Timers.Timer();
         private static readonly System.Timers.Timer BtnDoubleCheckTimer = new System.Timers.Timer(500);
         public static readonly System.Timers.Timer ServerInfoTimer = new System.Timers.Timer();
-        // 到时间后执行的计时器
-        private static readonly System.Timers.Timer TimeoutTimer = new System.Timers.Timer();
         // 网络适配器集合
-        private static List<NetWorkAdapter> adapters = new List<NetWorkAdapter>();
+        private readonly static List<NetWorkAdapter> adapters = new List<NetWorkAdapter>();
 
         static TimerService() {
             // 双击计时器不开启
@@ -38,10 +37,11 @@ namespace PM_plus.service {
                 if (name == "MS TCP Loopback interface")
                     continue;
                 // Create an instance of NetworkAdapter class, and create performance counters for it.
-                NetWorkAdapter adapter = new NetWorkAdapter(name);
-                adapter.dlCounter = new PerformanceCounter("Network Interface", "Bytes Received/sec", name);
-                adapter.ulCounter = new PerformanceCounter("Network Interface", "Bytes Sent/sec", name);
-                adapter.init();
+                NetWorkAdapter adapter = new NetWorkAdapter(name) {
+                    dlCounter = new PerformanceCounter("Network Interface", "Bytes Received/sec", name),
+                    ulCounter = new PerformanceCounter("Network Interface", "Bytes Sent/sec", name)
+                };
+                adapter.Init();
                 adapters.Add(adapter);    // Add it to ArrayList adapter
             }
         }
@@ -173,15 +173,15 @@ namespace PM_plus.service {
             MonitorProject(projectSection);
         }
         // 获取CPU和内存使用率
-        static PerformanceCounter cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+        readonly static PerformanceCounter cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
         // CPU空闲率
-        static PerformanceCounter idleCounter = new PerformanceCounter("Processor", "% Idle Time", "_Total");
+        readonly static PerformanceCounter idleCounter = new PerformanceCounter("Processor", "% Idle Time", "_Total");
         // 内存可用大小
-        static PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
+        readonly static PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
         // 内存已用大小
-        static PerformanceCounter usedRamCounter = new PerformanceCounter("Memory", "% Committed Bytes In Use");
+        readonly static PerformanceCounter usedRamCounter = new PerformanceCounter("Memory", "% Committed Bytes In Use");
         // 网络情况
-        static PerformanceCounterCategory category = new PerformanceCounterCategory("Network Interface");
+        readonly static PerformanceCounterCategory category = new PerformanceCounterCategory("Network Interface");
 
 
         /// <summary>
@@ -204,20 +204,29 @@ namespace PM_plus.service {
             string ramUsedStr = string.Format("{0:f2} %", ramUsed);
             double downloadSpeed = 0.0F;
             double uploadSpeed = 0.0F;
-            foreach(NetWorkAdapter adapter in adapters) {
-                adapter.refresh();
+            if(ServerInfoTimer.Interval != 1000) {
+                // 如果监控频率不为1秒的话，则需要执行该步骤
+                foreach (NetWorkAdapter adapter in adapters) {
+                    adapter.Init();
+                }
+            }
+            // 一秒后，再计算一下网络流量
+            Thread.Sleep(1000);
+            foreach (NetWorkAdapter adapter in adapters) {
+                adapter.Refresh();
                 downloadSpeed += adapter.DownloadSpeedKbps;
                 uploadSpeed += adapter.UploadSpeedKbps;
             }
             string downloadSpeedStr = string.Format("{0:n} KB/s", downloadSpeed);
             string uploadSpeedStr = string.Format("{0:n} KB/s", uploadSpeed);
-
-            Config.mainForm.CpuUsedTextBox.Text = cpuUsageStr;
-            Config.mainForm.CpuIdleTextBox.Text = cpuIdleStr;
-            Config.mainForm.MemoryAvailableTextBox.Text = ramAvaiableStr;
-            Config.mainForm.MemoryUsedTextBox.Text = ramUsedStr;
-            Config.mainForm.NetWorkDownloadTextBox.Text = downloadSpeedStr;
-            Config.mainForm.NetWorkUploadTextBox.Text = uploadSpeedStr;
+            if (ServerInfoTimer.Enabled) {
+                Config.mainForm.CpuUsedTextBox.Text = cpuUsageStr;
+                Config.mainForm.CpuIdleTextBox.Text = cpuIdleStr;
+                Config.mainForm.MemoryAvailableTextBox.Text = ramAvaiableStr;
+                Config.mainForm.MemoryUsedTextBox.Text = ramUsedStr;
+                Config.mainForm.NetWorkDownloadTextBox.Text = downloadSpeedStr;
+                Config.mainForm.NetWorkUploadTextBox.Text = uploadSpeedStr;
+            }
         }
 
         public static void MonitorProcess() {

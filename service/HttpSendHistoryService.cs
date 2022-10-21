@@ -14,7 +14,7 @@ namespace PM_plus.service {
     /// </summary>
     class HttpSendHistoryService {
 
-        SQLiteHelper sqlLiteHelper = data.SQLiteFactory.getSQLiteHelper(Config.DB_NAME, Config.DB_PASSWORD);
+        SQLiteHelper sqlLiteHelper = data.SQLiteFactory.GetSQLiteHelper(Config.DB_NAME, Config.DB_PASSWORD);
 
 
         public HttpSendHistoryService() {
@@ -31,13 +31,13 @@ namespace PM_plus.service {
         public int saveData(HttpSendHistory httpSendHistory) {
             // 查询是否存在类似数据
             HttpSendHistory queryModel = new HttpSendHistory();
-            queryModel.url = httpSendHistory.url;
-            queryModel.type = httpSendHistory.type;
+            queryModel.Url = httpSendHistory.Url;
+            queryModel.Type = httpSendHistory.Type;
             List<HttpSendHistory> list = selectList(queryModel);
             if (null != list && list.Count > 0) {
                 // 存在相同数据
                 HttpSendHistory history = list[0];
-                history.lastUsedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                history.LastUsedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 return updateData(history);
             }else {
                 return insertData(httpSendHistory);
@@ -58,7 +58,7 @@ namespace PM_plus.service {
         /// <param name="httpSendHistory"></param>
         /// <returns></returns>
         public int insertData(HttpSendHistory httpSendHistory) {
-            httpSendHistory.createTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            httpSendHistory.CreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             return sqlLiteHelper.InsertData(getTableName(), getParams(httpSendHistory));
         }
 
@@ -82,7 +82,7 @@ namespace PM_plus.service {
         /// <returns></returns>
         public int updateData(HttpSendHistory httpSendHistory) {
             List<SQLiteParameter> paramList = new List<SQLiteParameter>();
-            SQLiteParameter idParame = new SQLiteParameter("id", httpSendHistory.id);
+            SQLiteParameter idParame = new SQLiteParameter("id", httpSendHistory.Id);
             paramList.Add(idParame);
             return sqlLiteHelper.Update(getTableName(), getParams(httpSendHistory), "id=@id", paramList.ToArray());
         }
@@ -112,11 +112,11 @@ namespace PM_plus.service {
             while (reader.Read()) {
                 HttpSendHistory httpSendHistory = new HttpSendHistory();
 
-                httpSendHistory.id = Int32.Parse(reader["id"].ToString());
-                httpSendHistory.url = reader["url"].ToString();
-                httpSendHistory.type = reader["type"].ToString();
-                httpSendHistory.createTime = reader["create_time"].ToString();
-                httpSendHistory.lastUsedTime = reader["last_used_time"].ToString();
+                httpSendHistory.Id = Int32.Parse(reader["id"].ToString());
+                httpSendHistory.Url = reader["url"].ToString();
+                httpSendHistory.Type = reader["type"].ToString();
+                httpSendHistory.CreateTime = reader["create_time"].ToString();
+                httpSendHistory.LastUsedTime = reader["last_used_time"].ToString();
                 list.Add(httpSendHistory);
             }
             return list;
@@ -182,7 +182,7 @@ namespace PM_plus.service {
             object[] tableAttrs = typeof(HttpSendHistory).GetCustomAttributes(typeof(Table), true);
             if (tableAttrs != null && tableAttrs.Length > 0) {
                 Table table = (Table)tableAttrs[0];
-                tableName = table.tableName;
+                tableName = table.TableName;
             } else {
                 throw new Exception("HttpSendHistory class not set Table attributes");
             }

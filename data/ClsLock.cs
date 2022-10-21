@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
 
 namespace PM_plus.data {
@@ -23,7 +19,7 @@ namespace PM_plus.data {
             /// <summary>
             /// 是否为写入模式
             /// </summary>
-            private bool _IsWrite;
+            private readonly bool _IsWrite;
             /// <summary>
             /// 利用IDisposable的using语法糖方便的释放锁定操作构造函数
             /// </summary>

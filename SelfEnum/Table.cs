@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PM_plus.SelfEnum {
     class Table:Attribute {
 
         public Table(String tableName) {
-            this.tableName = tableName;
+            this.TableName = tableName;
         }
 
-        public String tableName { get; set; }
+        public String TableName { get; set; }
     }
 }

@@ -58,14 +58,8 @@ namespace PM_plus.data {
         /// <param name="dataFile">数据库地址</param>
         /// <param name="PassWord">数据库密码</param>
         public SQLiteHelper(string dataFile, string PassWord) {
-            if (null == dataFile) {
-                throw new ArgumentNullException("dataFile==null");
-            }
-            if (null == PassWord) {
-                throw new ArgumentNullException("PassWord==null");
-            }
-            this.mdataFile = dataFile;
-            this.mPassWord = PassWord;
+            this.mdataFile = dataFile ?? throw new ArgumentNullException("dataFile==null");
+            this.mPassWord = PassWord ?? throw new ArgumentNullException("PassWord==null");
             if (!RWL.ContainsKey(dataFile)) {
                 LockName = dataFile;
                 RWL.Add(dataFile, new ClsLock());

@@ -29,8 +29,8 @@ namespace PM_plus {
             int count = HistoryListBox.SelectedItems.Count;
             if (count > 0) {
                 HttpSendHistory history = (HistoryListBox.SelectedItem as HttpSendHistory);
-                Config.mainForm.UrlTextBox.Text = history.url;
-                Config.mainForm.TypeComboBox.SelectedItem = history.type;
+                Config.mainForm.UrlTextBox.Text = history.Url;
+                Config.mainForm.TypeComboBox.SelectedItem = history.Type;
             }
         }
 
@@ -38,7 +38,7 @@ namespace PM_plus {
             int count = HistoryListBox.SelectedItems.Count;
             if(count > 0) {
                 HttpSendHistory history = (HistoryListBox.SelectedItem as HttpSendHistory);
-                hshs.deleteData(history.id);
+                hshs.deleteData(history.Id);
                 HistoryListBox.Items.Remove(HistoryListBox.SelectedItem);
             } else {
                 MessageBox.Show("请选择删除数据！");
