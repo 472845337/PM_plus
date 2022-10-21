@@ -57,6 +57,7 @@ namespace PM_plus.config
         public const String INI_KEY_SYSTEM_SKIN = "skin";
         public const String INI_KEY_SYSTEM_SKIN_SWITCH = "skin_switch";
         public const String INI_KEY_SYSTEM_FONT_FAMILY = "font_family";
+        public const String INI_KEY_SYSTEM_CLICK_ACTIVE = "click_active";
 
         public const String INI_KEY_LOG_SWITCH = "switch";
         public const String INI_KEY_LOG_FILENAME = "filename";

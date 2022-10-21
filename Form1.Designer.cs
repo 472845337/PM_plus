@@ -49,8 +49,16 @@ namespace PM_plus {
             this.SystemConfig_SaveLabel = new System.Windows.Forms.Label();
             this.SystemConfig_Save_Button = new System.Windows.Forms.Button();
             this.MonitorTabPage = new System.Windows.Forms.TabPage();
-            this.MonitorFreqLabel = new System.Windows.Forms.Label();
-            this.MonitorFreqComboBox = new System.Windows.Forms.ComboBox();
+            this.ProjectInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.ClickActiveCmdCheckBox = new System.Windows.Forms.CheckBox();
+            this.ChildProcessListBox = new System.Windows.Forms.ListBox();
+            this.ProcessTitleTextBox = new System.Windows.Forms.TextBox();
+            this.ProcessMemTextBox = new System.Windows.Forms.TextBox();
+            this.ProcessIdTextBox = new System.Windows.Forms.TextBox();
+            this.ProcessMemLabel = new System.Windows.Forms.Label();
+            this.ProcessTitleLabel = new System.Windows.Forms.Label();
+            this.ProcessIdLabel = new System.Windows.Forms.Label();
+            this.ProcessListBox = new System.Windows.Forms.ListBox();
             this.ServerInfoGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MemoryAvailableLabel = new System.Windows.Forms.Label();
@@ -64,6 +72,8 @@ namespace PM_plus {
             this.CpuUsedLabel = new System.Windows.Forms.Label();
             this.CpuUsedTextBox = new System.Windows.Forms.TextBox();
             this.CpuIdleTextBox = new System.Windows.Forms.TextBox();
+            this.MonitorFreqLabel = new System.Windows.Forms.Label();
+            this.MonitorFreqComboBox = new System.Windows.Forms.ComboBox();
             this.DiySetTabPage = new System.Windows.Forms.TabPage();
             this.SkinSwitchChecked = new System.Windows.Forms.CheckBox();
             this.DiySetMsgLabel = new System.Windows.Forms.Label();
@@ -90,11 +100,13 @@ namespace PM_plus {
             this.JDKPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.LogPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.FreshProcessButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
             this.System_GroupBox.SuspendLayout();
             this.MonitorTabPage.SuspendLayout();
+            this.ProjectInfoGroupBox.SuspendLayout();
             this.ServerInfoGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -393,8 +405,7 @@ namespace PM_plus {
             // 
             // MonitorTabPage
             // 
-            this.MonitorTabPage.Controls.Add(this.MonitorFreqLabel);
-            this.MonitorTabPage.Controls.Add(this.MonitorFreqComboBox);
+            this.MonitorTabPage.Controls.Add(this.ProjectInfoGroupBox);
             this.MonitorTabPage.Controls.Add(this.ServerInfoGroupBox);
             this.MonitorTabPage.Location = new System.Drawing.Point(4, 29);
             this.MonitorTabPage.Name = "MonitorTabPage";
@@ -403,48 +414,138 @@ namespace PM_plus {
             this.MonitorTabPage.Text = "监控";
             this.MonitorTabPage.UseVisualStyleBackColor = true;
             // 
-            // MonitorFreqLabel
+            // ProjectInfoGroupBox
             // 
-            this.MonitorFreqLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.MonitorFreqLabel.AutoSize = true;
-            this.MonitorFreqLabel.Location = new System.Drawing.Point(4, 388);
-            this.MonitorFreqLabel.Name = "MonitorFreqLabel";
-            this.MonitorFreqLabel.Size = new System.Drawing.Size(41, 12);
-            this.MonitorFreqLabel.TabIndex = 2;
-            this.MonitorFreqLabel.Text = "刷新率";
+            this.ProjectInfoGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProjectInfoGroupBox.Controls.Add(this.FreshProcessButton);
+            this.ProjectInfoGroupBox.Controls.Add(this.ClickActiveCmdCheckBox);
+            this.ProjectInfoGroupBox.Controls.Add(this.ChildProcessListBox);
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessTitleTextBox);
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessMemTextBox);
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessIdTextBox);
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessMemLabel);
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessTitleLabel);
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessIdLabel);
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessListBox);
+            this.ProjectInfoGroupBox.Location = new System.Drawing.Point(6, 180);
+            this.ProjectInfoGroupBox.Name = "ProjectInfoGroupBox";
+            this.ProjectInfoGroupBox.Size = new System.Drawing.Size(576, 249);
+            this.ProjectInfoGroupBox.TabIndex = 3;
+            this.ProjectInfoGroupBox.TabStop = false;
+            this.ProjectInfoGroupBox.Text = "进程信息";
             // 
-            // MonitorFreqComboBox
+            // ClickActiveCmdCheckBox
             // 
-            this.MonitorFreqComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.MonitorFreqComboBox.FormattingEnabled = true;
-            this.MonitorFreqComboBox.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "5",
-            "10",
-            "30"});
-            this.MonitorFreqComboBox.Location = new System.Drawing.Point(51, 388);
-            this.MonitorFreqComboBox.Name = "MonitorFreqComboBox";
-            this.MonitorFreqComboBox.Size = new System.Drawing.Size(61, 20);
-            this.MonitorFreqComboBox.TabIndex = 1;
-            this.MonitorFreqComboBox.SelectedIndexChanged += new System.EventHandler(this.MonitorFreqComboBox_SelectedIndexChanged);
+            this.ClickActiveCmdCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ClickActiveCmdCheckBox.AutoSize = true;
+            this.ClickActiveCmdCheckBox.Location = new System.Drawing.Point(7, 227);
+            this.ClickActiveCmdCheckBox.Name = "ClickActiveCmdCheckBox";
+            this.ClickActiveCmdCheckBox.Size = new System.Drawing.Size(96, 16);
+            this.ClickActiveCmdCheckBox.TabIndex = 4;
+            this.ClickActiveCmdCheckBox.Text = "点击激活窗口";
+            this.ClickActiveCmdCheckBox.UseVisualStyleBackColor = true;
+            this.ClickActiveCmdCheckBox.CheckedChanged += new System.EventHandler(this.ClickActiveCmdCheckBox_CheckedChanged);
+            // 
+            // ChildProcessListBox
+            // 
+            this.ChildProcessListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChildProcessListBox.FormattingEnabled = true;
+            this.ChildProcessListBox.HorizontalScrollbar = true;
+            this.ChildProcessListBox.ItemHeight = 12;
+            this.ChildProcessListBox.Location = new System.Drawing.Point(305, 127);
+            this.ChildProcessListBox.Name = "ChildProcessListBox";
+            this.ChildProcessListBox.Size = new System.Drawing.Size(264, 88);
+            this.ChildProcessListBox.TabIndex = 7;
+            // 
+            // ProcessTitleTextBox
+            // 
+            this.ProcessTitleTextBox.Location = new System.Drawing.Point(362, 51);
+            this.ProcessTitleTextBox.Name = "ProcessTitleTextBox";
+            this.ProcessTitleTextBox.Size = new System.Drawing.Size(207, 21);
+            this.ProcessTitleTextBox.TabIndex = 6;
+            // 
+            // ProcessMemTextBox
+            // 
+            this.ProcessMemTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProcessMemTextBox.Location = new System.Drawing.Point(362, 88);
+            this.ProcessMemTextBox.Name = "ProcessMemTextBox";
+            this.ProcessMemTextBox.Size = new System.Drawing.Size(207, 21);
+            this.ProcessMemTextBox.TabIndex = 5;
+            // 
+            // ProcessIdTextBox
+            // 
+            this.ProcessIdTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProcessIdTextBox.Location = new System.Drawing.Point(362, 18);
+            this.ProcessIdTextBox.Name = "ProcessIdTextBox";
+            this.ProcessIdTextBox.Size = new System.Drawing.Size(207, 21);
+            this.ProcessIdTextBox.TabIndex = 4;
+            // 
+            // ProcessMemLabel
+            // 
+            this.ProcessMemLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProcessMemLabel.AutoSize = true;
+            this.ProcessMemLabel.Location = new System.Drawing.Point(315, 91);
+            this.ProcessMemLabel.Name = "ProcessMemLabel";
+            this.ProcessMemLabel.Size = new System.Drawing.Size(29, 12);
+            this.ProcessMemLabel.TabIndex = 3;
+            this.ProcessMemLabel.Text = "内存";
+            // 
+            // ProcessTitleLabel
+            // 
+            this.ProcessTitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProcessTitleLabel.AutoSize = true;
+            this.ProcessTitleLabel.Location = new System.Drawing.Point(315, 54);
+            this.ProcessTitleLabel.Name = "ProcessTitleLabel";
+            this.ProcessTitleLabel.Size = new System.Drawing.Size(29, 12);
+            this.ProcessTitleLabel.TabIndex = 2;
+            this.ProcessTitleLabel.Text = "标题";
+            // 
+            // ProcessIdLabel
+            // 
+            this.ProcessIdLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProcessIdLabel.AutoSize = true;
+            this.ProcessIdLabel.Location = new System.Drawing.Point(315, 21);
+            this.ProcessIdLabel.Name = "ProcessIdLabel";
+            this.ProcessIdLabel.Size = new System.Drawing.Size(41, 12);
+            this.ProcessIdLabel.TabIndex = 1;
+            this.ProcessIdLabel.Text = "进程ID";
+            // 
+            // ProcessListBox
+            // 
+            this.ProcessListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProcessListBox.FormattingEnabled = true;
+            this.ProcessListBox.HorizontalScrollbar = true;
+            this.ProcessListBox.ItemHeight = 12;
+            this.ProcessListBox.Location = new System.Drawing.Point(7, 21);
+            this.ProcessListBox.Name = "ProcessListBox";
+            this.ProcessListBox.Size = new System.Drawing.Size(291, 196);
+            this.ProcessListBox.TabIndex = 0;
+            this.ProcessListBox.SelectedIndexChanged += new System.EventHandler(this.ProcessListBox_SelectedIndexChanged);
             // 
             // ServerInfoGroupBox
             // 
-            this.ServerInfoGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ServerInfoGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ServerInfoGroupBox.Controls.Add(this.groupBox2);
             this.ServerInfoGroupBox.Controls.Add(this.groupBox1);
+            this.ServerInfoGroupBox.Controls.Add(this.MonitorFreqLabel);
+            this.ServerInfoGroupBox.Controls.Add(this.MonitorFreqComboBox);
             this.ServerInfoGroupBox.Location = new System.Drawing.Point(4, 4);
             this.ServerInfoGroupBox.Name = "ServerInfoGroupBox";
-            this.ServerInfoGroupBox.Size = new System.Drawing.Size(584, 377);
+            this.ServerInfoGroupBox.Size = new System.Drawing.Size(584, 170);
             this.ServerInfoGroupBox.TabIndex = 0;
             this.ServerInfoGroupBox.TabStop = false;
             this.ServerInfoGroupBox.Text = "服务器信息";
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.MemoryAvailableLabel);
             this.groupBox2.Controls.Add(this.MemoryAvailableTextBox);
             this.groupBox2.Controls.Add(this.MemoryUsedTextBox);
@@ -453,7 +554,7 @@ namespace PM_plus {
             this.groupBox2.Controls.Add(this.MemoryTotalTextBox);
             this.groupBox2.Location = new System.Drawing.Point(7, 78);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(571, 65);
+            this.groupBox2.Size = new System.Drawing.Size(571, 56);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "内存";
@@ -505,10 +606,11 @@ namespace PM_plus {
             this.MemoryTotalTextBox.Name = "MemoryTotalTextBox";
             this.MemoryTotalTextBox.Size = new System.Drawing.Size(94, 21);
             this.MemoryTotalTextBox.TabIndex = 3;
-            this.MemoryTotalTextBox.TextChanged += new System.EventHandler(this.MemoryUsedTextBox_TextChanged);
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.CpuIdleLabel);
             this.groupBox1.Controls.Add(this.CpuUsedLabel);
             this.groupBox1.Controls.Add(this.CpuUsedTextBox);
@@ -551,6 +653,32 @@ namespace PM_plus {
             this.CpuIdleTextBox.Name = "CpuIdleTextBox";
             this.CpuIdleTextBox.Size = new System.Drawing.Size(100, 21);
             this.CpuIdleTextBox.TabIndex = 4;
+            // 
+            // MonitorFreqLabel
+            // 
+            this.MonitorFreqLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.MonitorFreqLabel.AutoSize = true;
+            this.MonitorFreqLabel.Location = new System.Drawing.Point(470, 144);
+            this.MonitorFreqLabel.Name = "MonitorFreqLabel";
+            this.MonitorFreqLabel.Size = new System.Drawing.Size(41, 12);
+            this.MonitorFreqLabel.TabIndex = 2;
+            this.MonitorFreqLabel.Text = "刷新率";
+            // 
+            // MonitorFreqComboBox
+            // 
+            this.MonitorFreqComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MonitorFreqComboBox.FormattingEnabled = true;
+            this.MonitorFreqComboBox.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "5",
+            "10",
+            "30"});
+            this.MonitorFreqComboBox.Location = new System.Drawing.Point(517, 140);
+            this.MonitorFreqComboBox.Name = "MonitorFreqComboBox";
+            this.MonitorFreqComboBox.Size = new System.Drawing.Size(61, 20);
+            this.MonitorFreqComboBox.TabIndex = 1;
+            this.MonitorFreqComboBox.SelectedIndexChanged += new System.EventHandler(this.MonitorFreqComboBox_SelectedIndexChanged);
             // 
             // DiySetTabPage
             // 
@@ -704,9 +832,9 @@ namespace PM_plus {
             // 
             // SendHistoryButton
             // 
-            this.SendHistoryButton.Location = new System.Drawing.Point(0, 49);
+            this.SendHistoryButton.Location = new System.Drawing.Point(471, 108);
             this.SendHistoryButton.Name = "SendHistoryButton";
-            this.SendHistoryButton.Size = new System.Drawing.Size(49, 23);
+            this.SendHistoryButton.Size = new System.Drawing.Size(52, 26);
             this.SendHistoryButton.TabIndex = 8;
             this.SendHistoryButton.Text = "历史";
             this.SendHistoryButton.UseVisualStyleBackColor = true;
@@ -747,7 +875,7 @@ namespace PM_plus {
             // HttpSendButton
             // 
             this.HttpSendButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.HttpSendButton.Location = new System.Drawing.Point(526, 110);
+            this.HttpSendButton.Location = new System.Drawing.Point(526, 108);
             this.HttpSendButton.Name = "HttpSendButton";
             this.HttpSendButton.Size = new System.Drawing.Size(52, 26);
             this.HttpSendButton.TabIndex = 4;
@@ -822,6 +950,17 @@ namespace PM_plus {
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
             // 
+            // FreshProcessButton
+            // 
+            this.FreshProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.FreshProcessButton.Location = new System.Drawing.Point(493, 222);
+            this.FreshProcessButton.Name = "FreshProcessButton";
+            this.FreshProcessButton.Size = new System.Drawing.Size(75, 23);
+            this.FreshProcessButton.TabIndex = 8;
+            this.FreshProcessButton.Text = "刷新";
+            this.FreshProcessButton.UseVisualStyleBackColor = true;
+            this.FreshProcessButton.Click += new System.EventHandler(this.FreshProcessButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -844,8 +983,10 @@ namespace PM_plus {
             this.System_GroupBox.ResumeLayout(false);
             this.System_GroupBox.PerformLayout();
             this.MonitorTabPage.ResumeLayout(false);
-            this.MonitorTabPage.PerformLayout();
+            this.ProjectInfoGroupBox.ResumeLayout(false);
+            this.ProjectInfoGroupBox.PerformLayout();
             this.ServerInfoGroupBox.ResumeLayout(false);
+            this.ServerInfoGroupBox.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -929,6 +1070,17 @@ namespace PM_plus {
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label CpuIdleLabel;
         private System.Windows.Forms.Label CpuUsedLabel;
+        private System.Windows.Forms.GroupBox ProjectInfoGroupBox;
+        internal System.Windows.Forms.ListBox ChildProcessListBox;
+        internal System.Windows.Forms.TextBox ProcessTitleTextBox;
+        internal System.Windows.Forms.TextBox ProcessMemTextBox;
+        internal System.Windows.Forms.TextBox ProcessIdTextBox;
+        internal System.Windows.Forms.Label ProcessMemLabel;
+        internal System.Windows.Forms.Label ProcessTitleLabel;
+        internal System.Windows.Forms.Label ProcessIdLabel;
+        internal System.Windows.Forms.ListBox ProcessListBox;
+        private System.Windows.Forms.CheckBox ClickActiveCmdCheckBox;
+        private System.Windows.Forms.Button FreshProcessButton;
     }
 }
 

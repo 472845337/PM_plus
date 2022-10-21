@@ -6,7 +6,9 @@ using PM_plus.utils;
 using Sunisoft.IrisSkin;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Management;
 using System.Windows.Forms;
 
 namespace PM_plus {
@@ -79,7 +81,8 @@ namespace PM_plus {
             // 工具面板中设置
             TypeComboBox.Text = TypeComboBox.Items[0].ToString();
             isFinishedInit = true;
-            TimerService.monitorServer();
+            TimerService.MonitorServer();
+            TimerService.MonitorProcess();
         }
 
         /// <summary>
@@ -488,8 +491,55 @@ namespace PM_plus {
             }
         }
 
-        private void MemoryUsedTextBox_TextChanged(object sender, EventArgs e) {
+        private void ProcessListBox_SelectedIndexChanged(object sender, EventArgs e) {
+            if (ProcessListBox.Items.Count > 0 && ProcessListBox.SelectedIndex > -1) {
+                Process selectProcess = (ProcessListBox.SelectedItem as Process);
+                // 展示相关信息
+                ProcessIdTextBox.Text = selectProcess.Id.ToString();
+                ProcessTitleTextBox.Text = selectProcess.MainWindowTitle;
+                // 展示内存占用和子进程
+                showMemAndChildProcess(selectProcess);
 
+                if (ClickActiveCmdCheckBox.Checked) {
+                    // 并将当前窗口置顶
+                    User32Dll.SwitchToThisWindow(selectProcess.MainWindowHandle, true);
+                }
+
+            } else {
+                clearProcessInfo();
+            }
+        }
+
+        private void showMemAndChildProcess(Process p) {
+            // 内存占用量，需要将子进程也进行统计
+            float mem = 0.0F;
+            ChildProcessListBox.Items.Clear();
+            // 当前进程的所有子进程
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + p.Id);
+            ManagementObjectCollection moc = searcher.Get();
+            foreach (ManagementObject mo in moc) {
+                int childPID = Convert.ToInt32(mo["ProcessID"]);
+                Process childProcess = Process.GetProcessById(childPID);
+                mem += childProcess.WorkingSet64;
+                string childProcessInfo = childProcess.Id + "\t" + childProcess.ProcessName + "\t" + StringUtils.FormatSize(childProcess.WorkingSet64);
+                ChildProcessListBox.Items.Add(childProcessInfo);
+            }
+            ProcessMemTextBox.Text = StringUtils.FormatSize(mem + p.WorkingSet64);
+        }
+
+        private void clearProcessInfo() {
+            ProcessIdTextBox.Text = "";
+            ProcessTitleTextBox.Text = "";
+            ProcessMemTextBox.Text = "";
+            ChildProcessListBox.Items.Clear();
+        }
+
+        private void ClickActiveCmdCheckBox_CheckedChanged(object sender, EventArgs e) {
+            IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_CLICK_ACTIVE, ClickActiveCmdCheckBox.Checked.ToString()); ;
+        }
+
+        private void FreshProcessButton_Click(object sender, EventArgs e) {
+            TimerService.MonitorProcess();
         }
     }
 }

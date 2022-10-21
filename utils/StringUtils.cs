@@ -34,5 +34,27 @@ namespace PM_plus.utils
             }
             return str;
         }
+
+        public static String FormatSize(float byteSize) {
+            string unit = "";
+            float count = byteSize;
+            if (byteSize > (1024 * 1024 * 1024 / 2)) {
+                // GB
+                unit = "GB";
+                count = byteSize / 1024.0F / 1024.0F / 1024.0F;
+            } else if (byteSize > (1024 * 1024 / 2)) {
+                // MB
+                unit = "MB";
+                count = byteSize / 1024.0F / 1024.0F;
+            } else if (byteSize > (1024 / 2)) {
+                // KB
+                unit = "KB";
+                count = byteSize / 1024.0F;
+            } else {
+                unit = "B";
+            }
+
+            return string.Format("{0:###,##0.00}" + unit, count);
+        }
     }
 }

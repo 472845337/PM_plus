@@ -171,10 +171,10 @@ namespace PM_plus.service {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public static void ServerTimer_Tick(object sender, EventArgs e) {
-            monitorServer();
+            MonitorServer();
         }
 
-        public static void monitorServer() {
+        public static void MonitorServer() {
             var cpuUsage = cpuCounter.NextValue();
             string cpuUsageStr = string.Format("{0:f2} %", cpuUsage);
             var cpuIdle = idleCounter.NextValue();
@@ -187,6 +187,19 @@ namespace PM_plus.service {
             Config.mainForm.CpuIdleTextBox.Text = cpuIdleStr;
             Config.mainForm.MemoryAvailableTextBox.Text = ramAvaiableStr;
             Config.mainForm.MemoryUsedTextBox.Text = ramUsedStr;
+        }
+
+        public static void MonitorProcess() {
+            Process[] processes = Process.GetProcessesByName("CMD");
+            // 对processes进行排序
+            Array.Sort(processes, (x1, x2) => x1.MainWindowTitle.CompareTo(x2.MainWindowTitle));
+            Config.mainForm.ProcessListBox.Items.Clear();
+            foreach (Process pro in processes) {
+                if (StringUtils.IsNotEmpty(pro.MainWindowTitle)) {
+                    Config.mainForm.ProcessListBox.Items.Add(pro);
+                }
+            }
+            Config.mainForm.ProcessListBox.DisplayMember = "MainWindowTitle";
         }
     }
 }
