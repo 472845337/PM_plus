@@ -293,6 +293,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="resources\menu-icon\project.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Skins\Carlmness\Calmness.gif" />
     <Content Include="Skins\Carlmness\CalmnessColor1.gif" />
     <Content Include="Skins\Carlmness\CalmnessColor2.gif" />

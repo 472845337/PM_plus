@@ -28,6 +28,7 @@ namespace PM_plus {
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectForm));
             this.AddForm_Save_Button = new System.Windows.Forms.Button();
             this.AddForm_Cancel_Button = new System.Windows.Forms.Button();
             this.AddForm_Title_Label = new System.Windows.Forms.Label();
@@ -269,6 +270,7 @@ namespace PM_plus {
             this.Controls.Add(this.AddForm_Title_Label);
             this.Controls.Add(this.AddForm_Cancel_Button);
             this.Controls.Add(this.AddForm_Save_Button);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

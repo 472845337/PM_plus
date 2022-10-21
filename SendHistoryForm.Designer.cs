@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SendHistoryForm));
             this.HistoryListBox = new System.Windows.Forms.ListBox();
             this.HistoryClearButton = new System.Windows.Forms.Button();
             this.HistoryFreshButton = new System.Windows.Forms.Button();
@@ -78,6 +79,7 @@
             this.Controls.Add(this.HistoryFreshButton);
             this.Controls.Add(this.HistoryClearButton);
             this.Controls.Add(this.HistoryListBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SendHistoryForm";
             this.Text = "SendHistoryForm";
             this.ResumeLayout(false);
