@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace PM_plus {
     public partial class Form1 : Form {
         internal SkinEngine se = new SkinEngine();
-        internal HttpSendHistoryService hshs = new HttpSendHistoryService();
+        internal HttpSendHistoryService hshs = null;
         public Form1() {
             // 皮肤开关配置
             String skinSwithConfig = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN_SWITCH);
@@ -24,6 +24,7 @@ namespace PM_plus {
             /// 支持线程操作控件
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
+            hshs = new HttpSendHistoryService();
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -42,17 +43,17 @@ namespace PM_plus {
             Config.mainForm = this;
             int usedProgress;
             isFinishedInit = false;
-            // 窗口控件属性相关设置
-            FormService.InitMainForm(this);
             // 加载框显示，load函数中置主窗体不可用
-            FormService.InitWaitForm();
-            Config.waitForm.FreshProgress(10);
-            // GC回收定时任务初始化
-            TimerService.AutoGc();
-            Config.waitForm.FreshProgress(10);
             // 偏好加载,皮肤加载
             FormService.InitDiySet();
+            FormService.InitWaitForm();
             Config.waitForm.FreshProgress(5);
+            // 窗口控件属性相关设置
+            FormService.InitMainForm(this);
+            Config.waitForm.FreshProgress(15);
+            // GC回收定时任务初始化
+            TimerService.AutoGc();
+            Config.waitForm.FreshProgress(25);
             usedProgress = 25;
             // 系统参数加载
             usedProgress = IniConfigService.InitSystemConfig(usedProgress, 15);
@@ -61,10 +62,10 @@ namespace PM_plus {
             // 项目面板右键按钮
             usedProgress = FormService.InitPanelRightMenu(usedProgress, 15);
             // 创建项目按钮控件
-            usedProgress = FormService.InitProjectButton(usedProgress, 15);
+            FormService.InitProjectButton(usedProgress, 15);
             TimerService.Monitor();
             // 加载窗口关闭,close函数中置主窗体可用
-            Config.waitForm.FreshProgress(usedProgress);
+            Config.waitForm.FreshProgress(100);
             Config.waitForm.Close();
             // 高度设置
             String heightStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_HEIGHT);
@@ -388,10 +389,7 @@ namespace PM_plus {
 
         private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (isFinishedInit && FontFamilyComboBox.SelectedItem != null) {
-                String fontSizeStr = FontSizeComboBox.SelectedItem as String;
-                foreach (Control con in Config.mainForm.Controls) {
-                    ControlUtils.SetControlFont(con, FontFamilyComboBox.SelectedItem as String, StringUtils.IsNotEmpty(fontSizeStr)?Convert.ToInt16(fontSizeStr):0, FontColorTextBox.BackColor, true);
-                }
+                FormService.ChangeProjectButtonFont();
             }
         }
 
@@ -401,11 +399,13 @@ namespace PM_plus {
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, Config.DEFAULT_SKIN);
             SkinListBox.SelectedValue = Config.DEFAULT_SKIN;
             // 字体恢复默认
-            foreach (Control con in Config.mainForm.Controls) {
+            foreach (Control con in Config.mainForm.Projects_Panel.Controls) {
                 ControlUtils.SetControlFont(con, Config.DEFAULT_FONT_FAMILY, Config.DEFAULT_FONT_SIZE, ColorTranslator.FromHtml(Config.DEFAULT_FONT_COLOR), true);
             }
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, Config.DEFAULT_FONT_FAMILY);
             FontFamilyComboBox.SelectedItem = Config.DEFAULT_FONT_FAMILY;
+            FontSizeComboBox.SelectedItem = Config.DEFAULT_FONT_SIZE.ToString();
+            FontColorTextBox.BackColor = ColorTranslator.FromHtml(Config.DEFAULT_FONT_COLOR);
 
             DiySetMsgLabel.Text = "恢复默认成功！";
             DiySetMsgLabel.ForeColor = Color.Green;
@@ -451,7 +451,7 @@ namespace PM_plus {
                 Url = httpUrl,
                 Type = httpType
             };
-            hshs.saveData(hsh);
+            hshs.SaveData(hsh);
             String result;
             if (Config.HTTP_TYPE_POST.Equals(httpType)) {
                 result = HttpUtils.PostRequest(httpUrl, "", null);
@@ -478,8 +478,11 @@ namespace PM_plus {
         }
 
         private void SendHistoryButton_Click(object sender, EventArgs e) {
-            SendHistoryForm sendHistoryForm = new SendHistoryForm();
-            sendHistoryForm.Show();
+            if (false == Config.historyFormShow) {
+                SendHistoryForm sendHistoryForm = new SendHistoryForm();
+                sendHistoryForm.Show();
+                Config.historyFormShow = true;
+            }
         }
 
         private void MonitorFreqComboBox_SelectedIndexChanged(object sender, EventArgs e) {
@@ -511,15 +514,21 @@ namespace PM_plus {
         private void ProcessListBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (ProcessListBox.Items.Count > 0 && ProcessListBox.SelectedIndex > -1) {
                 Process selectProcess = (ProcessListBox.SelectedItem as Process);
+                Process javaParentProcess = selectProcess.ProcessName.Equals("java")?selectProcess.Parent():null;
                 // 展示相关信息
                 ProcessIdTextBox.Text = selectProcess.Id.ToString();
-                ProcessTitleTextBox.Text = selectProcess.MainWindowTitle;
+                ProcessTitleTextBox.Text = null == javaParentProcess? selectProcess.MainWindowTitle: javaParentProcess.MainWindowTitle;
                 // 展示内存占用和子进程
                 ShowMemAndChildProcess(selectProcess);
 
                 if (ClickActiveCmdCheckBox.Checked) {
-                    // 并将当前窗口置顶
-                    User32Dll.SwitchToThisWindow(selectProcess.MainWindowHandle, true);
+                    if (selectProcess.ProcessName.Equals("java")) {
+                        // 并将父窗口置顶
+                        User32Dll.SwitchToThisWindow(selectProcess.Parent().MainWindowHandle, true);
+                    } else {
+                        // 并将当前窗口置顶
+                        User32Dll.SwitchToThisWindow(selectProcess.MainWindowHandle, true);
+                    }
                 }
 
             } else {
@@ -531,8 +540,9 @@ namespace PM_plus {
             // 内存占用量，需要将子进程也进行统计
             float mem = 0.0F;
             ChildProcessListBox.Items.Clear();
+            int pid = p.ProcessName == "java"? p.Parent().Id: p.Id;
             // 当前进程的所有子进程
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + p.Id);
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + pid);
             ManagementObjectCollection moc = searcher.Get();
             foreach (ManagementObject mo in moc) {
                 int childPID = Convert.ToInt32(mo["ProcessID"]);
@@ -577,20 +587,14 @@ namespace PM_plus {
 
         private void FontSizeComboBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (isFinishedInit && FontSizeComboBox.SelectedItem != null) {
-                foreach (Control con in Config.mainForm.Controls) {
-                    String fontSizeStr = FontSizeComboBox.SelectedItem as String;
-                    ControlUtils.SetControlFont(con, FontFamilyComboBox.SelectedItem as string, StringUtils.IsNotEmpty(fontSizeStr)? Convert.ToInt16(fontSizeStr): 0, FontColorTextBox.BackColor, true);
-                }
+                FormService.ChangeProjectButtonFont();
             }
         }
 
         private void FontColorTextBox_Click(object sender, EventArgs e) {
             if (FontColorDialog.ShowDialog() == DialogResult.OK) {
                 FontColorTextBox.BackColor = FontColorDialog.Color;
-                foreach (Control con in Config.mainForm.Controls) {
-                    String fontSizeStr = FontSizeComboBox.SelectedItem as String;
-                    ControlUtils.SetControlFont(con, FontFamilyComboBox.SelectedItem as string, StringUtils.IsNotEmpty(fontSizeStr) ? Convert.ToInt16(fontSizeStr) : 0, FontColorTextBox.BackColor, true);
-                }
+                FormService.ChangeProjectButtonFont();
             }
         }
     }

@@ -14,42 +14,46 @@ namespace PM_plus.service {
     /// </summary>
     class HttpSendHistoryService {
 
-        SQLiteHelper sqlLiteHelper = data.SQLiteFactory.GetSQLiteHelper(Config.DB_NAME, Config.DB_PASSWORD);
+        static SQLiteHelper sqlLiteHelper = null;
 
 
         public HttpSendHistoryService() {
-            initTable();
+            if (null == sqlLiteHelper) {
+                sqlLiteHelper = data.SQLiteFactory.GetSQLiteHelper(Config.DB_NAME, Config.DB_PASSWORD);
+            }
+            InitTable();
         }
-        public void initTable() {
+        public void InitTable() {
             // 判断表是否存在
-            if (!sqlLiteHelper.TableExists(getTableName())) {
+            if (!sqlLiteHelper.TableExists(GetTableName())) {
                 // 创建表
-                createTable();
+                CreateTable();
             }
         }
        
-        public int saveData(HttpSendHistory httpSendHistory) {
+        public int SaveData(HttpSendHistory httpSendHistory) {
             // 查询是否存在类似数据
-            HttpSendHistory queryModel = new HttpSendHistory();
-            queryModel.Url = httpSendHistory.Url;
-            queryModel.Type = httpSendHistory.Type;
-            List<HttpSendHistory> list = selectList(queryModel);
+            HttpSendHistory queryModel = new HttpSendHistory {
+                Url = httpSendHistory.Url,
+                Type = httpSendHistory.Type
+            };
+            List<HttpSendHistory> list = SelectList(queryModel);
             if (null != list && list.Count > 0) {
                 // 存在相同数据
                 HttpSendHistory history = list[0];
                 history.LastUsedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                return updateData(history);
+                return UpdateData(history);
             }else {
-                return insertData(httpSendHistory);
+                return InsertData(httpSendHistory);
             }
         }
 
         /// <summary>
         /// 清除所有数据
         /// </summary>
-        internal void clear() {
+        internal void Clear() {
             // 清空所有的数据
-            sqlLiteHelper.ExecuteNonQuery("DELETE FROM "+getTableName(), null);
+            sqlLiteHelper.ExecuteNonQuery("DELETE FROM "+GetTableName(), null);
         }
 
         /// <summary>
@@ -57,9 +61,9 @@ namespace PM_plus.service {
         /// </summary>
         /// <param name="httpSendHistory"></param>
         /// <returns></returns>
-        public int insertData(HttpSendHistory httpSendHistory) {
+        public int InsertData(HttpSendHistory httpSendHistory) {
             httpSendHistory.CreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            return sqlLiteHelper.InsertData(getTableName(), getParams(httpSendHistory));
+            return sqlLiteHelper.InsertData(GetTableName(), GetParams(httpSendHistory));
         }
 
         /// <summary>
@@ -67,11 +71,11 @@ namespace PM_plus.service {
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int deleteData(int? id) {
+        public int DeleteData(int? id) {
             if(null == id) {
                 return 0;
             } else {
-                return sqlLiteHelper.ExecuteNonQuery("DELETE FROM " + getTableName() + " where id=@id", new SQLiteParameter[] { new SQLiteParameter("id", id) });
+                return sqlLiteHelper.ExecuteNonQuery("DELETE FROM " + GetTableName() + " where id=@id", new SQLiteParameter[] { new SQLiteParameter("id", id) });
             }
         }
 
@@ -80,11 +84,11 @@ namespace PM_plus.service {
         /// </summary>
         /// <param name="httpSendHistory"></param>
         /// <returns></returns>
-        public int updateData(HttpSendHistory httpSendHistory) {
+        public int UpdateData(HttpSendHistory httpSendHistory) {
             List<SQLiteParameter> paramList = new List<SQLiteParameter>();
             SQLiteParameter idParame = new SQLiteParameter("id", httpSendHistory.Id);
             paramList.Add(idParame);
-            return sqlLiteHelper.Update(getTableName(), getParams(httpSendHistory), "id=@id", paramList.ToArray());
+            return sqlLiteHelper.Update(GetTableName(), GetParams(httpSendHistory), "id=@id", paramList.ToArray());
         }
 
         /// <summary>
@@ -92,16 +96,16 @@ namespace PM_plus.service {
         /// </summary>
         /// <param name="queryModel"></param>
         /// <returns></returns>
-        public List<HttpSendHistory> selectList(HttpSendHistory queryModel) {
+        public List<HttpSendHistory> SelectList(HttpSendHistory queryModel) {
             List<HttpSendHistory> list = new List<HttpSendHistory>();
             List<SQLiteParameter> paramList = new List<SQLiteParameter>();
             String paramSql = "";
             String whereSql = "";
             String selectSql = "";
-            initSql(queryModel,ref paramSql,ref whereSql,ref paramList);
+            InitSql(queryModel,ref paramSql,ref whereSql,ref paramList);
             selectSql += "SELECT ";
             selectSql += paramSql;
-            selectSql += " FROM " + getTableName();
+            selectSql += " FROM " + GetTableName();
             if (StringUtils.IsNotEmpty(whereSql)) {
                 selectSql += " WHERE ";
                 selectSql += whereSql;
@@ -110,27 +114,26 @@ namespace PM_plus.service {
 
             SQLiteDataReader reader = sqlLiteHelper.ExecuteReader(selectSql, paramList.ToArray());
             while (reader.Read()) {
-                HttpSendHistory httpSendHistory = new HttpSendHistory();
-
-                httpSendHistory.Id = Int32.Parse(reader["id"].ToString());
-                httpSendHistory.Url = reader["url"].ToString();
-                httpSendHistory.Type = reader["type"].ToString();
-                httpSendHistory.CreateTime = reader["create_time"].ToString();
-                httpSendHistory.LastUsedTime = reader["last_used_time"].ToString();
+                HttpSendHistory httpSendHistory = new HttpSendHistory {
+                    Id = Int32.Parse(reader["id"].ToString()),
+                    Url = reader["url"].ToString(),
+                    Type = reader["type"].ToString(),
+                    CreateTime = reader["create_time"].ToString(),
+                    LastUsedTime = reader["last_used_time"].ToString()
+                };
                 list.Add(httpSendHistory);
             }
             return list;
         }
 
-        private void initSql(HttpSendHistory httpSendHistory,ref String paramSql, ref String whereSql, ref List<SQLiteParameter> paramList) {
+        private void InitSql(HttpSendHistory httpSendHistory,ref String paramSql, ref String whereSql, ref List<SQLiteParameter> paramList) {
             PropertyInfo[] infos = typeof(HttpSendHistory).GetProperties();
-            int size = infos.Length;
             paramList = new List<SQLiteParameter>();
             paramSql = "";
             whereSql = "";
             for (int i = 0; i < infos.Length; i++) {
                 PropertyInfo property = infos[i];
-                TableParam tableParam = getAttributeByProperty<TableParam>(property);
+                TableParam tableParam = GetAttributeByProperty<TableParam>(property);
                 if (null != property.GetValue(httpSendHistory, null)) {
                     whereSql += tableParam.param;
                     whereSql += "=@";
@@ -157,12 +160,12 @@ namespace PM_plus.service {
         /// 创建表
         /// </summary>
         /// <param name="httpSendHistory"></param>
-        private void createTable() {
+        private void CreateTable() {
             PropertyInfo[] infos = typeof(HttpSendHistory).GetProperties();
-            String insertSql = "create table " + getTableName() + " (";
+            String insertSql = "create table " + GetTableName() + " (";
             for (int i = 0; i < infos.Length; i++) {
                 PropertyInfo info = infos[i];
-                TableParam tableParam = getAttributeByProperty<TableParam>(info);
+                TableParam tableParam = GetAttributeByProperty<TableParam>(info);
                 insertSql += tableParam.param;
                 insertSql += " ";
                 insertSql += tableParam.type;
@@ -177,8 +180,8 @@ namespace PM_plus.service {
             sqlLiteHelper.ExecuteNonQuery(insertSql, null);
         }
 
-        private String getTableName() {
-            String tableName = "";
+        private String GetTableName() {
+            String tableName;
             object[] tableAttrs = typeof(HttpSendHistory).GetCustomAttributes(typeof(Table), true);
             if (tableAttrs != null && tableAttrs.Length > 0) {
                 Table table = (Table)tableAttrs[0];
@@ -197,14 +200,14 @@ namespace PM_plus.service {
         /// </summary>
         /// <param name="httpSendHistory"></param>
         /// <returns></returns>
-        private Dictionary<string, object> getParams(HttpSendHistory httpSendHistory) {
+        private Dictionary<string, object> GetParams(HttpSendHistory httpSendHistory) {
             Dictionary<string, object> dict = null;
             if (null != httpSendHistory) {
                 dict = new Dictionary<string, object>();
                 // 遍历所有的属性
                 PropertyInfo[] infos = typeof(HttpSendHistory).GetProperties();
                 foreach (PropertyInfo info in infos) {
-                    TableParam tableParam = getAttributeByProperty<TableParam>(info);
+                    TableParam tableParam = GetAttributeByProperty<TableParam>(info);
                     if (null != tableParam && !tableParam.isKey) {
                         dict.Add(tableParam.param, info.GetValue(httpSendHistory, null));
                     } else {
@@ -215,7 +218,7 @@ namespace PM_plus.service {
             return dict;
         }
 
-        private T getAttributeByProperty<T>(PropertyInfo propertyInfo) where T : Attribute {
+        private T GetAttributeByProperty<T>(PropertyInfo propertyInfo) where T : Attribute {
             object[] attributes = propertyInfo.GetCustomAttributes(typeof(T), true);
             T attribute = null;
             if (attributes != null && attributes.Length > 0) {

@@ -8,8 +8,12 @@ namespace PM_plus.config {
 
 
         public static void Clear() {
-            sections = null;
-            dictionarys = null;
+            if (null != sections) {
+                sections.Clear();
+            }
+            if(null != dictionarys) {
+                dictionarys.Clear();
+            }
         }
         public static List<String> GetAllSections() {
             return sections;

@@ -50,6 +50,8 @@ namespace PM_plus {
             this.SystemConfig_Save_Button = new System.Windows.Forms.Button();
             this.MonitorTabPage = new System.Windows.Forms.TabPage();
             this.ProjectInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.ProcessTypeLabel = new System.Windows.Forms.Label();
+            this.ProcessTypeTextBox = new System.Windows.Forms.TextBox();
             this.ProcessWindowMinButton = new System.Windows.Forms.Button();
             this.FreshProcessButton = new System.Windows.Forms.Button();
             this.ClickActiveCmdCheckBox = new System.Windows.Forms.CheckBox();
@@ -113,6 +115,7 @@ namespace PM_plus {
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.LogPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.FontColorDialog = new System.Windows.Forms.ColorDialog();
+            this.ProjectFontShowRichTextBox = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -433,6 +436,8 @@ namespace PM_plus {
             this.ProjectInfoGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessTypeLabel);
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessTypeTextBox);
             this.ProjectInfoGroupBox.Controls.Add(this.ProcessWindowMinButton);
             this.ProjectInfoGroupBox.Controls.Add(this.FreshProcessButton);
             this.ProjectInfoGroupBox.Controls.Add(this.ClickActiveCmdCheckBox);
@@ -451,10 +456,28 @@ namespace PM_plus {
             this.ProjectInfoGroupBox.TabStop = false;
             this.ProjectInfoGroupBox.Text = "进程信息";
             // 
+            // ProcessTypeLabel
+            // 
+            this.ProcessTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ProcessTypeLabel.AutoSize = true;
+            this.ProcessTypeLabel.Location = new System.Drawing.Point(189, 264);
+            this.ProcessTypeLabel.Name = "ProcessTypeLabel";
+            this.ProcessTypeLabel.Size = new System.Drawing.Size(29, 12);
+            this.ProcessTypeLabel.TabIndex = 11;
+            this.ProcessTypeLabel.Text = "类型";
+            // 
+            // ProcessTypeTextBox
+            // 
+            this.ProcessTypeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ProcessTypeTextBox.Location = new System.Drawing.Point(224, 260);
+            this.ProcessTypeTextBox.Name = "ProcessTypeTextBox";
+            this.ProcessTypeTextBox.Size = new System.Drawing.Size(74, 21);
+            this.ProcessTypeTextBox.TabIndex = 10;
+            // 
             // ProcessWindowMinButton
             // 
             this.ProcessWindowMinButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ProcessWindowMinButton.Location = new System.Drawing.Point(110, 261);
+            this.ProcessWindowMinButton.Location = new System.Drawing.Point(108, 259);
             this.ProcessWindowMinButton.Name = "ProcessWindowMinButton";
             this.ProcessWindowMinButton.Size = new System.Drawing.Size(75, 23);
             this.ProcessWindowMinButton.TabIndex = 9;
@@ -465,9 +488,9 @@ namespace PM_plus {
             // FreshProcessButton
             // 
             this.FreshProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.FreshProcessButton.Location = new System.Drawing.Point(493, 261);
+            this.FreshProcessButton.Location = new System.Drawing.Point(515, 259);
             this.FreshProcessButton.Name = "FreshProcessButton";
-            this.FreshProcessButton.Size = new System.Drawing.Size(75, 23);
+            this.FreshProcessButton.Size = new System.Drawing.Size(53, 23);
             this.FreshProcessButton.TabIndex = 8;
             this.FreshProcessButton.Text = "刷新";
             this.FreshProcessButton.UseVisualStyleBackColor = true;
@@ -477,7 +500,7 @@ namespace PM_plus {
             // 
             this.ClickActiveCmdCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ClickActiveCmdCheckBox.AutoSize = true;
-            this.ClickActiveCmdCheckBox.Location = new System.Drawing.Point(7, 268);
+            this.ClickActiveCmdCheckBox.Location = new System.Drawing.Point(6, 262);
             this.ClickActiveCmdCheckBox.Name = "ClickActiveCmdCheckBox";
             this.ClickActiveCmdCheckBox.Size = new System.Drawing.Size(96, 16);
             this.ClickActiveCmdCheckBox.TabIndex = 4;
@@ -749,7 +772,7 @@ namespace PM_plus {
             // 
             this.MonitorFreqLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MonitorFreqLabel.AutoSize = true;
-            this.MonitorFreqLabel.Location = new System.Drawing.Point(470, 94);
+            this.MonitorFreqLabel.Location = new System.Drawing.Point(470, 97);
             this.MonitorFreqLabel.Name = "MonitorFreqLabel";
             this.MonitorFreqLabel.Size = new System.Drawing.Size(41, 12);
             this.MonitorFreqLabel.TabIndex = 2;
@@ -765,7 +788,7 @@ namespace PM_plus {
             "5",
             "10",
             "30"});
-            this.MonitorFreqComboBox.Location = new System.Drawing.Point(517, 91);
+            this.MonitorFreqComboBox.Location = new System.Drawing.Point(517, 94);
             this.MonitorFreqComboBox.Name = "MonitorFreqComboBox";
             this.MonitorFreqComboBox.Size = new System.Drawing.Size(61, 20);
             this.MonitorFreqComboBox.TabIndex = 1;
@@ -912,6 +935,7 @@ namespace PM_plus {
             // 
             // FontSetGroupBox
             // 
+            this.FontSetGroupBox.Controls.Add(this.ProjectFontShowRichTextBox);
             this.FontSetGroupBox.Controls.Add(this.FontColorTextBox);
             this.FontSetGroupBox.Controls.Add(this.FontSizeComboBox);
             this.FontSetGroupBox.Controls.Add(this.FontColorLabel);
@@ -920,9 +944,10 @@ namespace PM_plus {
             this.FontSetGroupBox.Controls.Add(this.FontLabel);
             this.FontSetGroupBox.Location = new System.Drawing.Point(8, 7);
             this.FontSetGroupBox.Name = "FontSetGroupBox";
-            this.FontSetGroupBox.Size = new System.Drawing.Size(571, 49);
+            this.FontSetGroupBox.Size = new System.Drawing.Size(571, 73);
             this.FontSetGroupBox.TabIndex = 8;
             this.FontSetGroupBox.TabStop = false;
+            this.FontSetGroupBox.Text = "项目字体";
             // 
             // FontColorTextBox
             // 
@@ -940,7 +965,11 @@ namespace PM_plus {
             "8",
             "9",
             "10",
-            "12"});
+            "12",
+            "14",
+            "16",
+            "18",
+            "24"});
             this.FontSizeComboBox.Location = new System.Drawing.Point(204, 17);
             this.FontSizeComboBox.Name = "FontSizeComboBox";
             this.FontSizeComboBox.Size = new System.Drawing.Size(57, 20);
@@ -1026,9 +1055,9 @@ namespace PM_plus {
             this.SkinGroupBox.Controls.Add(this.SkinShowPictureBox);
             this.SkinGroupBox.Controls.Add(this.SkinSwitchChecked);
             this.SkinGroupBox.Controls.Add(this.SkinListBox);
-            this.SkinGroupBox.Location = new System.Drawing.Point(8, 62);
+            this.SkinGroupBox.Location = new System.Drawing.Point(8, 86);
             this.SkinGroupBox.Name = "SkinGroupBox";
-            this.SkinGroupBox.Size = new System.Drawing.Size(577, 321);
+            this.SkinGroupBox.Size = new System.Drawing.Size(577, 297);
             this.SkinGroupBox.TabIndex = 0;
             this.SkinGroupBox.TabStop = false;
             this.SkinGroupBox.Text = "皮肤";
@@ -1040,7 +1069,7 @@ namespace PM_plus {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SkinShowPictureBox.Location = new System.Drawing.Point(182, 20);
             this.SkinShowPictureBox.Name = "SkinShowPictureBox";
-            this.SkinShowPictureBox.Size = new System.Drawing.Size(389, 292);
+            this.SkinShowPictureBox.Size = new System.Drawing.Size(389, 268);
             this.SkinShowPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.SkinShowPictureBox.TabIndex = 3;
             this.SkinShowPictureBox.TabStop = false;
@@ -1049,7 +1078,7 @@ namespace PM_plus {
             // 
             this.SkinSwitchChecked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SkinSwitchChecked.AutoSize = true;
-            this.SkinSwitchChecked.Location = new System.Drawing.Point(8, 296);
+            this.SkinSwitchChecked.Location = new System.Drawing.Point(8, 272);
             this.SkinSwitchChecked.Name = "SkinSwitchChecked";
             this.SkinSwitchChecked.Size = new System.Drawing.Size(72, 16);
             this.SkinSwitchChecked.TabIndex = 7;
@@ -1064,7 +1093,7 @@ namespace PM_plus {
             this.SkinListBox.ItemHeight = 12;
             this.SkinListBox.Location = new System.Drawing.Point(6, 20);
             this.SkinListBox.Name = "SkinListBox";
-            this.SkinListBox.Size = new System.Drawing.Size(169, 268);
+            this.SkinListBox.Size = new System.Drawing.Size(169, 244);
             this.SkinListBox.TabIndex = 2;
             this.SkinListBox.SelectedIndexChanged += new System.EventHandler(this.SkinListBox_SelectedIndexChanged);
             // 
@@ -1094,6 +1123,15 @@ namespace PM_plus {
             // LabelTimer
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
+            // 
+            // ProjectFontShowRichTextBox
+            // 
+            this.ProjectFontShowRichTextBox.Location = new System.Drawing.Point(368, 16);
+            this.ProjectFontShowRichTextBox.Name = "ProjectFontShowRichTextBox";
+            this.ProjectFontShowRichTextBox.ReadOnly = true;
+            this.ProjectFontShowRichTextBox.Size = new System.Drawing.Size(197, 51);
+            this.ProjectFontShowRichTextBox.TabIndex = 6;
+            this.ProjectFontShowRichTextBox.Text = "项目";
             // 
             // Form1
             // 
@@ -1232,6 +1270,9 @@ namespace PM_plus {
         private System.Windows.Forms.Label FontColorLabel;
         private System.Windows.Forms.Label FontSizeLabel;
         private System.Windows.Forms.ColorDialog FontColorDialog;
+        private System.Windows.Forms.Label ProcessTypeLabel;
+        internal System.Windows.Forms.TextBox ProcessTypeTextBox;
+        internal System.Windows.Forms.RichTextBox ProjectFontShowRichTextBox;
     }
 }
 

@@ -72,14 +72,13 @@ namespace PM_plus.service {
                 fontColor = Config.DEFAULT_FONT_COLOR;
                 IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_COLOR, Config.DEFAULT_FONT_COLOR);
             }
-            // 控件字体设置
-            foreach (Control child in Config.mainForm.Controls) {
-                ControlUtils.SetControlFont(child, fontFamilyName, fontSize, ColorTranslator.FromHtml(fontColor), true);
-            }
+            
             // 字体项选择
             Config.mainForm.FontFamilyComboBox.SelectedItem = fontFamilyName;
             Config.mainForm.FontSizeComboBox.SelectedItem = fontSize.ToString();
             Config.mainForm.FontColorTextBox.BackColor = ColorTranslator.FromHtml(fontColor);
+            Config.mainForm.ProjectFontShowRichTextBox.Font = new Font(fontFamilyName, fontSize);
+            Config.mainForm.ProjectFontShowRichTextBox.ForeColor = ColorTranslator.FromHtml(fontColor);
         }
 
 
@@ -326,7 +325,12 @@ namespace PM_plus.service {
             // 按钮文本
             button.Text = projectSection.Title;
             button.TextAlign = ContentAlignment.BottomCenter;
-            button.Font = new Font(Config.DEFAULT_FONT_FAMILY, 12);
+            // 文本样式
+            string fontFamily = Config.mainForm.FontFamilyComboBox.SelectedItem as string;
+            string fontSizeStr = Config.mainForm.FontSizeComboBox.SelectedItem as string;
+            Color fontColor = Config.mainForm.FontColorTextBox.BackColor;
+            button.Font = new Font(fontFamily, Convert.ToInt32(fontSizeStr));
+            button.ForeColor = fontColor;
             button.Tag = 9999;
             #endregion
             #region 按钮加载相关事件
@@ -392,6 +396,18 @@ namespace PM_plus.service {
             ProjectSections.RemoveProjectBySection(section);
             // 文件清除
             ProjectUtils.RemoveBat(btn.Text);
+        }
+
+        public static void ChangeProjectButtonFont() {
+            string fontFamily = Config.mainForm.FontFamilyComboBox.SelectedItem as String;
+            String fontSizeStr = Config.mainForm.FontSizeComboBox.SelectedItem as String;
+            Color fontColor = Config.mainForm.FontColorTextBox.BackColor;
+            Config.mainForm.ProjectFontShowRichTextBox.Font = new Font(fontFamily, StringUtils.IsNotEmpty(fontSizeStr) ? Convert.ToInt16(fontSizeStr) : 0);
+            Config.mainForm.ProjectFontShowRichTextBox.ForeColor = fontColor;
+
+            foreach (Control con in Config.mainForm.Projects_Panel.Controls) {
+                ControlUtils.SetControlFont(con, fontFamily, StringUtils.IsNotEmpty(fontSizeStr) ? Convert.ToInt16(fontSizeStr) : 0, fontColor, true);
+            }
         }
     }
 }

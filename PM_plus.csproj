@@ -26,7 +26,7 @@
     <ProductName>java项目管理器</ProductName>
     <PublisherName>万世极缘</PublisherName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -74,8 +74,7 @@
   <PropertyGroup />
   <ItemGroup>
     <Reference Include="IrisSkin4">
-      <HintPath>plugins\IrisSkin4.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>.\IrisSkin4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -140,6 +139,7 @@
     <Compile Include="utils\LogUtils.cs" />
     <Compile Include="utils\Monitor.cs" />
     <Compile Include="utils\PortUtils.cs" />
+    <Compile Include="utils\ProcessExt.cs" />
     <Compile Include="utils\ProcessUtils.cs" />
     <Compile Include="utils\ProjectUtils.cs" />
     <Compile Include="utils\ScrollBarUtils.cs" />
@@ -188,6 +188,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="README.md" />
     <None Include="Skins\Carlmness\Calmness.ssk" />
     <None Include="Skins\Carlmness\CalmnessColor1.ssk" />
     <None Include="Skins\Carlmness\CalmnessColor2.ssk" />
@@ -289,7 +290,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="IrisSkin4.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -82,6 +82,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SendHistoryForm";
             this.Text = "SendHistoryForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SendHistoryForm_FormClosed);
             this.ResumeLayout(false);
 
         }

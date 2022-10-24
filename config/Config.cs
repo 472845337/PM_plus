@@ -177,5 +177,7 @@ namespace PM_plus.config
         public static Dictionary<String, RichTextBox> richTextBoxControlDic = new Dictionary<string, RichTextBox>();
 
         public static int monitorServerInterval;
+
+        public static bool historyFormShow = false;
     }
 }

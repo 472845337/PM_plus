@@ -35,30 +35,33 @@ namespace PM_plus {
             // 
             // WaitForm_ProgressBar
             // 
-            this.WaitForm_ProgressBar.Location = new System.Drawing.Point(2, 45);
+            this.WaitForm_ProgressBar.Location = new System.Drawing.Point(2, 32);
+            this.WaitForm_ProgressBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.WaitForm_ProgressBar.Name = "WaitForm_ProgressBar";
-            this.WaitForm_ProgressBar.Size = new System.Drawing.Size(259, 23);
+            this.WaitForm_ProgressBar.Size = new System.Drawing.Size(222, 16);
             this.WaitForm_ProgressBar.Step = 1;
+            this.WaitForm_ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.WaitForm_ProgressBar.TabIndex = 1;
             // 
             // WaitForm_Label
             // 
             this.WaitForm_Label.AutoSize = true;
-            this.WaitForm_Label.Location = new System.Drawing.Point(113, 9);
+            this.WaitForm_Label.Location = new System.Drawing.Point(97, 6);
             this.WaitForm_Label.Name = "WaitForm_Label";
-            this.WaitForm_Label.Size = new System.Drawing.Size(53, 17);
+            this.WaitForm_Label.Size = new System.Drawing.Size(59, 12);
             this.WaitForm_Label.TabIndex = 2;
             this.WaitForm_Label.Text = "加载中...";
             // 
             // WaitForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 79);
+            this.ClientSize = new System.Drawing.Size(226, 56);
             this.Controls.Add(this.WaitForm_Label);
             this.Controls.Add(this.WaitForm_ProgressBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WaitForm";

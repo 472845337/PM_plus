@@ -230,16 +230,24 @@ namespace PM_plus.service {
         }
 
         public static void MonitorProcess() {
-            Process[] processes = Process.GetProcessesByName("CMD");
+            string processName = "CMD";
+            if (StringUtils.IsNotEmpty(Config.mainForm.ProcessTypeTextBox.Text)) {
+                processName = Config.mainForm.ProcessTypeTextBox.Text;
+            }
+            Process[] processes = Process.GetProcessesByName(processName);
             // 对processes进行排序
             Array.Sort(processes, (x1, x2) => x1.MainWindowTitle.CompareTo(x2.MainWindowTitle));
             Config.mainForm.ProcessListBox.Items.Clear();
             foreach (Process pro in processes) {
-                if (StringUtils.IsNotEmpty(pro.MainWindowTitle)) {
+                if (processName.Equals("java") || StringUtils.IsNotEmpty(pro.MainWindowTitle)) {
                     Config.mainForm.ProcessListBox.Items.Add(pro);
                 }
             }
-            Config.mainForm.ProcessListBox.DisplayMember = "MainWindowTitle";
+            if (processName.Equals("java")) {
+                Config.mainForm.ProcessListBox.DisplayMember = "ProcessName";
+            } else {
+                Config.mainForm.ProcessListBox.DisplayMember = "MainWindowTitle";
+            }
         }
     }
 }

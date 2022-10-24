@@ -14,14 +14,15 @@ namespace PM_plus {
     
     public partial class SendHistoryForm : Form {
 
-        internal HttpSendHistoryService hshs = new HttpSendHistoryService();
+        internal HttpSendHistoryService hshs = null;
         public SendHistoryForm() {
             InitializeComponent();
-            initListBox();
+            hshs = new HttpSendHistoryService();
+            InitListBox();
         }
 
         private void HistoryClearButton_Click(object sender, EventArgs e) {
-            hshs.clear();
+            hshs.Clear();
             HistoryListBox.Items.Clear();
         }
 
@@ -38,7 +39,7 @@ namespace PM_plus {
             int count = HistoryListBox.SelectedItems.Count;
             if(count > 0) {
                 HttpSendHistory history = (HistoryListBox.SelectedItem as HttpSendHistory);
-                hshs.deleteData(history.Id);
+                hshs.DeleteData(history.Id);
                 HistoryListBox.Items.Remove(HistoryListBox.SelectedItem);
             } else {
                 MessageBox.Show("请选择删除数据！");
@@ -48,11 +49,11 @@ namespace PM_plus {
 
         private void HistoryFreshButton_Click(object sender, EventArgs e) {
             HistoryListBox.Items.Clear();
-            initListBox();
+            InitListBox();
         }
 
-        private void initListBox() {
-            List<HttpSendHistory> sendHistoryList = hshs.selectList(new HttpSendHistory());
+        private void InitListBox() {
+            List<HttpSendHistory> sendHistoryList = hshs.SelectList(new HttpSendHistory());
             foreach (HttpSendHistory history in sendHistoryList) {
                 HistoryListBox.Items.Add(history);
             }
@@ -62,6 +63,10 @@ namespace PM_plus {
             // HistoryListBox.SelectedIndexChanged += HistoryListBox_SelectedIndexChanged;
             // 历史记录中的url
             HistoryListBox.DisplayMember = "url";
+        }
+
+        private void SendHistoryForm_FormClosed(object sender, FormClosedEventArgs e) {
+            Config.historyFormShow = false;
         }
     }
 }
