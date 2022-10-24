@@ -19,8 +19,8 @@ namespace PM_plus.utils {
                 if (Config.richTextBoxControlDic == null || Config.richTextBoxControlDic.Count == 0) {
                     // 获取form中的所有控件，拿到richTextBox
                     foreach (Control single in GetAllControl()) {
-                        if (single is RichTextBox) {
-                            Config.richTextBoxControlDic.Add(single.Name, (RichTextBox)single);
+                        if (single is RichTextBox box) {
+                            Config.richTextBoxControlDic.Add(single.Name, box);
                         }
                     }
                 }
