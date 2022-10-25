@@ -32,6 +32,9 @@
             // 
             // HistoryListBox
             // 
+            this.HistoryListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.HistoryListBox.FormattingEnabled = true;
             this.HistoryListBox.ItemHeight = 12;
             this.HistoryListBox.Location = new System.Drawing.Point(13, 13);
@@ -42,6 +45,7 @@
             // 
             // HistoryClearButton
             // 
+            this.HistoryClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.HistoryClearButton.Location = new System.Drawing.Point(293, 279);
             this.HistoryClearButton.Name = "HistoryClearButton";
             this.HistoryClearButton.Size = new System.Drawing.Size(42, 23);
@@ -52,6 +56,7 @@
             // 
             // HistoryFreshButton
             // 
+            this.HistoryFreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.HistoryFreshButton.Location = new System.Drawing.Point(201, 279);
             this.HistoryFreshButton.Name = "HistoryFreshButton";
             this.HistoryFreshButton.Size = new System.Drawing.Size(40, 23);
@@ -62,6 +67,7 @@
             // 
             // HistoryDeleteButton
             // 
+            this.HistoryDeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.HistoryDeleteButton.Location = new System.Drawing.Point(247, 279);
             this.HistoryDeleteButton.Name = "HistoryDeleteButton";
             this.HistoryDeleteButton.Size = new System.Drawing.Size(40, 23);

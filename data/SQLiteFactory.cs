@@ -24,5 +24,11 @@ namespace PM_plus.data {
             }
            
         }
+
+        public static void CloseAllSQLite() {
+            foreach(KeyValuePair<String, SQLiteHelper> pair in SQLiteHelperDic) {
+                pair.Value.Close();
+            }
+        }
     }
 }

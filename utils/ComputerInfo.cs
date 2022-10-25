@@ -16,14 +16,15 @@ namespace PM_plus.utils {
         public string MemoryAvailable { get; set; }
 
         public static ComputerInfo GetComputerInfo() {
-            ComputerInfo computerInfo = new ComputerInfo();
-            computerInfo.ComputerName = GetComputerName();
-            computerInfo.RemovableDeviceID = GetRemovableDeviceID();
-            computerInfo.SystemNameInfo = GetSystemName();
-            computerInfo.SystemTypeInfo = GetSystemType();
-            computerInfo.CupInfo = GetCPUInfo();
-            computerInfo.SystemMemorySizeOfGB = GetSystemMemorySizeOfGB();
-            computerInfo.MemoryAvailable = GetMemoryAvailable();
+            ComputerInfo computerInfo = new ComputerInfo {
+                ComputerName = GetComputerName(),
+                RemovableDeviceID = GetRemovableDeviceID(),
+                SystemNameInfo = GetSystemName(),
+                SystemTypeInfo = GetSystemType(),
+                CupInfo = GetCPUInfo(),
+                SystemMemorySizeOfGB = GetSystemMemorySizeOfGB(),
+                MemoryAvailable = GetMemoryAvailable()
+            };
             return computerInfo;
         }
         /// <summary> 
@@ -153,7 +154,7 @@ namespace PM_plus.utils {
                 long numAvailableFreeSpace = 0L;
                 string strTotalSize = "";
                 string strAvailableFreeSpace = "";
-                str_HardDiskName = str_HardDiskName + @"\";
+                str_HardDiskName += @"\";
                 foreach (DriveInfo info in DriveInfo.GetDrives()) {
                     if (info.Name.ToUpper() == str_HardDiskName.ToUpper()) {
                         numTotalSize = info.TotalSize;
@@ -204,7 +205,6 @@ namespace PM_plus.utils {
                 str = m["VideoProcessor"].ToString().Replace("Family", "");
                 break;
             }
-            manage = null;
             manageCollection.Dispose();
             return str;
         }
@@ -220,7 +220,6 @@ namespace PM_plus.utils {
                 str = m["Name"].ToString();
                 break;
             }
-            mcCPU = null;
             mocCPU.Dispose();
             return str;
         }
@@ -229,9 +228,10 @@ namespace PM_plus.utils {
         /// </summary>
         /// <returns>返回当前电脑内存的大小</returns>
         public static string GetSystemMemorySizeOfGB() {
-            float size = 0;
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher();   //用于查询一些如系统信息的管理对象
-            searcher.Query = new SelectQuery("Win32_PhysicalMemory", "", new string[] { "Capacity" });//设置查询条件
+            float size;
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher {
+                Query = new SelectQuery("Win32_PhysicalMemory", "", new string[] { "Capacity" })//设置查询条件
+            };   //用于查询一些如系统信息的管理对象
             ManagementObjectCollection collection = searcher.Get();   //获取内存容量 
             ManagementObjectCollection.ManagementObjectEnumerator em = collection.GetEnumerator();
             long capacity = 0;

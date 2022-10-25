@@ -152,56 +152,14 @@ namespace PM_plus.service {
         public static void Btn_MouseMove(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left && down) {
                 down = false;
-                if (!(sender is Button)) {
+                if (!(sender is Button box)) {
                     return;
                 } else {
-                    Config.mainForm.Projects_Panel.DoDragDrop((Button)sender, DragDropEffects.Move);
+                    Config.mainForm.Projects_Panel.DoDragDrop(box, DragDropEffects.Move);
                 }
             }
         }
         #endregion
-
-        /// <summary>
-        /// 运行窗口中清除按钮点击事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public static void RunTab_ClearButtonClick(Object sender, MouseEventArgs e) {
-            Button button = (Button)sender;
-            String section = (String)button.Tag;
-            RichTextBox richTextBox = ControlUtils.GetRichTextBoxControlBySection(section);
-            richTextBox.Text = "";
-        }
-
-        /// <summary>
-        /// 运行窗口中启动按钮点击事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public static void RunTab_StartButtonClick(Object sender, MouseEventArgs e) {
-            Button button = (Button)sender;
-            String section = (String)button.Tag;
-            ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
-            if (null != projectSection) {
-                // 准备启动
-                ProjectUtils.ProjectStart(projectSection);
-            }
-        }
-
-        /// <summary>
-        /// 运行窗口中终止按钮点击事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public static void RunTab_StopButtonClick(Object sender, MouseEventArgs e) {
-            Button button = (Button)sender;
-            String section = (String)button.Tag;
-            ProjectSections.ProjectSection projectSection = ProjectSections.GetProjectBySection(section);
-            if (null != projectSection) {
-                // 停止
-                ProjectUtils.ProjectStop(projectSection);
-            }
-        }
 
         private static ProjectSections.ProjectSection GetCurrentProjectSectionBySender(Object sender) {
             Button currentBtn = GetCurrentBtnBySender(sender);

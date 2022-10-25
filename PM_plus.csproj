@@ -144,24 +144,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="service\DllImportUtils.cs" />
     <Compile Include="service\EventService.cs" />
     <Compile Include="service\FormService.cs" />
     <Compile Include="service\IniConfigService.cs" />
     <Compile Include="service\TimerService.cs" />
     <Compile Include="utils\ComputerInfo.cs" />
     <Compile Include="utils\ControlUtils.cs" />
-    <Compile Include="utils\DateTimeUtils.cs" />
     <Compile Include="utils\FileUtils.cs" />
     <Compile Include="utils\HttpUtils.cs" />
     <Compile Include="utils\IniUtils.cs" />
     <Compile Include="utils\LogUtils.cs" />
-    <Compile Include="utils\Monitor.cs" />
     <Compile Include="utils\PortUtils.cs" />
     <Compile Include="utils\ProcessExt.cs" />
     <Compile Include="utils\ProcessUtils.cs" />
     <Compile Include="utils\ProjectUtils.cs" />
-    <Compile Include="utils\ScrollBarUtils.cs" />
     <Compile Include="utils\SkinUtils.cs" />
     <Compile Include="utils\StringUtils.cs" />
     <Compile Include="utils\User32Dll.cs" />

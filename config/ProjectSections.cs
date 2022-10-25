@@ -6,15 +6,6 @@ namespace PM_plus.config {
         private static List<String> sections;
         private static Dictionary<String, ProjectSection> dictionarys;
 
-
-        public static void Clear() {
-            if (null != sections) {
-                sections.Clear();
-            }
-            if(null != dictionarys) {
-                dictionarys.Clear();
-            }
-        }
         public static List<String> GetAllSections() {
             return sections;
         }

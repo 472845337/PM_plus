@@ -337,6 +337,8 @@ namespace PM_plus {
             if (Config.exitAfterClose) {
                 ProjectUtils.AllProjectOperate(Config.PROJECT_OPERATE_TYPE_STOP);
             }
+            // 关闭所有SQLite连接
+            data.SQLiteFactory.CloseAllSQLite();
         }
 
         private void Projects_Panel_DragDrop(object sender, DragEventArgs e) {

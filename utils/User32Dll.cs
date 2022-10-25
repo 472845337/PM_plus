@@ -12,6 +12,10 @@ namespace PM_plus.utils {
         // 最大化窗口
         public static UInt16 SHOW_WINDOW_MAX = 3;
 
+
+
+        [DllImport("User32.dll ", EntryPoint = "SetParent")]
+        public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
         /// <summary>
         /// 窗口操作，关闭请不要随意使用
         /// </summary>

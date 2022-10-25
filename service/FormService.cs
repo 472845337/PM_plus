@@ -200,34 +200,6 @@ namespace PM_plus.service {
         }
 
         /// <summary>
-        /// 项目运行窗口初始化
-        /// </summary>
-        /// <param name="projectRunTabControl"></param>
-        /// <param name="usedProgress"></param>
-        /// <param name="giveProgress"></param>
-        /// <returns></returns>
-        public static int InitProjectTab(TabControl projectRunTabControl, int usedProgress, int giveProgress) {
-            List<String> sectionList = IniUtils.ReadSections(Config.ProjectsIniPath);
-            // 先移除首页外的所有
-            foreach (TabPage tabPage in projectRunTabControl.TabPages) {
-                if (!"HomeTabPage".Equals(tabPage.Name)) {
-                    projectRunTabControl.TabPages.Remove(tabPage);
-                }
-            }
-            Config.waitForm.FreshProgress(usedProgress + 5);
-            Thread.Sleep(100);
-            int surplusProgress = giveProgress - 10;
-            for (int i = 0; i < sectionList.Count; i++) {
-                String section = sectionList[i];
-                // 添加项目运行窗口的所有控件
-                ControlUtils.AddTabPage2TabControl(projectRunTabControl, section);
-                // 
-                Config.waitForm.FreshProgress(usedProgress + (surplusProgress / sectionList.Count) * (i + 1));
-                Thread.Sleep(100);
-            }
-            return usedProgress + giveProgress;
-        }
-        /// <summary>
         /// 调整项目按钮上的右键菜单可用性
         /// </summary>
         /// <param name="section">当前按钮编码</param>

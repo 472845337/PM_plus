@@ -36,7 +36,7 @@ namespace PM_plus.utils
         }
 
         public static String FormatSize(float byteSize) {
-            string unit = "";
+            string unit;
             float count = byteSize;
             if (byteSize > (1024 * 1024 * 1024 / 2)) {
                 // GB
