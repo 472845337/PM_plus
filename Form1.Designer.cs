@@ -96,6 +96,7 @@ namespace PM_plus {
             this.UrlTextBox = new System.Windows.Forms.RichTextBox();
             this.DiySetTabPage = new System.Windows.Forms.TabPage();
             this.FontSetGroupBox = new System.Windows.Forms.GroupBox();
+            this.ProjectFontShowRichTextBox = new System.Windows.Forms.RichTextBox();
             this.FontColorTextBox = new System.Windows.Forms.TextBox();
             this.FontSizeComboBox = new System.Windows.Forms.ComboBox();
             this.FontColorLabel = new System.Windows.Forms.Label();
@@ -115,7 +116,6 @@ namespace PM_plus {
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.LogPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.FontColorDialog = new System.Windows.Forms.ColorDialog();
-            this.ProjectFontShowRichTextBox = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -460,7 +460,7 @@ namespace PM_plus {
             // 
             this.ProcessTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ProcessTypeLabel.AutoSize = true;
-            this.ProcessTypeLabel.Location = new System.Drawing.Point(189, 264);
+            this.ProcessTypeLabel.Location = new System.Drawing.Point(176, 264);
             this.ProcessTypeLabel.Name = "ProcessTypeLabel";
             this.ProcessTypeLabel.Size = new System.Drawing.Size(29, 12);
             this.ProcessTypeLabel.TabIndex = 11;
@@ -469,7 +469,7 @@ namespace PM_plus {
             // ProcessTypeTextBox
             // 
             this.ProcessTypeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ProcessTypeTextBox.Location = new System.Drawing.Point(224, 260);
+            this.ProcessTypeTextBox.Location = new System.Drawing.Point(211, 260);
             this.ProcessTypeTextBox.Name = "ProcessTypeTextBox";
             this.ProcessTypeTextBox.Size = new System.Drawing.Size(74, 21);
             this.ProcessTypeTextBox.TabIndex = 10;
@@ -479,7 +479,7 @@ namespace PM_plus {
             this.ProcessWindowMinButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ProcessWindowMinButton.Location = new System.Drawing.Point(108, 259);
             this.ProcessWindowMinButton.Name = "ProcessWindowMinButton";
-            this.ProcessWindowMinButton.Size = new System.Drawing.Size(75, 23);
+            this.ProcessWindowMinButton.Size = new System.Drawing.Size(62, 23);
             this.ProcessWindowMinButton.TabIndex = 9;
             this.ProcessWindowMinButton.Text = "最小化";
             this.ProcessWindowMinButton.UseVisualStyleBackColor = true;
@@ -614,14 +614,14 @@ namespace PM_plus {
             this.NetWorkGroup.Controls.Add(this.NetWorkUploadLabel);
             this.NetWorkGroup.Location = new System.Drawing.Point(9, 74);
             this.NetWorkGroup.Name = "NetWorkGroup";
-            this.NetWorkGroup.Size = new System.Drawing.Size(274, 45);
+            this.NetWorkGroup.Size = new System.Drawing.Size(274, 50);
             this.NetWorkGroup.TabIndex = 7;
             this.NetWorkGroup.TabStop = false;
             this.NetWorkGroup.Text = "网速";
             // 
             // NetWorkDownloadTextBox
             // 
-            this.NetWorkDownloadTextBox.Location = new System.Drawing.Point(183, 14);
+            this.NetWorkDownloadTextBox.Location = new System.Drawing.Point(183, 17);
             this.NetWorkDownloadTextBox.Name = "NetWorkDownloadTextBox";
             this.NetWorkDownloadTextBox.ReadOnly = true;
             this.NetWorkDownloadTextBox.Size = new System.Drawing.Size(85, 21);
@@ -629,7 +629,7 @@ namespace PM_plus {
             // 
             // NetWorkUploadTextBox
             // 
-            this.NetWorkUploadTextBox.Location = new System.Drawing.Point(39, 14);
+            this.NetWorkUploadTextBox.Location = new System.Drawing.Point(39, 17);
             this.NetWorkUploadTextBox.Name = "NetWorkUploadTextBox";
             this.NetWorkUploadTextBox.ReadOnly = true;
             this.NetWorkUploadTextBox.Size = new System.Drawing.Size(85, 21);
@@ -638,7 +638,7 @@ namespace PM_plus {
             // NewWorkDownloadLabel
             // 
             this.NewWorkDownloadLabel.AutoSize = true;
-            this.NewWorkDownloadLabel.Location = new System.Drawing.Point(148, 17);
+            this.NewWorkDownloadLabel.Location = new System.Drawing.Point(148, 20);
             this.NewWorkDownloadLabel.Name = "NewWorkDownloadLabel";
             this.NewWorkDownloadLabel.Size = new System.Drawing.Size(29, 12);
             this.NewWorkDownloadLabel.TabIndex = 1;
@@ -647,7 +647,7 @@ namespace PM_plus {
             // NetWorkUploadLabel
             // 
             this.NetWorkUploadLabel.AutoSize = true;
-            this.NetWorkUploadLabel.Location = new System.Drawing.Point(6, 17);
+            this.NetWorkUploadLabel.Location = new System.Drawing.Point(6, 20);
             this.NetWorkUploadLabel.Name = "NetWorkUploadLabel";
             this.NetWorkUploadLabel.Size = new System.Drawing.Size(29, 12);
             this.NetWorkUploadLabel.TabIndex = 0;
@@ -673,7 +673,7 @@ namespace PM_plus {
             // MemoryAvailableLabel
             // 
             this.MemoryAvailableLabel.AutoSize = true;
-            this.MemoryAvailableLabel.Location = new System.Drawing.Point(189, 17);
+            this.MemoryAvailableLabel.Location = new System.Drawing.Point(189, 20);
             this.MemoryAvailableLabel.Name = "MemoryAvailableLabel";
             this.MemoryAvailableLabel.Size = new System.Drawing.Size(29, 12);
             this.MemoryAvailableLabel.TabIndex = 8;
@@ -681,7 +681,7 @@ namespace PM_plus {
             // 
             // MemoryAvailableTextBox
             // 
-            this.MemoryAvailableTextBox.Location = new System.Drawing.Point(224, 14);
+            this.MemoryAvailableTextBox.Location = new System.Drawing.Point(224, 17);
             this.MemoryAvailableTextBox.Name = "MemoryAvailableTextBox";
             this.MemoryAvailableTextBox.ReadOnly = true;
             this.MemoryAvailableTextBox.Size = new System.Drawing.Size(55, 21);
@@ -689,7 +689,7 @@ namespace PM_plus {
             // 
             // MemoryUsedTextBox
             // 
-            this.MemoryUsedTextBox.Location = new System.Drawing.Point(127, 14);
+            this.MemoryUsedTextBox.Location = new System.Drawing.Point(127, 17);
             this.MemoryUsedTextBox.Name = "MemoryUsedTextBox";
             this.MemoryUsedTextBox.ReadOnly = true;
             this.MemoryUsedTextBox.Size = new System.Drawing.Size(56, 21);
@@ -698,7 +698,7 @@ namespace PM_plus {
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(92, 17);
+            this.label4.Location = new System.Drawing.Point(92, 20);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 5;
@@ -707,7 +707,7 @@ namespace PM_plus {
             // MemoryTotalLabel
             // 
             this.MemoryTotalLabel.AutoSize = true;
-            this.MemoryTotalLabel.Location = new System.Drawing.Point(6, 17);
+            this.MemoryTotalLabel.Location = new System.Drawing.Point(6, 20);
             this.MemoryTotalLabel.Name = "MemoryTotalLabel";
             this.MemoryTotalLabel.Size = new System.Drawing.Size(17, 12);
             this.MemoryTotalLabel.TabIndex = 4;
@@ -715,7 +715,7 @@ namespace PM_plus {
             // 
             // MemoryTotalTextBox
             // 
-            this.MemoryTotalTextBox.Location = new System.Drawing.Point(30, 14);
+            this.MemoryTotalTextBox.Location = new System.Drawing.Point(30, 17);
             this.MemoryTotalTextBox.Name = "MemoryTotalTextBox";
             this.MemoryTotalTextBox.ReadOnly = true;
             this.MemoryTotalTextBox.Size = new System.Drawing.Size(56, 21);
@@ -737,7 +737,7 @@ namespace PM_plus {
             // CpuIdleLabel
             // 
             this.CpuIdleLabel.AutoSize = true;
-            this.CpuIdleLabel.Location = new System.Drawing.Point(150, 17);
+            this.CpuIdleLabel.Location = new System.Drawing.Point(150, 20);
             this.CpuIdleLabel.Name = "CpuIdleLabel";
             this.CpuIdleLabel.Size = new System.Drawing.Size(29, 12);
             this.CpuIdleLabel.TabIndex = 6;
@@ -746,7 +746,7 @@ namespace PM_plus {
             // CpuUsedLabel
             // 
             this.CpuUsedLabel.AutoSize = true;
-            this.CpuUsedLabel.Location = new System.Drawing.Point(6, 17);
+            this.CpuUsedLabel.Location = new System.Drawing.Point(6, 20);
             this.CpuUsedLabel.Name = "CpuUsedLabel";
             this.CpuUsedLabel.Size = new System.Drawing.Size(29, 12);
             this.CpuUsedLabel.TabIndex = 5;
@@ -754,7 +754,7 @@ namespace PM_plus {
             // 
             // CpuUsedTextBox
             // 
-            this.CpuUsedTextBox.Location = new System.Drawing.Point(41, 14);
+            this.CpuUsedTextBox.Location = new System.Drawing.Point(41, 17);
             this.CpuUsedTextBox.Name = "CpuUsedTextBox";
             this.CpuUsedTextBox.ReadOnly = true;
             this.CpuUsedTextBox.Size = new System.Drawing.Size(85, 21);
@@ -762,7 +762,7 @@ namespace PM_plus {
             // 
             // CpuIdleTextBox
             // 
-            this.CpuIdleTextBox.Location = new System.Drawing.Point(185, 14);
+            this.CpuIdleTextBox.Location = new System.Drawing.Point(185, 17);
             this.CpuIdleTextBox.Name = "CpuIdleTextBox";
             this.CpuIdleTextBox.ReadOnly = true;
             this.CpuIdleTextBox.Size = new System.Drawing.Size(85, 21);
@@ -921,6 +921,7 @@ namespace PM_plus {
             // DiySetTabPage
             // 
             this.DiySetTabPage.Controls.Add(this.FontSetGroupBox);
+            this.DiySetTabPage.Controls.Add(this.SkinSwitchChecked);
             this.DiySetTabPage.Controls.Add(this.DiySetMsgLabel);
             this.DiySetTabPage.Controls.Add(this.ResetButton);
             this.DiySetTabPage.Controls.Add(this.DiySetChangeApply_Button);
@@ -949,9 +950,18 @@ namespace PM_plus {
             this.FontSetGroupBox.TabStop = false;
             this.FontSetGroupBox.Text = "项目字体";
             // 
+            // ProjectFontShowRichTextBox
+            // 
+            this.ProjectFontShowRichTextBox.Location = new System.Drawing.Point(368, 16);
+            this.ProjectFontShowRichTextBox.Name = "ProjectFontShowRichTextBox";
+            this.ProjectFontShowRichTextBox.ReadOnly = true;
+            this.ProjectFontShowRichTextBox.Size = new System.Drawing.Size(197, 51);
+            this.ProjectFontShowRichTextBox.TabIndex = 6;
+            this.ProjectFontShowRichTextBox.Text = "项目";
+            // 
             // FontColorTextBox
             // 
-            this.FontColorTextBox.Location = new System.Drawing.Point(302, 16);
+            this.FontColorTextBox.Location = new System.Drawing.Point(302, 26);
             this.FontColorTextBox.Name = "FontColorTextBox";
             this.FontColorTextBox.ReadOnly = true;
             this.FontColorTextBox.Size = new System.Drawing.Size(60, 21);
@@ -970,7 +980,7 @@ namespace PM_plus {
             "16",
             "18",
             "24"});
-            this.FontSizeComboBox.Location = new System.Drawing.Point(204, 17);
+            this.FontSizeComboBox.Location = new System.Drawing.Point(204, 27);
             this.FontSizeComboBox.Name = "FontSizeComboBox";
             this.FontSizeComboBox.Size = new System.Drawing.Size(57, 20);
             this.FontSizeComboBox.TabIndex = 4;
@@ -979,7 +989,7 @@ namespace PM_plus {
             // FontColorLabel
             // 
             this.FontColorLabel.AutoSize = true;
-            this.FontColorLabel.Location = new System.Drawing.Point(267, 20);
+            this.FontColorLabel.Location = new System.Drawing.Point(267, 30);
             this.FontColorLabel.Name = "FontColorLabel";
             this.FontColorLabel.Size = new System.Drawing.Size(29, 12);
             this.FontColorLabel.TabIndex = 3;
@@ -988,7 +998,7 @@ namespace PM_plus {
             // FontSizeLabel
             // 
             this.FontSizeLabel.AutoSize = true;
-            this.FontSizeLabel.Location = new System.Drawing.Point(169, 20);
+            this.FontSizeLabel.Location = new System.Drawing.Point(169, 30);
             this.FontSizeLabel.Name = "FontSizeLabel";
             this.FontSizeLabel.Size = new System.Drawing.Size(29, 12);
             this.FontSizeLabel.TabIndex = 2;
@@ -999,7 +1009,7 @@ namespace PM_plus {
             this.FontFamilyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.FontFamilyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.FontFamilyComboBox.FormattingEnabled = true;
-            this.FontFamilyComboBox.Location = new System.Drawing.Point(41, 17);
+            this.FontFamilyComboBox.Location = new System.Drawing.Point(41, 27);
             this.FontFamilyComboBox.Name = "FontFamilyComboBox";
             this.FontFamilyComboBox.Size = new System.Drawing.Size(121, 22);
             this.FontFamilyComboBox.TabIndex = 1;
@@ -1009,7 +1019,7 @@ namespace PM_plus {
             // FontLabel
             // 
             this.FontLabel.AutoSize = true;
-            this.FontLabel.Location = new System.Drawing.Point(6, 20);
+            this.FontLabel.Location = new System.Drawing.Point(6, 30);
             this.FontLabel.Name = "FontLabel";
             this.FontLabel.Size = new System.Drawing.Size(29, 12);
             this.FontLabel.TabIndex = 1;
@@ -1053,7 +1063,6 @@ namespace PM_plus {
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SkinGroupBox.Controls.Add(this.SkinShowPictureBox);
-            this.SkinGroupBox.Controls.Add(this.SkinSwitchChecked);
             this.SkinGroupBox.Controls.Add(this.SkinListBox);
             this.SkinGroupBox.Location = new System.Drawing.Point(8, 86);
             this.SkinGroupBox.Name = "SkinGroupBox";
@@ -1078,7 +1087,7 @@ namespace PM_plus {
             // 
             this.SkinSwitchChecked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SkinSwitchChecked.AutoSize = true;
-            this.SkinSwitchChecked.Location = new System.Drawing.Point(8, 272);
+            this.SkinSwitchChecked.Location = new System.Drawing.Point(16, 398);
             this.SkinSwitchChecked.Name = "SkinSwitchChecked";
             this.SkinSwitchChecked.Size = new System.Drawing.Size(72, 16);
             this.SkinSwitchChecked.TabIndex = 7;
@@ -1093,7 +1102,7 @@ namespace PM_plus {
             this.SkinListBox.ItemHeight = 12;
             this.SkinListBox.Location = new System.Drawing.Point(6, 20);
             this.SkinListBox.Name = "SkinListBox";
-            this.SkinListBox.Size = new System.Drawing.Size(169, 244);
+            this.SkinListBox.Size = new System.Drawing.Size(169, 268);
             this.SkinListBox.TabIndex = 2;
             this.SkinListBox.SelectedIndexChanged += new System.EventHandler(this.SkinListBox_SelectedIndexChanged);
             // 
@@ -1123,15 +1132,6 @@ namespace PM_plus {
             // LabelTimer
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
-            // 
-            // ProjectFontShowRichTextBox
-            // 
-            this.ProjectFontShowRichTextBox.Location = new System.Drawing.Point(368, 16);
-            this.ProjectFontShowRichTextBox.Name = "ProjectFontShowRichTextBox";
-            this.ProjectFontShowRichTextBox.ReadOnly = true;
-            this.ProjectFontShowRichTextBox.Size = new System.Drawing.Size(197, 51);
-            this.ProjectFontShowRichTextBox.TabIndex = 6;
-            this.ProjectFontShowRichTextBox.Text = "项目";
             // 
             // Form1
             // 
@@ -1173,7 +1173,6 @@ namespace PM_plus {
             this.FontSetGroupBox.ResumeLayout(false);
             this.FontSetGroupBox.PerformLayout();
             this.SkinGroupBox.ResumeLayout(false);
-            this.SkinGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).EndInit();
             this.HelpTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
