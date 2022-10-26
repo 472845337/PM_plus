@@ -194,32 +194,33 @@ namespace PM_plus.service {
         }
 
         public static void MonitorServer() {
-            float cpuUsage = cpuCounter.NextValue();
-            string cpuUsageStr = string.Format("{0:f2} %", cpuUsage);
-            float cpuIdle = idleCounter.NextValue();
-            string cpuIdleStr = string.Format("{0:f2} %", cpuIdle);
-            float ramAvailable = ramCounter.NextValue();
-            string ramAvaiableStr = string.Format("{0:f2} GB", ramAvailable/1024.0F);
-            float ramUsed = usedRamCounter.NextValue();
-            string ramUsedStr = string.Format("{0:f2} %", ramUsed);
-            double downloadSpeed = 0.0F;
-            double uploadSpeed = 0.0F;
-            if(ServerInfoTimer.Interval != 1000) {
-                // 如果监控频率不为1秒的话，则需要执行该步骤
-                foreach (NetWorkAdapter adapter in adapters) {
-                    adapter.Init();
-                }
-            }
-            // 一秒后，再计算一下网络流量
-            Thread.Sleep(1000);
-            foreach (NetWorkAdapter adapter in adapters) {
-                adapter.Refresh();
-                downloadSpeed += adapter.DownloadSpeedKbps;
-                uploadSpeed += adapter.UploadSpeedKbps;
-            }
-            string downloadSpeedStr = string.Format("{0:n} KB/s", downloadSpeed);
-            string uploadSpeedStr = string.Format("{0:n} KB/s", uploadSpeed);
             if (ServerInfoTimer.Enabled) {
+                if (ServerInfoTimer.Interval != 1000) {
+                    // 如果监控频率不为1秒的话，则需要执行该步骤
+                    foreach (NetWorkAdapter adapter in adapters) {
+                        adapter.Init();
+                    }
+                }
+                // 一秒后，再计算一下网络流量
+                Thread.Sleep(1000);
+                double downloadSpeed = 0.0F;
+                double uploadSpeed = 0.0F;
+                foreach (NetWorkAdapter adapter in adapters) {
+                    adapter.Refresh();
+                    downloadSpeed += adapter.DownloadSpeedKbps;
+                    uploadSpeed += adapter.UploadSpeedKbps;
+                }
+                string downloadSpeedStr = string.Format("{0:n} KB/s", downloadSpeed);
+                string uploadSpeedStr = string.Format("{0:n} KB/s", uploadSpeed);
+                float cpuUsage = cpuCounter.NextValue();
+                string cpuUsageStr = string.Format("{0:f2} %", cpuUsage);
+                float cpuIdle = idleCounter.NextValue();
+                string cpuIdleStr = string.Format("{0:f2} %", cpuIdle);
+                float ramAvailable = ramCounter.NextValue();
+                string ramAvaiableStr = string.Format("{0:f2} GB", ramAvailable / 1024.0F);
+                float ramUsed = usedRamCounter.NextValue();
+                string ramUsedStr = string.Format("{0:f2} %", ramUsed);
+
                 Config.mainForm.CpuUsedTextBox.Text = cpuUsageStr;
                 Config.mainForm.CpuIdleTextBox.Text = cpuIdleStr;
                 Config.mainForm.MemoryAvailableTextBox.Text = ramAvaiableStr;
