@@ -339,6 +339,8 @@ namespace PM_plus {
             }
             // 关闭所有SQLite连接
             data.SQLiteFactory.CloseAllSQLite();
+            // 所有定时器资源回收
+            TimerService.DisposeAllTimer();
         }
 
         private void Projects_Panel_DragDrop(object sender, DragEventArgs e) {

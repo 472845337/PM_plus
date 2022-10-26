@@ -39,9 +39,11 @@ namespace PM_plus.utils {
                 MessageBox.Show(e.Message, "写入日志异常");
             } finally {
                 if (null != sw) {
+                    sw.Dispose();
                     sw.Close();
                 }
                 if (null != fs) {
+                    fs.Dispose();
                     fs.Close();
                 }
             }

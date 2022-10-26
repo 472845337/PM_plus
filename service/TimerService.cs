@@ -13,10 +13,10 @@ namespace PM_plus.service {
         [System.Runtime.InteropServices.DllImport("kernel32")]
         public static extern Int32 SetProcessWorkingSetSize(IntPtr process, Int32 minSize, Int32 maxSize);
         // 不能使用窗体中的timer控件，要使用线程timer
-        private static readonly System.Timers.Timer GcTimer = new System.Timers.Timer();
-        private static readonly System.Timers.Timer MonitorTimer = new System.Timers.Timer();
-        private static readonly System.Timers.Timer BtnDoubleCheckTimer = new System.Timers.Timer(500);
-        public static readonly System.Timers.Timer ServerInfoTimer = new System.Timers.Timer();
+        private static System.Timers.Timer GcTimer = new System.Timers.Timer();
+        private static System.Timers.Timer MonitorTimer = new System.Timers.Timer();
+        private static System.Timers.Timer BtnDoubleCheckTimer = new System.Timers.Timer(1000);
+        public static System.Timers.Timer ServerInfoTimer = new System.Timers.Timer();
         // 网络适配器集合
         private readonly static List<NetWorkAdapter> adapters = new List<NetWorkAdapter>();
 
@@ -45,8 +45,13 @@ namespace PM_plus.service {
                 adapters.Add(adapter);    // Add it to ArrayList adapter
             }
         }
+
+        /// <summary>
+        /// 自动GC定时器初始化
+        /// </summary>
         internal static void AutoGc() {
-            GcTimer.Interval = 20000;
+            // 每5分钟执行一次GC
+            GcTimer.Interval = 5 * 60 * 1000;
             GcTimer.Enabled = true;
             // 给时间控件绑定事件
             GcTimer.Elapsed += new System.Timers.ElapsedEventHandler(GCTimer_Tick);
@@ -103,7 +108,7 @@ namespace PM_plus.service {
             GC.WaitForPendingFinalizers();
             if (Environment.OSVersion.Platform == PlatformID.Win32NT) {
                 //  配置工作使用空间
-                SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+                SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
             }
         }
 
@@ -227,6 +232,7 @@ namespace PM_plus.service {
                 Config.mainForm.MemoryUsedTextBox.Text = ramUsedStr;
                 Config.mainForm.NetWorkDownloadTextBox.Text = downloadSpeedStr;
                 Config.mainForm.NetWorkUploadTextBox.Text = uploadSpeedStr;
+
             }
         }
 
@@ -249,6 +255,19 @@ namespace PM_plus.service {
             } else {
                 Config.mainForm.ProcessListBox.DisplayMember = "MainWindowTitle";
             }
+        }
+        /// <summary>
+        /// 回收定时器所有的资源
+        /// </summary>
+        public static void DisposeAllTimer() {
+            GcTimer.Dispose();
+            MonitorTimer.Dispose();
+            BtnDoubleCheckTimer.Dispose();
+            ServerInfoTimer.Dispose();
+            GcTimer = null;
+            MonitorTimer = null;
+            BtnDoubleCheckTimer = null;
+            ServerInfoTimer = null;
         }
     }
 }
