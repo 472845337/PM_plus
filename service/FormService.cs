@@ -77,9 +77,8 @@ namespace PM_plus.service {
             Config.mainForm.FontFamilyComboBox.SelectedItem = fontFamilyName;
             Config.mainForm.FontSizeComboBox.SelectedItem = fontSize.ToString();
             Config.mainForm.FontColorTextBox.BackColor = ColorTranslator.FromHtml(fontColor);
-            Font showFont = new Font(fontFamilyName, fontSize);
-            Config.mainForm.ProjectFontShowRichTextBox.Font = showFont;
-            showFont.Dispose();
+            // 这里的字体属于初始字体，不能使用非托管资源定义方式 ，否则打开这个tabpage会找不到字体
+            Config.mainForm.ProjectFontShowRichTextBox.Font = new Font(fontFamilyName, fontSize);
             Config.mainForm.ProjectFontShowRichTextBox.ForeColor = ColorTranslator.FromHtml(fontColor);
         }
 
@@ -303,11 +302,11 @@ namespace PM_plus.service {
             string fontFamily = Config.mainForm.FontFamilyComboBox.SelectedItem as string;
             string fontSizeStr = Config.mainForm.FontSizeComboBox.SelectedItem as string;
             Color fontColor = Config.mainForm.FontColorTextBox.BackColor;
-            Font buttonFont = new Font(fontFamily, Convert.ToInt32(fontSizeStr));
-            button.Font = buttonFont;
+            using (Font buttonFont = new Font(fontFamily, Convert.ToInt32(fontSizeStr))) {
+                button.Font = buttonFont;
+            }
             button.ForeColor = fontColor;
             button.Tag = 9999;
-            buttonFont.Dispose();
             #endregion
             #region 按钮加载相关事件
             button.MouseHover += new EventHandler(EventService.BtnMouseHover);
@@ -378,11 +377,10 @@ namespace PM_plus.service {
             string fontFamily = Config.mainForm.FontFamilyComboBox.SelectedItem as String;
             String fontSizeStr = Config.mainForm.FontSizeComboBox.SelectedItem as String;
             Color fontColor = Config.mainForm.FontColorTextBox.BackColor;
-            Font showFont = new Font(fontFamily, StringUtils.IsNotEmpty(fontSizeStr) ? Convert.ToInt16(fontSizeStr) : 0);
-            Config.mainForm.ProjectFontShowRichTextBox.Font = showFont;
+            using (Font showFont = new Font(fontFamily, StringUtils.IsNotEmpty(fontSizeStr) ? Convert.ToInt16(fontSizeStr) : 0)) {
+                Config.mainForm.ProjectFontShowRichTextBox.Font = showFont;
+            }
             Config.mainForm.ProjectFontShowRichTextBox.ForeColor = fontColor;
-            // 字体使用完后需要回收
-            showFont.Dispose();
             foreach (Control con in Config.mainForm.Projects_Panel.Controls) {
                 ControlUtils.SetControlFont(con, fontFamily, StringUtils.IsNotEmpty(fontSizeStr) ? Convert.ToInt16(fontSizeStr) : 0, fontColor, true);
             }
