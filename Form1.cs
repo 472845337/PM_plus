@@ -271,9 +271,7 @@ namespace PM_plus {
                         FormService.CheckSection(projectSectionEntry.Value, true);
                     }
                 }
-                OperateMsg_Label.Text = "刷新成功";
-                OperateMsg_Label.ForeColor = Color.Green;
-                InitLabelMsgTimerout();
+                TimerService.ShowOperateLabelMessage("刷新成功", Color.Green);
             }
         }
 
