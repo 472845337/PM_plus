@@ -195,9 +195,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="README.md" />
-    <None Include="Skins\Carlmness\Calmness.ssk" />
-    <None Include="Skins\Carlmness\CalmnessColor1.ssk" />
-    <None Include="Skins\Carlmness\CalmnessColor2.ssk" />
+    <None Include="Skins\Calmness\Calmness.ssk" />
+    <None Include="Skins\Calmness\CalmnessColor1.ssk" />
+    <None Include="Skins\Calmness\CalmnessColor2.ssk" />
     <None Include="Skins\Deep\DeepCyan.ssk" />
     <None Include="Skins\Deep\DeepGreen.ssk" />
     <None Include="Skins\Deep\DeepOrange.ssk" />
@@ -306,9 +306,9 @@
     <EmbeddedResource Include="resources\menu-icon\project.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <Content Include="Skins\Carlmness\Calmness.gif" />
-    <Content Include="Skins\Carlmness\CalmnessColor1.gif" />
-    <Content Include="Skins\Carlmness\CalmnessColor2.gif" />
+    <Content Include="Skins\Calmness\Calmness.gif" />
+    <Content Include="Skins\Calmness\CalmnessColor1.gif" />
+    <Content Include="Skins\Calmness\CalmnessColor2.gif" />
     <Content Include="Skins\Deep\DeepCyan.gif" />
     <Content Include="Skins\Deep\DeepGreen.gif" />
     <Content Include="Skins\Deep\DeepOrange.gif" />
