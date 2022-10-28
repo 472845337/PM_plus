@@ -102,7 +102,6 @@ namespace PM_plus {
             this.FontFamilyComboBox = new System.Windows.Forms.ComboBox();
             this.FontLabel = new System.Windows.Forms.Label();
             this.SkinSwitchChecked = new System.Windows.Forms.CheckBox();
-            this.DiySetMsgLabel = new System.Windows.Forms.Label();
             this.ResetButton = new System.Windows.Forms.Button();
             this.DiySetChangeApply_Button = new System.Windows.Forms.Button();
             this.SkinGroupBox = new System.Windows.Forms.GroupBox();
@@ -899,7 +898,6 @@ namespace PM_plus {
             // 
             this.DiySetTabPage.Controls.Add(this.FontSetGroupBox);
             this.DiySetTabPage.Controls.Add(this.SkinSwitchChecked);
-            this.DiySetTabPage.Controls.Add(this.DiySetMsgLabel);
             this.DiySetTabPage.Controls.Add(this.ResetButton);
             this.DiySetTabPage.Controls.Add(this.DiySetChangeApply_Button);
             this.DiySetTabPage.Controls.Add(this.SkinGroupBox);
@@ -1012,16 +1010,6 @@ namespace PM_plus {
             this.SkinSwitchChecked.TabIndex = 7;
             this.SkinSwitchChecked.Text = "皮肤开关";
             this.SkinSwitchChecked.UseVisualStyleBackColor = true;
-            // 
-            // DiySetMsgLabel
-            // 
-            this.DiySetMsgLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DiySetMsgLabel.AutoSize = true;
-            this.DiySetMsgLabel.Location = new System.Drawing.Point(268, 495);
-            this.DiySetMsgLabel.Name = "DiySetMsgLabel";
-            this.DiySetMsgLabel.Size = new System.Drawing.Size(0, 12);
-            this.DiySetMsgLabel.TabIndex = 5;
             // 
             // ResetButton
             // 
@@ -1214,7 +1202,6 @@ namespace PM_plus {
         private System.Windows.Forms.Button JDKPath_Dialog_Button;
         private System.Windows.Forms.Button SystemConfig_Save_Button;
         private System.Windows.Forms.Button ResetButton;
-        private System.Windows.Forms.Label DiySetMsgLabel;
         internal System.Windows.Forms.PictureBox SkinShowPictureBox;
         internal System.Windows.Forms.CheckBox SkinSwitchChecked;
         private System.Windows.Forms.Button LogPath_Dialog_Button;

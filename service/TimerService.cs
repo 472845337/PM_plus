@@ -271,7 +271,12 @@ namespace PM_plus.service {
             ServerInfoTimer = null;
         }
 
-        public static void showOperateLabelMessage(String message, Color color, int second = 5) {
+        public static void ShowOperateLabelMessage(String message, Color color, int second = 5) {
+            if (!Config.BLANK_STR.Equals(Config.mainForm.OperateMessageLabel.Text)) {
+                // 还存在消息，要先清掉
+                Config.mainForm.OperateMessageLabel.Text = Config.BLANK_STR;
+                Thread.Sleep(500);
+            }
             Config.mainForm.OperateMessageLabel.Text = message;
             Config.mainForm.OperateMessageLabel.ForeColor = color;
             Config.mainForm.InitLabelMsgTimerout(second);

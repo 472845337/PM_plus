@@ -159,7 +159,7 @@ namespace PM_plus {
             long saveLogPathResult = SaveLogPath();
 
             if (saveProfileResult > 0 && saveJDKPathresult > 0 && saveLogPathResult > 0) {
-                TimerService.showOperateLabelMessage("保存成功!", Color.DarkGreen);
+                TimerService.ShowOperateLabelMessage("保存成功!", Color.DarkGreen);
             } else {
                 MessageBox.Show("保存失败，请联系作者！","警告");
             }
@@ -364,10 +364,7 @@ namespace PM_plus {
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_FAMILY, FontFamilyComboBox.SelectedItem as String);
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_SIZE, FontSizeComboBox.SelectedItem as String);
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_COLOR, ColorTranslator.ToHtml(FontColorTextBox.BackColor));
-            DiySetMsgLabel.Text = "设置成功!";
-            DiySetMsgLabel.ForeColor = Color.Green;
-            DiySetMsgLabel.Visible = true;
-            InitLabelMsgTimerout();
+            TimerService.ShowOperateLabelMessage("设置成功!", Color.Green);
         }
 
         private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e) {
@@ -390,9 +387,7 @@ namespace PM_plus {
             FontSizeComboBox.SelectedItem = Config.DEFAULT_FONT_SIZE.ToString();
             FontColorTextBox.BackColor = ColorTranslator.FromHtml(Config.DEFAULT_FONT_COLOR);
 
-            DiySetMsgLabel.Text = "恢复默认成功！";
-            DiySetMsgLabel.ForeColor = Color.Green;
-            InitLabelMsgTimerout();
+            TimerService.ShowOperateLabelMessage("恢复默认!", Color.Green);
         }
 
         /// <summary>
