@@ -358,6 +358,9 @@ namespace PM_plus {
         }
         private void DiySetChangeApply_Button_Click(object sender, EventArgs e) {
             se.Active = SkinSwitchChecked.Checked;
+            if(SkinListBox.SelectedIndex == -1) {
+                SkinListBox.SelectedIndex = 0;
+            }
             se.SkinFile = (SkinListBox.SelectedItem as Skin).RelativeName;
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN, (SkinListBox.SelectedItem as Skin).RelativeName);
             IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_SKIN_SWITCH, SkinSwitchChecked.Checked.ToString());
