@@ -30,7 +30,6 @@ namespace PM_plus {
             this.OperateMsg_Label = new System.Windows.Forms.Label();
             this.ExitAfterClose_CheckBox = new System.Windows.Forms.CheckBox();
             this.LogSwitch_CheckBox = new System.Windows.Forms.CheckBox();
-            this.Author_Label = new System.Windows.Forms.Label();
             this.ProjectGroupBox = new System.Windows.Forms.GroupBox();
             this.Projects_Panel = new System.Windows.Forms.FlowLayoutPanel();
             this.ProjectAdd_Button = new System.Windows.Forms.Button();
@@ -46,7 +45,6 @@ namespace PM_plus {
             this.JDKPath_Label = new System.Windows.Forms.Label();
             this.JDKPath_TextBox = new System.Windows.Forms.TextBox();
             this.JDKPath_Dialog_Button = new System.Windows.Forms.Button();
-            this.SystemConfig_SaveLabel = new System.Windows.Forms.Label();
             this.SystemConfig_Save_Button = new System.Windows.Forms.Button();
             this.MonitorTabPage = new System.Windows.Forms.TabPage();
             this.ProjectInfoGroupBox = new System.Windows.Forms.GroupBox();
@@ -103,12 +101,12 @@ namespace PM_plus {
             this.FontSizeLabel = new System.Windows.Forms.Label();
             this.FontFamilyComboBox = new System.Windows.Forms.ComboBox();
             this.FontLabel = new System.Windows.Forms.Label();
+            this.SkinSwitchChecked = new System.Windows.Forms.CheckBox();
             this.DiySetMsgLabel = new System.Windows.Forms.Label();
             this.ResetButton = new System.Windows.Forms.Button();
             this.DiySetChangeApply_Button = new System.Windows.Forms.Button();
             this.SkinGroupBox = new System.Windows.Forms.GroupBox();
             this.SkinShowPictureBox = new System.Windows.Forms.PictureBox();
-            this.SkinSwitchChecked = new System.Windows.Forms.CheckBox();
             this.SkinListBox = new System.Windows.Forms.ListBox();
             this.HelpTabPage = new System.Windows.Forms.TabPage();
             this.HelpRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -116,6 +114,9 @@ namespace PM_plus {
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.LogPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.FontColorDialog = new System.Windows.Forms.ColorDialog();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.AuthorToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.OperateMessageLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -133,6 +134,7 @@ namespace PM_plus {
             this.SkinGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).BeginInit();
             this.HelpTabPage.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -149,7 +151,7 @@ namespace PM_plus {
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(599, 465);
+            this.tabControl1.Size = new System.Drawing.Size(599, 452);
             this.tabControl1.TabIndex = 0;
             // 
             // ProjectTagPage
@@ -157,13 +159,12 @@ namespace PM_plus {
             this.ProjectTagPage.Controls.Add(this.OperateMsg_Label);
             this.ProjectTagPage.Controls.Add(this.ExitAfterClose_CheckBox);
             this.ProjectTagPage.Controls.Add(this.LogSwitch_CheckBox);
-            this.ProjectTagPage.Controls.Add(this.Author_Label);
             this.ProjectTagPage.Controls.Add(this.ProjectGroupBox);
             this.ProjectTagPage.Controls.Add(this.System_GroupBox);
             this.ProjectTagPage.Location = new System.Drawing.Point(4, 29);
             this.ProjectTagPage.Name = "ProjectTagPage";
             this.ProjectTagPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ProjectTagPage.Size = new System.Drawing.Size(591, 432);
+            this.ProjectTagPage.Size = new System.Drawing.Size(591, 419);
             this.ProjectTagPage.TabIndex = 0;
             this.ProjectTagPage.Text = "项目配置";
             this.ProjectTagPage.UseVisualStyleBackColor = true;
@@ -172,7 +173,7 @@ namespace PM_plus {
             // 
             this.OperateMsg_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.OperateMsg_Label.AutoSize = true;
-            this.OperateMsg_Label.Location = new System.Drawing.Point(161, 411);
+            this.OperateMsg_Label.Location = new System.Drawing.Point(193, 398);
             this.OperateMsg_Label.Name = "OperateMsg_Label";
             this.OperateMsg_Label.Size = new System.Drawing.Size(0, 12);
             this.OperateMsg_Label.TabIndex = 26;
@@ -181,7 +182,7 @@ namespace PM_plus {
             // 
             this.ExitAfterClose_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ExitAfterClose_CheckBox.AutoSize = true;
-            this.ExitAfterClose_CheckBox.Location = new System.Drawing.Point(95, 410);
+            this.ExitAfterClose_CheckBox.Location = new System.Drawing.Point(95, 397);
             this.ExitAfterClose_CheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ExitAfterClose_CheckBox.Name = "ExitAfterClose_CheckBox";
             this.ExitAfterClose_CheckBox.Size = new System.Drawing.Size(72, 16);
@@ -195,7 +196,7 @@ namespace PM_plus {
             // 
             this.LogSwitch_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LogSwitch_CheckBox.AutoSize = true;
-            this.LogSwitch_CheckBox.Location = new System.Drawing.Point(5, 410);
+            this.LogSwitch_CheckBox.Location = new System.Drawing.Point(5, 397);
             this.LogSwitch_CheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LogSwitch_CheckBox.Name = "LogSwitch_CheckBox";
             this.LogSwitch_CheckBox.Size = new System.Drawing.Size(84, 16);
@@ -203,16 +204,6 @@ namespace PM_plus {
             this.LogSwitch_CheckBox.Text = "控制台日志";
             this.LogSwitch_CheckBox.UseVisualStyleBackColor = true;
             this.LogSwitch_CheckBox.CheckedChanged += new System.EventHandler(this.LogSwitch_CheckBox_CheckedChanged);
-            // 
-            // Author_Label
-            // 
-            this.Author_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Author_Label.AutoSize = true;
-            this.Author_Label.Location = new System.Drawing.Point(414, 411);
-            this.Author_Label.Name = "Author_Label";
-            this.Author_Label.Size = new System.Drawing.Size(137, 12);
-            this.Author_Label.TabIndex = 23;
-            this.Author_Label.Text = "作者:1320311706@qq.com";
             // 
             // ProjectGroupBox
             // 
@@ -224,9 +215,9 @@ namespace PM_plus {
             this.ProjectGroupBox.Controls.Add(this.AllStart_Button);
             this.ProjectGroupBox.Controls.Add(this.AllStop_Button);
             this.ProjectGroupBox.Controls.Add(this.FreshButton);
-            this.ProjectGroupBox.Location = new System.Drawing.Point(7, 105);
+            this.ProjectGroupBox.Location = new System.Drawing.Point(7, 110);
             this.ProjectGroupBox.Name = "ProjectGroupBox";
-            this.ProjectGroupBox.Size = new System.Drawing.Size(579, 293);
+            this.ProjectGroupBox.Size = new System.Drawing.Size(579, 275);
             this.ProjectGroupBox.TabIndex = 22;
             this.ProjectGroupBox.TabStop = false;
             this.ProjectGroupBox.Text = "项目";
@@ -239,7 +230,7 @@ namespace PM_plus {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Projects_Panel.Location = new System.Drawing.Point(6, 21);
             this.Projects_Panel.Name = "Projects_Panel";
-            this.Projects_Panel.Size = new System.Drawing.Size(567, 230);
+            this.Projects_Panel.Size = new System.Drawing.Size(567, 212);
             this.Projects_Panel.TabIndex = 21;
             this.Projects_Panel.ClientSizeChanged += new System.EventHandler(this.Projects_Panel_ClientSizeChanged);
             this.Projects_Panel.DragDrop += new System.Windows.Forms.DragEventHandler(this.Projects_Panel_DragDrop);
@@ -250,7 +241,7 @@ namespace PM_plus {
             this.ProjectAdd_Button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ProjectAdd_Button.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F);
-            this.ProjectAdd_Button.Location = new System.Drawing.Point(7, 256);
+            this.ProjectAdd_Button.Location = new System.Drawing.Point(7, 238);
             this.ProjectAdd_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ProjectAdd_Button.Name = "ProjectAdd_Button";
             this.ProjectAdd_Button.Size = new System.Drawing.Size(309, 32);
@@ -263,7 +254,7 @@ namespace PM_plus {
             // 
             this.AllStart_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AllStart_Button.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F);
-            this.AllStart_Button.Location = new System.Drawing.Point(409, 256);
+            this.AllStart_Button.Location = new System.Drawing.Point(409, 238);
             this.AllStart_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AllStart_Button.Name = "AllStart_Button";
             this.AllStart_Button.Size = new System.Drawing.Size(81, 32);
@@ -276,7 +267,7 @@ namespace PM_plus {
             // 
             this.AllStop_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AllStop_Button.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F);
-            this.AllStop_Button.Location = new System.Drawing.Point(496, 256);
+            this.AllStop_Button.Location = new System.Drawing.Point(496, 238);
             this.AllStop_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AllStop_Button.Name = "AllStop_Button";
             this.AllStop_Button.Size = new System.Drawing.Size(75, 32);
@@ -289,7 +280,7 @@ namespace PM_plus {
             // 
             this.FreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.FreshButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F);
-            this.FreshButton.Location = new System.Drawing.Point(322, 256);
+            this.FreshButton.Location = new System.Drawing.Point(322, 238);
             this.FreshButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.FreshButton.Name = "FreshButton";
             this.FreshButton.Size = new System.Drawing.Size(81, 32);
@@ -310,11 +301,10 @@ namespace PM_plus {
             this.System_GroupBox.Controls.Add(this.JDKPath_Label);
             this.System_GroupBox.Controls.Add(this.JDKPath_TextBox);
             this.System_GroupBox.Controls.Add(this.JDKPath_Dialog_Button);
-            this.System_GroupBox.Controls.Add(this.SystemConfig_SaveLabel);
             this.System_GroupBox.Controls.Add(this.SystemConfig_Save_Button);
             this.System_GroupBox.Location = new System.Drawing.Point(6, 6);
             this.System_GroupBox.Name = "System_GroupBox";
-            this.System_GroupBox.Size = new System.Drawing.Size(580, 93);
+            this.System_GroupBox.Size = new System.Drawing.Size(580, 98);
             this.System_GroupBox.TabIndex = 21;
             this.System_GroupBox.TabStop = false;
             this.System_GroupBox.Text = "环境配置";
@@ -346,7 +336,6 @@ namespace PM_plus {
             this.LogPath_TextBox.Name = "LogPath_TextBox";
             this.LogPath_TextBox.Size = new System.Drawing.Size(459, 21);
             this.LogPath_TextBox.TabIndex = 16;
-            this.LogPath_TextBox.TextChanged += new System.EventHandler(this.LogPath_TextBox_TextChanged);
             // 
             // LogPathLabel
             // 
@@ -384,7 +373,6 @@ namespace PM_plus {
             this.JDKPath_TextBox.Name = "JDKPath_TextBox";
             this.JDKPath_TextBox.Size = new System.Drawing.Size(298, 21);
             this.JDKPath_TextBox.TabIndex = 11;
-            this.JDKPath_TextBox.TextChanged += new System.EventHandler(this.JDKPath_TextBox_TextChanged);
             // 
             // JDKPath_Dialog_Button
             // 
@@ -398,20 +386,9 @@ namespace PM_plus {
             this.JDKPath_Dialog_Button.UseVisualStyleBackColor = true;
             this.JDKPath_Dialog_Button.Click += new System.EventHandler(this.JDKPath_Dialog_Button_Click);
             // 
-            // SystemConfig_SaveLabel
-            // 
-            this.SystemConfig_SaveLabel.AutoSize = true;
-            this.SystemConfig_SaveLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.SystemConfig_SaveLabel.Location = new System.Drawing.Point(14, 75);
-            this.SystemConfig_SaveLabel.Name = "SystemConfig_SaveLabel";
-            this.SystemConfig_SaveLabel.Size = new System.Drawing.Size(53, 12);
-            this.SystemConfig_SaveLabel.TabIndex = 14;
-            this.SystemConfig_SaveLabel.Text = "保存成功";
-            this.SystemConfig_SaveLabel.Visible = false;
-            // 
             // SystemConfig_Save_Button
             // 
-            this.SystemConfig_Save_Button.Location = new System.Drawing.Point(524, 71);
+            this.SystemConfig_Save_Button.Location = new System.Drawing.Point(524, 70);
             this.SystemConfig_Save_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SystemConfig_Save_Button.Name = "SystemConfig_Save_Button";
             this.SystemConfig_Save_Button.Size = new System.Drawing.Size(46, 23);
@@ -426,7 +403,7 @@ namespace PM_plus {
             this.MonitorTabPage.Controls.Add(this.ServerInfoGroupBox);
             this.MonitorTabPage.Location = new System.Drawing.Point(4, 29);
             this.MonitorTabPage.Name = "MonitorTabPage";
-            this.MonitorTabPage.Size = new System.Drawing.Size(591, 432);
+            this.MonitorTabPage.Size = new System.Drawing.Size(591, 419);
             this.MonitorTabPage.TabIndex = 4;
             this.MonitorTabPage.Text = "监控";
             this.MonitorTabPage.UseVisualStyleBackColor = true;
@@ -451,7 +428,7 @@ namespace PM_plus {
             this.ProjectInfoGroupBox.Controls.Add(this.ProcessListBox);
             this.ProjectInfoGroupBox.Location = new System.Drawing.Point(6, 140);
             this.ProjectInfoGroupBox.Name = "ProjectInfoGroupBox";
-            this.ProjectInfoGroupBox.Size = new System.Drawing.Size(576, 289);
+            this.ProjectInfoGroupBox.Size = new System.Drawing.Size(576, 277);
             this.ProjectInfoGroupBox.TabIndex = 3;
             this.ProjectInfoGroupBox.TabStop = false;
             this.ProjectInfoGroupBox.Text = "进程信息";
@@ -460,7 +437,7 @@ namespace PM_plus {
             // 
             this.ProcessTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ProcessTypeLabel.AutoSize = true;
-            this.ProcessTypeLabel.Location = new System.Drawing.Point(176, 264);
+            this.ProcessTypeLabel.Location = new System.Drawing.Point(176, 252);
             this.ProcessTypeLabel.Name = "ProcessTypeLabel";
             this.ProcessTypeLabel.Size = new System.Drawing.Size(29, 12);
             this.ProcessTypeLabel.TabIndex = 11;
@@ -469,7 +446,7 @@ namespace PM_plus {
             // ProcessTypeTextBox
             // 
             this.ProcessTypeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ProcessTypeTextBox.Location = new System.Drawing.Point(211, 260);
+            this.ProcessTypeTextBox.Location = new System.Drawing.Point(211, 248);
             this.ProcessTypeTextBox.Name = "ProcessTypeTextBox";
             this.ProcessTypeTextBox.Size = new System.Drawing.Size(74, 21);
             this.ProcessTypeTextBox.TabIndex = 10;
@@ -477,7 +454,7 @@ namespace PM_plus {
             // ProcessWindowMinButton
             // 
             this.ProcessWindowMinButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ProcessWindowMinButton.Location = new System.Drawing.Point(108, 259);
+            this.ProcessWindowMinButton.Location = new System.Drawing.Point(108, 247);
             this.ProcessWindowMinButton.Name = "ProcessWindowMinButton";
             this.ProcessWindowMinButton.Size = new System.Drawing.Size(62, 23);
             this.ProcessWindowMinButton.TabIndex = 9;
@@ -488,7 +465,7 @@ namespace PM_plus {
             // FreshProcessButton
             // 
             this.FreshProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.FreshProcessButton.Location = new System.Drawing.Point(515, 259);
+            this.FreshProcessButton.Location = new System.Drawing.Point(515, 247);
             this.FreshProcessButton.Name = "FreshProcessButton";
             this.FreshProcessButton.Size = new System.Drawing.Size(53, 23);
             this.FreshProcessButton.TabIndex = 8;
@@ -500,7 +477,7 @@ namespace PM_plus {
             // 
             this.ClickActiveCmdCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ClickActiveCmdCheckBox.AutoSize = true;
-            this.ClickActiveCmdCheckBox.Location = new System.Drawing.Point(6, 262);
+            this.ClickActiveCmdCheckBox.Location = new System.Drawing.Point(6, 250);
             this.ClickActiveCmdCheckBox.Name = "ClickActiveCmdCheckBox";
             this.ClickActiveCmdCheckBox.Size = new System.Drawing.Size(96, 16);
             this.ClickActiveCmdCheckBox.TabIndex = 4;
@@ -517,7 +494,7 @@ namespace PM_plus {
             this.ChildProcessListBox.ItemHeight = 12;
             this.ChildProcessListBox.Location = new System.Drawing.Point(305, 127);
             this.ChildProcessListBox.Name = "ChildProcessListBox";
-            this.ChildProcessListBox.Size = new System.Drawing.Size(264, 124);
+            this.ChildProcessListBox.Size = new System.Drawing.Size(264, 112);
             this.ChildProcessListBox.TabIndex = 7;
             // 
             // ProcessTitleTextBox
@@ -586,7 +563,7 @@ namespace PM_plus {
             this.ProcessListBox.ItemHeight = 12;
             this.ProcessListBox.Location = new System.Drawing.Point(7, 19);
             this.ProcessListBox.Name = "ProcessListBox";
-            this.ProcessListBox.Size = new System.Drawing.Size(291, 232);
+            this.ProcessListBox.Size = new System.Drawing.Size(291, 220);
             this.ProcessListBox.TabIndex = 0;
             this.ProcessListBox.SelectedIndexChanged += new System.EventHandler(this.ProcessListBox_SelectedIndexChanged);
             // 
@@ -799,7 +776,7 @@ namespace PM_plus {
             this.ToolTabPage.Controls.Add(this.HttpRequestGroupBox);
             this.ToolTabPage.Location = new System.Drawing.Point(4, 29);
             this.ToolTabPage.Name = "ToolTabPage";
-            this.ToolTabPage.Size = new System.Drawing.Size(591, 432);
+            this.ToolTabPage.Size = new System.Drawing.Size(591, 419);
             this.ToolTabPage.TabIndex = 3;
             this.ToolTabPage.Text = "工具";
             this.ToolTabPage.UseVisualStyleBackColor = true;
@@ -820,7 +797,7 @@ namespace PM_plus {
             this.HttpRequestGroupBox.Controls.Add(this.UrlTextBox);
             this.HttpRequestGroupBox.Location = new System.Drawing.Point(4, 4);
             this.HttpRequestGroupBox.Name = "HttpRequestGroupBox";
-            this.HttpRequestGroupBox.Size = new System.Drawing.Size(584, 425);
+            this.HttpRequestGroupBox.Size = new System.Drawing.Size(584, 413);
             this.HttpRequestGroupBox.TabIndex = 0;
             this.HttpRequestGroupBox.TabStop = false;
             this.HttpRequestGroupBox.Text = "Http请求";
@@ -838,7 +815,7 @@ namespace PM_plus {
             // HttpResponseClearButton
             // 
             this.HttpResponseClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.HttpResponseClearButton.Location = new System.Drawing.Point(526, 396);
+            this.HttpResponseClearButton.Location = new System.Drawing.Point(526, 384);
             this.HttpResponseClearButton.Name = "HttpResponseClearButton";
             this.HttpResponseClearButton.Size = new System.Drawing.Size(52, 23);
             this.HttpResponseClearButton.TabIndex = 7;
@@ -863,7 +840,7 @@ namespace PM_plus {
             this.HttpSendResponseRichTextBox.Location = new System.Drawing.Point(55, 138);
             this.HttpSendResponseRichTextBox.Name = "HttpSendResponseRichTextBox";
             this.HttpSendResponseRichTextBox.ReadOnly = true;
-            this.HttpSendResponseRichTextBox.Size = new System.Drawing.Size(523, 252);
+            this.HttpSendResponseRichTextBox.Size = new System.Drawing.Size(523, 240);
             this.HttpSendResponseRichTextBox.TabIndex = 5;
             this.HttpSendResponseRichTextBox.Text = "";
             // 
@@ -929,7 +906,7 @@ namespace PM_plus {
             this.DiySetTabPage.Location = new System.Drawing.Point(4, 29);
             this.DiySetTabPage.Name = "DiySetTabPage";
             this.DiySetTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.DiySetTabPage.Size = new System.Drawing.Size(591, 432);
+            this.DiySetTabPage.Size = new System.Drawing.Size(591, 419);
             this.DiySetTabPage.TabIndex = 1;
             this.DiySetTabPage.Text = "偏好设置";
             this.DiySetTabPage.UseVisualStyleBackColor = true;
@@ -1025,12 +1002,23 @@ namespace PM_plus {
             this.FontLabel.TabIndex = 1;
             this.FontLabel.Text = "字体";
             // 
+            // SkinSwitchChecked
+            // 
+            this.SkinSwitchChecked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SkinSwitchChecked.AutoSize = true;
+            this.SkinSwitchChecked.Location = new System.Drawing.Point(16, 386);
+            this.SkinSwitchChecked.Name = "SkinSwitchChecked";
+            this.SkinSwitchChecked.Size = new System.Drawing.Size(72, 16);
+            this.SkinSwitchChecked.TabIndex = 7;
+            this.SkinSwitchChecked.Text = "皮肤开关";
+            this.SkinSwitchChecked.UseVisualStyleBackColor = true;
+            // 
             // DiySetMsgLabel
             // 
             this.DiySetMsgLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DiySetMsgLabel.AutoSize = true;
-            this.DiySetMsgLabel.Location = new System.Drawing.Point(268, 507);
+            this.DiySetMsgLabel.Location = new System.Drawing.Point(268, 495);
             this.DiySetMsgLabel.Name = "DiySetMsgLabel";
             this.DiySetMsgLabel.Size = new System.Drawing.Size(0, 12);
             this.DiySetMsgLabel.TabIndex = 5;
@@ -1038,7 +1026,7 @@ namespace PM_plus {
             // ResetButton
             // 
             this.ResetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResetButton.Location = new System.Drawing.Point(429, 389);
+            this.ResetButton.Location = new System.Drawing.Point(429, 377);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(75, 32);
             this.ResetButton.TabIndex = 3;
@@ -1049,7 +1037,7 @@ namespace PM_plus {
             // DiySetChangeApply_Button
             // 
             this.DiySetChangeApply_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DiySetChangeApply_Button.Location = new System.Drawing.Point(510, 389);
+            this.DiySetChangeApply_Button.Location = new System.Drawing.Point(510, 377);
             this.DiySetChangeApply_Button.Name = "DiySetChangeApply_Button";
             this.DiySetChangeApply_Button.Size = new System.Drawing.Size(75, 32);
             this.DiySetChangeApply_Button.TabIndex = 4;
@@ -1066,7 +1054,7 @@ namespace PM_plus {
             this.SkinGroupBox.Controls.Add(this.SkinListBox);
             this.SkinGroupBox.Location = new System.Drawing.Point(8, 86);
             this.SkinGroupBox.Name = "SkinGroupBox";
-            this.SkinGroupBox.Size = new System.Drawing.Size(577, 297);
+            this.SkinGroupBox.Size = new System.Drawing.Size(577, 285);
             this.SkinGroupBox.TabIndex = 0;
             this.SkinGroupBox.TabStop = false;
             this.SkinGroupBox.Text = "皮肤";
@@ -1078,21 +1066,10 @@ namespace PM_plus {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SkinShowPictureBox.Location = new System.Drawing.Point(182, 20);
             this.SkinShowPictureBox.Name = "SkinShowPictureBox";
-            this.SkinShowPictureBox.Size = new System.Drawing.Size(389, 268);
+            this.SkinShowPictureBox.Size = new System.Drawing.Size(389, 256);
             this.SkinShowPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.SkinShowPictureBox.TabIndex = 3;
             this.SkinShowPictureBox.TabStop = false;
-            // 
-            // SkinSwitchChecked
-            // 
-            this.SkinSwitchChecked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.SkinSwitchChecked.AutoSize = true;
-            this.SkinSwitchChecked.Location = new System.Drawing.Point(16, 398);
-            this.SkinSwitchChecked.Name = "SkinSwitchChecked";
-            this.SkinSwitchChecked.Size = new System.Drawing.Size(72, 16);
-            this.SkinSwitchChecked.TabIndex = 7;
-            this.SkinSwitchChecked.Text = "皮肤开关";
-            this.SkinSwitchChecked.UseVisualStyleBackColor = true;
             // 
             // SkinListBox
             // 
@@ -1102,7 +1079,7 @@ namespace PM_plus {
             this.SkinListBox.ItemHeight = 12;
             this.SkinListBox.Location = new System.Drawing.Point(6, 20);
             this.SkinListBox.Name = "SkinListBox";
-            this.SkinListBox.Size = new System.Drawing.Size(169, 268);
+            this.SkinListBox.Size = new System.Drawing.Size(169, 256);
             this.SkinListBox.TabIndex = 2;
             this.SkinListBox.SelectedIndexChanged += new System.EventHandler(this.SkinListBox_SelectedIndexChanged);
             // 
@@ -1111,7 +1088,7 @@ namespace PM_plus {
             this.HelpTabPage.Controls.Add(this.HelpRichTextBox);
             this.HelpTabPage.Location = new System.Drawing.Point(4, 29);
             this.HelpTabPage.Name = "HelpTabPage";
-            this.HelpTabPage.Size = new System.Drawing.Size(591, 432);
+            this.HelpTabPage.Size = new System.Drawing.Size(591, 419);
             this.HelpTabPage.TabIndex = 2;
             this.HelpTabPage.Text = "帮助";
             this.HelpTabPage.UseVisualStyleBackColor = true;
@@ -1125,7 +1102,7 @@ namespace PM_plus {
             this.HelpRichTextBox.Location = new System.Drawing.Point(3, 2);
             this.HelpRichTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.HelpRichTextBox.Name = "HelpRichTextBox";
-            this.HelpRichTextBox.Size = new System.Drawing.Size(585, 423);
+            this.HelpRichTextBox.Size = new System.Drawing.Size(585, 411);
             this.HelpRichTextBox.TabIndex = 1;
             this.HelpRichTextBox.Text = "";
             // 
@@ -1133,11 +1110,36 @@ namespace PM_plus {
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AuthorToolStripStatusLabel,
+            this.OperateMessageLabel});
+            this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.statusStrip1.Location = new System.Drawing.Point(0, 467);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(623, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // AuthorToolStripStatusLabel
+            // 
+            this.AuthorToolStripStatusLabel.Name = "AuthorToolStripStatusLabel";
+            this.AuthorToolStripStatusLabel.Size = new System.Drawing.Size(32, 17);
+            this.AuthorToolStripStatusLabel.Text = "作者";
+            // 
+            // OperateMessageLabel
+            // 
+            this.OperateMessageLabel.Name = "OperateMessageLabel";
+            this.OperateMessageLabel.Size = new System.Drawing.Size(60, 17);
+            this.OperateMessageLabel.Text = "message";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(623, 489);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(639, 1080);
@@ -1175,7 +1177,10 @@ namespace PM_plus {
             this.SkinGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).EndInit();
             this.HelpTabPage.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1196,7 +1201,6 @@ namespace PM_plus {
         internal System.Windows.Forms.Label OperateMsg_Label;
         internal System.Windows.Forms.CheckBox ExitAfterClose_CheckBox;
         internal System.Windows.Forms.CheckBox LogSwitch_CheckBox;
-        private System.Windows.Forms.Label Author_Label;
         private System.Windows.Forms.GroupBox ProjectGroupBox;
         internal System.Windows.Forms.FlowLayoutPanel Projects_Panel;
         internal System.Windows.Forms.Button ProjectAdd_Button;
@@ -1208,7 +1212,6 @@ namespace PM_plus {
         private System.Windows.Forms.Label JDKPath_Label;
         internal System.Windows.Forms.TextBox JDKPath_TextBox;
         private System.Windows.Forms.Button JDKPath_Dialog_Button;
-        private System.Windows.Forms.Label SystemConfig_SaveLabel;
         private System.Windows.Forms.Button SystemConfig_Save_Button;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.Label DiySetMsgLabel;
@@ -1272,6 +1275,9 @@ namespace PM_plus {
         private System.Windows.Forms.Label ProcessTypeLabel;
         internal System.Windows.Forms.TextBox ProcessTypeTextBox;
         internal System.Windows.Forms.RichTextBox ProjectFontShowRichTextBox;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        internal System.Windows.Forms.ToolStripStatusLabel AuthorToolStripStatusLabel;
+        internal System.Windows.Forms.ToolStripStatusLabel OperateMessageLabel;
     }
 }
 

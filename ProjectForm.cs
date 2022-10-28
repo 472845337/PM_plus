@@ -3,6 +3,7 @@ using PM_plus.config;
 using PM_plus.service;
 using PM_plus.utils;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -143,6 +144,9 @@ namespace PM_plus {
                 String result = ProjectUtils.CreateStartBat(projectModel, Config.LOG_FILE_INFO, Config.LOG_FILE_ERROR);
                 if (!bool.TrueString.Equals(result)) {
                     MessageBox.Show(result);
+                } else {
+                    Config.mainForm.OperateMessageLabel.Text = "保存成功";
+                    Config.mainForm.OperateMessageLabel.ForeColor = Color.DarkGreen;
                 }
                 // 生成stop.bat
                 ProjectUtils.CreateStopBat(projectModel);
@@ -164,6 +168,9 @@ namespace PM_plus {
                 /* 添加新服务按钮完成****** *************/
                 // ControlUtils.addTabPage2TabControl(Config.mainForm.ProjectRunTabControl, newSection);
                 // 关闭新增窗口
+                Config.mainForm.OperateMessageLabel.Text = "保存成功！";
+                Config.mainForm.OperateMessageLabel.ForeColor = Color.DarkGreen;
+                Config.mainForm.InitLabelMsgTimerout();
                 this.Close();
             }
         }

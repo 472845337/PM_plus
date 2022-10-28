@@ -41,32 +41,23 @@ namespace PM_plus {
         private void InitData() {
             // 主窗体赋值，以便其它地方调用
             Config.mainForm = this;
-            int usedProgress;
             isFinishedInit = false;
             // 加载框显示，load函数中置主窗体不可用
             // 偏好加载,皮肤加载
             FormService.InitDiySet();
-            FormService.InitWaitForm();
-            Config.waitForm.FreshProgress(5);
             // 窗口控件属性相关设置
             FormService.InitMainForm(this);
-            Config.waitForm.FreshProgress(15);
             // GC回收定时任务初始化
             TimerService.AutoGc();
-            Config.waitForm.FreshProgress(25);
-            usedProgress = 25;
             // 系统参数加载
-            usedProgress = IniConfigService.InitSystemConfig(usedProgress, 15);
+            IniConfigService.InitSystemConfig();
             // 运行环境参数加载
-            usedProgress = IniConfigService.InitProjectConfig(usedProgress, 15);
+            IniConfigService.InitProjectConfig();
             // 项目面板右键按钮
-            usedProgress = FormService.InitPanelRightMenu(usedProgress, 15);
+            FormService.InitPanelRightMenu();
             // 创建项目按钮控件
-            FormService.InitProjectButton(usedProgress, 15);
+            FormService.InitProjectButton();
             TimerService.Monitor();
-            // 加载窗口关闭,close函数中置主窗体可用
-            Config.waitForm.FreshProgress(100);
-            Config.waitForm.Close();
             // 高度设置
             String heightStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_HEIGHT);
             String widthStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_WIDTH);
@@ -168,9 +159,9 @@ namespace PM_plus {
             long saveLogPathResult = SaveLogPath();
 
             if (saveProfileResult > 0 && saveJDKPathresult > 0 && saveLogPathResult > 0) {
-                MessageBox.Show("保存成功！");
+                TimerService.showOperateLabelMessage("保存成功!", Color.DarkGreen);
             } else {
-                MessageBox.Show("保存失败，请联系作者！");
+                MessageBox.Show("保存失败，请联系作者！","警告");
             }
 
         }
@@ -183,10 +174,7 @@ namespace PM_plus {
             // 放入缓存
             ProjectUtils.profile = profile;
             // 写进配置文件
-            long saveProfileResult = IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_PROFILE, profile);
-            SystemConfig_SaveLabel.Visible = true;
-            InitLabelMsgTimerout();
-            return saveProfileResult;
+            return IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_PROFILE, profile);
         }
 
         /// <summary>
@@ -309,28 +297,19 @@ namespace PM_plus {
             ProjectUtils.AllProjectOperate(Config.PROJECT_OPERATE_TYPE_STOP);
         }
 
-        private void JDKPath_TextBox_TextChanged(object sender, EventArgs e) {
-            if (isFinishedInit) {
-                SaveJdkPath();
-            }
-        }
-
-        private void LogPath_TextBox_TextChanged(object sender, EventArgs e) {
-            if (isFinishedInit) {
-                SaveLogPath();
-            }
-        }
-
         private void LabelTimer_Tick(object sender, EventArgs e) {
-            SystemConfig_SaveLabel.Visible = false;
-            OperateMsg_Label.Text = Config.BLANK_STR;
-            DiySetMsgLabel.Text = Config.BLANK_STR;
+            Config.mainForm.OperateMessageLabel.Text = "";
             LabelTimer.Enabled = false;
         }
 
         internal void InitLabelMsgTimerout() {
             LabelTimer.Enabled = true;
             LabelTimer.Interval = 3000;
+        }
+
+        internal void InitLabelMsgTimerout(int second) {
+            LabelTimer.Enabled = true;
+            LabelTimer.Interval = second * 1000;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {

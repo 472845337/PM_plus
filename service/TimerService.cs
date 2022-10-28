@@ -4,6 +4,7 @@ using PM_plus.utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -27,7 +28,7 @@ namespace PM_plus.service {
 
 
             ServerInfoTimer.Elapsed += new System.Timers.ElapsedEventHandler(ServerTimer_Tick);
-            if(Config.monitorServerInterval > 0) {
+            if (Config.monitorServerInterval > 0) {
                 ServerInfoTimer.Enabled = true;
                 ServerInfoTimer.Interval = Config.monitorServerInterval * 1000;
             }
@@ -268,6 +269,12 @@ namespace PM_plus.service {
             MonitorTimer = null;
             BtnDoubleCheckTimer = null;
             ServerInfoTimer = null;
+        }
+
+        public static void showOperateLabelMessage(String message, Color color, int second = 5) {
+            Config.mainForm.OperateMessageLabel.Text = message;
+            Config.mainForm.OperateMessageLabel.ForeColor = color;
+            Config.mainForm.InitLabelMsgTimerout(second);
         }
     }
 }

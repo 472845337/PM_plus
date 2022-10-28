@@ -161,12 +161,6 @@
     <Compile Include="utils\SkinUtils.cs" />
     <Compile Include="utils\StringUtils.cs" />
     <Compile Include="utils\User32Dll.cs" />
-    <Compile Include="WaitForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WaitForm.Designer.cs">
-      <DependentUpon>WaitForm.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="ProjectForm.resx">
       <DependentUpon>ProjectForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,9 +178,6 @@
     </Compile>
     <EmbeddedResource Include="SendHistoryForm.resx">
       <DependentUpon>SendHistoryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WaitForm.resx">
-      <DependentUpon>WaitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="help.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

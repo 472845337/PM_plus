@@ -33,17 +33,14 @@ namespace PM_plus.service {
             //帮助页面加载
             form.HelpRichTextBox.ReadOnly = true;
             form.HelpRichTextBox.LoadFile("help.rtf", RichTextBoxStreamType.RichText);
+            // 状态栏作者
+            form.AuthorToolStripStatusLabel.Alignment = ToolStripItemAlignment.Right;
+            form.AuthorToolStripStatusLabel.Text = "作者:1320311706@qq.com";
+
+            form.OperateMessageLabel.Text = "";
+
         }
 
-        /// <summary>
-        /// 初始化显示加载窗口
-        /// </summary>
-        public static void InitWaitForm() {
-            WaitForm waitForm = new WaitForm();
-            waitForm.Show();
-            waitForm.Update();
-            Config.waitForm = waitForm;
-        }
         internal static void InitFont() {
             InstalledFontCollection installedFontCollection = new InstalledFontCollection();
             foreach (FontFamily fontFamily in installedFontCollection.Families) {
@@ -125,7 +122,7 @@ namespace PM_plus.service {
             InitSkin();
         }
 
-        public static int InitPanelRightMenu(int usedProgress, int giveProgress) {
+        public static void InitPanelRightMenu() {
 
             /* 启动程序按钮 */
             ContextMenuStrip rightMenu = new ContextMenuStrip();
@@ -139,12 +136,10 @@ namespace PM_plus.service {
             ControlUtils.AddToolStripMenu(rightMenu, Config.BLANK_STR, Config.PROJECT_PANEL_RIGHT_FRESH_NAME, Config.PROJECT_PANEL_RIGHT_FRESH_TEXT, Config.RIGHT_BUTTON_FRESH_IMAGE, new EventHandler(Config.mainForm.Fresh_Button_Click));
             /* 装载右键 */
             Config.mainForm.Projects_Panel.ContextMenuStrip = rightMenu;
-            return usedProgress + giveProgress;
         }
 
-        public static int InitProjectButton(int usedProgress, int giveProgress) {
+        public static void InitProjectButton() {
             List<String> sectionList = IniUtils.ReadSections(Config.ProjectsIniPath);
-            Config.waitForm.FreshProgress(usedProgress + 5);
             for (int i = 0; i < sectionList.Count; i++) {
                 String section = sectionList[i];
                 // 标题
@@ -187,9 +182,7 @@ namespace PM_plus.service {
                 ProjectSections.UpdateProjectSection(section, projectSection);
                 // 校验section
                 FormService.CheckSection(projectSection, false);
-                Config.waitForm.FreshProgress(usedProgress + ((giveProgress - 5) / sectionList.Count) * (i + 1));
             }
-            return usedProgress + giveProgress;
         }
 
         public static void FreshProjectButtonSort() {

@@ -57,9 +57,7 @@ namespace PM_plus.service {
             if (null != projectSection) {
                 // 刷新bat文件
                 FormService.CheckSection(projectSection, true);
-                Config.mainForm.OperateMsg_Label.Text = "刷新成功";
-                Config.mainForm.OperateMsg_Label.ForeColor = Color.Green;
-                Config.mainForm.InitLabelMsgTimerout();
+                TimerService.showOperateLabelMessage("刷新成功", Color.Green);
             } else {
                 MessageBox.Show("项目未找到，请重启程序!");
             }
@@ -133,8 +131,7 @@ namespace PM_plus.service {
             FormService.RemoveButton(section);
             // 删除ini文件中的配置信息
             IniUtils.EraseSection(Config.ProjectsIniPath, section);
-
-            MessageBox.Show("删除成功！");
+            TimerService.showOperateLabelMessage("删除成功！", Color.DarkOrange);
         }
 
 
