@@ -25,6 +25,7 @@ namespace PM_plus.service
             bool exitAfterClose = !StringUtils.IsEmpty(exitAfterCloseIni) && Convert.ToBoolean(exitAfterCloseIni);
             Config.exitAfterClose = exitAfterClose;
             Config.mainForm.ExitAfterClose_CheckBox.Checked = Config.exitAfterClose;
+
         }
         /// <summary>
         /// 

@@ -41,6 +41,16 @@ namespace PM_plus.service {
 
         }
 
+        /// <summary>
+        /// 初始化显示加载窗口
+        /// </summary>
+        public static void InitWaitForm() {
+            WaitForm waitForm = new WaitForm();
+            waitForm.Show();
+            waitForm.Update();
+            Config.waitForm = waitForm;
+        }
+
         internal static void InitFont() {
             InstalledFontCollection installedFontCollection = new InstalledFontCollection();
             foreach (FontFamily fontFamily in installedFontCollection.Families) {

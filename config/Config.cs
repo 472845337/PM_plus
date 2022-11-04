@@ -165,6 +165,7 @@ namespace PM_plus.config
 
         public static bool logSwitch;
         // 窗体，初始化时会赋值，用于其它窗口或方法中
+        public static WaitForm waitForm;
         public static Form1 mainForm;
         // 单位是秒
         public static int interval;

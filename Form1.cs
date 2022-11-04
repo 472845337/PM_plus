@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Management;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PM_plus {
@@ -30,7 +31,9 @@ namespace PM_plus {
         private void Form1_Load(object sender, EventArgs e) {
             this.Icon = new Icon("icons/disk.ico");
             se.DisableTag = 9999;
+
             InitData();
+            Config.waitForm.Close();
         }
 
         // 是否完成初始化属性，一些checkbox根据此属性进行判断changed,否则初始化就会发生冗余的changed事件
@@ -43,6 +46,7 @@ namespace PM_plus {
             Config.mainForm = this;
             isFinishedInit = false;
             // 加载框显示，load函数中置主窗体不可用
+            FormService.InitWaitForm();
             // 偏好加载,皮肤加载
             FormService.InitDiySet();
             // 窗口控件属性相关设置
@@ -57,6 +61,7 @@ namespace PM_plus {
             FormService.InitPanelRightMenu();
             // 创建项目按钮控件
             FormService.InitProjectButton();
+            
             TimerService.Monitor();
             // 高度设置
             String heightStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_HEIGHT);

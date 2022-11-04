@@ -1,0 +1,5 @@
+diff a/service/IniConfigService.cs b/service/IniConfigService.cs	(rejected hunks)
+@@ -27,3 +27,2 @@
+             Config.mainForm.ExitAfterClose_CheckBox.Checked = Config.exitAfterClose;
+-            Config.waitForm.FreshProgress(usedProgress + giveProgress);
+         }
