@@ -26,34 +26,33 @@ namespace PM_plus {
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitForm));
             this.WaitForm_Label = new System.Windows.Forms.Label();
-            this.LoadingPictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.LoadingPictureBox)).BeginInit();
+            this.LoadingLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // WaitForm_Label
             // 
             this.WaitForm_Label.AutoSize = true;
-            this.WaitForm_Label.Location = new System.Drawing.Point(60, 25);
+            this.WaitForm_Label.Location = new System.Drawing.Point(72, 28);
             this.WaitForm_Label.Name = "WaitForm_Label";
             this.WaitForm_Label.Size = new System.Drawing.Size(41, 12);
             this.WaitForm_Label.TabIndex = 2;
             this.WaitForm_Label.Text = "加载中";
             // 
-            // LoadingPictureBox
+            // LoadingLabel
             // 
-            this.LoadingPictureBox.Location = new System.Drawing.Point(107, 12);
-            this.LoadingPictureBox.Name = "LoadingPictureBox";
-            this.LoadingPictureBox.Size = new System.Drawing.Size(38, 38);
-            this.LoadingPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.LoadingPictureBox.TabIndex = 3;
-            this.LoadingPictureBox.TabStop = false;
+            this.LoadingLabel.AutoSize = true;
+            this.LoadingLabel.Location = new System.Drawing.Point(120, 28);
+            this.LoadingLabel.Name = "LoadingLabel";
+            this.LoadingLabel.Size = new System.Drawing.Size(11, 12);
+            this.LoadingLabel.TabIndex = 3;
+            this.LoadingLabel.Text = ".";
             // 
             // WaitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(226, 60);
-            this.Controls.Add(this.LoadingPictureBox);
+            this.Controls.Add(this.LoadingLabel);
             this.Controls.Add(this.WaitForm_Label);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -63,9 +62,9 @@ namespace PM_plus {
             this.Name = "WaitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "加载数据";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WaitForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WaitForm_FormClosed);
             this.Load += new System.EventHandler(this.WaitForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.LoadingPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -73,6 +72,6 @@ namespace PM_plus {
 
         #endregion
         private System.Windows.Forms.Label WaitForm_Label;
-        private System.Windows.Forms.PictureBox LoadingPictureBox;
+        private System.Windows.Forms.Label LoadingLabel;
     }
 }
