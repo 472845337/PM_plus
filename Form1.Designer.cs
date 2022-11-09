@@ -116,6 +116,7 @@ namespace PM_plus {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.AuthorToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.OperateMessageLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ProcessWindowShowButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -412,6 +413,7 @@ namespace PM_plus {
             this.ProjectInfoGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProjectInfoGroupBox.Controls.Add(this.ProcessWindowShowButton);
             this.ProjectInfoGroupBox.Controls.Add(this.ProcessTypeLabel);
             this.ProjectInfoGroupBox.Controls.Add(this.ProcessTypeTextBox);
             this.ProjectInfoGroupBox.Controls.Add(this.ProcessWindowMinButton);
@@ -436,7 +438,7 @@ namespace PM_plus {
             // 
             this.ProcessTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ProcessTypeLabel.AutoSize = true;
-            this.ProcessTypeLabel.Location = new System.Drawing.Point(176, 252);
+            this.ProcessTypeLabel.Location = new System.Drawing.Point(201, 254);
             this.ProcessTypeLabel.Name = "ProcessTypeLabel";
             this.ProcessTypeLabel.Size = new System.Drawing.Size(29, 12);
             this.ProcessTypeLabel.TabIndex = 11;
@@ -445,7 +447,7 @@ namespace PM_plus {
             // ProcessTypeTextBox
             // 
             this.ProcessTypeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ProcessTypeTextBox.Location = new System.Drawing.Point(211, 248);
+            this.ProcessTypeTextBox.Location = new System.Drawing.Point(236, 250);
             this.ProcessTypeTextBox.Name = "ProcessTypeTextBox";
             this.ProcessTypeTextBox.Size = new System.Drawing.Size(74, 21);
             this.ProcessTypeTextBox.TabIndex = 10;
@@ -453,7 +455,7 @@ namespace PM_plus {
             // ProcessWindowMinButton
             // 
             this.ProcessWindowMinButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ProcessWindowMinButton.Location = new System.Drawing.Point(108, 247);
+            this.ProcessWindowMinButton.Location = new System.Drawing.Point(60, 247);
             this.ProcessWindowMinButton.Name = "ProcessWindowMinButton";
             this.ProcessWindowMinButton.Size = new System.Drawing.Size(62, 23);
             this.ProcessWindowMinButton.TabIndex = 9;
@@ -478,9 +480,9 @@ namespace PM_plus {
             this.ClickActiveCmdCheckBox.AutoSize = true;
             this.ClickActiveCmdCheckBox.Location = new System.Drawing.Point(6, 250);
             this.ClickActiveCmdCheckBox.Name = "ClickActiveCmdCheckBox";
-            this.ClickActiveCmdCheckBox.Size = new System.Drawing.Size(96, 16);
+            this.ClickActiveCmdCheckBox.Size = new System.Drawing.Size(48, 16);
             this.ClickActiveCmdCheckBox.TabIndex = 4;
-            this.ClickActiveCmdCheckBox.Text = "点击激活窗口";
+            this.ClickActiveCmdCheckBox.Text = "窗口";
             this.ClickActiveCmdCheckBox.UseVisualStyleBackColor = true;
             this.ClickActiveCmdCheckBox.CheckedChanged += new System.EventHandler(this.ClickActiveCmdCheckBox_CheckedChanged);
             // 
@@ -1122,6 +1124,17 @@ namespace PM_plus {
             this.OperateMessageLabel.Size = new System.Drawing.Size(60, 17);
             this.OperateMessageLabel.Text = "message";
             // 
+            // ProcessWindowShowButton
+            // 
+            this.ProcessWindowShowButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ProcessWindowShowButton.Location = new System.Drawing.Point(128, 248);
+            this.ProcessWindowShowButton.Name = "ProcessWindowShowButton";
+            this.ProcessWindowShowButton.Size = new System.Drawing.Size(62, 23);
+            this.ProcessWindowShowButton.TabIndex = 12;
+            this.ProcessWindowShowButton.Text = "显示";
+            this.ProcessWindowShowButton.UseVisualStyleBackColor = true;
+            this.ProcessWindowShowButton.Click += new System.EventHandler(this.ProcessWindowShowButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1265,6 +1278,7 @@ namespace PM_plus {
         private System.Windows.Forms.StatusStrip statusStrip1;
         internal System.Windows.Forms.ToolStripStatusLabel AuthorToolStripStatusLabel;
         internal System.Windows.Forms.ToolStripStatusLabel OperateMessageLabel;
+        private System.Windows.Forms.Button ProcessWindowShowButton;
     }
 }
 

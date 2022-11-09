@@ -569,6 +569,19 @@ namespace PM_plus {
             }
         }
 
+        /// <summary>
+        /// 所有进程对应的窗口打开
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProcessWindowShowButton_Click(object sender, EventArgs e) {
+            if (ProcessListBox.Items.Count > 0) {
+                foreach (Process process in ProcessListBox.Items) {
+                    User32Dll.ShowWindow(process.MainWindowHandle, User32Dll.SHOW_WINDOW_OPEN);
+                }
+            }
+        }
+
         private void FontSizeComboBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (isFinishedInit && FontSizeComboBox.SelectedItem != null) {
                 FormService.ChangeProjectButtonFont();
