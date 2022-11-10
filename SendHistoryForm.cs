@@ -3,15 +3,10 @@ using PM_plus.pojo;
 using PM_plus.service;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace PM_plus {
-    
+
     public partial class SendHistoryForm : Form {
 
         internal HttpSendHistoryService hshs = null;
@@ -37,14 +32,14 @@ namespace PM_plus {
 
         private void HistoryDeleteButton_Click(object sender, EventArgs e) {
             int count = HistoryListBox.SelectedItems.Count;
-            if(count > 0) {
+            if (count > 0) {
                 HttpSendHistory history = (HistoryListBox.SelectedItem as HttpSendHistory);
                 hshs.DeleteData(history.Id);
                 HistoryListBox.Items.Remove(HistoryListBox.SelectedItem);
             } else {
                 MessageBox.Show("请选择删除数据！");
             }
-            
+
         }
 
         private void HistoryFreshButton_Click(object sender, EventArgs e) {

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PM_plus.config;
 using PM_plus.data;
-using System.Reflection;
-using PM_plus.SelfEnum;
-using System.Data.SQLite;
 using PM_plus.pojo;
+using PM_plus.SelfEnum;
 using PM_plus.utils;
-using PM_plus.config;
+using System;
+using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Reflection;
 
 namespace PM_plus.service {
     /// <summary>
@@ -30,7 +30,7 @@ namespace PM_plus.service {
                 CreateTable();
             }
         }
-       
+
         public int SaveData(HttpSendHistory httpSendHistory) {
             // 查询是否存在类似数据
             HttpSendHistory queryModel = new HttpSendHistory {
@@ -43,7 +43,7 @@ namespace PM_plus.service {
                 HttpSendHistory history = list[0];
                 history.LastUsedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 return UpdateData(history);
-            }else {
+            } else {
                 return InsertData(httpSendHistory);
             }
         }
@@ -53,7 +53,7 @@ namespace PM_plus.service {
         /// </summary>
         internal void Clear() {
             // 清空所有的数据
-            sqlLiteHelper.ExecuteNonQuery("DELETE FROM "+GetTableName(), null);
+            sqlLiteHelper.ExecuteNonQuery("DELETE FROM " + GetTableName(), null);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace PM_plus.service {
         /// <param name="id"></param>
         /// <returns></returns>
         public int DeleteData(int? id) {
-            if(null == id) {
+            if (null == id) {
                 return 0;
             } else {
                 return sqlLiteHelper.ExecuteNonQuery("DELETE FROM " + GetTableName() + " where id=@id", new SQLiteParameter[] { new SQLiteParameter("id", id) });
@@ -102,7 +102,7 @@ namespace PM_plus.service {
             String paramSql = "";
             String whereSql = "";
             String selectSql = "";
-            InitSql(queryModel,ref paramSql,ref whereSql,ref paramList);
+            InitSql(queryModel, ref paramSql, ref whereSql, ref paramList);
             selectSql += "SELECT ";
             selectSql += paramSql;
             selectSql += " FROM " + GetTableName();
@@ -110,7 +110,7 @@ namespace PM_plus.service {
                 selectSql += " WHERE ";
                 selectSql += whereSql;
             }
-            
+
 
             SQLiteDataReader reader = sqlLiteHelper.ExecuteReader(selectSql, paramList.ToArray());
             while (reader.Read()) {
@@ -126,7 +126,7 @@ namespace PM_plus.service {
             return list;
         }
 
-        private void InitSql(HttpSendHistory httpSendHistory,ref String paramSql, ref String whereSql, ref List<SQLiteParameter> paramList) {
+        private void InitSql(HttpSendHistory httpSendHistory, ref String paramSql, ref String whereSql, ref List<SQLiteParameter> paramList) {
             PropertyInfo[] infos = typeof(HttpSendHistory).GetProperties();
             paramList = new List<SQLiteParameter>();
             paramSql = "";

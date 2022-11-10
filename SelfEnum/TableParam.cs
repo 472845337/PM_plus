@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace PM_plus.SelfEnum{
-    class TableParam :Attribute{
+namespace PM_plus.SelfEnum {
+    class TableParam : Attribute {
         public bool isKey;
         public String param;
         public String type;

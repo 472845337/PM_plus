@@ -182,7 +182,7 @@ namespace PM_plus.data {
                 return mConn;
             }
             private set {
-                mConn = value ;
+                mConn = value;
             }
         }
 

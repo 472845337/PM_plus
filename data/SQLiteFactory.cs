@@ -17,16 +17,16 @@ namespace PM_plus.data {
                 return SQLiteHelperDic[dbName];
             } else {
                 // 没有该库，创建库并打开库
-                SQLiteHelper sqliteHeper = StringUtils.IsEmpty(password)? new SQLiteHelper(dbName): new SQLiteHelper(dbName, password);
+                SQLiteHelper sqliteHeper = StringUtils.IsEmpty(password) ? new SQLiteHelper(dbName) : new SQLiteHelper(dbName, password);
                 sqliteHeper.Open();
                 SQLiteHelperDic.Add(dbName, sqliteHeper);
                 return sqliteHeper;
             }
-           
+
         }
 
         public static void CloseAllSQLite() {
-            foreach(KeyValuePair<String, SQLiteHelper> pair in SQLiteHelperDic) {
+            foreach (KeyValuePair<String, SQLiteHelper> pair in SQLiteHelperDic) {
                 pair.Value.Close();
             }
         }

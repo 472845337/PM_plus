@@ -4,7 +4,6 @@ using PM_plus.service;
 using PM_plus.utils;
 using System;
 using System.Drawing;
-using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -99,7 +98,7 @@ namespace PM_plus {
                     // 端口必须要是数字
                     checkFlag = false;
                     checkMsg.Append("端口必须是数字").Append(Config.ENTER_STR);
-                } else if(Convert.ToInt32(port) > 65535) {
+                } else if (Convert.ToInt32(port) > 65535) {
                     // 端口不能大于65535
                     checkFlag = false;
                     checkMsg.Append("端口不能大于65535").Append(Config.ENTER_STR);

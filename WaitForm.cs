@@ -1,6 +1,5 @@
 ﻿using PM_plus.config;
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 namespace PM_plus {

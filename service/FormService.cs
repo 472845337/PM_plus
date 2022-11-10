@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 using static System.Windows.Forms.Control;
 
@@ -79,7 +78,7 @@ namespace PM_plus.service {
                 fontColor = Config.DEFAULT_FONT_COLOR;
                 IniUtils.IniWriteValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FONT_COLOR, Config.DEFAULT_FONT_COLOR);
             }
-            
+
             // 字体项选择
             Config.mainForm.FontFamilyComboBox.SelectedItem = fontFamilyName;
             Config.mainForm.FontSizeComboBox.SelectedItem = fontSize.ToString();

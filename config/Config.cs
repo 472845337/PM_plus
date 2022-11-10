@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace PM_plus.config
-{
-    class Config
-    {
+namespace PM_plus.config {
+    class Config {
         public const String ENTER_STR = "\r\n";
         public const String BLANK_STR = "";
 

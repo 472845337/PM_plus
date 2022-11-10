@@ -77,7 +77,7 @@ namespace PM_plus.utils {
             StreamReader reader = null;
             string responseFromServer = null;
             try {
-               
+
                 response = (HttpWebResponse)request.GetResponse();
 
                 //定义response字符流

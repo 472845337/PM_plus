@@ -1,24 +1,13 @@
 ﻿using PM_plus.config;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace PM_plus.utils
-{
-    class StringUtils
-    {
-        public static bool IsNotEmpty(String str)
-        {
+namespace PM_plus.utils {
+    class StringUtils {
+        public static bool IsNotEmpty(string str) {
             return !IsEmpty(str);
         }
-        public static bool IsEmpty(String str)
-        {
-            bool isEmpty = false;
-            if(null == str || "".Equals(str) || "null".Equals(str.ToLower()))
-            {
-                isEmpty = true;
-            }
-            return isEmpty;
+        public static bool IsEmpty(string str) {
+            return string.IsNullOrEmpty(str);
         }
 
         public static String TxtEncode(String str) {

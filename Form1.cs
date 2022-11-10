@@ -61,7 +61,7 @@ namespace PM_plus {
             FormService.InitPanelRightMenu();
             // 创建项目按钮控件
             FormService.InitProjectButton();
-            
+
             TimerService.Monitor();
             // 高度设置
             String heightStr = IniUtils.IniReadValue(Config.SystemIniPath, Config.INI_SECTION_SYSTEM, Config.INI_KEY_SYSTEM_FORM_HEIGHT);
@@ -100,7 +100,7 @@ namespace PM_plus {
         }
 
 
-        private System.Threading.Thread invokeThread;
+        private Thread invokeThread;
         private DialogResult result;
         /// <summary>
         /// 选择JDK路径的文件夹选择框
@@ -110,13 +110,13 @@ namespace PM_plus {
         private void JDKPath_Dialog_Button_Click(object sender, EventArgs e) {
             JDKPath_FolderBrowserDialog.SelectedPath = JDKPath_TextBox.Text;
             JDKPath_FolderBrowserDialog.ShowNewFolderButton = false;
-           /* if (JDKPath_FolderBrowserDialog.ShowDialog() == DialogResult.OK) {
-                JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
-            }*/
+            /* if (JDKPath_FolderBrowserDialog.ShowDialog() == DialogResult.OK) {
+                 JDKPath_TextBox.Text = JDKPath_FolderBrowserDialog.SelectedPath;
+             }*/
 
 
-            invokeThread = new System.Threading.Thread(new System.Threading.ThreadStart(InvokeMethodJDKPath));
-            invokeThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            invokeThread = new Thread(new ThreadStart(InvokeMethodJDKPath));
+            invokeThread.SetApartmentState(ApartmentState.STA);
             invokeThread.Start();
             invokeThread.Join();
 
@@ -140,8 +140,8 @@ namespace PM_plus {
              }*/
 
 
-            invokeThread = new System.Threading.Thread(new System.Threading.ThreadStart(InvokeMethodLogPath));
-            invokeThread.SetApartmentState(System.Threading.ApartmentState.STA);
+            invokeThread = new Thread(new ThreadStart(InvokeMethodLogPath));
+            invokeThread.SetApartmentState(ApartmentState.STA);
             invokeThread.Start();
             invokeThread.Join();
 
@@ -166,7 +166,7 @@ namespace PM_plus {
             if (saveProfileResult > 0 && saveJDKPathresult > 0 && saveLogPathResult > 0) {
                 TimerService.ShowOperateLabelMessage("保存成功!", Color.DarkGreen);
             } else {
-                MessageBox.Show("保存失败，请联系作者！","警告");
+                MessageBox.Show("保存失败，请联系作者！", "警告");
             }
 
         }
@@ -268,7 +268,7 @@ namespace PM_plus {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         internal void Fresh_Button_Click(object sender, EventArgs e) {
-            if(MessageBox.Show("确认刷新所有启动脚本吗？", "信息",MessageBoxButtons.YesNo) == DialogResult.Yes) {
+            if (MessageBox.Show("确认刷新所有启动脚本吗？", "信息", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 Dictionary<String, ProjectSections.ProjectSection> sectionList = ProjectSections.GetAllSectionDic();
                 if (null != sectionList) {
                     foreach (KeyValuePair<String, ProjectSections.ProjectSection> projectSectionEntry in sectionList) {
@@ -361,7 +361,7 @@ namespace PM_plus {
         }
         private void DiySetChangeApply_Button_Click(object sender, EventArgs e) {
             se.Active = SkinSwitchChecked.Checked;
-            if(SkinListBox.SelectedIndex == -1) {
+            if (SkinListBox.SelectedIndex == -1) {
                 SkinListBox.SelectedIndex = 0;
             }
             se.SkinFile = (SkinListBox.SelectedItem as Skin).RelativeName;
@@ -421,7 +421,7 @@ namespace PM_plus {
             if (StringUtils.IsEmpty(httpUrl)) {
                 MessageBox.Show("未填写URL;");
                 goto end;
-            }else {
+            } else {
                 if (!httpUrl.ToLower().StartsWith("http")) {
                     httpUrl = "http://" + httpUrl;
                 }
@@ -439,17 +439,17 @@ namespace PM_plus {
             String result;
             if (Config.HTTP_TYPE_POST.Equals(httpType)) {
                 result = HttpUtils.PostRequest(httpUrl, "", null);
-            }else if(Config.HTTP_TYPE_GET.Equals(httpType)) {
+            } else if (Config.HTTP_TYPE_GET.Equals(httpType)) {
                 result = HttpUtils.GetRequest(httpUrl, null);
-            }else {
+            } else {
                 MessageBox.Show("非法请求类型;");
                 goto end;
             }
             HttpSendResponseRichTextBox.Text = result;
 
-            end:
-                HttpSendButton.Enabled = true;
-            
+        end:
+            HttpSendButton.Enabled = true;
+
 
         }
         /// <summary>
@@ -498,10 +498,10 @@ namespace PM_plus {
         private void ProcessListBox_SelectedIndexChanged(object sender, EventArgs e) {
             if (ProcessListBox.Items.Count > 0 && ProcessListBox.SelectedIndex > -1) {
                 Process selectProcess = (ProcessListBox.SelectedItem as Process);
-                Process javaParentProcess = selectProcess.ProcessName.Equals("java")?selectProcess.Parent():null;
+                Process javaParentProcess = selectProcess.ProcessName.Equals("java") ? selectProcess.Parent() : null;
                 // 展示相关信息
                 ProcessIdTextBox.Text = selectProcess.Id.ToString();
-                ProcessTitleTextBox.Text = null == javaParentProcess? selectProcess.MainWindowTitle: javaParentProcess.MainWindowTitle;
+                ProcessTitleTextBox.Text = null == javaParentProcess ? selectProcess.MainWindowTitle : javaParentProcess.MainWindowTitle;
                 // 展示内存占用和子进程
                 ShowMemAndChildProcess(selectProcess);
 
@@ -524,7 +524,7 @@ namespace PM_plus {
             // 内存占用量，需要将子进程也进行统计
             float mem = 0.0F;
             ChildProcessListBox.Items.Clear();
-            int pid = p.ProcessName == "java"? p.Parent().Id: p.Id;
+            int pid = p.ProcessName == "java" ? p.Parent().Id : p.Id;
             // 当前进程的所有子进程
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + pid);
             ManagementObjectCollection moc = searcher.Get();

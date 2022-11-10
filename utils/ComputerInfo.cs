@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Management;
-using System.Text;
 
 namespace PM_plus.utils {
     class ComputerInfo {
@@ -135,7 +133,7 @@ namespace PM_plus.utils {
                 }
                 query = null;
                 queryCollection.Dispose();
-                
+
             } catch (Exception e) {
                 LogUtils.WriteLog(e.Message);
             }
@@ -159,7 +157,7 @@ namespace PM_plus.utils {
                     if (info.Name.ToUpper() == str_HardDiskName.ToUpper()) {
                         numTotalSize = info.TotalSize;
                         numAvailableFreeSpace = info.AvailableFreeSpace;
-                        strTotalSize = numTotalSize/1024/1024/1024+"GB";
+                        strTotalSize = numTotalSize / 1024 / 1024 / 1024 + "GB";
                         strAvailableFreeSpace = numAvailableFreeSpace / 1024 / 1024 / 1024 + "GB";
                     }
                 }
@@ -272,5 +270,5 @@ namespace PM_plus.utils {
             public string FreeSpaceSize { get; set; }
         }
     }
-    
+
 }

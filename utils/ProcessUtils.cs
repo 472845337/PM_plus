@@ -1,29 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
-using System.Text.RegularExpressions;
 
-namespace PM_plus.utils
-{
-    class ProcessUtils
-    {
+namespace PM_plus.utils {
+    class ProcessUtils {
         public String[] scriptLineArray;
         public String batFilePath;
-        public ProcessUtils(String[] scriptLineArray)
-        {
+        public ProcessUtils(String[] scriptLineArray) {
             this.scriptLineArray = scriptLineArray;
         }
-        public ProcessUtils(String batFilePath)
-        {
+        public ProcessUtils(String batFilePath) {
             this.batFilePath = batFilePath;
         }
-        public void RunScript()
-        {
-            Process proc = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
+        public void RunScript() {
+            Process proc = new Process {
+                StartInfo = new ProcessStartInfo {
                     FileName = @"C:\WINDOWS\system32\cmd.exe ",
                     UseShellExecute = false,
                     CreateNoWindow = false,
@@ -33,8 +23,7 @@ namespace PM_plus.utils
             };
             proc.Start();
             // 执行脚本
-            for (int i = 0; i < scriptLineArray.Length; i++)
-            {
+            for (int i = 0; i < scriptLineArray.Length; i++) {
                 proc.StandardInput.WriteLine(scriptLineArray[i]);
             }
             proc.WaitForExit();
@@ -42,8 +31,7 @@ namespace PM_plus.utils
             proc.Dispose();
         }
 
-        public void RunBat()
-        {
+        public void RunBat() {
             Process.Start(batFilePath);
         }
     }
