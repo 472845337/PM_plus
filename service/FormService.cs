@@ -33,6 +33,7 @@ namespace PM_plus.service {
             form.HelpRichTextBox.ReadOnly = true;
             form.HelpRichTextBox.LoadFile("help.rtf", RichTextBoxStreamType.RichText);
             // 状态栏作者
+            form.StatusStrip.BackColor = Color.LightBlue;
             form.AuthorToolStripStatusLabel.Alignment = ToolStripItemAlignment.Right;
             form.AuthorToolStripStatusLabel.Text = "作者:1320311706@qq.com";
 

@@ -113,7 +113,7 @@ namespace PM_plus {
             this.LabelTimer = new System.Windows.Forms.Timer(this.components);
             this.LogPath_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.FontColorDialog = new System.Windows.Forms.ColorDialog();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.AuthorToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.OperateMessageLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProcessWindowShowButton = new System.Windows.Forms.Button();
@@ -134,7 +134,7 @@ namespace PM_plus {
             this.SkinGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).BeginInit();
             this.HelpTabPage.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1102,15 +1102,15 @@ namespace PM_plus {
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AuthorToolStripStatusLabel,
             this.OperateMessageLabel});
-            this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.statusStrip1.Location = new System.Drawing.Point(0, 467);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(623, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
+            this.StatusStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.StatusStrip.Location = new System.Drawing.Point(0, 467);
+            this.StatusStrip.Name = "StatusStrip";
+            this.StatusStrip.Size = new System.Drawing.Size(623, 22);
+            this.StatusStrip.TabIndex = 1;
+            this.StatusStrip.Text = "StatusStrip";
             // 
             // AuthorToolStripStatusLabel
             // 
@@ -1140,7 +1140,7 @@ namespace PM_plus {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(623, 489);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(639, 1080);
@@ -1178,8 +1178,8 @@ namespace PM_plus {
             this.SkinGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SkinShowPictureBox)).EndInit();
             this.HelpTabPage.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.StatusStrip.ResumeLayout(false);
+            this.StatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1275,7 +1275,7 @@ namespace PM_plus {
         private System.Windows.Forms.Label ProcessTypeLabel;
         internal System.Windows.Forms.TextBox ProcessTypeTextBox;
         internal System.Windows.Forms.RichTextBox ProjectFontShowRichTextBox;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        internal System.Windows.Forms.StatusStrip StatusStrip;
         internal System.Windows.Forms.ToolStripStatusLabel AuthorToolStripStatusLabel;
         internal System.Windows.Forms.ToolStripStatusLabel OperateMessageLabel;
         private System.Windows.Forms.Button ProcessWindowShowButton;
