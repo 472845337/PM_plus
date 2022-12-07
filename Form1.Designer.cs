@@ -48,6 +48,7 @@ namespace PM_plus {
             this.SystemConfig_Save_Button = new System.Windows.Forms.Button();
             this.MonitorTabPage = new System.Windows.Forms.TabPage();
             this.ProjectInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.ProcessWindowShowButton = new System.Windows.Forms.Button();
             this.ProcessTypeLabel = new System.Windows.Forms.Label();
             this.ProcessTypeTextBox = new System.Windows.Forms.TextBox();
             this.ProcessWindowMinButton = new System.Windows.Forms.Button();
@@ -116,7 +117,6 @@ namespace PM_plus {
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.AuthorToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.OperateMessageLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ProcessWindowShowButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ProjectTagPage.SuspendLayout();
             this.ProjectGroupBox.SuspendLayout();
@@ -199,9 +199,9 @@ namespace PM_plus {
             this.LogSwitch_CheckBox.Location = new System.Drawing.Point(5, 397);
             this.LogSwitch_CheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LogSwitch_CheckBox.Name = "LogSwitch_CheckBox";
-            this.LogSwitch_CheckBox.Size = new System.Drawing.Size(84, 16);
+            this.LogSwitch_CheckBox.Size = new System.Drawing.Size(72, 16);
             this.LogSwitch_CheckBox.TabIndex = 24;
-            this.LogSwitch_CheckBox.Text = "控制台日志";
+            this.LogSwitch_CheckBox.Text = "应用日志";
             this.LogSwitch_CheckBox.UseVisualStyleBackColor = true;
             this.LogSwitch_CheckBox.CheckedChanged += new System.EventHandler(this.LogSwitch_CheckBox_CheckedChanged);
             // 
@@ -433,6 +433,17 @@ namespace PM_plus {
             this.ProjectInfoGroupBox.TabIndex = 3;
             this.ProjectInfoGroupBox.TabStop = false;
             this.ProjectInfoGroupBox.Text = "进程信息";
+            // 
+            // ProcessWindowShowButton
+            // 
+            this.ProcessWindowShowButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ProcessWindowShowButton.Location = new System.Drawing.Point(128, 248);
+            this.ProcessWindowShowButton.Name = "ProcessWindowShowButton";
+            this.ProcessWindowShowButton.Size = new System.Drawing.Size(62, 23);
+            this.ProcessWindowShowButton.TabIndex = 12;
+            this.ProcessWindowShowButton.Text = "显示";
+            this.ProcessWindowShowButton.UseVisualStyleBackColor = true;
+            this.ProcessWindowShowButton.Click += new System.EventHandler(this.ProcessWindowShowButton_Click);
             // 
             // ProcessTypeLabel
             // 
@@ -1100,7 +1111,7 @@ namespace PM_plus {
             // 
             this.LabelTimer.Tick += new System.EventHandler(this.LabelTimer_Tick);
             // 
-            // statusStrip1
+            // StatusStrip
             // 
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AuthorToolStripStatusLabel,
@@ -1123,17 +1134,6 @@ namespace PM_plus {
             this.OperateMessageLabel.Name = "OperateMessageLabel";
             this.OperateMessageLabel.Size = new System.Drawing.Size(60, 17);
             this.OperateMessageLabel.Text = "message";
-            // 
-            // ProcessWindowShowButton
-            // 
-            this.ProcessWindowShowButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ProcessWindowShowButton.Location = new System.Drawing.Point(128, 248);
-            this.ProcessWindowShowButton.Name = "ProcessWindowShowButton";
-            this.ProcessWindowShowButton.Size = new System.Drawing.Size(62, 23);
-            this.ProcessWindowShowButton.TabIndex = 12;
-            this.ProcessWindowShowButton.Text = "显示";
-            this.ProcessWindowShowButton.UseVisualStyleBackColor = true;
-            this.ProcessWindowShowButton.Click += new System.EventHandler(this.ProcessWindowShowButton_Click);
             // 
             // Form1
             // 
