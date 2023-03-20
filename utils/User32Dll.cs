@@ -17,6 +17,15 @@ namespace PM_plus.utils {
         public static UInt16 SW_SHOWDEFAULT = 10;//	根据启动应用程序的程序传递给 CreateProcess 函数的 STARTUPINFO 结构中指定的SW_值设置显示状态。
         public static UInt16 SW_FORCEMINIMIZE = 11;//即使拥有窗口的线程未响应，也会最小化窗口。 仅当将窗口从不同的线程最小化时，才应使用此标志。
 
+        public static Int32 AW_ACTIVATE = 0x00020000;// 激活窗口。 不要将此值用于 AW_HIDE。
+        public static Int32 AW_BLEND = 0x00080000;// 使用淡化效果。 仅当 hwnd 是顶级窗口时，才能使用此标志。
+        public static Int32 AW_CENTER = 0x00000010;// 如果使用AW_HIDE，或者如果未使用AW_HIDE，则使窗口显示为向内折叠。 各种方向标志不起作用。
+        public static Int32 AW_HIDE = 0x00010000;// 隐藏窗口。 默认情况下，将显示窗口。
+        public static Int32 AW_HOR_POSITIVE = 0x00000001;// 将窗口从左到右进行动画处理。 此标志可用于滚动或幻灯片动画。 与 AW_CENTER 或 AW_BLEND一起使用时，将忽略它。
+        public static Int32 AW_HOR_NEGATIVE = 0x00000002;// 将窗口从右到左进行动画处理。 此标志可用于滚动或幻灯片动画。 与 AW_CENTER 或 AW_BLEND一起使用时，将忽略它。
+        public static Int32 AW_SLIDE = 0x00040000;// 使用幻灯片动画。 默认情况下，使用滚动动画。 与 AW_CENTER一起使用时，将忽略此标志。
+        public static Int32 AW_VER_POSITIVE = 0x00000004;// 对窗口进行从上到下动画。 此标志可用于滚动或幻灯片动画。 与 AW_CENTER 或 AW_BLEND一起使用时，将忽略它。
+        public static Int32 AW_VER_NEGATIVE = 0x00000008;// 对窗口进行从下到上动画。 此标志可用于滚动或幻灯片动画。 与 AW_CENTER 或 AW_BLEND一起使用时，将忽略它。
 
 
         [DllImport("User32.dll ", EntryPoint = "SetParent")]
@@ -29,6 +38,9 @@ namespace PM_plus.utils {
         /// <returns></returns>
         [DllImport("user32.dll", EntryPoint = "ShowWindow", SetLastError = true)]
         public static extern bool ShowWindow(IntPtr hWnd, UInt16 nCmdShow);
+
+        [DllImport("user32.dll", EntryPoint = "AnimateWindow", SetLastError = true)]
+        public static extern bool AnimateWindow(IntPtr hWnd, UInt16 dwTime, UInt16 dwFlags);
         /// <summary>
         /// 窗口置最前，最小化也会置
         /// </summary>

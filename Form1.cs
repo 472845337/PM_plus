@@ -415,11 +415,13 @@ namespace PM_plus {
         /// <param name="e"></param>
         private void HttpSendButton_Click(object sender, EventArgs e) {
             HttpSendButton.Enabled = false;
-
+            string responseText = "";
+            HttpSendResponseRichTextBox.Text = "开始请求...";
             String httpUrl = UrlTextBox.Text;
             String httpType = TypeComboBox.Text;
             if (StringUtils.IsEmpty(httpUrl)) {
                 MessageBox.Show("未填写URL;");
+                responseText = "";
                 goto end;
             } else {
                 if (!httpUrl.ToLower().StartsWith("http")) {
@@ -428,6 +430,7 @@ namespace PM_plus {
             }
             if (StringUtils.IsEmpty(httpType)) {
                 MessageBox.Show("未选择请求类型;");
+                responseText = "";
                 goto end;
             }
             // 当前数据写进文件中
@@ -436,21 +439,17 @@ namespace PM_plus {
                 Type = httpType
             };
             hshs.SaveData(hsh);
-            String result;
             if (Config.HTTP_TYPE_POST.Equals(httpType)) {
-                result = HttpUtils.PostRequest(httpUrl, "", null);
+                responseText = HttpUtils.PostRequest(httpUrl, "", null);
             } else if (Config.HTTP_TYPE_GET.Equals(httpType)) {
-                result = HttpUtils.GetRequest(httpUrl, null);
+                responseText = HttpUtils.GetRequest(httpUrl, null);
             } else {
                 MessageBox.Show("非法请求类型;");
                 goto end;
             }
-            HttpSendResponseRichTextBox.Text = result;
-
         end:
             HttpSendButton.Enabled = true;
-
-
+            HttpSendResponseRichTextBox.Text = responseText;
         }
         /// <summary>
         /// 清除http请求反馈中文件框内容
@@ -564,7 +563,7 @@ namespace PM_plus {
         private void ProcessWindowMinButton_Click(object sender, EventArgs e) {
             if (ProcessListBox.Items.Count > 0) {
                 foreach (Process process in ProcessListBox.Items) {
-                    User32Dll.ShowWindow(process.MainWindowHandle, User32Dll.SW_SHOWMINIMIZED);
+                    User32Dll.ShowWindow(process.MainWindowHandle, User32Dll.SW_MINIMIZE);
                 }
             }
         }
