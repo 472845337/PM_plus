@@ -563,7 +563,7 @@ namespace PM_plus {
         private void ProcessWindowMinButton_Click(object sender, EventArgs e) {
             if (ProcessListBox.Items.Count > 0) {
                 foreach (Process process in ProcessListBox.Items) {
-                    User32Dll.ShowWindow(process.MainWindowHandle, User32Dll.SW_MINIMIZE);
+                    User32Dll.ShowWindow(process.MainWindowHandle, User32Dll.SW_SHOWMINIMIZED);
                 }
             }
         }
